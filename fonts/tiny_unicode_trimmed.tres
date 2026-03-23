@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" format=3 uid="uid://c41la3swa3w2g"]
+
+[ext_resource type="FontFile" uid="uid://cqa2x6m4v6uid" path="res://fonts/tiny_unicode.ttf" id="1"]
+
+[resource]
+base_font = ExtResource("1")
+spacing_top = -6
+spacing_bottom = -1

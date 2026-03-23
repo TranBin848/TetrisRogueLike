@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://ceg74cmxc6il5"]
+
+[ext_resource type="FontVariation" uid="uid://c41la3swa3w2g" path="res://fonts/tiny_unicode_trimmed.tres" id="1"]
+[ext_resource type="Script" uid="uid://upywjn6i2hm3" path="res://scripts/rich_text_label_shadowed.gd" id="2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7orqs"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+
+[node name="RichTextLabelShadowed" type="RichTextLabel" unique_id=1455599570]
+clip_contents = false
+offset_right = 123.0
+offset_bottom = 8.0
+mouse_filter = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+theme_override_constants/line_separation = 2
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_constants/text_highlight_h_padding = 1
+theme_override_constants/text_highlight_v_padding = 1
+theme_override_fonts/normal_font = ExtResource("1")
+theme_override_font_sizes/normal_font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7orqs")
+bbcode_enabled = true
+text = "Lorem ipsum dolor sit amet."
+fit_content = true
+scroll_active = false
+script = ExtResource("2")

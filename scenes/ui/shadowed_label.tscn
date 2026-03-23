@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://de4ndxdyt87p"]
+
+[ext_resource type="Script" uid="uid://b2hjcktyt2qxe" path="res://scripts/shadowed_label.gd" id="1"]
+[ext_resource type="FontVariation" uid="uid://dl8ncrb3dnqti" path="res://fonts/awesome_9_trimmed.tres" id="2"]
+
+[node name="ShadowedLabel" type="MarginContainer" unique_id=963152213]
+offset_right = 70.0
+offset_bottom = 11.0
+theme_override_constants/margin_left = 1
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 1
+theme_override_constants/margin_bottom = 1
+script = ExtResource("1")
+font_family = 1
+text = "Hey there"
+shadow_offset = 1
+
+[node name="Label" type="Label" parent="." unique_id=161428634]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.105882354, 0.105882354, 0.105882354, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 4
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 16
+text = "Hey there"

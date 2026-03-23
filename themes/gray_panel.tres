@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" format=3 uid="uid://bwerxk3dkj8pe"]
+
+[ext_resource type="Texture2D" uid="uid://em500tukwt3p" path="res://sprite/panel_gray_background.png" id="1_ahge2"]
+
+[resource]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+texture = ExtResource("1_ahge2")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0

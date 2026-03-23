@@ -1,0 +1,131 @@
+[gd_scene format=3 uid="uid://csemd0ev6juk8"]
+
+[ext_resource type="Script" uid="uid://than0vol5832" path="res://MainMenu/MainMenu.gd" id="1_b76km"]
+[ext_resource type="FontFile" uid="uid://cfor4bc5akggb" path="res://fonts/awesome_9.ttf" id="1_cruaa"]
+[ext_resource type="FontFile" uid="uid://o3vktcp3b2d0" path="res://fonts/quan.ttf" id="2_b76km"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cruaa"]
+content_margin_top = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.42352942, 0.36078432, 0.90588236, 1)
+shadow_color = Color(0.23921569, 0.1882353, 0.627451, 1)
+shadow_size = 4
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbqne"]
+content_margin_left = 0.0
+content_margin_top = 14.0
+content_margin_right = 0.0
+content_margin_bottom = 10.0
+bg_color = Color(0.3529412, 0.29411766, 0.81960785, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_430ii"]
+bg_color = Color(0.52156866, 0.46666667, 0.9607843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3bqr"]
+
+[sub_resource type="Theme" id="Theme_b76km"]
+Button/colors/font_color = Color(0.42352942, 0.36078432, 0.90588236, 1)
+Button/colors/font_disabled_color = Color(0.49019608, 0.43529412, 0.9411765, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_pressed_color = Color(0.3529412, 0.29411766, 0.81960785, 1)
+Button/styles/pressed = SubResource("StyleBoxFlat_n3bqr")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b76km"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="MainMenu" type="Control" unique_id=1137514408]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b76km")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1345083990]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.039215688, 0.039215688, 0.05882353, 1)
+
+[node name="GridOverlay" type="TextureRect" parent="." unique_id=1464834614]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FallingBlocks" type="Node2D" parent="." unique_id=1532707436]
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1641247515]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1318665881]
+layout_mode = 2
+
+[node name="LogoSection" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=2080964476]
+layout_mode = 2
+
+[node name="SubTitle" type="Label" parent="CenterContainer/VBoxContainer/LogoSection" unique_id=296363519]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_cruaa")
+theme_override_font_sizes/font_size = 18
+text = "A BLOCK STACKING ROUGELIKE"
+horizontal_alignment = 1
+
+[node name="Titile" type="Label" parent="CenterContainer/VBoxContainer/LogoSection" unique_id=421780542]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_b76km")
+theme_override_font_sizes/font_size = 36
+text = "StackFlow"
+horizontal_alignment = 1
+
+[node name="Accent" type="ColorRect" parent="CenterContainer/VBoxContainer/LogoSection" unique_id=1068126853]
+layout_mode = 2
+
+[node name="Space" type="Control" parent="CenterContainer/VBoxContainer" unique_id=136939346]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="ButtonSection" type="VBoxContainer" parent="CenterContainer/VBoxContainer" unique_id=2095554384]
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonSection" unique_id=1024956144]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.8784314, 0.8784314, 0.8784314, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.5019608, 1)
+theme_override_fonts/font = ExtResource("1_cruaa")
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxFlat_cruaa")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lbqne")
+theme_override_styles/hover = SubResource("StyleBoxFlat_430ii")
+text = "Play"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonSection" unique_id=1335773382]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+theme = SubResource("Theme_b76km")
+theme_override_colors/font_color = Color(0.18039216, 0.18039216, 0.2901961, 1)
+theme_override_colors/font_hover_color = Color(0.43755138, 0.37296772, 0.93403834, 1)
+theme_override_fonts/font = ExtResource("1_cruaa")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b76km")
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonSection" unique_id=1362756334]
+custom_minimum_size = Vector2(240, 48)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_cruaa")
+text = "Quit"
