@@ -203,8 +203,14 @@ func clear_panel():
 		for j in range(5, 9):
 			erase_cell(active_layer, Vector2i(i, j))
 
+# De o day cho de chinh
+const BLOCK_SCORE = 10;
+const ROW_MULT = 4;
 func check_rows():
 	var row : int = ROWS
+	
+	var stack : int = 0;
+	var flow : int = 0;
 	while row > 0:
 		var count = 0
 		for i in range(COLS):
@@ -213,11 +219,17 @@ func check_rows():
 		#if row is full then erase it
 		if count == COLS:
 			shift_rows(row)
-			score += REWARD
-			$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score)
+			#score += REWARD
+			#$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score)
+			stack += count * BLOCK_SCORE;
+			flow += ROW_MULT;
+			print("Stack: ", stack, " Flow: ", flow);
 			speed += ACCEL
 		else:
 			row -= 1
+	print("Final: ", stack * flow);
+	score += stack * flow;
+	$HUD.get_node("ScoreLabel").text = "SCORE: " + str(score)
 
 func shift_rows(row):
 	var atlas
