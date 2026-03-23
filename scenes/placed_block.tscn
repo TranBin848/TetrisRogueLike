@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwi1xfh7v0esm"]
+
+[ext_resource type="Script" uid="uid://c453w8h7y1e5n" path="res://scripts/core/placed_block.gd" id="1_block"]
+
+[node name="PlacedBlock" type="Node2D"]
+script = ExtResource("1_block")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+position = Vector2(18, 18)
+
+[node name="OutlineSprite" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(16, 16)
+
+[node name="FlashSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1.5, 1.5, 1.5, 1)
+position = Vector2(16, 16)

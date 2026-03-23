@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5b20678shlca"]
+
+[ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_board"]
+[ext_resource type="Script" uid="uid://5yuodfa7xjbn" path="res://scripts/board/game_camera.gd" id="2_camera"]
+[ext_resource type="Script" uid="uid://bg3emvohy8x2i" path="res://scripts/board/game_controller.gd" id="3_controller"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("3_controller")
+
+[node name="GameCamera" type="Camera2D" parent="."]
+position = Vector2(160, 320)
+script = ExtResource("2_camera")
+
+[node name="Board" parent="." instance=ExtResource("1_board")]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameOverLabel" type="Label" parent="UI"]
+visible = false
+offset_left = 80.0
+offset_top = 280.0
+offset_right = 240.0
+offset_bottom = 360.0
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="Button" parent="UI"]
+offset_left = 340.0
+offset_top = 500.0
+offset_right = 520.0
+offset_bottom = 540.0
+text = "NEW GAME"
