@@ -27,6 +27,7 @@ const ROUND_SCORES_BASE: Array[int] = [
 	10000000, 
 	25000000
 ]
+const BASE_LEVEL_REWARD = 5;
 
 # =============================================================================
 # SIGNALS
@@ -42,6 +43,7 @@ signal lines_cleared_stopped()
 
 signal piece_landed(blocks: Array)
 signal block_destroyed(block: Node)
+signal round_changed(new_round: int)
 
 signal game_over()
 signal game_started()
@@ -49,6 +51,7 @@ signal game_state_changed(new_state: GameState)
 
 signal calculation_finished()
 
+signal money_changed(new_money: int)
 
 # =============================================================================
 # GAME STATE
@@ -63,6 +66,7 @@ enum GameState {
 var gameState : GameState = GameState.PLAYING:
 	set(value):
 		gameState = value
+		print("Game state changed to ", GameState.keys()[gameState])
 		game_state_changed.emit(gameState)
 
 var score: int = 0
@@ -81,6 +85,10 @@ var level: int = 1
 var is_game_over: bool = false
 var is_calculating: bool = false
 var paused: bool = false
+var round : int = 0:
+	set(value):
+		round = value
+		round_changed.emit(round)
 
 # =============================================================================
 # PIECE BAG (7-bag randomizer)
@@ -98,6 +106,15 @@ var _can_hold: bool = true
 var _board: Node = null
 
 # =============================================================================
+# MONEY
+# =============================================================================
+
+var money: int = 0:
+	set(value):
+		money = value
+		money_changed.emit(money)
+
+# =============================================================================
 # LIFECYCLE
 # =============================================================================
 
@@ -108,6 +125,7 @@ func _ready() -> void:
 
 func reset_game() -> void:
 	score = 0
+	target_score = ROUND_SCORES_BASE[round % ROUND_SCORES_BASE.size()]
 	multiplier = 1
 	lines_cleared_total = 0
 	level = 1
@@ -122,6 +140,8 @@ func reset_game() -> void:
 	score_changed.emit(score)
 	multiplier_changed.emit(multiplier)
 	game_started.emit()
+	reset_stack_and_multiplier();
+	gameState = GameState.PLAYING
 
 # =============================================================================
 # BOARD MANAGEMENT
@@ -188,6 +208,13 @@ func _pick_from_bag() -> GameData.ShapeType:
 	if _piece_bag.is_empty():
 		_refill_bag()
 	return _piece_bag.pop_front()
+# =============================================================================
+# MONEY
+# =============================================================================
+
+func add_money(amount: int) -> void:
+	money += amount
+	print("Money increased to ", money)
 
 # =============================================================================
 # SCORING
@@ -200,7 +227,6 @@ func reset_stack_and_multiplier() -> void:
 	reset_stack()
 	reset_multiplier()
 
-
 func add_stack_flow() -> void:
 	score += stack * multiplier
 	score_changed.emit(score)
@@ -211,7 +237,6 @@ func add_score(points: int) -> void:
 
 func add_stack(value: int) -> void:
 	stack += value
-	print("Add stack");
 
 func reset_stack() -> void:
 	stack = 0

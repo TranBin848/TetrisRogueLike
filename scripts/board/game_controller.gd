@@ -21,11 +21,16 @@ func _ready() -> void:
 	GameManager.lines_cleared_stopped.connect(_on_lines_cleared_stop);
 	GameManager.stack_changed.connect(_on_stack_changed);
 	GameManager.multiplier_changed.connect(_on_multiplier_changed);
+	GameManager.money_changed.connect(_on_money_changed);
 	# Initialize
 	_on_score_changed(GameManager.score);
 	_on_target_score_changed(GameManager.target_score);
+	_on_money_changed(GameManager.money);
 
 	start_button.pressed.connect(_on_start_pressed)
+
+func _on_money_changed(money) -> void:
+	%Money.text = str(money)
 
 func _on_stack_changed(stack) -> void:
 	%Stack.text = str(stack)
@@ -48,13 +53,17 @@ func _on_game_state_changed(new_state: GameManager.GameState) -> void:
 			game_over_label.text = "You Win!"
 			game_over_label.visible = true
 			start_button.visible = true
+			const BLOCK_REMAINING = 24;
+			GameManager.round += 1;
+			GameManager.add_money(GameManager.BASE_LEVEL_REWARD + \
+				roundi(float(BLOCK_REMAINING) / 4.0)); 
 
 func _on_lines_cleared_stop() -> void:
 	GameManager.add_stack_flow();
-	if GameManager.score >= GameManager.target_score:
-		GameManager.trigger_win();
 	await get_tree().create_timer(0.5).timeout
 	GameManager.reset_stack_and_multiplier();
+	if GameManager.score >= GameManager.target_score:
+		GameManager.trigger_win();
 
 func _on_start_pressed() -> void:
 	start_button.visible = false
