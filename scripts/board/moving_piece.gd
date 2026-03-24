@@ -216,7 +216,8 @@ func hard_drop() -> void:
 		camera.punch(Vector2.DOWN, 3.0)
 
 	# Score for hard drop
-	GameManager.add_score(drop_distance * 2)
+	# Hình như cái này là perk
+	#GameManager.add_score(drop_distance * 2)
 
 	lock_piece()
 

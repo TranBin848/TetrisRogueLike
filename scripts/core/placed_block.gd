@@ -222,11 +222,11 @@ func destroy() -> void:
 	# Execute type-specific effects
 	execute_destroy_effect()
 
-
+const STACK_DESTROY_SCORE: int = 10
 func execute_destroy_effect() -> void:
 	# Normal blocks give base points and show floating text
-	GameManager.add_score(1)
-	_spawn_floating_text("+1")
+	GameManager.add_stack(STACK_DESTROY_SCORE)
+	_spawn_floating_text(str(STACK_DESTROY_SCORE))
 
 # =============================================================================
 # FLOATING TEXT

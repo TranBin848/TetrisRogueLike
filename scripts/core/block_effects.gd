@@ -17,6 +17,6 @@ static func common_destroy(block: PlacedBlock, cleared_lines_count: int = 1) -> 
 
 	# Bonus for rightmost column (like Balatro)
 	if block.grid_position.x == 9:
-		GameManager.add_multiplier(cleared_lines_count)
+		GameManager.add_multiplier(4)
 
 	return DEFAULT_DELAY

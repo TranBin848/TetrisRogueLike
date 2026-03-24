@@ -18,6 +18,8 @@ func _ready() -> void:
 	GameManager.score_changed.connect(_on_score_changed)
 	GameManager.target_score_changed.connect(_on_target_score_changed)
 	GameManager.lines_cleared.connect(_on_lines_cleared)
+	GameManager.game_state_changed.connect(_on_game_state_changed)
+	GameManager.lines_finally_cleared.connect(_on_lines_cleared)
 	# Initialize
 	_on_score_changed(GameManager.score);
 	_on_target_score_changed(GameManager.target_score);
@@ -32,10 +34,18 @@ func _on_target_score_changed(new_target: int) -> void:
 	# Update target score display
 	%TargetScore.text = str(new_target)
 
+func _on_game_state_changed(new_state: GameManager.GameState) -> void:
+	match new_state:
+		GameManager.GameState.WIN:
+			# Display win message
+			game_over_label.text = "You Win!"
+			game_over_label.visible = true
+			start_button.visible = true
+
 func _on_lines_cleared(count: int) -> void:
+	print("Lines cleared: " + str(count))
 	if GameManager.score >= GameManager.target_score:
-		print("Target score reached! You win!");
-		_on_game_over()
+		GameManager.trigger_win();
 
 func _on_start_pressed() -> void:
 	start_button.visible = false

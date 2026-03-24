@@ -5,27 +5,27 @@ extends Node
 # =============================================================================
 
 const ROUND_SCORES_BASE: Array[int] = [
-    50, 
-    100, 
-    300, 
-    600, 
-    1500, 
-    2500, 
-    5000, 
-    10000, 
-    20000, 
-    40000, 
-    60000, 
-    80000, 
-    100000, 
-    150000, 
-    250000, 
-    500000, 
-    1000000, 
-    2000000, 
-    5000000, 
-    10000000, 
-    25000000
+	50, 
+	100, 
+	300, 
+	600, 
+	1500, 
+	2500, 
+	5000, 
+	10000, 
+	20000, 
+	40000, 
+	60000, 
+	80000, 
+	100000, 
+	150000, 
+	250000, 
+	500000, 
+	1000000, 
+	2000000, 
+	5000000, 
+	10000000, 
+	25000000
 ]
 
 # =============================================================================
@@ -34,6 +34,7 @@ const ROUND_SCORES_BASE: Array[int] = [
 
 signal score_changed(new_score: int)
 signal target_score_changed(new_target: int)	
+signal stack_changed(new_stack: int)
 signal multiplier_changed(new_multiplier: int)
 signal lines_cleared(count: int)
 signal piece_landed(blocks: Array)
@@ -41,16 +42,34 @@ signal block_destroyed(block: Node)
 signal game_over()
 signal game_started()
 signal calculation_finished()
+signal game_state_changed(new_state: GameState)
+signal lines_finally_cleared();
 
 # =============================================================================
 # GAME STATE
 # =============================================================================
+
+enum GameState {
+	WIN,
+	GAME_OVER,
+	PLAYING,
+}
+
+var gameState : GameState = GameState.PLAYING:
+	set(value):
+		gameState = value
+		game_state_changed.emit(gameState)
 
 var score: int = 0
 var target_score : int = 1000:
 	set(value):
 		target_score = value
 		target_score_changed.emit(target_score)
+
+var stack : int = 0:
+	set(value):
+		stack = value
+		stack_changed.emit(stack)
 var multiplier: int = 1
 var lines_cleared_total: int = 0
 var level: int = 1
@@ -176,9 +195,16 @@ func add_score(points: int) -> void:
 	score += points * multiplier
 	score_changed.emit(score)
 
+func add_stack(value: int) -> void:
+	stack += value
+	print("Add stack");
+
+func reset_stack() -> void:
+	stack = 0
 
 func add_multiplier(value: int) -> void:
 	multiplier += value
+	print("Multiplier increased to ", multiplier)
 	multiplier_changed.emit(multiplier)
 
 
@@ -186,22 +212,22 @@ func reset_multiplier() -> void:
 	multiplier = 1
 	multiplier_changed.emit(multiplier)
 
-
 func on_lines_cleared(count: int) -> void:
-	if count <= 0:
-		return
+	#if count <= 0:
+		#return
+	# lines_cleared_total += count
 
-	lines_cleared_total += count
+	#add_multiplier(count * 4);
+	#add_score(stack);
+	# # Calculate score based on lines cleared
+	# var line_index: int = mini(count, LINE_SCORES.size() - 1)
+	# var points: int = LINE_SCORES[line_index] * level
+	# add_score(points)
 
-	# Calculate score based on lines cleared
-	var line_index: int = mini(count, LINE_SCORES.size() - 1)
-	var points: int = LINE_SCORES[line_index] * level
-	add_score(points)
-
-	# Update level
-	var new_level: int = (lines_cleared_total / 10) + 1
-	if new_level > level:
-		level = new_level
+	# # Update level
+	# var new_level: int = (lines_cleared_total / 10) + 1
+	# if new_level > level:
+	# 	level = new_level
 
 	lines_cleared.emit(count)
 
@@ -210,6 +236,8 @@ func trigger_game_over() -> void:
 	is_game_over = true
 	game_over.emit()
 
+func trigger_win() -> void:
+	gameState = GameState.WIN
 
 func finish_calculation() -> void:
 	is_calculating = false

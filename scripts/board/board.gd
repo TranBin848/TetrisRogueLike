@@ -171,6 +171,11 @@ func check_and_clear_lines(should_execute_events: bool = true, should_spawn_next
 		if camera and camera.has_method("shake_direction"):
 			camera.shake_direction(2.0 * lines_count, 0, 0.3)
 
+		EventManager.add_event(func():
+			print("All multiplier added?")
+			return 0.0;
+		);
+
 		# Update score
 		GameManager.on_lines_cleared(lines_count)
 
