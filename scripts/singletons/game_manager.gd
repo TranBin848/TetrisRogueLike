@@ -1,10 +1,39 @@
 extends Node
 
 # =============================================================================
+# CONSTANTS
+# =============================================================================
+
+const ROUND_SCORES_BASE: Array[int] = [
+    50, 
+    100, 
+    300, 
+    600, 
+    1500, 
+    2500, 
+    5000, 
+    10000, 
+    20000, 
+    40000, 
+    60000, 
+    80000, 
+    100000, 
+    150000, 
+    250000, 
+    500000, 
+    1000000, 
+    2000000, 
+    5000000, 
+    10000000, 
+    25000000
+]
+
+# =============================================================================
 # SIGNALS
 # =============================================================================
 
 signal score_changed(new_score: int)
+signal target_score_changed(new_target: int)	
 signal multiplier_changed(new_multiplier: int)
 signal lines_cleared(count: int)
 signal piece_landed(blocks: Array)
@@ -18,6 +47,10 @@ signal calculation_finished()
 # =============================================================================
 
 var score: int = 0
+var target_score : int = 1000:
+	set(value):
+		target_score = value
+		target_score_changed.emit(target_score)
 var multiplier: int = 1
 var lines_cleared_total: int = 0
 var level: int = 1
