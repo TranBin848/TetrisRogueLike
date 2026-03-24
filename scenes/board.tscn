@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqov56fuh2dpx"]
+
+[ext_resource type="Script" uid="uid://jckbnamsmd5k" path="res://scripts/board/board.gd" id="1_board"]
+[ext_resource type="Script" uid="uid://dswgknumi1w6n" path="res://scripts/board/moving_piece.gd" id="2_piece"]
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_board")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 320.0
+offset_bottom = 640.0
+color = Color(0.599546, 0.599906, 0.655291, 1)
+
+[node name="PlacedBlocks" type="Node2D" parent="."]
+
+[node name="MovingPiece" type="Node2D" parent="."]
+script = ExtResource("2_piece")
+
+[node name="BlockSprites" type="Node2D" parent="MovingPiece"]
+
+[node name="GhostSprites" type="Node2D" parent="MovingPiece"]
+
+[node name="GridLines" type="Node2D" parent="."]
