@@ -36,14 +36,19 @@ signal score_changed(new_score: int)
 signal target_score_changed(new_target: int)	
 signal stack_changed(new_stack: int)
 signal multiplier_changed(new_multiplier: int)
-signal lines_cleared(count: int)
+
+signal lines_cleared(count: int) # Lines cleared started
+signal lines_cleared_stopped()
+
 signal piece_landed(blocks: Array)
 signal block_destroyed(block: Node)
+
 signal game_over()
 signal game_started()
-signal calculation_finished()
 signal game_state_changed(new_state: GameState)
-signal lines_finally_cleared();
+
+signal calculation_finished()
+
 
 # =============================================================================
 # GAME STATE
@@ -191,6 +196,15 @@ func _pick_from_bag() -> GameData.ShapeType:
 ## Base points for line clears
 const LINE_SCORES: Array[int] = [0, 100, 300, 500, 800]  # 0, 1, 2, 3, 4 lines
 
+func reset_stack_and_multiplier() -> void:
+	reset_stack()
+	reset_multiplier()
+
+
+func add_stack_flow() -> void:
+	score += stack * multiplier
+	score_changed.emit(score)
+
 func add_score(points: int) -> void:
 	score += points * multiplier
 	score_changed.emit(score)
@@ -213,21 +227,18 @@ func reset_multiplier() -> void:
 	multiplier_changed.emit(multiplier)
 
 func on_lines_cleared(count: int) -> void:
-	#if count <= 0:
-		#return
+	if count <= 0:
+		printerr("Sao mà lines cleared lại <= 0 được nhỉ?");
+		return
 	# lines_cleared_total += count
 
-	#add_multiplier(count * 4);
-	#add_score(stack);
-	# # Calculate score based on lines cleared
-	# var line_index: int = mini(count, LINE_SCORES.size() - 1)
-	# var points: int = LINE_SCORES[line_index] * level
-	# add_score(points)
+	var line_index: int = mini(count, LINE_SCORES.size() - 1)
+	var points: int = LINE_SCORES[line_index] * level
+	add_stack(points)
 
 	# # Update level
 	# var new_level: int = (lines_cleared_total / 10) + 1
-	# if new_level > level:
-	# 	level = new_level
+	# level = max(level, new_level);
 
 	lines_cleared.emit(count)
 

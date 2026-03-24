@@ -17,14 +17,21 @@ func _ready() -> void:
 	GameManager.game_over.connect(_on_game_over)
 	GameManager.score_changed.connect(_on_score_changed)
 	GameManager.target_score_changed.connect(_on_target_score_changed)
-	GameManager.lines_cleared.connect(_on_lines_cleared)
 	GameManager.game_state_changed.connect(_on_game_state_changed)
-	GameManager.lines_finally_cleared.connect(_on_lines_cleared)
+	GameManager.lines_cleared_stopped.connect(_on_lines_cleared_stop);
+	GameManager.stack_changed.connect(_on_stack_changed);
+	GameManager.multiplier_changed.connect(_on_multiplier_changed);
 	# Initialize
 	_on_score_changed(GameManager.score);
 	_on_target_score_changed(GameManager.target_score);
 
 	start_button.pressed.connect(_on_start_pressed)
+
+func _on_stack_changed(stack) -> void:
+	%Stack.text = str(stack)
+
+func _on_multiplier_changed(multiplier) -> void:
+	%Flow.text = str(multiplier)
 
 func _on_score_changed(new_score: int) -> void:
 	# Update score display
@@ -42,10 +49,12 @@ func _on_game_state_changed(new_state: GameManager.GameState) -> void:
 			game_over_label.visible = true
 			start_button.visible = true
 
-func _on_lines_cleared(count: int) -> void:
-	print("Lines cleared: " + str(count))
+func _on_lines_cleared_stop() -> void:
+	GameManager.add_stack_flow();
 	if GameManager.score >= GameManager.target_score:
 		GameManager.trigger_win();
+	await get_tree().create_timer(0.5).timeout
+	GameManager.reset_stack_and_multiplier();
 
 func _on_start_pressed() -> void:
 	start_button.visible = false

@@ -215,6 +215,9 @@ func apply_gravity_changes() -> void:
 		_apply_gravity_to_column(col, destroyed_rows)
 
 	# Check for cascading line clears
+	# TODO: FIX THIS????
+	GameManager.lines_cleared_stopped.emit()
+	print("Stack: ", GameManager.stack, " Multiplier: ", GameManager.multiplier)
 	await get_tree().create_timer(0.2).timeout
 	var cascading_lines: int = check_and_clear_lines(true, true)
 	if cascading_lines == 0:
