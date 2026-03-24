@@ -5,7 +5,7 @@ extends Control
 @onready var quit_button: Button = $CenterContainer/VBoxContainer/ButtonSection/QuitButton
 @onready var falling_blocks: Node2D = $FallingBlocks
 
-const GAME_SCENE = "res://testscenes/tile_map.tscn"
+const GAME_SCENE = "res://scenes/game.tscn"
 const SETTING_SCENE = "res://scene/ui/Settings.tscn"
 const FADE_DURATION: float = 0.4
 

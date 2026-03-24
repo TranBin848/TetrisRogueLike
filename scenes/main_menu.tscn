@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://csemd0ev6juk8"]
 
-[ext_resource type="Script" uid="uid://than0vol5832" path="res://MainMenu/MainMenu.gd" id="1_b76km"]
+[ext_resource type="Script" uid="uid://than0vol5832" path="res://scripts/main_menu.gd" id="1_b76km"]
 [ext_resource type="FontFile" uid="uid://cfor4bc5akggb" path="res://fonts/awesome_9.ttf" id="1_cruaa"]
 [ext_resource type="FontFile" uid="uid://o3vktcp3b2d0" path="res://fonts/quan.ttf" id="2_b76km"]
 

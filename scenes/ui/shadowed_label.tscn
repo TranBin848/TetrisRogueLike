@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://de4ndxdyt87p"]
 
 [ext_resource type="Script" uid="uid://b2hjcktyt2qxe" path="res://scripts/shadowed_label.gd" id="1"]
-[ext_resource type="FontVariation" uid="uid://dl8ncrb3dnqti" path="res://fonts/awesome_9_trimmed.tres" id="2"]
+[ext_resource type="FontVariation" path="res://fonts/awesome_9_trimmed.tres" id="2"]
 
 [node name="ShadowedLabel" type="MarginContainer" unique_id=963152213]
 offset_right = 70.0

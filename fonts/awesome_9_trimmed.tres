@@ -1,9 +1,9 @@
-[gd_resource type="FontVariation" format=3 uid="uid://dl8ncrb3dnqti"]
+[gd_resource type="FontVariation" format=3 uid="uid://bj5qt3kblfua8"]
 
-[ext_resource type="FontFile" uid="uid://cfor4bc5akggb" path="res://fonts/awesome_9.ttf" id="1_hl2re"]
+[ext_resource type="FontFile" uid="uid://bnlhmnd44vrkc" path="res://fonts/awesome_9.ttf" id="1"]
 
 [resource]
-base_font = ExtResource("1_hl2re")
+base_font = ExtResource("1")
 spacing_space = -3
 spacing_top = -3
 spacing_bottom = -3
