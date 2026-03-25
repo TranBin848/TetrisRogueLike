@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0y4gb3webi53"
-path="res://.godot/imported/tetrominoes.png-8ee828b0faf6366db83dceb1f2549754.ctex"
+uid="uid://bj5ipuf487rx7"
+path="res://.godot/imported/white_block.png-1659e6ee6503b329400a407c96eab264.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://testscenes/tetrominoes.png"
-dest_files=["res://.godot/imported/tetrominoes.png-8ee828b0faf6366db83dceb1f2549754.ctex"]
+source_file="res://sprite/blocks/default/white_block.png"
+dest_files=["res://.godot/imported/white_block.png-1659e6ee6503b329400a407c96eab264.ctex"]
 
 [params]
 

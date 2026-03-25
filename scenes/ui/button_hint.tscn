@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://climcg5wulglf"]
+
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="1_6l86g"]
+[ext_resource type="Texture2D" uid="uid://ltecljd0h7i1" path="res://sprite/key.png" id="1_i4wpw"]
+[ext_resource type="Texture2D" uid="uid://qrd6280insra" path="res://sprite/key_arrow_up.png" id="2_a621b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a621b"]
+content_margin_left = 1.0
+content_margin_top = 0.0
+content_margin_right = 1.0
+content_margin_bottom = 3.0
+texture = ExtResource("1_i4wpw")
+texture_margin_left = 1.0
+texture_margin_top = 1.0
+texture_margin_right = 2.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="ButtonHint" type="Control" unique_id=1181895176]
+custom_minimum_size = Vector2(16, 17)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="KeyboardHintPanelContainer" type="PanelContainer" parent="." unique_id=955147451]
+custom_minimum_size = Vector2(16, 17)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_a621b")
+
+[node name="KeyIconTexture" type="TextureRect" parent="KeyboardHintPanelContainer" unique_id=697145240]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_a621b")
+
+[node name="KeyHintLabel" parent="KeyboardHintPanelContainer" unique_id=963152213 instance=ExtResource("1_6l86g")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+text = "R"
+shadow_enabled = false
+shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+horizontal_alignment = 1

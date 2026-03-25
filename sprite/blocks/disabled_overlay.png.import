@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0y4gb3webi53"
-path="res://.godot/imported/tetrominoes.png-8ee828b0faf6366db83dceb1f2549754.ctex"
+uid="uid://bnh7idv6wa1cb"
+path="res://.godot/imported/disabled_overlay.png-c064851ec4252f44384b8da8cbabd47d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://testscenes/tetrominoes.png"
-dest_files=["res://.godot/imported/tetrominoes.png-8ee828b0faf6366db83dceb1f2549754.ctex"]
+source_file="res://sprite/blocks/disabled_overlay.png"
+dest_files=["res://.godot/imported/disabled_overlay.png-c064851ec4252f44384b8da8cbabd47d.ctex"]
 
 [params]
 
