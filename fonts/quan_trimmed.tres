@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" format=3 uid="uid://c66xj4g50pbl6"]
+
+[ext_resource type="FontFile" uid="uid://eo3n5m0bwspr" path="res://fonts/quan.ttf" id="1"]
+
+[resource]
+base_font = ExtResource("1")

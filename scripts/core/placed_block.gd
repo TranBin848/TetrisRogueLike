@@ -25,6 +25,11 @@ const BLOCK_COLORS: Dictionary = {
 	"red": Color(1.0, 0.0, 0.0),
 	"blue": Color(0.0, 0.0, 1.0),
 	"orange": Color(1.0, 0.5, 0.0),
+	"gold": Color(1.0, 0.84, 0.0),
+	"special_blue": Color(0.1, 0.3, 1.0),
+	"special_red": Color(1.0, 0.2, 0.2),
+	"water": Color(0.4, 0.8, 1.0),
+	"lucky": Color(0.8, 0.8, 1.0),
 }
 
 # =============================================================================
@@ -224,9 +229,26 @@ func destroy() -> void:
 
 
 func execute_destroy_effect() -> void:
-	# Normal blocks give base points and show floating text
-	GameManager.add_score(1)
-	_spawn_floating_text("+1")
+	match type:
+		"gold":
+			GameManager.add_coins(2)
+			_spawn_floating_text("+2 Tiền")
+		"special_blue":
+			GameManager.add_score(50)
+			_spawn_floating_text("+50 Điểm")
+		"special_red":
+			GameManager.add_multiplier(4)
+			_spawn_floating_text("+4 Mult")
+		"lucky":
+			GameManager.add_score(1)
+			if randf() <= 0.2:
+				GameManager.add_multiplier(20)
+				_spawn_floating_text("+20 Mult!")
+			else:
+				_spawn_floating_text("+1")
+		_:
+			GameManager.add_score(1)
+			_spawn_floating_text("+1")
 
 # =============================================================================
 # FLOATING TEXT

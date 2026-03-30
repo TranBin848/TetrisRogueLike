@@ -36,6 +36,7 @@ const BLOCK_COLORS: Dictionary = {
 # =============================================================================
 
 var current_shape: GameData.ShapeType
+var current_special_type: String = ""
 var current_rotation: int = 0
 var grid_position: Vector2i = Vector2i.ZERO
 var is_active: bool = false
@@ -147,8 +148,12 @@ func _handle_lock_delay(delta: float) -> void:
 # SPAWNING
 # =============================================================================
 
-func spawn(shape: GameData.ShapeType) -> void:
+func spawn(shape: GameData.ShapeType, special_type: String = "") -> void:
 	current_shape = shape
+	if special_type.is_empty():
+		current_special_type = GameData.get_shape_block_type(shape)
+	else:
+		current_special_type = special_type
 	current_rotation = 0
 	grid_position = SPAWN_POSITION
 	is_active = true
@@ -257,9 +262,9 @@ func rotate_piece(direction: int) -> bool:
 # =============================================================================
 
 func hold_piece() -> void:
-	var new_shape: GameData.ShapeType = GameManager.try_hold_piece(current_shape)
-	if new_shape != -1:
-		spawn(new_shape)
+	var new_piece: Dictionary = GameManager.try_hold_piece({"shape": current_shape, "type": current_special_type})
+	if not new_piece.is_empty():
+		spawn(new_piece.shape, new_piece.type)
 
 # =============================================================================
 # LOCKING
@@ -270,11 +275,16 @@ func lock_piece() -> void:
 	visible = false
 
 	# Place blocks on board
-	var block_type: String = GameData.get_shape_block_type(current_shape)
+	var block_type: String = current_special_type
 	var blocks: Array = GameData.get_shape_blocks(current_shape, current_rotation)
 
-	for offset: Vector2i in blocks:
+	var sorted_blocks = blocks.duplicate()
+	sorted_blocks.sort_custom(func(a, b): return a.y > b.y)
+
+	for offset: Vector2i in sorted_blocks:
 		var pos: Vector2i = grid_position + offset
+		if block_type == "water":
+			pos = board.get_lowest_water_fall_position(pos)
 		board.place_block(pos, block_type)
 
 	# Check for line clears
@@ -312,7 +322,7 @@ func _update_visuals() -> void:
 
 	# Create block sprites with shadow
 	var blocks: Array = GameData.get_shape_blocks(current_shape, current_rotation)
-	var block_type: String = GameData.get_shape_block_type(current_shape)
+	var block_type: String = current_special_type
 	var texture_path: String = GameData.get_block_texture_path(block_type)
 
 	for offset: Vector2i in blocks:
@@ -345,7 +355,7 @@ func _update_ghost() -> void:
 
 	# Create ghost sprites
 	var blocks: Array = GameData.get_shape_blocks(current_shape, current_rotation)
-	var block_type: String = GameData.get_shape_block_type(current_shape)
+	var block_type: String = current_special_type
 	var texture_path: String = GameData.get_block_texture_path(block_type)
 
 	for offset: Vector2i in blocks:

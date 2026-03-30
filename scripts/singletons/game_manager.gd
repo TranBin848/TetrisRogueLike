@@ -12,6 +12,7 @@ signal block_destroyed(block: Node)
 signal game_over()
 signal game_started()
 signal calculation_finished()
+signal coins_changed(new_coins: int)
 
 # =============================================================================
 # GAME STATE
@@ -21,6 +22,7 @@ var score: int = 0
 var multiplier: int = 1
 var lines_cleared_total: int = 0
 var level: int = 1
+var coins: int = 0
 var is_game_over: bool = false
 var is_calculating: bool = false
 var paused: bool = false
@@ -29,9 +31,9 @@ var paused: bool = false
 # PIECE BAG (7-bag randomizer)
 # =============================================================================
 
-var _piece_bag: Array = []
-var _next_piece: GameData.ShapeType
-var _held_piece: GameData.ShapeType = -1
+var _piece_bag: Array[Dictionary] = []
+var _next_piece: Dictionary = {}
+var _held_piece: Dictionary = {}
 var _can_hold: bool = true
 
 # =============================================================================
@@ -54,16 +56,18 @@ func reset_game() -> void:
 	multiplier = 1
 	lines_cleared_total = 0
 	level = 1
+	coins = 0
 	is_game_over = false
 	is_calculating = false
 	paused = false
-	_held_piece = -1
+	_held_piece = {}
 	_can_hold = true
 	_piece_bag.clear()
 	_refill_bag()
 	_next_piece = _pick_from_bag()
 	score_changed.emit(score)
 	multiplier_changed.emit(multiplier)
+	coins_changed.emit(coins)
 	game_started.emit()
 
 # =============================================================================
@@ -85,37 +89,37 @@ func can_move() -> bool:
 # PIECE MANAGEMENT
 # =============================================================================
 
-func get_next_piece() -> GameData.ShapeType:
+func get_next_piece() -> Dictionary:
 	return _next_piece
 
 
-func consume_next_piece() -> GameData.ShapeType:
-	var current: GameData.ShapeType = _next_piece
+func consume_next_piece() -> Dictionary:
+	var current: Dictionary = _next_piece
 	_next_piece = _pick_from_bag()
 	_can_hold = true
 	return current
 
 
-func get_held_piece() -> int:
+func get_held_piece() -> Dictionary:
 	return _held_piece
 
 
-func try_hold_piece(current_piece: GameData.ShapeType) -> GameData.ShapeType:
+func try_hold_piece(current_piece: Dictionary) -> Dictionary:
 	if not _can_hold:
-		return -1
+		return {}
 
 	_can_hold = false
-	var old_held: int = _held_piece
+	var old_held: Dictionary = _held_piece
 	_held_piece = current_piece
 
-	if old_held == -1:
+	if old_held.is_empty():
 		return consume_next_piece()
 	else:
-		return old_held as GameData.ShapeType
+		return old_held
 
 
 func _refill_bag() -> void:
-	_piece_bag = [
+	var shapes = [
 		GameData.ShapeType.I,
 		GameData.ShapeType.O,
 		GameData.ShapeType.T,
@@ -124,10 +128,15 @@ func _refill_bag() -> void:
 		GameData.ShapeType.J,
 		GameData.ShapeType.L,
 	]
-	_piece_bag.shuffle()
+	shapes.shuffle()
+	
+	for s in shapes:
+		var base_type: String = GameData.get_shape_block_type(s)
+		var t: String = GameData.get_random_special_block_type(base_type)
+		_piece_bag.append({"shape": s, "type": t})
 
 
-func _pick_from_bag() -> GameData.ShapeType:
+func _pick_from_bag() -> Dictionary:
 	if _piece_bag.is_empty():
 		_refill_bag()
 	return _piece_bag.pop_front()
@@ -143,6 +152,9 @@ func add_score(points: int) -> void:
 	score += points * multiplier
 	score_changed.emit(score)
 
+func add_coins(amount: int) -> void:
+	coins += amount
+	coins_changed.emit(coins)
 
 func add_multiplier(value: int) -> void:
 	multiplier += value

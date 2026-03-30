@@ -100,6 +100,17 @@ func get_column_blocks(col: int) -> Array[PlacedBlock]:
 			blocks.append(block)
 	return blocks
 
+func get_lowest_water_fall_position(pos: Vector2i) -> Vector2i:
+	if not is_position_valid(pos):
+		return pos
+	var lowest_y: int = pos.y
+	for y in range(pos.y + 1, BOARD_HEIGHT):
+		if placed_blocks_grid[y][pos.x] == null:
+			lowest_y = y
+		else:
+			break
+	return Vector2i(pos.x, lowest_y)
+
 # =============================================================================
 # BLOCK PLACEMENT
 # =============================================================================
@@ -262,8 +273,8 @@ func spawn_next_piece() -> void:
 	GameManager.finish_calculation()
 
 	if moving_piece:
-		var shape: GameData.ShapeType = GameManager.consume_next_piece()
-		moving_piece.spawn(shape)
+		var piece_data: Dictionary = GameManager.consume_next_piece()
+		moving_piece.spawn(piece_data.shape, piece_data.type)
 
 		# Check game over
 		if not moving_piece.is_spawn_valid():
