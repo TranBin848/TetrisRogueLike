@@ -1,0 +1,129 @@
+[gd_scene load_steps=10 format=3 uid="uid://c00puly5uo3f4"]
+
+[ext_resource type="Script" uid="uid://cxqpruc1v5p1x" path="res://scripts/block_button.gd" id="1_uctnb"]
+[ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="2_gs4gp"]
+[ext_resource type="Texture2D" uid="uid://bpms14qhfnier" path="res://sprite/rounded_outline_white_panel.png" id="3_kfhnh"]
+[ext_resource type="PackedScene" path="res://scenes/ui/piece_display.tscn" id="3_piece"]
+[ext_resource type="Texture2D" uid="uid://bnjn8u4ifuu44" path="res://sprite/rounded_white_panel.png" id="5_1exji"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="6_bwyhj"]
+[ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="7_caeo6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1exji"]
+texture = ExtResource("3_kfhnh")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+modulate_color = Color(0.439216, 0.439216, 0.439216, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bwyhj"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource("5_1exji")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+modulate_color = Color(0.439216, 0.439216, 0.439216, 1)
+
+[node name="BlockButton" type="Control"]
+custom_minimum_size = Vector2(130, 170)
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+script = ExtResource("1_uctnb")
+
+[node name="PieceChangeTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Button" parent="." instance=ExtResource("2_gs4gp")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+hover_scale = 1.05
+pressed_scale_addition = 0.03
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(130, 170)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="PieceContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1exji")
+
+[node name="PieceDisplay" parent="MarginContainer/VBoxContainer/PieceContainer" instance=ExtResource("3_piece")]
+unique_name_in_owner = true
+
+[node name="CountPanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/PieceContainer"]
+z_index = 2
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bwyhj")
+
+[node name="Count" parent="MarginContainer/VBoxContainer/PieceContainer/CountPanelContainer" instance=ExtResource("6_bwyhj")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "x5"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="TitleLabel" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_bwyhj")]
+layout_mode = 2
+mouse_filter = 2
+text = "Stone"
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+autowrap_mode = 3
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("7_caeo6")]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+text = "[color=f68187]Explosives[/color] Lorem ipsum dolor sit amet."
+horizontal_alignment = 1
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="TypesHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
