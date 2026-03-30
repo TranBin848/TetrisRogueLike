@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Tetromancer"
-run/main_scene="uid://csemd0ev6juk8"
+run/main_scene="uid://bqov56fuh2dpx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 

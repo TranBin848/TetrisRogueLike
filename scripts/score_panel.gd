@@ -8,15 +8,15 @@ extends PanelContainer
  
 func _ready() -> void:
 	GameManager.score_changed.connect(_on_score_changed)
-	GameManager.points_changed.connect(_on_points_changed)
+	#GameManager.points_changed.connect(_on_points_changed)
 	GameManager.multiplier_changed.connect(_on_multiplier_changed)
 	_refresh_all()
  
  
 func _refresh_all() -> void:
-	target_score_label.text = _format_number(GameManager.target_score)
+	#target_score_label.text = _format_number(GameManager.target_score)
 	score_label.text = _format_number(GameManager.score)
-	point_value_label.text = _format_number(GameManager.points)
+	#point_value_label.text = _format_number(GameManager.points)
 	mul_value_label.text = _format_number(GameManager.multiplier)
  
  

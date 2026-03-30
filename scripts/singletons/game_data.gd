@@ -15,6 +15,14 @@ const BLOCK_TYPES: Dictionary = {
 	"ORANGE": "orange",    # L piece
 }
 
+const SPECIAL_BLOCKS: Array[String] = [
+	"gold",
+	"special_blue",
+	"special_red",
+	"water",
+	"lucky"
+]
+
 enum BlockGroups {
 	DEFAULT,
 }
@@ -158,3 +166,11 @@ func get_wall_kicks(shape_type: ShapeType, from_rot: int, to_rot: int) -> Array:
 
 func get_random_shape() -> ShapeType:
 	return randi() % ShapeType.size() as ShapeType
+
+
+func get_random_special_block_type(base_type: String) -> String:
+	# 80% normal
+	if randf() > 0.2:
+		return base_type
+	# 20% special
+	return SPECIAL_BLOCKS.pick_random()
