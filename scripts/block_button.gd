@@ -46,7 +46,7 @@ var disabled: bool = false:
 @onready var button: BouncyButton = $Button
 @onready var margin_container: MarginContainer = $MarginContainer
 @onready var piece_container: Control = %PieceContainer
-@onready var piece_display: PieceDisplay = %PieceDisplay
+@onready var piece_renderer: PieceRenderer = %PieceRenderer
 @onready var count_label: LabelShadowed = %CountLabel
 @onready var title_label: LabelShadowed = %TitleLabel
 @onready var description_label: RichTextLabelShadowed = %DescriptionLabel
@@ -55,33 +55,33 @@ var disabled: bool = false:
 
 
 func center_piece(piece_type: GameData.ShapeType) -> void :
-	var bounds: Rect2i = piece_display.get_piece_bounds(piece_type, 0)
+	var bounds: Rect2i = piece_renderer.get_piece_bounds(piece_type, 0)
 
 	if bounds.size == Vector2i.ZERO:
 		return
 
-	var piece_pixel_width = bounds.size.x * PieceDisplay.PIECE_SIZE
-	var piece_pixel_height = bounds.size.y * PieceDisplay.PIECE_SIZE
+	var piece_pixel_width = bounds.size.x * PieceRenderer.PIECE_SIZE
+	var piece_pixel_height = bounds.size.y * PieceRenderer.PIECE_SIZE
 
 	var center_x = (piece_container.size.x - piece_pixel_width) / 2.0
 	var center_y = (piece_container.size.y - piece_pixel_height) / 2.0
 
-	var offset_x = center_x - (bounds.position.x * PieceDisplay.PIECE_SIZE)
-	var offset_y = center_y - (bounds.position.y * PieceDisplay.PIECE_SIZE)
+	var offset_x = center_x - (bounds.position.x * PieceRenderer.PIECE_SIZE)
+	var offset_y = center_y - (bounds.position.y * PieceRenderer.PIECE_SIZE)
 
-	piece_display.position = Vector2(offset_x, offset_y)
+	piece_renderer.position = Vector2(offset_x, offset_y)
 
 
 
 func update_piece_display() -> void :
 	if awarded_piece_types.size() > 0:
 		var piece_type = awarded_piece_types[current_piece_index]
-		piece_display.set_piece(piece_type, 0, type)
+		piece_renderer.set_piece(piece_type, 0, true, type)
 		center_piece(piece_type)
 
 
 func _ready() -> void :
-	piece_display.set_piece(GameData.ShapeType.T, 0, type)
+	piece_renderer.set_piece(GameData.ShapeType.T, 0, false, type)
 	center_piece(GameData.ShapeType.T)
 
 
