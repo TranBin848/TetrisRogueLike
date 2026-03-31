@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://i2h08wpsr8gs"]
+
+[ext_resource type="PackedScene" uid="uid://c4ecjkyq0vrgm" path="res://scenes/piece_renderer.tscn" id="1_nybn5"]
+
+[node name="MovingPiece" type="Node2D"]
+
+[node name="GhostRenderer" parent="." instance=ExtResource("1_nybn5")]
+modulate = Color(1, 1, 1, 0.301961)
+
+[node name="PieceRenderer" parent="." instance=ExtResource("1_nybn5")]

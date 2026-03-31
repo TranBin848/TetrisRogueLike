@@ -14,10 +14,11 @@ func _ready() -> void:
  
  
 func _refresh_all() -> void:
-	#target_score_label.text = _format_number(GameManager.target_score)
-	score_label.text = _format_number(GameManager.score)
-	#point_value_label.text = _format_number(GameManager.points)
-	mul_value_label.text = _format_number(GameManager.multiplier)
+	return
+	##target_score_label.text = _format_number(GameManager.target_score)
+	#score_label.text = _format_number(GameManager.score)
+	##point_value_label.text = _format_number(GameManager.points)
+	#mul_value_label.text = _format_number(GameManager.multiplier)
  
  
 func _on_score_changed(value: int) -> void:

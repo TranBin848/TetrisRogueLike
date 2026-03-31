@@ -1,37 +1,31 @@
-[gd_scene format=3 uid="uid://cdujk1vf4b7fc"]
+[gd_scene load_steps=7 format=3 uid="uid://cdujk1vf4b7fc"]
 
 [ext_resource type="StyleBox" uid="uid://bwerxk3dkj8pe" path="res://themes/gray_panel.tres" id="1_tms4c"]
 [ext_resource type="Script" uid="uid://1nrfloqb2swh" path="res://scripts/score_panel.gd" id="2_way5h"]
 [ext_resource type="StyleBox" uid="uid://c8m1jufawoe8" path="res://themes/light_gray_panel.tres" id="3_hiogp"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="4_qc7dn"]
 [ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="5_p76jh"]
-[ext_resource type="FontFile" uid="uid://cfor4bc5akggb" path="res://fonts/awesome_9.ttf" id="6_tms4c"]
+[ext_resource type="FontVariation" uid="uid://bj5qt3kblfua8" path="res://fonts/awesome_9_trimmed.tres" id="6_amt3t"]
 
-[sub_resource type="FontVariation" id="FontVariation_niab0"]
-base_font = ExtResource("6_tms4c")
-spacing_space = -3
-spacing_top = -3
-spacing_bottom = -3
-
-[node name="ScorePanel" type="PanelContainer" unique_id=886288022]
+[node name="ScorePanel" type="PanelContainer"]
 offset_right = 113.0
 offset_bottom = 108.0
 theme_override_styles/panel = ExtResource("1_tms4c")
 script = ExtResource("2_way5h")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=205657038]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="TargetScore" type="PanelContainer" parent="VBoxContainer" unique_id=1740815930]
+[node name="TargetScore" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_hiogp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TargetScore" unique_id=1936618729]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TargetScore"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="TargetTitle" parent="VBoxContainer/TargetScore/VBoxContainer" unique_id=963152213 instance=ExtResource("4_qc7dn")]
+[node name="TargetTitle" parent="VBoxContainer/TargetScore/VBoxContainer" instance=ExtResource("4_qc7dn")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -39,34 +33,34 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 font_family = 0
 text = "TARGET SCORE"
-font_color = Color(0.52156866, 0.52156866, 0.52156866, 1)
+font_color = Color(0.521569, 0.521569, 0.521569, 1)
 shadow_enabled = false
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 horizontal_alignment = 1
 
-[node name="TargetValue" parent="VBoxContainer/TargetScore/VBoxContainer" unique_id=1663588119 instance=ExtResource("4_qc7dn")]
+[node name="TargetValue" parent="VBoxContainer/TargetScore/VBoxContainer" instance=ExtResource("4_qc7dn")]
 layout_mode = 2
 size_flags_vertical = 0
 text = "1,000"
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 horizontal_alignment = 1
 
-[node name="Control" type="ColorRect" parent="VBoxContainer" unique_id=956530825]
+[node name="Control" type="ColorRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
-color = Color(0.31764707, 0.31764707, 0.31764707, 1)
+color = Color(0.317647, 0.317647, 0.317647, 1)
 
-[node name="Score" type="PanelContainer" parent="VBoxContainer" unique_id=402938334]
+[node name="Score" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_styles/panel = ExtResource("3_hiogp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Score" unique_id=974894432]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Score"]
 layout_mode = 2
 theme_override_constants/separation = 2
 
-[node name="ScoreTitle" parent="VBoxContainer/Score/VBoxContainer" unique_id=1108840931 instance=ExtResource("4_qc7dn")]
+[node name="ScoreTitle" parent="VBoxContainer/Score/VBoxContainer" instance=ExtResource("4_qc7dn")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -74,36 +68,36 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 font_family = 0
 text = "SCORE"
-font_color = Color(0.52156866, 0.52156866, 0.52156866, 1)
+font_color = Color(0.521569, 0.521569, 0.521569, 1)
 shadow_enabled = false
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 horizontal_alignment = 1
 
-[node name="ScoreValue" parent="VBoxContainer/Score/VBoxContainer" unique_id=878371935 instance=ExtResource("4_qc7dn")]
+[node name="ScoreValue" parent="VBoxContainer/Score/VBoxContainer" instance=ExtResource("4_qc7dn")]
 layout_mode = 2
 size_flags_vertical = 0
 text = "1,000"
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=303586383]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="Points" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=943434232]
+[node name="Points" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("3_hiogp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Points" unique_id=1993534009]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Points"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="PointTitle" parent="VBoxContainer/HBoxContainer/Points/VBoxContainer" unique_id=834971355 instance=ExtResource("4_qc7dn")]
+[node name="PointTitle" parent="VBoxContainer/HBoxContainer/Points/VBoxContainer" instance=ExtResource("4_qc7dn")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -111,28 +105,28 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 font_family = 0
 text = "POINTS"
-font_color = Color(0, 0.8039216, 0.9764706, 1)
+font_color = Color(0, 0.803922, 0.976471, 1)
 shadow_enabled = false
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 
-[node name="PointValue" parent="VBoxContainer/HBoxContainer/Points/VBoxContainer" unique_id=1455599570 instance=ExtResource("5_p76jh")]
+[node name="PointValue" parent="VBoxContainer/HBoxContainer/Points/VBoxContainer" instance=ExtResource("5_p76jh")]
 layout_mode = 2
-theme_override_colors/default_color = Color(0, 0.8039216, 0.9764706, 1)
-theme_override_colors/font_outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-theme_override_colors/font_shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-theme_override_constants/shadow_offset_x = 1
+theme_override_colors/default_color = Color(0, 0.803922, 0.976471, 1)
+theme_override_colors/font_outline_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = SubResource("FontVariation_niab0")
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/normal_font = ExtResource("6_amt3t")
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 font_family = 1
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
 shadow_offset = 1
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 
-[node name="XLabel" parent="VBoxContainer/HBoxContainer" unique_id=1534648091 instance=ExtResource("4_qc7dn")]
+[node name="XLabel" parent="VBoxContainer/HBoxContainer" instance=ExtResource("4_qc7dn")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -140,20 +134,20 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 text = "X"
 shadow_enabled = false
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 
-[node name="Multiplier" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=764463118]
+[node name="Multiplier" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_styles/panel = ExtResource("3_hiogp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Multiplier" unique_id=626746148]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Multiplier"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="MulTitle" parent="VBoxContainer/HBoxContainer/Multiplier/VBoxContainer" unique_id=1800393717 instance=ExtResource("4_qc7dn")]
+[node name="MulTitle" parent="VBoxContainer/HBoxContainer/Multiplier/VBoxContainer" instance=ExtResource("4_qc7dn")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -161,25 +155,25 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 font_family = 0
 text = "MULTIPLIER"
-font_color = Color(0.9647059, 0.4392157, 0.46666667, 1)
+font_color = Color(0.964706, 0.439216, 0.466667, 1)
 shadow_enabled = false
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MulValue" parent="VBoxContainer/HBoxContainer/Multiplier/VBoxContainer" unique_id=851445928 instance=ExtResource("5_p76jh")]
+[node name="MulValue" parent="VBoxContainer/HBoxContainer/Multiplier/VBoxContainer" instance=ExtResource("5_p76jh")]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.9647059, 0.4392157, 0.46666667, 1)
-theme_override_colors/font_outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-theme_override_colors/font_shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
-theme_override_constants/shadow_offset_x = 1
+theme_override_colors/default_color = Color(0.964706, 0.439216, 0.466667, 1)
+theme_override_colors/font_outline_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/normal_font = SubResource("FontVariation_niab0")
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/normal_font = ExtResource("6_amt3t")
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 font_family = 1
-shadow_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
 shadow_offset = 1
-outline_color = Color(0.23921569, 0.23921569, 0.23921569, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)

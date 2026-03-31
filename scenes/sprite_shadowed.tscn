@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dajowq31xhnn6"]
+
+[ext_resource type="Shader" uid="uid://cgx5d854c4jn1" path="res://themes/shader/shadow_shader.gdshader" id="1_y510u"]
+[ext_resource type="Texture2D" uid="uid://ctybuicva7nlc" path="res://images/normal/blue.png" id="2_fbg3b"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_blb86"]
+shader = ExtResource("1_y510u")
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+
+[node name="SpriteShadowed" type="Node2D"]
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_blb86")
+position = Vector2(8, 8)
+texture = ExtResource("2_fbg3b")
+
+[node name="MainSprite" type="Sprite2D" parent="."]
+position = Vector2(6, 6)
+texture = ExtResource("2_fbg3b")
