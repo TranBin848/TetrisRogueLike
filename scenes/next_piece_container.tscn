@@ -1,24 +1,24 @@
-[gd_scene format=3 uid="uid://bmrln54m45dt6"]
+[gd_scene load_steps=6 format=3 uid="uid://bmrln54m45dt6"]
 
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="1_ivssa"]
 [ext_resource type="StyleBox" uid="uid://bwerxk3dkj8pe" path="res://themes/gray_panel.tres" id="1_qb6tc"]
-[ext_resource type="PackedScene" uid="uid://b1sxpauqp561r" path="res://scenes/ui/piece_renderer.tscn" id="3_8tpm6"]
+[ext_resource type="PackedScene" uid="uid://c4ecjkyq0vrgm" path="res://scenes/piece_renderer.tscn" id="4_3cnif"]
 [ext_resource type="PackedScene" uid="uid://2nj8gupelkhr" path="res://scenes/ui/eclipse_container.tscn" id="4_mmx0r"]
 [ext_resource type="PackedScene" uid="uid://climcg5wulglf" path="res://scenes/ui/button_hint.tscn" id="5_pprkh"]
 
-[node name="NextPieceContainer" type="PanelContainer" unique_id=590438323]
+[node name="NextPieceContainer" type="PanelContainer"]
 custom_minimum_size = Vector2(90, 90)
 theme_override_styles/panel = ExtResource("1_qb6tc")
 
-[node name="BlinkTimer" type="Timer" parent="." unique_id=1641697857]
+[node name="BlinkTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1222556495]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 4
 
-[node name="NextPieceLabel" parent="VBoxContainer" unique_id=963152213 instance=ExtResource("1_ivssa")]
+[node name="NextPieceLabel" parent="VBoxContainer" instance=ExtResource("1_ivssa")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -27,39 +27,39 @@ theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 font_family = 0
 text = "NEXT_PIECE"
-font_color = Color(0.52156866, 0.52156866, 0.52156866, 1)
+font_color = Color(0.521569, 0.521569, 0.521569, 1)
 shadow_enabled = false
-shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
-outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="NextContainer" type="Control" parent="VBoxContainer" unique_id=1485092302]
+[node name="NextContainer" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="PieceRenderer" parent="VBoxContainer/NextContainer" unique_id=1519372237 instance=ExtResource("3_8tpm6")]
+[node name="PieceRenderer" parent="VBoxContainer/NextContainer" instance=ExtResource("4_3cnif")]
 
-[node name="EclipseContainer" parent="VBoxContainer/NextContainer" unique_id=2127673610 instance=ExtResource("4_mmx0r")]
+[node name="EclipseContainer" parent="VBoxContainer/NextContainer" instance=ExtResource("4_mmx0r")]
 layout_mode = 1
 offset_right = 0.0
 offset_bottom = -16.0
 
-[node name="RemainingCountLabel" parent="VBoxContainer" unique_id=85745151 instance=ExtResource("1_ivssa")]
+[node name="RemainingCountLabel" parent="VBoxContainer" instance=ExtResource("1_ivssa")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 text = "0/10"
-shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
-outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="ButtonAnchorPoint" type="Control" parent="." unique_id=1027250131]
+[node name="ButtonAnchorPoint" type="Control" parent="."]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 mouse_filter = 2
 
-[node name="ButtonHint" parent="ButtonAnchorPoint" unique_id=1181895176 instance=ExtResource("5_pprkh")]
+[node name="ButtonHint" parent="ButtonAnchorPoint" instance=ExtResource("5_pprkh")]
 layout_mode = 0
 offset_left = -3.0
 offset_top = -3.0

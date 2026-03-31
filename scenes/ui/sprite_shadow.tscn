@@ -1,8 +1,7 @@
-[gd_scene format=3 uid="uid://dpl4m7qe0sihv"]
+[gd_scene load_steps=6 format=3 uid="uid://dpl4m7qe0sihv"]
 
 [ext_resource type="Script" uid="uid://dm4wd1msqq3by" path="res://scripts/sprite_shadow.gd" id="1_s6c8x"]
 [ext_resource type="Shader" uid="uid://cgx5d854c4jn1" path="res://themes/shader/shadow_shader.gdshader" id="2_px2cr"]
-[ext_resource type="Texture2D" uid="uid://ceyrdg5aqqhh8" path="res://sprite/blocks/default/dark_green.png" id="2_uj4s2"]
 [ext_resource type="Texture2D" uid="uid://bnh7idv6wa1cb" path="res://sprite/blocks/disabled_overlay.png" id="3_q884o"]
 [ext_resource type="Texture2D" uid="uid://bj5ipuf487rx7" path="res://sprite/blocks/default/white_block.png" id="4_px2cr"]
 
@@ -10,25 +9,21 @@
 shader = ExtResource("2_px2cr")
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 
-[node name="SpriteShadow" type="Node2D" unique_id=1474830301]
+[node name="SpriteShadow" type="Node2D"]
 script = ExtResource("1_s6c8x")
-shadow_margin = null
 centered = false
-shadow_color = null
 
-[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=566346939]
+[node name="ShadowSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_mry80")
-position = Vector2(8, 8)
-texture = ExtResource("2_uj4s2")
+position = Vector2(4, 4)
 
-[node name="MainSprite" type="Sprite2D" parent="." unique_id=195543552]
+[node name="MainSprite" type="Sprite2D" parent="."]
 position = Vector2(6, 6)
-texture = ExtResource("2_uj4s2")
 
-[node name="DisabledOverlaySprite" type="Sprite2D" parent="MainSprite" unique_id=2026987664]
+[node name="DisabledOverlaySprite" type="Sprite2D" parent="MainSprite"]
 visible = false
 texture = ExtResource("3_q884o")
 
-[node name="FlashSprite" type="Sprite2D" parent="MainSprite" unique_id=588701418]
+[node name="FlashSprite" type="Sprite2D" parent="MainSprite"]
 visible = false
 texture = ExtResource("4_px2cr")

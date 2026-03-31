@@ -1,33 +1,15 @@
-class_name BlockData extends RefCounted
-
-## Block type groups for categorization
-var groups: Array = []
-
-## Base point value when destroyed
-var point_value: int = 1
-
-## Multiplier bonus when destroyed
-var multiplier_value: int = 0
-
-## Special behavior identifier (for custom effects)
-var special_behavior: StringName = &""
+class_name BlockData extends Object
 
 
-func _init(
-	groups_value: Array = [],
-	point_value_value: int = 1,
-	multiplier_value_value: int = 0,
-	special_behavior_value: StringName = &""
-) -> void:
+var groups: Array[GameData.BlockGroups] = []
+var minimum_reward_count: int = 1
+var maximum_reward_count: int = 1
+
+var requirements: Array[String] = []
+
+
+func _init(groups_value: Array[GameData.BlockGroups], minimum_reward_count_value: int, maximum_reward_count_value: int, requirements_value: Array[String] = []) -> void :
 	groups = groups_value
-	point_value = point_value_value
-	multiplier_value = multiplier_value_value
-	special_behavior = special_behavior_value
-
-
-func has_group(group: GameData.BlockGroups) -> bool:
-	return groups.has(group)
-
-
-func is_special() -> bool:
-	return special_behavior != &""
+	minimum_reward_count = minimum_reward_count_value
+	maximum_reward_count = maximum_reward_count_value
+	requirements = requirements_value

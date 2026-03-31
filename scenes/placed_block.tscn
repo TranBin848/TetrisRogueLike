@@ -6,7 +6,7 @@
 script = ExtResource("1_block")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
-position = Vector2(18, 18)
+position = Vector2(19, 19)
 
 [node name="OutlineSprite" type="Sprite2D" parent="."]
 position = Vector2(16, 16)

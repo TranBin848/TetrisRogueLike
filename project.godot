@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Tetromancer"
-run/main_scene="uid://bqov56fuh2dpx"
+run/main_scene="uid://cr3fc8bhrhx03"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -25,11 +25,12 @@ GameManager="*res://scripts/singletons/game_manager.gd"
 GameData="*res://scripts/singletons/game_data.gd"
 Random="*uid://chfaubaqxnvx2"
 EventManager="*res://scripts/singletons/event_manager.gd"
+BlockChainReaction="*res://scripts/block_destroy_effects.gd"
 
 [display]
 
-window/size/viewport_width=650
-window/size/viewport_height=704
+window/size/viewport_width=480
+window/size/viewport_height=270
 
 [input]
 
@@ -72,5 +73,6 @@ hold={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

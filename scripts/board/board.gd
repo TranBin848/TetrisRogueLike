@@ -1,292 +1,460 @@
-class_name Board 
-extends Node2D
+class_name Board extends Node2D
 
-# =============================================================================
-# CONSTANTS
-# =============================================================================
+const PIECE_SIZE: int = 12
+const PLACED_BLOCK_SCENE: PackedScene = preload("res://scenes/placed_block.tscn")
+
 
 const BOARD_WIDTH: int = 10
 const BOARD_HEIGHT: int = 20
-const CELL_SIZE: int = 32
-const SPAWN_POSITION: Vector2i = Vector2i(3, 0)
 
-const PLACED_BLOCK_SCENE: PackedScene = preload("res://scenes/placed_block.tscn")
 
-# =============================================================================
-# STATE
-# =============================================================================
+const GRAVITY_DELAY: float = 0.1
+const CALCULATION_DELAY: float = 1.0
 
-## 2D grid of PlacedBlock references (null = empty)
-var placed_blocks_grid: Array = []
 
-## Track destroyed block positions for gravity
+const DEATHLINE_TOP_ROWS: int = 0
+const DEATHLINE_BOTTOM_ROWS: int = 19
+
+
+var placed_blocks_grid: Array[Array] = []
 var destroyed_block_positions: Array[Vector2i] = []
+var notification_rows: Array[int] = []
 
-# =============================================================================
-# NODES
-# =============================================================================
+var linebreak_sound_pitch: float = 0.8
 
-@onready var placed_blocks_container: Node2D = $PlacedBlocks
-@onready var moving_piece: MovingPiece = $MovingPiece
-@onready var ghost_piece: Node2D = $GhostPiece
+var momentum_perk_time_left: float = 0.0
 
-# =============================================================================
-# LIFECYCLE
-# =============================================================================
 
-func _ready() -> void:
-	GameManager.set_board(self)
+@onready var placed_blocks: Node2D = $PlacedBlocks
+@onready var line_destruction_color_rect: ColorRect = $LineDestructionColorRect
+@onready var calculation_delay_timer: Timer = $CalculationDelayTimer
+
+func _ready() -> void :
 	initialize_board()
-
-	EventManager.queue_started.connect(_on_queue_started)
-	EventManager.queue_finished.connect(_on_queue_finished)
+	_update_deathline_position()
 
 
-func initialize_board() -> void:
-	# Clear existing blocks
-	for child in placed_blocks_container.get_children():
-		child.queue_free()
+	calculation_delay_timer.wait_time = CALCULATION_DELAY
+	calculation_delay_timer.timeout.connect(_on_calculation_delay_timeout)
 
-	# Initialize grid
+
+	EventManager.queue_started.connect( func():
+		calculation_delay_timer.stop()
+	)
+
+
+	GameManager.calculation_finished.connect( func():
+		linebreak_sound_pitch = 0.8
+		calculation_delay_timer.start()
+	)
+
+	await get_tree().create_timer(CALCULATION_DELAY).timeout
+	GameManager.spawn_moving_piece()
+
+
+func _process(delta: float) -> void :
+	#if GameManager.is_game_busy():
+		#return
+
+	if momentum_perk_time_left > 0.0:
+		momentum_perk_time_left -= delta
+
+
+func _on_calculation_delay_timeout() -> void :
+	print("calculation_delay_timer timeout - proceeding to next action")
+
+	if GameManager.is_calculating:
+		GameManager.is_calculating = false
+		GameScreen.next_action()
+
+
+func _update_deathline_position() -> void :
+	var is_fall_up: bool = GameManager.current_boss == GameData.BossTypes.FALL_UP
+	var deathline_row: int = DEATHLINE_BOTTOM_ROWS if is_fall_up else DEATHLINE_TOP_ROWS
+
+	line_destruction_color_rect.position.y = (deathline_row * PIECE_SIZE) + (PIECE_SIZE / 2)
+	line_destruction_color_rect.size.x = BOARD_WIDTH * PIECE_SIZE
+
+
+func initialize_board() -> void :
+
 	placed_blocks_grid.clear()
+	GameManager.clear_placed_blocks_variables()
+
 	for row in range(BOARD_HEIGHT):
-		var row_array: Array = []
-		row_array.resize(BOARD_WIDTH)
+		var sprite_row: Array[Node2D] = []
+
 		for col in range(BOARD_WIDTH):
-			row_array[col] = null
-		placed_blocks_grid.append(row_array)
+			sprite_row.append(null)
 
-	destroyed_block_positions.clear()
-
-# =============================================================================
-# GRID QUERIES
-# =============================================================================
-
-func is_position_valid(pos: Vector2i) -> bool:
-	return pos.x >= 0 and pos.x < BOARD_WIDTH and pos.y >= 0 and pos.y < BOARD_HEIGHT
+		placed_blocks_grid.append(sprite_row)
 
 
 func is_position_occupied(pos: Vector2i) -> bool:
-	if not is_position_valid(pos):
-		return true  # Out of bounds = occupied
-	if pos.y < 0:
-		return false  # Above board is ok
+
+	if pos.x < 0 or pos.x >= BOARD_WIDTH or pos.y < 0 or pos.y >= BOARD_HEIGHT:
+		return true
+
+
+	if placed_blocks_grid.is_empty() or pos.y >= placed_blocks_grid.size():
+		return true
+
 	return placed_blocks_grid[pos.y][pos.x] != null
 
 
-func is_position_free(pos: Vector2i) -> bool:
-	if pos.x < 0 or pos.x >= BOARD_WIDTH:
-		return false
-	if pos.y >= BOARD_HEIGHT:
-		return false
-	if pos.y < 0:
-		return true  # Above board is free
-	return placed_blocks_grid[pos.y][pos.x] == null
-
-
-func get_block_at(pos: Vector2i) -> PlacedBlock:
-	if not is_position_valid(pos):
+func place_block(pos: Vector2i, sprite_path: String, block_type: String = GameData.BLOCK_TYPES.NORMAL) -> PlacedBlock:
+	if pos.x < 0 or pos.x >= BOARD_WIDTH or pos.y < 0 or pos.y >= BOARD_HEIGHT:
 		return null
-	return placed_blocks_grid[pos.y][pos.x] as PlacedBlock
 
+	var block_instance: PlacedBlock = PLACED_BLOCK_SCENE.instantiate()
+	placed_blocks.add_child(block_instance)
 
-func get_column_blocks(col: int) -> Array[PlacedBlock]:
-	var blocks: Array[PlacedBlock] = []
-	if col < 0 or col >= BOARD_WIDTH:
-		return blocks
-	for row in range(BOARD_HEIGHT):
-		var block: PlacedBlock = placed_blocks_grid[row][col] as PlacedBlock
-		if is_instance_valid(block):
-			blocks.append(block)
-	return blocks
+	block_instance.type = block_type
+	block_instance.set_texture(load(sprite_path))
+	block_instance.set_grid_position(pos, PIECE_SIZE)
 
-func get_lowest_water_fall_position(pos: Vector2i) -> Vector2i:
-	if not is_position_valid(pos):
-		return pos
-	var lowest_y: int = pos.y
-	for y in range(pos.y + 1, BOARD_HEIGHT):
-		if placed_blocks_grid[y][pos.x] == null:
-			lowest_y = y
-		else:
-			break
-	return Vector2i(pos.x, lowest_y)
+	block_instance.destroyed.connect( func() -> void :
 
-# =============================================================================
-# BLOCK PLACEMENT
-# =============================================================================
-
-func place_block(pos: Vector2i, block_type: String) -> PlacedBlock:
-	if not is_position_valid(pos):
-		return null
-	if pos.y < 0:
-		return null  # Can't place above board
-
-	var block: PlacedBlock = PLACED_BLOCK_SCENE.instantiate()
-	placed_blocks_container.add_child(block)
-
-	block.type = block_type
-	block.set_grid_position(pos)
-
-	# Connect destroyed signal to track position
-	block.destroyed.connect(func():
-		_on_block_destroyed(block)
+		for row in BOARD_HEIGHT:
+			for col in BOARD_WIDTH:
+				if placed_blocks_grid[row][col] == block_instance:
+					placed_blocks_grid[row][col] = null
+					destroyed_block_positions.append(Vector2i(col, row))
+					return
 	)
 
-	placed_blocks_grid[pos.y][pos.x] = block
-	return block
+	placed_blocks_grid[pos.y][pos.x] = block_instance
+	GameManager.add_placed_block(block_instance, block_type)
+
+	return block_instance
 
 
-func _on_block_destroyed(block: PlacedBlock) -> void:
-	var pos: Vector2i = block.grid_position
-	if is_position_valid(pos):
-		placed_blocks_grid[pos.y][pos.x] = null
-		destroyed_block_positions.append(pos)
 
-# =============================================================================
-# LINE CLEARING
-# =============================================================================
+
+func place_blocks_directly(positions: Array[Vector2i], block_type: String = GameData.BLOCK_TYPES.NORMAL, simulated_rotation: bool = false) -> Array[PlacedBlock]:
+	var sprite_path: String = GameData.get_block_texture_path(block_type)
+	return place_piece(positions, sprite_path, block_type, simulated_rotation)
+
+
+func place_piece(blocks: Array[Vector2i], sprite_path: String, block_type: String = GameData.BLOCK_TYPES.NORMAL, piece_was_rotated: bool = false) -> Array[PlacedBlock]:
+	var b: Array[PlacedBlock] = []
+
+	for block_pos in blocks:
+		b.append(place_block(block_pos, sprite_path, block_type))
+
+	_trigger_below_blocks_animation(blocks)
+	handle_block_placement_interactions(b, piece_was_rotated)
+
+
+
+	#AchievementManager.add_progress(AchievementManager.AchievementId.PLACE_50_PIECES)
+	#AchievementManager.add_progress(AchievementManager.AchievementId.PLACE_100_PIECES)
+	#AchievementManager.add_progress(AchievementManager.AchievementId.PLACE_500_PIECES)
+
+	return b
+
 
 func is_line_full(row: int) -> bool:
+
 	if row < 0 or row >= BOARD_HEIGHT:
 		return false
-	for col in range(BOARD_WIDTH):
+
+	for col in BOARD_WIDTH:
 		var block = placed_blocks_grid[row][col]
+
 		if block == null or not is_instance_valid(block):
 			return false
+
 	return true
 
 
-func check_and_clear_lines(should_execute_events: bool = true, should_spawn_next: bool = true) -> int:
+func is_line_fully_empty(row: int) -> bool:
+
+	if row < 0 or row >= BOARD_HEIGHT:
+		return false
+
+	for col in BOARD_WIDTH:
+		if placed_blocks_grid[row][col] != null:
+			return false
+
+	return true
+
+
+func is_fully_clear() -> bool:
+
+	for row in BOARD_HEIGHT:
+		for col in BOARD_WIDTH:
+			if placed_blocks_grid[row][col] != null:
+				return false
+
+	return true
+
+
+func check_and_clear_lines(should_execute_events: bool = true, should_trigger_next_action: bool = true) -> int:
 	var rows_to_clear: Array[int] = []
 
-	# Find all full rows
-	for row in range(BOARD_HEIGHT):
-		if is_line_full(row):
-			rows_to_clear.append(row)
+	for i in BOARD_HEIGHT:
+		if is_line_full(i):
+			rows_to_clear.append(i)
 
 	if rows_to_clear.size() > 0:
 		var lines_count: int = rows_to_clear.size()
 
-		# Reset pitch for new line clear
-		PlacedBlock.reset_destroy_pitch()
-
-		# Queue destruction RIGHT TO LEFT for each row
-		for row in rows_to_clear:
+		for i in rows_to_clear:
 			for col in range(BOARD_WIDTH - 1, -1, -1):
-				var block: PlacedBlock = placed_blocks_grid[row][col] as PlacedBlock
-				if is_instance_valid(block) and not block.destroy_animation_requested:
-					EventManager.add_event(BlockEffects.common_destroy.bind(block, lines_count))
+				var block: PlacedBlock = placed_blocks_grid[i][col]
 
-		# Camera shake
-		var camera = get_viewport().get_camera_2d()
-		if camera and camera.has_method("shake_direction"):
-			camera.shake_direction(2.0 * lines_count, 0, 0.3)
+				if is_instance_valid(block):
+					EventManager.add_event(BlockChainReaction.common_destroy.bind(block, lines_count))
 
-		# Update score
-		GameManager.on_lines_cleared(lines_count)
+		GameCamera.shake_direction(2 * linebreak_sound_pitch, 0, 0.3)
+
+		if GameManager.is_perk_active(GameData.Perks.STACK_MASTER) and lines_count >= 3:
+			GameManager.trigger_perk(GameData.Perks.STACK_MASTER)
+
+		if GameManager.is_perk_active(GameData.Perks.PAUPER) and lines_count == 1:
+			GameManager.trigger_cumulative_perk(GameData.Perks.PAUPER)
+
+		if GameManager.is_perk_active(GameData.Perks.PERFECTION) and lines_count == 4:
+			GameManager.trigger_cumulative_perk(GameData.Perks.PERFECTION)
+
+		if GameManager.is_perk_active(GameData.Perks.MOMENTUM):
+			if momentum_perk_time_left > 0.0:
+				GameManager.trigger_cumulative_perk(GameData.Perks.MOMENTUM)
+			else:
+				GameManager.reset_cumulative_perk(GameData.Perks.MOMENTUM)
+
+			momentum_perk_time_left = 15.0
+
+
+		#if GameManager.current_boss == GameData.BossTypes.PERFECTIONIST and lines_count < 4:
+			#EventManager.add_event_last( func() -> float:
+				#GameManager.points = GameManager.points.multiply(0.5)
+#
+				#var boss_texture_rect: BossTypeTextureRect = GameManager.get_unique_node("BossTypeTextureRect")
+				#PointNotification.create_and_slide(boss_texture_rect.global_position + boss_texture_rect.size / 2 + Vector2(0, 6), PointNotification.BLUE, "x0.5", 1.8, PointNotification.DOWN, 12.0)
+#
+				#return BlockChainReaction.DEFAULT_DELAY
+			#)
+
+
+		if GameManager.is_perk_active(GameData.Perks.FULL_CLEAR):
+			GameManager.trigger_perk(GameData.Perks.FULL_CLEAR)
 
 		if should_execute_events:
 			GameManager.is_calculating = true
 			EventManager.execute_events()
 	else:
-		# No lines to clear - spawn next piece
-		if should_spawn_next:
-			spawn_next_piece()
+		if should_trigger_next_action:
+			GameScreen.next_action()
 
 	return rows_to_clear.size()
 
-# =============================================================================
-# GRAVITY
-# =============================================================================
 
-func apply_gravity_changes() -> void:
-	if destroyed_block_positions.is_empty():
-		spawn_next_piece()
-		return
 
-	var local_destroyed: Array[Vector2i] = destroyed_block_positions.duplicate()
+
+
+
+
+func apply_gravity_changes() -> float:
+
+
+	if EventManager.should_check_lines_after_queue:
+		print("Skipping gravity application - line check pending after queue")
+		return 0.0
+
+
+
+	var local_destroyed_positions: Array[Vector2i] = destroyed_block_positions.duplicate()
 	destroyed_block_positions.clear()
 
-	# Group destroyed positions by column
-	var by_column: Dictionary = {}
-	for pos in local_destroyed:
-		if not by_column.has(pos.x):
-			by_column[pos.x] = []
-		by_column[pos.x].append(pos.y)
 
-	# Apply gravity to each affected column
-	for col in by_column.keys():
-		var destroyed_rows: Array = by_column[col]
+	var destroyed_by_column: Dictionary = {}
+	for pos in local_destroyed_positions:
+		if not destroyed_by_column.has(pos.x):
+			destroyed_by_column[pos.x] = []
+		destroyed_by_column[pos.x].append(pos.y)
+
+
+	for col in destroyed_by_column.keys():
+		var destroyed_rows: Array[int] = []
+
+		destroyed_rows.assign(destroyed_by_column[col])
 		destroyed_rows.sort()
+
 		_apply_gravity_to_column(col, destroyed_rows)
 
-	# Check for cascading line clears
-	await get_tree().create_timer(0.2).timeout
-	var cascading_lines: int = check_and_clear_lines(true, true)
-	if cascading_lines == 0:
-		spawn_next_piece()
+	return GRAVITY_DELAY
 
 
-func _apply_gravity_to_column(col: int, destroyed_rows: Array) -> void:
-	# Collect all blocks above destroyed rows that need to fall
+
+
+func _trigger_below_blocks_animation(newly_placed_blocks: Array[Vector2i]) -> void :
+	if newly_placed_blocks.is_empty():
+		return
+
+
+	var affected_columns: Array[int] = []
+	for block_pos in newly_placed_blocks:
+		if block_pos.x not in affected_columns:
+			affected_columns.append(block_pos.x)
+
+
+	if not _has_blocks_in_columns(affected_columns):
+		return
+
+
+	var animated_blocks_count: int = _animate_blocks_in_columns(affected_columns)
+
+
+	if animated_blocks_count > 5:
+		GameCamera.shake_direction(1, 270, 0.2)
+
+
+func _has_blocks_in_columns(columns: Array[int]) -> bool:
+	for col in columns:
+		for row in range(BOARD_HEIGHT):
+			if placed_blocks_grid[row][col] != null:
+				return true
+	return false
+
+
+func _animate_blocks_in_columns(columns: Array[int]) -> int:
+	var animated_count: int = 0
+
+	for col in columns:
+		for row in range(BOARD_HEIGHT):
+			var block: PlacedBlock = placed_blocks_grid[row][col]
+			if is_instance_valid(block):
+				block.above_placement_animation()
+				animated_count += 1
+
+	return animated_count
+
+
+
+
+func handle_block_placement_interactions(newly_placed_blocks: Array[PlacedBlock], piece_was_rotated: bool = false) -> void :
+
+	var colony_event_queue: Array[Callable] = []
+
+	var worker_bee_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.WORKER_BEE)
+	var queen_bee_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.QUEEN_BEE)
+
+
+	for b in newly_placed_blocks:
+		worker_bee_blocks.erase(b)
+		queen_bee_blocks.erase(b)
+
+	for worker_bee_block in worker_bee_blocks:
+		var adjacent_blocks: Array[PlacedBlock] = worker_bee_block.get_adjacent_blocks()
+		var adjacent_colony_block_count: int = 0
+
+		for block in adjacent_blocks:
+			if is_instance_valid(block) and GameData.is_block_on_group(block.type, GameData.BlockGroups.COLONY):
+				adjacent_colony_block_count += 1
+
+		if adjacent_colony_block_count > 0:
+			colony_event_queue.append(BlockChainReaction.worker_bee.bind(worker_bee_block, adjacent_colony_block_count))
+
+	for queen_bee_block in queen_bee_blocks:
+		var adjacent_blocks: Array[PlacedBlock] = queen_bee_block.get_adjacent_blocks()
+		var adjacent_colony_block_count: int = 0
+
+		for block in adjacent_blocks:
+			if is_instance_valid(block) and GameData.is_block_on_group(block.type, GameData.BlockGroups.COLONY):
+				adjacent_colony_block_count += 1
+
+		if adjacent_colony_block_count > 0:
+			colony_event_queue.append(BlockChainReaction.queen_bee.bind(queen_bee_block, adjacent_colony_block_count))
+
+	if colony_event_queue.size() > 0:
+		EventManager.execute_queue_events(colony_event_queue)
+
+
+	if not piece_was_rotated:
+
+		if GameManager.is_perk_active(GameData.Perks.ACCEPTANCE):
+			GameManager.trigger_perk(GameData.Perks.ACCEPTANCE)
+
+		var bricks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.BRICK)
+
+
+		for b in newly_placed_blocks:
+			bricks.erase(b)
+
+		if bricks.size() > 0:
+			var bricks_event_queue: Array[Callable] = []
+
+			for brick in bricks:
+				bricks_event_queue.append(BlockChainReaction.brick.bind(brick))
+
+			EventManager.execute_queue_events(bricks_event_queue)
+
+
+
+
+func _apply_gravity_to_column(col: int, destroyed_rows: Array[int]) -> void :
 	var falling_blocks: Array[Dictionary] = []
+	var is_fall_up: bool = GameManager.current_boss == GameData.BossTypes.FALL_UP
 
-	# Iterate from bottom to top
-	for row in range(BOARD_HEIGHT - 1, -1, -1):
-		var block: PlacedBlock = placed_blocks_grid[row][col] as PlacedBlock
+
+	var row_range: Array[int] = []
+	row_range.assign(range(BOARD_HEIGHT) if is_fall_up else range(BOARD_HEIGHT - 1, -1, -1))
+
+	for row in row_range:
+		var block: PlacedBlock = placed_blocks_grid[row][col]
+
 		if not is_instance_valid(block):
 			continue
 
-		# Count how many destroyed rows are BELOW this block
+
 		var fall_distance: int = 0
 		for destroyed_row in destroyed_rows:
-			if destroyed_row > row:
+			var should_fall: bool = destroyed_row < row if is_fall_up else destroyed_row > row
+			if should_fall:
 				fall_distance += 1
 
 		if fall_distance > 0:
-			var target_row: int = mini(BOARD_HEIGHT - 1, row + fall_distance)
+
+			var target_row: int
+			if is_fall_up:
+				target_row = max(0, row - fall_distance)
+			else:
+				target_row = min(BOARD_HEIGHT - 1, row + fall_distance)
+
 			falling_blocks.append({
-				"block": block,
-				"from_row": row,
+				"block": block, 
+				"from_row": row, 
 				"to_row": target_row
 			})
 
-	# Move blocks in grid and animate
-	for data in falling_blocks:
-		var block: PlacedBlock = data["block"]
-		var from_row: int = data["from_row"]
-		var to_row: int = data["to_row"]
 
-		# Update grid
+	for block_data in falling_blocks:
+		var block: PlacedBlock = block_data["block"]
+		var from_row: int = block_data["from_row"]
+		var to_row: int = block_data["to_row"]
+
+
+		var final_row: int = to_row
+		if is_fall_up:
+
+			while final_row < BOARD_HEIGHT and is_instance_valid(placed_blocks_grid[final_row][col]):
+				final_row += 1
+
+			if final_row >= BOARD_HEIGHT:
+				continue
+		else:
+
+			while final_row >= 0 and is_instance_valid(placed_blocks_grid[final_row][col]):
+				final_row -= 1
+
+			if final_row < 0:
+				continue
+
+
 		placed_blocks_grid[from_row][col] = null
-		placed_blocks_grid[to_row][col] = block
+		placed_blocks_grid[final_row][col] = block
 
-		# Update block position
-		block.grid_position = Vector2i(col, to_row)
-		block.animate_fall_to(to_row * CELL_SIZE)
-
-# =============================================================================
-# PIECE SPAWNING
-# =============================================================================
-
-func spawn_next_piece() -> void:
-	GameManager.finish_calculation()
-
-	if moving_piece:
-		var piece_data: Dictionary = GameManager.consume_next_piece()
-		moving_piece.spawn(piece_data.shape, piece_data.type)
-
-		# Check game over
-		if not moving_piece.is_spawn_valid():
-			GameManager.trigger_game_over()
-
-# =============================================================================
-# EVENT CALLBACKS
-# =============================================================================
-
-func _on_queue_started() -> void:
-	pass
-
-
-func _on_queue_finished() -> void:
-	pass
+		block.grid_position = Vector2i(col, final_row)
+		block.animate_y(final_row * PIECE_SIZE)
