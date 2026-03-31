@@ -23,9 +23,13 @@ config/icon="res://icon.svg"
 
 GameManager="*res://scripts/singletons/game_manager.gd"
 GameData="*res://scripts/singletons/game_data.gd"
-Random="*uid://chfaubaqxnvx2"
 EventManager="*res://scripts/singletons/event_manager.gd"
+<<<<<<< HEAD
 BlockChainReaction="*res://scripts/block_destroy_effects.gd"
+=======
+Camera="*res://scripts/board/game_camera.gd"
+Random="*res://scripts/singletons/rng.gd"
+>>>>>>> feature/ui-selection-card
 
 [display]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvwcjpmifyg4a"
-path="res://.godot/imported/white_block.png-35e3f6820c40f93d35060d2d52f171fd.ctex"
+uid="uid://bpms14qhfnier"
+path="res://.godot/imported/rounded_outline_white_panel.png-8cf8ba15d46ecd7f594860660ba3554f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/white_block.png"
-dest_files=["res://.godot/imported/white_block.png-35e3f6820c40f93d35060d2d52f171fd.ctex"]
+source_file="res://sprite/rounded_outline_white_panel.png"
+dest_files=["res://.godot/imported/rounded_outline_white_panel.png-8cf8ba15d46ecd7f594860660ba3554f.ctex"]
 
 [params]
 

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d375lb0s7ge4f"]
+
+[ext_resource type="Script" uid="uid://denedrkghul76" path="res://scripts/block_type_panel.gd" id="1_45kh5"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="2_66fqx"]
+
+[node name="BlockTypePanel" type="PanelContainer"]
+script = ExtResource("1_45kh5")
+
+[node name="ShadowedLabel" parent="." instance=ExtResource("2_66fqx")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "MINERALS"
+shadow_enabled = false
+shadow_color = Color(0.384314, 0.141176, 0.380392, 1)

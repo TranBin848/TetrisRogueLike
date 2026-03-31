@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvwcjpmifyg4a"
-path="res://.godot/imported/white_block.png-35e3f6820c40f93d35060d2d52f171fd.ctex"
+uid="uid://vwjqkrqwftf"
+path="res://.godot/imported/button_roll.png-eb0e6b9bb946c2799c4e9e3044736e70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/white_block.png"
-dest_files=["res://.godot/imported/white_block.png-35e3f6820c40f93d35060d2d52f171fd.ctex"]
+source_file="res://sprite/button_roll.png"
+dest_files=["res://.godot/imported/button_roll.png-eb0e6b9bb946c2799c4e9e3044736e70.ctex"]
 
 [params]
 

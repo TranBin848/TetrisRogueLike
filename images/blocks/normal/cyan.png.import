@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvwcjpmifyg4a"
-path="res://.godot/imported/white_block.png-35e3f6820c40f93d35060d2d52f171fd.ctex"
+uid="uid://d1evda26wueys"
+path="res://.godot/imported/cyan.png-ed68914de290d537e07bb84351c7182c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/white_block.png"
-dest_files=["res://.godot/imported/white_block.png-35e3f6820c40f93d35060d2d52f171fd.ctex"]
+source_file="res://images/blocks/normal/cyan.png"
+dest_files=["res://.godot/imported/cyan.png-ed68914de290d537e07bb84351c7182c.ctex"]
 
 [params]
 

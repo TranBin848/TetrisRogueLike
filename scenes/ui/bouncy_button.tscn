@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://diptqe1ltcpci"]
+
+[ext_resource type="Script" uid="uid://1eurjq6swn8i" path="res://scripts/bouncy_button.gd" id="1_s5g15"]
+[ext_resource type="FontVariation" uid="uid://bj5qt3kblfua8" path="res://fonts/awesome_9_trimmed.tres" id="1_wxm5t"]
+[ext_resource type="StyleBox" uid="uid://cocwpwx4olv4g" path="res://themes/gray_button_focus.tres" id="2_o3kag"]
+[ext_resource type="StyleBox" uid="uid://dmrc4yisjb4o7" path="res://themes/gray_button_disabled.tres" id="3_3j3vd"]
+[ext_resource type="StyleBox" uid="uid://dq7e37ljbot8a" path="res://themes/gray_button_hover.tres" id="4_jh3k1"]
+[ext_resource type="StyleBox" uid="uid://c3eyb2dnuxuab" path="res://themes/gray_button_pressed.tres" id="5_8qjmy"]
+[ext_resource type="StyleBox" uid="uid://b3e1767opghrn" path="res://themes/gray_button_normal.tres" id="6_0o12s"]
+
+[node name="BouncyButton" type="Button"]
+theme_override_colors/font_disabled_color = Color(0.313726, 0.313726, 0.313726, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1_wxm5t")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = ExtResource("2_o3kag")
+theme_override_styles/disabled = ExtResource("3_3j3vd")
+theme_override_styles/hover = ExtResource("4_jh3k1")
+theme_override_styles/pressed = ExtResource("5_8qjmy")
+theme_override_styles/normal = ExtResource("6_0o12s")
+script = ExtResource("1_s5g15")
