@@ -25,7 +25,7 @@ func _process(delta: float) -> void :
 	position.y += (8.0 * rotation_speed * movement_direction.y) * delta
 
 
-	var camera_pos: Vector2 = Camera.get_world_position()
+	var camera_pos: Vector2 = GameCamera.get_world_position()
 	var half_screen: Vector2 = screen_size / 2
 	var left_bound: float = camera_pos.x - half_screen.x - wrap_margin
 	var right_bound: float = camera_pos.x + half_screen.x + wrap_margin

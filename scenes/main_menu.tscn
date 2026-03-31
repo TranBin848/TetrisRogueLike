@@ -1,131 +1,154 @@
-[gd_scene load_steps=10 format=3 uid="uid://csemd0ev6juk8"]
+[gd_scene load_steps=9 format=3 uid="uid://csemd0ev6juk8"]
 
-[ext_resource type="Script" uid="uid://than0vol5832" path="res://scripts/main_menu.gd" id="1_b76km"]
-[ext_resource type="FontFile" uid="uid://cfor4bc5akggb" path="res://fonts/awesome_9.ttf" id="1_cruaa"]
-[ext_resource type="FontFile" uid="uid://o3vktcp3b2d0" path="res://fonts/quan.ttf" id="2_b76km"]
+[ext_resource type="Script" uid="uid://than0vol5832" path="res://scripts/main_menu.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cb8n4d47n5xjb" path="res://scenes/background.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bdibwlsljo4pa" path="res://scenes/game_camera.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://cxipygxxerpwd" path="res://images/logo_pixel.png" id="5_tbmy8"]
+[ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="8"]
+[ext_resource type="FontVariation" uid="uid://bj5qt3kblfua8" path="res://fonts/awesome_9_trimmed.tres" id="9"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="10"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_430ii"]
-bg_color = Color(0.521569, 0.466667, 0.960784, 1)
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lbqne"]
-content_margin_left = 0.0
-content_margin_top = 14.0
-content_margin_right = 0.0
-content_margin_bottom = 10.0
-bg_color = Color(0.352941, 0.294118, 0.819608, 1)
+[node name="Background" parent="." instance=ExtResource("2")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cruaa"]
-content_margin_top = 12.0
-content_margin_bottom = 12.0
-bg_color = Color(0.423529, 0.360784, 0.905882, 1)
-shadow_color = Color(0.239216, 0.188235, 0.627451, 1)
-shadow_size = 4
-shadow_offset = Vector2(0, 4)
+[node name="GameCamera" parent="." instance=ExtResource("3")]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n3bqr"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
-[sub_resource type="Theme" id="Theme_b76km"]
-Button/colors/font_color = Color(0.423529, 0.360784, 0.905882, 1)
-Button/colors/font_disabled_color = Color(0.490196, 0.435294, 0.941176, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_pressed_color = Color(0.352941, 0.294118, 0.819608, 1)
-Button/styles/pressed = SubResource("StyleBoxFlat_n3bqr")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b76km"]
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-
-[node name="MainMenu" type="Control"]
-layout_mode = 3
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_b76km")
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0392157, 0.0392157, 0.0588235, 1)
-
-[node name="GridOverlay" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="FallingBlocks" type="Node2D" parent="."]
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="SocialMediaContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+visible = false
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
-[node name="LogoSection" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="DiscordButton" parent="CanvasLayer/MarginContainer/SocialMediaContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
 layout_mode = 2
+text = "Discord"
 
-[node name="SubTitle" type="Label" parent="CenterContainer/VBoxContainer/LogoSection"]
+[node name="SteamButton" parent="CanvasLayer/MarginContainer/SocialMediaContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_cruaa")
-theme_override_font_sizes/font_size = 18
-text = "A BLOCK STACKING ROUGELIKE"
+text = "Steam"
+
+[node name="MainContainerVBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LogoTexture" type="TextureRect" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("5_tbmy8")
+stretch_mode = 3
+
+[node name="DemoRichTextLabel" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("8")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/default_color = Color(0.521569, 0.521569, 0.521569, 1)
+theme_override_colors/font_outline_color = Color(0.105882, 0.105882, 0.105882, 1)
+theme_override_colors/font_shadow_color = Color(0.105882, 0.105882, 0.105882, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/normal_font = ExtResource("9")
+text = "[wave freq=6 amp=20]DEMO_VERSION"
 horizontal_alignment = 1
+font_family = 1
+shadow_offset = 1
+outline_color = Color(0.105882, 0.105882, 0.105882, 1)
 
-[node name="Titile" type="Label" parent="CenterContainer/VBoxContainer/LogoSection"]
+[node name="EmptySpace" type="Control" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer"]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("2_b76km")
-theme_override_font_sizes/font_size = 36
-text = "StackFlow"
-horizontal_alignment = 1
+size_flags_vertical = 3
 
-[node name="Accent" type="ColorRect" parent="CenterContainer/VBoxContainer/LogoSection"]
+[node name="NewGameButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
 layout_mode = 2
+text = "BUTTON_NEW_GAME"
 
-[node name="Space" type="Control" parent="CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
+[node name="ContinueButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
+text = "BUTTON_CONTINUE"
 
-[node name="ButtonSection" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="AchievementsButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
+text = "BUTTON_ACHIEVEMENTS"
 
-[node name="PlayButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonSection"]
-custom_minimum_size = Vector2(240, 48)
+[node name="BlockipediaButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
-theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.501961, 1)
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_pressed_color = Color(0.878431, 0.878431, 0.878431, 1)
-theme_override_fonts/font = ExtResource("1_cruaa")
-theme_override_font_sizes/font_size = 23
-theme_override_styles/hover = SubResource("StyleBoxFlat_430ii")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_lbqne")
-theme_override_styles/normal = SubResource("StyleBoxFlat_cruaa")
-text = "Play"
+text = "BUTTON_BLOCKIPEDIA"
 
-[node name="SettingsButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonSection"]
-custom_minimum_size = Vector2(240, 48)
+[node name="OptionsButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
 layout_mode = 2
-theme = SubResource("Theme_b76km")
-theme_override_colors/font_hover_color = Color(0.437551, 0.372968, 0.934038, 1)
-theme_override_colors/font_color = Color(0.180392, 0.180392, 0.290196, 1)
-theme_override_fonts/font = ExtResource("1_cruaa")
-theme_override_styles/normal = SubResource("StyleBoxFlat_b76km")
-text = "Settings"
+text = "BUTTON_OPTIONS"
 
-[node name="QuitButton" type="Button" parent="CenterContainer/VBoxContainer/ButtonSection"]
-custom_minimum_size = Vector2(240, 48)
+[node name="QuitButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
 layout_mode = 2
-theme_override_fonts/font = ExtResource("1_cruaa")
-text = "Quit"
+text = "BUTTON_QUIT"
+
+[node name="VersionLabel" parent="CanvasLayer/MarginContainer" instance=ExtResource("10")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+text = "v0.11"
+font_color = Color(0.521569, 0.521569, 0.521569, 1)
+shadow_enabled = false
+outline_color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="HudLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 2
+visible = false
+
+[node name="NewGameConfirmation" parent="HudLayer"]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+visible = false
+anchors_preset = 15
+script = null
+
+[node name="DeckSelectorScreen" parent="HudLayer"]
+_import_path = NodePath("")
+unique_name_in_owner = true
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+visible = false
+anchors_preset = 15
+script = null

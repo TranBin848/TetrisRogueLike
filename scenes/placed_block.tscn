@@ -1,20 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwi1xfh7v0esm"]
+[gd_scene load_steps=4 format=3 uid="uid://dwi1xfh7v0esm"]
 
 [ext_resource type="Script" uid="uid://c453w8h7y1e5n" path="res://scripts/core/placed_block.gd" id="1_block"]
+[ext_resource type="PackedScene" uid="uid://dajowq31xhnn6" path="res://scenes/sprite_shadowed.tscn" id="2_sprite"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3v8d8"]
+size = Vector2(12, 12)
 
 [node name="PlacedBlock" type="Node2D"]
 script = ExtResource("1_block")
 
-[node name="ShadowSprite" type="Sprite2D" parent="."]
-position = Vector2(19, 19)
+[node name="SpriteShadowed" parent="." instance=ExtResource("2_sprite")]
 
-[node name="OutlineSprite" type="Sprite2D" parent="."]
-position = Vector2(16, 16)
+[node name="CollisionArea" type="Area2D" parent="."]
+collision_mask = 4
+input_pickable = false
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(16, 16)
-
-[node name="FlashSprite" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1.5, 1.5, 1.5, 1)
-position = Vector2(16, 16)
+[node name="Collision" type="CollisionShape2D" parent="CollisionArea"]
+position = Vector2(6, 6)
+shape = SubResource("RectangleShape2D_3v8d8")

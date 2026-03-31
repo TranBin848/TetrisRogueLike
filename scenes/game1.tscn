@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bkiqdhrorivrd"]
 
-[ext_resource type="PackedScene" uid="uid://sr0oyqqghe7p" path="res://scenes/board.tscn" id="1_board"]
+[ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_board"]
 [ext_resource type="Script" uid="uid://5yuodfa7xjbn" path="res://scripts/board/game_camera.gd" id="2_camera"]
 [ext_resource type="Script" uid="uid://bg3emvohy8x2i" path="res://scripts/board/game_controller.gd" id="3_controller"]
 

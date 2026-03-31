@@ -1,6 +1,6 @@
-class_name GameCamera extends Camera2D
+class_name GameCameraBehavior extends Camera2D
 
-static var _self: GameCamera = null
+static var _self: GameCameraBehavior = null
 
 var original_offset: Vector2
 var shake_tween: Tween
@@ -20,10 +20,19 @@ static func get_world_position() -> Vector2:
 
 	return Vector2.ZERO
 
+static func enable() -> void:
+	if _self:
+		_self.enabled = true
+
+static func disable() -> void:
+	if _self:
+		_self.enabled = false
 
 func _ready() -> void :
 	_self = self
 	original_offset = offset
+	# Disable by default, let game scenes enable it
+	enabled = false
 
 
 func _shake_randomly(intensity: float, duration: float) -> void :

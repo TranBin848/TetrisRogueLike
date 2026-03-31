@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr3fc8bhrhx03"]
+[gd_scene load_steps=7 format=3 uid="uid://3ca6erjlgewg"]
 
-[ext_resource type="PackedScene" uid="uid://sr0oyqqghe7p" path="res://scenes/board.tscn" id="1_iywne"]
+[ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_iywne"]
+[ext_resource type="Script" uid="uid://dk3x83rgqwwnb" path="res://scripts/game.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://cdujk1vf4b7fc" path="res://scenes/score_panel.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://xuv8qr4wlkf" path="res://sprite/perk_empty_slot.png" id="2_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://7ixjl7xc350t" path="res://sprite/board.png" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bmrln54m45dt6" path="res://scenes/next_piece_container.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_script")
 
 [node name="Board" parent="." instance=ExtResource("1_iywne")]
+unique_name_in_owner = true
 position = Vector2(179, 14)
 
 [node name="HUD" type="CanvasLayer" parent="."]
@@ -18,8 +21,6 @@ follow_viewport_enabled = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -170.0
-offset_bottom = -434.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 12
