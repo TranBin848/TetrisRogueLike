@@ -269,6 +269,7 @@ var current_shape_type: ShapeType = ShapeType.I
 var current_rotation: int = 0
 var current_texture: Texture2D = null
 var current_blocks: Array[Vector2i] = []
+var _pending_render_debug_log: bool = false
 
 @onready var shadow_outline_layer: Node2D = $ShadowOutlineLayer
 @onready var texture_layer: Node2D = $TextureLayer
@@ -303,6 +304,10 @@ func set_piece(shape_type: ShapeType, rotation_index: int = 0, animated: bool = 
 		sprite_path = GameData.get_block_texture_path(block_type)
 
 	current_texture = load(sprite_path)
+	_pending_render_debug_log = true
+
+	if OS.is_debug_build():
+		print("[RenderDebug] PieceRenderer.set_piece() shape=", shape_type, " rotation=", rotation_index, " texture=", sprite_path, " blocks=", current_blocks)
 
 
 	var bounds: = get_piece_bounds(shape_type, rotation_index)
@@ -358,6 +363,10 @@ func _draw_shadow_outline() -> void :
 func _draw_texture() -> void :
 	if current_texture == null or current_blocks.is_empty():
 		return
+
+	if _pending_render_debug_log and OS.is_debug_build():
+		print("[RenderDebug] PieceRenderer._draw_texture() drawing ", current_blocks.size(), " blocks")
+		_pending_render_debug_log = false
 
 
 	var bounds: = get_piece_bounds(current_shape_type, current_rotation)

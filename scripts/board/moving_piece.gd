@@ -54,6 +54,8 @@ static func create(parent: Node, next_piece_data: Dictionary) -> MovingPiece:
 	var instance: MovingPiece = preload("res://scenes/moving_piece.tscn").instantiate()
 
 	parent.add_child(instance)
+	if OS.is_debug_build():
+		print("[RenderDebug] MovingPiece.create() parent=", parent.name, " data=", next_piece_data)
 
 	instance.name = "MovingPiece"
 
@@ -193,6 +195,9 @@ func set_piece(shape_type: PieceRenderer.ShapeType, spawn_position: Vector2i = S
 	piece_renderer.set_piece(current_piece_data.shape, current_rotation, true, block_type)
 	ghost_renderer.set_piece(current_piece_data.shape, current_rotation, false, block_type)
 
+	if OS.is_debug_build():
+		print("[RenderDebug] MovingPiece.set_piece() shape=", shape_type, " block_type=", block_type, " grid_position=", grid_position)
+
 	update_visual_position()
 	update_ghost_position()
 
@@ -261,6 +266,9 @@ func land_piece() -> void :
 	if not board:
 		push_error("MovingPiece: No board reference set!")
 		return
+
+	if OS.is_debug_build():
+		print("[RenderDebug] land_piece() blocks=", get_current_blocks(), " type=", current_piece_data.type)
 
 	if GameManager.current_moving_piece == self:
 		GameManager.current_moving_piece = null

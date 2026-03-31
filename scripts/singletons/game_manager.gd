@@ -977,6 +977,8 @@ func get_board() -> Board:
 
 func spawn_moving_piece() -> MovingPiece:
 	var next_piece: Dictionary = consume_next_piece()
+	if OS.is_debug_build():
+		print("[RenderDebug] spawn_moving_piece() next_piece=", next_piece)
 	var moving_piece: MovingPiece = MovingPiece.create(get_unique_node("Board"), next_piece)
 
 	current_moving_piece = moving_piece

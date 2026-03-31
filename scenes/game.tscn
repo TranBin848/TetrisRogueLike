@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://3ca6erjlgewg"]
+[gd_scene load_steps=6 format=3 uid="uid://3ca6erjlgewg"]
 
 [ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_iywne"]
 [ext_resource type="Script" uid="uid://dk3x83rgqwwnb" path="res://scripts/game.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://cdujk1vf4b7fc" path="res://scenes/score_panel.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://xuv8qr4wlkf" path="res://sprite/perk_empty_slot.png" id="2_yqjtg"]
-[ext_resource type="Texture2D" uid="uid://7ixjl7xc350t" path="res://sprite/board.png" id="3_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://bmrln54m45dt6" path="res://scenes/next_piece_container.tscn" id="3_lnu2h"]
 
 [node name="Game" type="Node2D"]
@@ -77,7 +76,6 @@ texture = ExtResource("2_yqjtg")
 [node name="SafeMiddleArea" type="TextureRect" parent="HUD/MainMarginContainer/MainHBoxContainer"]
 custom_minimum_size = Vector2(126, 0)
 layout_mode = 2
-texture = ExtResource("3_lbhrr")
 
 [node name="RightContainer" type="VBoxContainer" parent="HUD/MainMarginContainer/MainHBoxContainer"]
 layout_mode = 2
