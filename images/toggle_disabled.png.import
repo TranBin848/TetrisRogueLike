@@ -2,33 +2,33 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdyant7fmeonx"
-path="res://.godot/imported/orange.png-3a835bae81fff5748f1b3c81e08e8e9e.ctex"
+uid="uid://fq0bmeltmq8l"
+path="res://.godot/imported/toggle_disabled.png-b8de9ef5f6be68acde9a3b03b754b2ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/blocks/default/orange.png"
-dest_files=["res://.godot/imported/orange.png-3a835bae81fff5748f1b3c81e08e8e9e.ctex"]
+source_file="res://images/toggle_disabled.png"
+dest_files=["res://.godot/imported/toggle_disabled.png-b8de9ef5f6be68acde9a3b03b754b2ca.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
-compress/lossy_quality=1.0
-compress/hdr_compression=0
+compress/lossy_quality=0.7
+compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
-process/fix_alpha_border=false
+process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

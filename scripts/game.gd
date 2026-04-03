@@ -36,23 +36,23 @@ static func next_action() -> void :
 		_instance.game_over_screen.appear_animation()
 		return
 
-	if GameManager.score.is_greater_than_or_equal_to(GameManager.target_score):
-		await _instance.get_tree().create_timer(1.0 / GameManager.timescale).timeout
-
-		if not is_instance_valid(_instance) or not is_instance_valid(_instance.current_score_panel):
-			return
-
-		_instance.current_score_panel.trigger_finish_animation()
-
-		await _instance.current_score_panel.final_animation_finished
-		await _instance.get_tree().create_timer(0.5 / GameManager.timescale).timeout
-
-		if GameManager.is_demo_build and GameManager.current_round == GameManager.DEMO_LAST_ROUND:
-			_instance.demo_warning.appear_animation()
-			return
-
-		_instance.victory_screen.appear_animation()
-		return
+	#if GameManager.score.is_greater_than_or_equal_to(GameManager.target_score):
+		#await _instance.get_tree().create_timer(1.0 / GameManager.timescale).timeout
+#
+		#if not is_instance_valid(_instance) or not is_instance_valid(_instance.current_score_panel):
+			#return
+#
+		#_instance.current_score_panel.trigger_finish_animation()
+#
+		#await _instance.current_score_panel.final_animation_finished
+		#await _instance.get_tree().create_timer(0.5 / GameManager.timescale).timeout
+#
+		#if GameManager.is_demo_build and GameManager.current_round == GameManager.DEMO_LAST_ROUND:
+			#_instance.demo_warning.appear_animation()
+			#return
+#
+		#_instance.victory_screen.appear_animation()
+		#return
 
 	if not GameManager.next_piece_cache.is_empty():
 		if not is_instance_valid(GameManager.current_moving_piece):

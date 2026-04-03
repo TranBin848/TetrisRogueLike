@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtuoex81l8ovy"]
+
+[ext_resource type="Texture2D" uid="uid://fq0bmeltmq8l" path="res://images/toggle_disabled.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bim1b7wjjh5bo" path="res://images/toggle_enabled.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://c31hppyoj3s6w" path="res://images/toggle_focus.png" id="3"]
+[ext_resource type="Script" uid="uid://dfmk5wy5fgrmx" path="res://scripts/pixel_toggle_button.gd" id="4"]
+
+[node name="PixelToggleButton" type="TextureButton"]
+size_flags_horizontal = 10
+toggle_mode = true
+texture_normal = ExtResource("1")
+texture_pressed = ExtResource("2")
+texture_focused = ExtResource("3")
+stretch_mode = 3
+script = ExtResource("4")

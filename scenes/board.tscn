@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqov56fuh2dpx"]
+[gd_scene load_steps=6 format=3 uid="uid://bqov56fuh2dpx"]
 
 [ext_resource type="Script" uid="uid://jckbnamsmd5k" path="res://scripts/board/board.gd" id="1_board"]
 [ext_resource type="Texture2D" uid="uid://7ixjl7xc350t" path="res://sprite/board.png" id="2_board_bg"]
 [ext_resource type="Texture2D" uid="uid://2chjjcta67ke" path="res://sprite/board_overlay.png" id="3_board_overlay"]
+[ext_resource type="Shader" uid="uid://b6lv7utxt3wd1" path="res://themes/shader/canvas_group_outline.gdshader" id="3_fv4ni"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vf5bc"]
+shader = ExtResource("3_fv4ni")
+shader_parameter/line_colour = Color(0.184314, 0.184314, 0.184314, 1)
+shader_parameter/line_thickness = 1
+shader_parameter/shadow_offset = 0
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_board")
@@ -34,7 +39,7 @@ offset_bottom = 29.0
 color = Color(1, 1, 1, 0.117647)
 
 [node name="BoardOverlay" type="Sprite2D" parent="."]
-z_index = 2
+z_index = 5
 texture = ExtResource("3_board_overlay")
 centered = false
 offset = Vector2(-2, -2)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=0 format=3 uid="uid://c5ieg3ef547rn"]
+[gd_scene load_steps=2 format=3 uid="uid://dwxh3kkgs1uua"]
 
-[ext_resource type="Script" path="res://scripts/calculation_blocker.gd" id="1"]
+[ext_resource type="Script" uid="uid://1040jimgrqtk" path="res://scripts/calculation_blocker.gd" id="1"]
 
-[node name="CalculationBlocker" type="Node" unique_id=1089935182]
+[node name="CalculationBlocker" type="Node"]
 script = ExtResource("1")

@@ -1,0 +1,196 @@
+[gd_scene load_steps=11 format=3 uid="uid://cq1u55c8uo7l6"]
+
+[ext_resource type="Script" uid="uid://ckxipx8ok3x73" path="res://scenes/modal/deck_selector/deck_selector_screen.gd" id="1"]
+[ext_resource type="StyleBox" path="res://resources/gray_panel.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="3"]
+[ext_resource type="Texture2D" uid="uid://dye5o5hl3wtyc" path="res://sprite/blocks/default/preview.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://w0jrabo7op0x" path="res://images/seed_button_down.png" id="7"]
+[ext_resource type="StyleBox" path="res://resources/light_gray_panel.tres" id="8"]
+[ext_resource type="PackedScene" uid="uid://dtuoex81l8ovy" path="res://scenes/ui/pixel_toggle_button.tscn" id="9"]
+[ext_resource type="PackedScene" uid="uid://bvknaklq8rrfd" path="res://scenes/ui/pixel_line_edit.tscn" id="10"]
+
+[node name="DeckSelectorScreen" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.313726)
+script = ExtResource("1")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="CloseButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "X"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="PreviousButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../../CloseButton")
+focus_neighbor_right = NodePath("../NextButton")
+focus_neighbor_bottom = NodePath("../../BottomContainer/HBoxContainer/PlayButton")
+focus_next = NodePath("../NextButton")
+focus_previous = NodePath("../NextButton")
+text = "<"
+
+[node name="DeckPreviewTexture" type="TextureRect" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4")
+stretch_mode = 3
+
+[node name="NextButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../PreviousButton")
+focus_neighbor_top = NodePath("../../CloseButton")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../../BottomContainer/HBoxContainer/PlayButton")
+focus_next = NodePath("../PreviousButton")
+focus_previous = NodePath("../PreviousButton")
+text = ">"
+
+[node name="TextContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/TextContainer" instance=ExtResource("5")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "The Moai"
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+horizontal_alignment = 1
+
+[node name="DescriptionLabel" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/TextContainer" instance=ExtResource("6")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+text = "[color=red]Can't be rotated. [color=white]When destroyed, gives [color=blue]Points +10[color=white]."
+horizontal_alignment = 1
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+shadow_offset = 1
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="BottomContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="PlayButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/HBoxContainer" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../../../HBoxContainer/PreviousButton")
+focus_neighbor_right = NodePath("../SeedButton")
+focus_next = NodePath("../../../HBoxContainer/NextButton")
+focus_previous = NodePath("../../../HBoxContainer/PreviousButton")
+text = "BUTTON_PLAY"
+
+[node name="SeedButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/HBoxContainer" instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../PlayButton")
+focus_neighbor_top = NodePath("../../../HBoxContainer/NextButton")
+focus_neighbor_right = NodePath("../PlayButton")
+focus_neighbor_bottom = NodePath("../../SeedLineEdit")
+focus_next = NodePath("../../SeedLineEdit")
+focus_previous = NodePath("../../../HBoxContainer/NextButton")
+icon = ExtResource("7")
+
+[node name="TooltipAnchorControl" type="CenterContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/HBoxContainer/SeedButton"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_top = -9.0
+offset_bottom = -9.0
+grow_horizontal = 2
+use_top_left = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/HBoxContainer/SeedButton/TooltipAnchorControl"]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("8")
+
+[node name="CustomSeedLabel" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/HBoxContainer/SeedButton/TooltipAnchorControl/PanelContainer" instance=ExtResource("5")]
+layout_mode = 2
+font_family = 0
+text = "CUSTOM_SEED"
+shadow_color = Color(0.20871, 0.20871, 0.20871, 1)
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.288518, 0.288518, 0.288518, 1)
+
+[node name="CustomSeedTitleContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer"]
+layout_mode = 2
+
+[node name="CustomSeedTitleLabel" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/CustomSeedTitleContainer" instance=ExtResource("5")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "CUSTOM_SEED"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="CustomSeedToggleButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/CustomSeedTitleContainer" instance=ExtResource("9")]
+unique_name_in_owner = true
+layout_mode = 2
+texture_normal = null
+texture_pressed = null
+texture_focused = null
+
+[node name="SeedLineEdit" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer" instance=ExtResource("10")]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.392157)
+layout_mode = 2
+theme_override_colors/font_placeholder_color = Color(0.299547, 0.299547, 0.299547, 1)
+text = "Hello Worl"
+alignment = 1
+max_length = 10
+context_menu_enabled = false
+emoji_menu_enabled = false
+select_all_on_focus = true

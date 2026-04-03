@@ -83,3 +83,12 @@ size_flags_horizontal = 2
 
 [node name="NextPieceContainer" parent="HUD/MainMarginContainer/MainHBoxContainer/RightContainer" instance=ExtResource("3_lnu2h")]
 layout_mode = 2
+
+[node name="PointNotificationContainer" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

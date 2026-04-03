@@ -1,21 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://dajowq31xhnn6"]
+[gd_scene load_steps=6 format=3 uid="uid://dajowq31xhnn6"]
 
 [ext_resource type="Script" uid="uid://dm4wd1msqq3by" path="res://scripts/sprite_shadow.gd" id="1_fbg3b"]
 [ext_resource type="Shader" uid="uid://cgx5d854c4jn1" path="res://themes/shader/shadow_shader.gdshader" id="1_y510u"]
-[ext_resource type="Texture2D" uid="uid://ctybuicva7nlc" path="res://images/blocks/normal/blue.png" id="2_fbg3b"]
+[ext_resource type="Texture2D" uid="uid://xoreu4je2mi" path="res://images/blocks/normal/red.png" id="2_fbg3b"]
+[ext_resource type="Texture2D" uid="uid://cvwcjpmifyg4a" path="res://images/white_block.png" id="3_blb86"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_blb86"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fbg3b"]
 shader = ExtResource("1_y510u")
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 0)
 
 [node name="SpriteShadowed" type="Node2D"]
 script = ExtResource("1_fbg3b")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_blb86")
+material = SubResource("ShaderMaterial_fbg3b")
 position = Vector2(8, 8)
-texture = ExtResource("2_fbg3b")
+texture = ExtResource("3_blb86")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
 position = Vector2(6, 6)
 texture = ExtResource("2_fbg3b")
+
+[node name="FlashSprite" type="Sprite2D" parent="MainSprite"]
+visible = false
+texture = ExtResource("3_blb86")
