@@ -429,11 +429,17 @@ func _migrate_original_pieces(raw_pieces: Dictionary) -> Dictionary:
 
 
 func get_current_scene() -> Node:
-	return get_tree().current_scene.get_node("%Game").get_child(0)
+	var viewport = get_tree().current_scene.get_node_or_null("%MainViewport")
+	if viewport and viewport.get_child_count() > 0:
+		return viewport.get_child(0)
+	return get_tree().current_scene
 
 
 func get_unique_node(unique_name: String) -> Node:
-	return get_current_scene().get_node_or_null("%" + unique_name)
+	var scene = get_current_scene()
+	if scene:
+		return scene.get_node_or_null("%" + unique_name)
+	return null
 
 
 
@@ -526,9 +532,18 @@ func _calculate_next_piece_cache() -> void :
 		print("[GameManager] Used piece from hold: ", GameData.get_block_name(next_piece_cache.type))
 		return
 
-	pieces_finished.emit()
+	# Fallback: if no pieces available, use default block
 	print("\n[GameManager] No pieces available in the queue!")
 	print("[GameManager] Remaining count: ", get_remaining_pieces_count())
+	print("[GameManager] Using fallback default block")
+	
+	var fallback_shape = PieceRenderer.ShapeType.I
+	var fallback_block = get_current_default_block()
+	next_piece_cache = {"type": fallback_block, "shape": fallback_shape, "queue_index": 0}
+	if piece_queue.is_empty():
+		piece_queue.append(fallback_shape)
+	
+	pieces_finished.emit()
 
 
 func _weighted_pick_block_type(available_blocks: Array) -> String:
@@ -641,180 +656,150 @@ func add_multiplier(value) -> void :
 	##VictoryScreen.is_active())
 
 
-#func is_perk_active(perk: GameData.Perks) -> bool:
-	#return perk_levels.has(perk) and perk_levels[perk] > 0
-#
-#
-#func get_perk_level(perk: GameData.Perks) -> int:
-	#return perk_levels.get(perk, 0)
-#
-#
-#func get_unique_perk_count() -> int:
-	#return perk_levels.size()
-#
-#
-#func can_upgrade_perk(perk: GameData.Perks) -> bool:
-	#if perk not in LEVELED_PERKS:
-		#return false
-#
-	#var current_level: int = get_perk_level(perk)
-	#return current_level < MAX_PERK_LEVEL
-#
-#
-#
-#
-#func can_select_another_perk() -> bool:
-	#if get_unique_perk_count() < MAX_PERK_SLOTS:
-		#return true
-	#for perk: GameData.Perks in perk_levels:
-		#if can_upgrade_perk(perk):
-			#return true
-	#return false
-#
-#
-#func is_perk_used(perk: GameData.Perks) -> bool:
-	#return is_perk_active(perk) and perks_used.has(perk)
-#
-#
-#func trigger_cumulative_perk(perk: GameData.Perks, amount: int = 1) -> void :
-	#if not GameManager.perks_used.has(perk):
-		#GameManager.perks_used.append(perk)
-#
-	#if not cumulative_perks.has(perk):
-		#cumulative_perks[perk] = 0
-#
-	#cumulative_perks[perk] += amount
-#
-	#if GameManager.is_perk_active(GameData.Perks.CHAIN_REACTION) and perk != GameData.Perks.CHAIN_REACTION:
-		#GameManager.trigger_perk(GameData.Perks.CHAIN_REACTION)
-#
-	#match perk:
-		#GameData.Perks.PAUPER:
-			#var stack_count: int = cumulative_perks[perk]
-			#add_points(stack_count * 10)
+func is_perk_active(perk: GameData.Perks) -> bool:
+	return perk_levels.has(perk) and perk_levels[perk] > 0
+
+
+func get_perk_level(perk: GameData.Perks) -> int:
+	return perk_levels.get(perk, 0)
+
+
+func get_unique_perk_count() -> int:
+	return perk_levels.size()
+
+
+func can_upgrade_perk(perk: GameData.Perks) -> bool:
+	if perk not in LEVELED_PERKS:
+		return false
+
+	var current_level: int = get_perk_level(perk)
+	return current_level < MAX_PERK_LEVEL
+
+
+
+
+func can_select_another_perk() -> bool:
+	if get_unique_perk_count() < MAX_PERK_SLOTS:
+		return true
+	for perk: GameData.Perks in perk_levels:
+		if can_upgrade_perk(perk):
+			return true
+	return false
+
+
+func is_perk_used(perk: GameData.Perks) -> bool:
+	return is_perk_active(perk) and perks_used.has(perk)
+
+
+func trigger_cumulative_perk(perk: GameData.Perks, amount: int = 1) -> void:
+	if not GameManager.perks_used.has(perk):
+		GameManager.perks_used.append(perk)
+
+	if not cumulative_perks.has(perk):
+		cumulative_perks[perk] = 0
+
+	cumulative_perks[perk] += amount
+
+	if GameManager.is_perk_active(GameData.Perks.CHAIN_REACTION) and perk != GameData.Perks.CHAIN_REACTION:
+		GameManager.trigger_perk(GameData.Perks.CHAIN_REACTION)
+
+	match perk:
+		GameData.Perks.PAUPER:
+			var stack_count: int = cumulative_perks[perk]
+			add_points(stack_count * 10)
 			#InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "+%d" % (stack_count * 10))
-#
-		#GameData.Perks.PERFECTION:
-			#var stack_count: int = cumulative_perks[perk]
-			#add_multiplier(stack_count * 5)
+
+		GameData.Perks.PERFECTION:
+			var stack_count: int = cumulative_perks[perk]
+			add_multiplier(stack_count * 5)
 			#InGamePerksContainer.spawn_point_notification(perk, PointNotification.RED, "+%d" % (stack_count * 5))
-#
-		#GameData.Perks.MOMENTUM:
-			#var stack_count: int = cumulative_perks[perk]
-			#var total: int = stack_count * 10
-#
-			#add_points(total)
-#
+
+		GameData.Perks.MOMENTUM:
+			var stack_count: int = cumulative_perks[perk]
+			var total: int = stack_count * 10
+
+			add_points(total)
+
 			#InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "+%d" % total)
-#
-#
-#func reset_cumulative_perk(perk: GameData.Perks) -> void :
-	#if cumulative_perks.has(perk):
-		#cumulative_perks.erase(perk)
-#
-#
-#func trigger_perk(perk: GameData.Perks) -> void :
-	#GameManager.perks_used.append(perk)
-#
-	#if GameManager.is_perk_active(GameData.Perks.CHAIN_REACTION) and perk != GameData.Perks.CHAIN_REACTION:
-		#GameManager.trigger_perk(GameData.Perks.CHAIN_REACTION)
-#
-	#match perk:
-#
-		#GameData.Perks.POINT_RUSH:
+
+
+func reset_cumulative_perk(perk: GameData.Perks) -> void:
+	if cumulative_perks.has(perk):
+		cumulative_perks.erase(perk)
+
+
+func trigger_perk(perk: GameData.Perks) -> void:
+	GameManager.perks_used.append(perk)
+
+	if GameManager.is_perk_active(GameData.Perks.CHAIN_REACTION) and perk != GameData.Perks.CHAIN_REACTION:
+		GameManager.trigger_perk(GameData.Perks.CHAIN_REACTION)
+
+	match perk:
+
+		GameData.Perks.POINT_RUSH:
+			pass
 			#InGamePerksContainer.pulse_perk_icon(GameData.Perks.POINT_RUSH)
-#
-		#GameData.Perks.SHORTCUT:
-			#var shortcut_percentage_value: Big = target_score.multiply(0.25)
-			#var score_background_panel: ScoreBackgroundPanel = get_unique_node("ScoreBackgroundPanel")
-#
-			#target_score = target_score.minus(shortcut_percentage_value)
-			#score_background_panel.target_score_label_value = target_score.to_float()
-#
-			#InGamePerksContainer.spawn_point_notification(
-				#GameData.Perks.SHORTCUT, 
-				#PointNotification.GRAY, 
-				#"-" + shortcut_percentage_value.to_scientific(true)
-			#)
-#
-		#GameData.Perks.AUTOMAGIC:
-			#add_points(10)
-			#InGamePerksContainer.spawn_point_notification(GameData.Perks.AUTOMAGIC, PointNotification.BLUE, 10)
-			#InGamePerksContainer.pulse_perk_icon(GameData.Perks.AUTOMAGIC)
-#
-		#GameData.Perks.SPEED_RUN:
-			#var level: int = get_perk_level(GameData.Perks.SPEED_RUN)
-			#if level == 0:
-				#level = 1
-			#level = clamp(level, 1, 5)
-			#var points_value: int = SPEED_RUN_STACK_BY_LEVEL[level - 1]
-			#add_points(points_value)
-			#InGamePerksContainer.spawn_point_notification(GameData.Perks.SPEED_RUN, PointNotification.BLUE, points_value)
-#
-		#GameData.Perks.ACCEPTANCE:
-			#var level: int = get_perk_level(GameData.Perks.ACCEPTANCE)
-			#if level == 0:
-				#level = 1
-			#level = clamp(level, 1, 5)
-			#var multiplier_value: int = ACCEPTANCE_FLOW_BY_LEVEL[level - 1]
-			#add_multiplier(multiplier_value)
-			#InGamePerksContainer.spawn_point_notification(GameData.Perks.ACCEPTANCE, PointNotification.RED, multiplier_value)
-#
-		#GameData.Perks.CHAIN_REACTION:
-			#var level: int = get_perk_level(GameData.Perks.CHAIN_REACTION)
-			#if level == 0:
-				#level = 1
-			#level = clamp(level, 1, 5)
-			#var multiplier_value: int = CHAIN_REACTION_FLOW_BY_LEVEL[level - 1]
-			#add_multiplier(multiplier_value)
-			#InGamePerksContainer.spawn_point_notification(GameData.Perks.CHAIN_REACTION, PointNotification.RED, multiplier_value)
-#
-		#GameData.Perks.LAST_BREATH:
-			#var level: int = get_perk_level(GameData.Perks.LAST_BREATH)
-			#if level == 0:
-				#level = 1
-			#level = clamp(level, 1, 5)
-			#var percentage: float = LAST_BREATH_PERCENT_BY_LEVEL[level - 1]
-			#var target_score_percentage: Big = target_score.multiply(percentage)
-#
-			#add_points(target_score_percentage)
-			#InGamePerksContainer.spawn_point_notification(GameData.Perks.LAST_BREATH, PointNotification.BLUE, target_score_percentage.to_scientific(true))
-#
-		#GameData.Perks.SACRIFICE:
-			#var sacrifice_percentage_value: Big = target_score.multiply(0.05)
-			#var target_score_panel: ScoreBackgroundPanel = get_unique_node("ScoreBackgroundPanel")
-#
-			#target_score = target_score.minus(sacrifice_percentage_value)
-			#target_score_panel.target_score_label_value = target_score.to_float()
-#
-			#InGamePerksContainer.spawn_point_notification(
-				#GameData.Perks.SACRIFICE, 
-				#PointNotification.GRAY, 
-				#"-" + sacrifice_percentage_value.to_scientific(true)
-			#)
-			#InGamePerksContainer.pulse_perk_icon(GameData.Perks.SACRIFICE)
-#
-#
-#
-		#GameData.Perks.STACK_MASTER:
+
+		GameData.Perks.SHORTCUT:
+			var shortcut_percentage_value: Big = target_score.multiply(0.25)
+			target_score = target_score.minus(shortcut_percentage_value)
+
+		GameData.Perks.AUTOMAGIC:
+			add_points(10)
+
+		GameData.Perks.SPEED_RUN:
+			var level: int = get_perk_level(GameData.Perks.SPEED_RUN)
+			if level == 0:
+				level = 1
+			level = clamp(level, 1, 5)
+			var points_value: int = SPEED_RUN_STACK_BY_LEVEL[level - 1]
+			add_points(points_value)
+
+		GameData.Perks.ACCEPTANCE:
+			var level: int = get_perk_level(GameData.Perks.ACCEPTANCE)
+			if level == 0:
+				level = 1
+			level = clamp(level, 1, 5)
+			var multiplier_value: int = ACCEPTANCE_FLOW_BY_LEVEL[level - 1]
+			add_multiplier(multiplier_value)
+
+		GameData.Perks.CHAIN_REACTION:
+			var level: int = get_perk_level(GameData.Perks.CHAIN_REACTION)
+			if level == 0:
+				level = 1
+			level = clamp(level, 1, 5)
+			var multiplier_value: int = CHAIN_REACTION_FLOW_BY_LEVEL[level - 1]
+			add_multiplier(multiplier_value)
+
+		GameData.Perks.LAST_BREATH:
+			var level: int = get_perk_level(GameData.Perks.LAST_BREATH)
+			if level == 0:
+				level = 1
+			level = clamp(level, 1, 5)
+			var percentage: float = LAST_BREATH_PERCENT_BY_LEVEL[level - 1]
+			var target_score_percentage: Big = target_score.multiply(percentage)
+			add_points(target_score_percentage)
+
+		GameData.Perks.SACRIFICE:
+			var sacrifice_percentage_value: Big = target_score.multiply(0.05)
+			target_score = target_score.minus(sacrifice_percentage_value)
+
+		GameData.Perks.STACK_MASTER:
+			pass
 			#EventManager.add_event_last( func() -> float:
 				#GameManager.multiplier = GameManager.multiplier.multiply(2)
-				#InGamePerksContainer.spawn_point_notification(perk, PointNotification.RED, "x2")
-#
 				#return BlockChainReaction.DEFAULT_DELAY
 			#)
-#
-		#GameData.Perks.FULL_CLEAR:
+
+		GameData.Perks.FULL_CLEAR:
+			pass
 			#EventManager.add_event_last( func() -> float:
 				#if GameManager.get_board().is_fully_clear():
 					#GameManager.points = GameManager.points.multiply(3)
 					#GameManager.multiplier = GameManager.multiplier.multiply(3)
-#
-					#InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "x3", - PI / 2)
-					#InGamePerksContainer.spawn_point_notification(perk, PointNotification.RED, "x3", PI / 2)
-#
 				#return BlockChainReaction.DEFAULT_DELAY
 			#)
+
 
 func add_placed_block(block_instance: PlacedBlock, block_type: String) -> void :
 
@@ -992,6 +977,8 @@ func get_board() -> Board:
 
 func spawn_moving_piece() -> MovingPiece:
 	var next_piece: Dictionary = consume_next_piece()
+	if OS.is_debug_build():
+		print("[RenderDebug] spawn_moving_piece() next_piece=", next_piece)
 	var moving_piece: MovingPiece = MovingPiece.create(get_unique_node("Board"), next_piece)
 
 	current_moving_piece = moving_piece

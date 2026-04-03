@@ -20,7 +20,7 @@ void fragment() {
 	// Calculate shadow
 	vec2 shadow_pos = SCREEN_UV + SCREEN_PIXEL_SIZE * float(shadow_offset);
 	float shadow_alpha = 0.0;
-	
+
 	for (float i = -size.x; i <= size.x; i += SCREEN_PIXEL_SIZE.x) {
 		for (float j = -size.y; j <= size.y; j += SCREEN_PIXEL_SIZE.y) {
 			shadow_alpha += texture(screen_texture, shadow_pos + vec2(i, j)).a;
@@ -28,17 +28,17 @@ void fragment() {
 	}
 
 	vec4 colour = texture(screen_texture, SCREEN_UV);
-	
+
 	// Get the maximum alpha in the area to respect modulate
 	float content_alpha = colour.a;
-	
+
 	// Only show outline/shadow where there's content nearby
 	float outline_strength = min(line_alpha, 1.0) - content_alpha;
 	float shadow_strength = min(shadow_alpha, 1.0) - content_alpha;
-	
+
 	vec4 outline = vec4(line_colour, max(outline_strength, 0.0));
 	vec4 shadow = vec4(line_colour, max(shadow_strength, 0.0));
-	
+
 	// Blend shadow, then outline, then color
 	COLOR = mix(shadow, outline, outline.a);
 	COLOR = mix(COLOR, colour, colour.a);

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfeltsrum762x"]
+
+[ext_resource type="Script" uid="uid://dre745xq4q6ah" path="res://scripts/background_piece_renderer.gd" id="1_3hjb2"]
+[ext_resource type="Texture2D" uid="uid://bgwllxxwlj6ke" path="res://sprite/background.png" id="2_5hb4w"]
+
+[node name="BackgroundPieceRenderer" type="Node2D"]
+script = ExtResource("1_3hjb2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5hb4w")

@@ -11,6 +11,9 @@ static var _instance: GameScreen
 
 func _ready() -> void :
 	_instance = self
+	
+	# Enable GameCamera for game scene
+	GameCamera.enable()
 
 	if GameManager.is_perk_active(GameData.Perks.SHORTCUT):
 		await get_tree().create_timer(1.5).timeout

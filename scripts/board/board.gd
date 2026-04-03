@@ -49,6 +49,8 @@ func _ready() -> void :
 	)
 
 	await get_tree().create_timer(CALCULATION_DELAY).timeout
+	if OS.is_debug_build():
+		print("[RenderDebug] Board ready -> spawn first moving piece")
 	GameManager.spawn_moving_piece()
 
 
@@ -108,6 +110,8 @@ func place_block(pos: Vector2i, sprite_path: String, block_type: String = GameDa
 
 	var block_instance: PlacedBlock = PLACED_BLOCK_SCENE.instantiate()
 	placed_blocks.add_child(block_instance)
+	if OS.is_debug_build():
+		print("[RenderDebug] place_block() instantiate at=", pos, " type=", block_type, " sprite=", sprite_path)
 
 	block_instance.type = block_type
 	block_instance.set_texture(load(sprite_path))
@@ -138,6 +142,8 @@ func place_blocks_directly(positions: Array[Vector2i], block_type: String = Game
 
 func place_piece(blocks: Array[Vector2i], sprite_path: String, block_type: String = GameData.BLOCK_TYPES.NORMAL, piece_was_rotated: bool = false) -> Array[PlacedBlock]:
 	var b: Array[PlacedBlock] = []
+	if OS.is_debug_build():
+		print("[RenderDebug] place_piece() blocks=", blocks, " type=", block_type, " rotated=", piece_was_rotated)
 
 	for block_pos in blocks:
 		b.append(place_block(block_pos, sprite_path, block_type))
