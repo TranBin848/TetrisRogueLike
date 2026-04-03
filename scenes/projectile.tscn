@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dovaho70m707v"]
 
 [ext_resource type="Script" uid="uid://b6wt0vu2etd00" path="res://scripts/projectiles.gd" id="1"]
-[ext_resource type="PackedScene" path="res://scenes/calculation_blocker.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dwxh3kkgs1uua" path="res://scenes/calculation_blocker.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://dajowq31xhnn6" path="res://scenes/sprite_shadowed.tscn" id="3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jxwu6"]

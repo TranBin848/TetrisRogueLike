@@ -289,7 +289,9 @@ func land_piece() -> void :
 		sprite_path = PieceRenderer.DECK_SPRITES[GameManager.current_deck][current_piece_data.shape]
 	else:
 		sprite_path = GameData.get_block_texture_path(current_piece_data.type)
-
+	
+	print(sprite_path)
+	
 	#AchievementManager.discover_block(current_piece_data.type)
 
 

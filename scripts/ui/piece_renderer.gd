@@ -1,7 +1,7 @@
 class_name PieceRenderer extends Node2D
 
 const PIECE_SIZE: int = 12
-const SPRITE_SHADOWED_SCENE: PackedScene = preload("res://scenes/ui/sprite_shadow.tscn")
+const SPRITE_SHADOWED_SCENE: PackedScene = preload("res://scenes/sprite_shadowed.tscn")
 
 const SPAWN_ANIMATION_DURATION: float = 0.35
 const SPAWN_ANIMATION_START: Vector2 = Vector2.ONE * 0.5
@@ -20,32 +20,32 @@ enum ShapeType{
 
 const DECK_SPRITES: Dictionary = {
 	GameData.DeckTypes.NORMAL: {
-		ShapeType.I: "res://images/blocks/default/cyan.png", 
-		ShapeType.O: "res://images/blocks/default/dark_green.png", 
-		ShapeType.T: "res://images/blocks/default/purple.png", 
-		ShapeType.S: "res://images/blocks/default/green.png", 
-		ShapeType.Z: "res://images/blocks/default/red.png", 
-		ShapeType.J: "res://images/blocks/default/blue.png", 
-		ShapeType.L: "res://images/blocks/default/orange.png"
+		ShapeType.I: "res://images/blocks/normal/blue.png", 
+		ShapeType.O: "res://images/blocks/normal/yellow.png", 
+		ShapeType.T: "res://images/blocks/normal/purple.png", 
+		ShapeType.S: "res://images/blocks/normal/green.png", 
+		ShapeType.Z: "res://images/blocks/normal/red.png", 
+		ShapeType.J: "res://images/blocks/normal/blue.png", 
+		ShapeType.L: "res://images/blocks/normal/orange.png"
 	}, 
-	GameData.DeckTypes.MOAI: {
-		ShapeType.I: "res://images/blocks/moai/blue.png", 
-		ShapeType.O: "res://images/blocks/moai/green.png", 
-		ShapeType.T: "res://images/blocks/moai/purple.png", 
-		ShapeType.S: "res://images/blocks/moai/green.png", 
-		ShapeType.Z: "res://images/blocks/moai/red.png", 
-		ShapeType.J: "res://images/blocks/moai/blue.png", 
-		ShapeType.L: "res://images/blocks/moai/orange.png"
-	}, 
-	GameData.DeckTypes.X: {
-		ShapeType.I: "res://images/blocks/the_x/blue.png", 
-		ShapeType.O: "res://images/blocks/the_x/green.png", 
-		ShapeType.T: "res://images/blocks/the_x/purple.png", 
-		ShapeType.S: "res://images/blocks/the_x/green.png", 
-		ShapeType.Z: "res://images/blocks/the_x/red.png", 
-		ShapeType.J: "res://images/blocks/the_x/blue.png", 
-		ShapeType.L: "res://images/blocks/the_x/orange.png"
-	}
+	#GameData.DeckTypes.MOAI: {
+		#ShapeType.I: "res://images/blocks/moai/blue.png", 
+		#ShapeType.O: "res://images/blocks/moai/green.png", 
+		#ShapeType.T: "res://images/blocks/moai/purple.png", 
+		#ShapeType.S: "res://images/blocks/moai/green.png", 
+		#ShapeType.Z: "res://images/blocks/moai/red.png", 
+		#ShapeType.J: "res://images/blocks/moai/blue.png", 
+		#ShapeType.L: "res://images/blocks/moai/orange.png"
+	#}, 
+	#GameData.DeckTypes.X: {
+		#ShapeType.I: "res://images/blocks/the_x/blue.png", 
+		#ShapeType.O: "res://images/blocks/the_x/green.png", 
+		#ShapeType.T: "res://images/blocks/the_x/purple.png", 
+		#ShapeType.S: "res://images/blocks/the_x/green.png", 
+		#ShapeType.Z: "res://images/blocks/the_x/red.png", 
+		#ShapeType.J: "res://images/blocks/the_x/blue.png", 
+		#ShapeType.L: "res://images/blocks/the_x/orange.png"
+	#}
 }
 
 const PIECE_SHADOW_SPRITE: CompressedTexture2D = preload("res://images/white_block.png")
@@ -295,7 +295,7 @@ func set_piece(shape_type: ShapeType, rotation_index: int = 0, animated: bool = 
 
 
 	var sprite_path: String
-	if block_type in [GameData.BLOCK_TYPES.NORMAL, GameData.BLOCK_TYPES.MOAI, GameData.BLOCK_TYPES.X]:
+	if block_type in [GameData.BLOCK_TYPES.NORMAL]:
 		sprite_path = DECK_SPRITES[GameData.DeckTypes.NORMAL][shape_type]
 
 		if DECK_SPRITES.has(GameManager.current_deck) and DECK_SPRITES[GameManager.current_deck].has(shape_type):
