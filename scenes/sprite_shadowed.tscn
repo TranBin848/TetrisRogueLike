@@ -20,3 +20,7 @@ texture = ExtResource("3_blb86")
 [node name="MainSprite" type="Sprite2D" parent="."]
 position = Vector2(6, 6)
 texture = ExtResource("2_fbg3b")
+
+[node name="FlashSprite" type="Sprite2D" parent="MainSprite"]
+visible = false
+texture = ExtResource("3_blb86")

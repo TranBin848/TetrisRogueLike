@@ -242,7 +242,7 @@ func above_placement_animation() -> void :
 
 	placement_animation_tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT).set_parallel()
 
-	placement_animation_tween.tween_property(sprite_shadowed, "position:y", 0, PLACEMENT_ANIMATION_DURATION / GameManager.timescale).from(PLACEMENT_ANIMATION_FORCE)
+	placement_animation_tween.tween_property(sprite_shadowed, "position:y", 6.0, PLACEMENT_ANIMATION_DURATION / GameManager.timescale).from(6.0 + PLACEMENT_ANIMATION_FORCE)
 
 
 func get_adjacent_blocks() -> Array[PlacedBlock]:

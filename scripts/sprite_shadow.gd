@@ -47,6 +47,7 @@ func _update_sprite_positions() -> void :
 
 @onready var main_sprite: Sprite2D = $MainSprite
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
+@onready var flash_sprite: Sprite2D = $MainSprite / FlashSprite
 
 func _ready() -> void :
 	main_sprite.texture = texture
