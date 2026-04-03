@@ -5,6 +5,9 @@ const GAME_SCENE: String = "res://scenes/game.tscn"
 @onready var new_game_button: BouncyButton = get_node_or_null("%NewGameButton")
 @onready var quit_button: BouncyButton = get_node_or_null("%QuitButton")
 
+@onready var deck_selector_screen: DeckSelectorScreen = $HudLayer/DeckSelectorScreen
+
+
 func _ready() -> void:
 	# Disable GameCamera autoload for main menu
 	GameCamera.disable()
@@ -21,7 +24,7 @@ func _ready() -> void:
 
 func _on_new_game_pressed() -> void:
 	Random.set_random_seed()
-	get_tree().change_scene_to_file(GAME_SCENE)
+	deck_selector_screen.appear_animation()
 
 
 func _on_quit_pressed() -> void:

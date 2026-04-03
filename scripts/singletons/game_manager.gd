@@ -180,7 +180,7 @@ var main_viewport: SubViewport
 var is_calculating: bool = false
 var awaiting_calculation_blocker: bool = false
 
-#var current_modal: ModalRect = null
+var current_modal: ModalRect = null
 var current_moving_piece: MovingPiece
 
 var _mouse_idle_timer: float = 0.0

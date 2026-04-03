@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvknaklq8rrfd"]
+
+[ext_resource type="FontVariation" uid="uid://bj5qt3kblfua8" path="res://fonts/awesome_9_trimmed.tres" id="1"]
+[ext_resource type="StyleBox" uid="uid://dglfm5mjx7uwx" path="res://resources/gray_button_focus.tres" id="2"]
+[ext_resource type="Script" uid="uid://ddnaaw140ktuv" path="res://scripts/pixel_line_edit.gd" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ocwec"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+anti_aliasing = false
+
+[node name="PixelLineEdit" type="LineEdit"]
+offset_right = 99.0
+offset_bottom = 19.0
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("1")
+theme_override_styles/focus = ExtResource("2")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ocwec")
+text = "Hello World"
+selecting_enabled = false
+script = ExtResource("3")
