@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3 uid="uid://cas6svfar8qon"]
+
+[ext_resource type="Texture2D" uid="uid://1ql4tnqkwl5a" path="res://images/level_selection/round.png" id="1"]
+[ext_resource type="Script" uid="uid://ve8qr071ch2w" path="res://scenes/level_selection/level_selection_square.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cduv28xjld3ly" path="res://images/level_selection/round_current.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="4"]
+
+[node name="LevelSelectionSquare" type="Sprite2D"]
+texture = ExtResource("1")
+script = ExtResource("2")
+
+[node name="CurrentIndicatorSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, -1)
+texture = ExtResource("3")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -18.0
+offset_right = -18.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+use_top_left = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="RoundLabel" parent="CenterContainer/VBoxContainer" instance=ExtResource("4")]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "ROUND"
+shadow_enabled = false
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)
+
+[node name="RoundValueLabel" parent="CenterContainer/VBoxContainer" instance=ExtResource("4")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+text = "1"
+shadow_enabled = false
+shadow_color = Color(0.239216, 0.239216, 0.239216, 1)
+outline_color = Color(0.239216, 0.239216, 0.239216, 1)

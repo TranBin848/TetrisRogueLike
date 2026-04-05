@@ -27,6 +27,7 @@ EventManager="*res://scripts/singletons/event_manager.gd"
 GameCamera="*res://scripts/board/game_camera.gd"
 BlockChainReaction="*res://scripts/block_destroy_effects.gd"
 Random="*res://scripts/singletons/rng.gd"
+Transition="*res://scenes/transition.tscn"
 
 [display]
 

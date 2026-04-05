@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bkciwrv7lehmy"]
+
+[ext_resource type="PackedScene" uid="uid://cb8n4d47n5xjb" path="res://scenes/background.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://bdibwlsljo4pa" path="res://scenes/game_camera.tscn" id="2"]
+[ext_resource type="Script" uid="uid://dcao5fmilp7do" path="res://scripts/square_renderer.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://gu0vbsm01hyv" path="res://scenes/boss_information_panel.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://cbs48jhogj406" path="res://scenes/level_selection/round_information_panel.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://bulm880jjyu0w" path="res://scenes/modal/pause_menu/pause_menu.tscn" id="6"]
+
+[node name="LevelSelection" type="Node2D"]
+
+[node name="Background_1" parent="." instance=ExtResource("1")]
+z_index = -2
+quantity = 25
+
+[node name="GameCamera" parent="." instance=ExtResource("2")]
+unique_name_in_owner = true
+
+[node name="SquareRenderer" type="Node2D" parent="."]
+position = Vector2(240, 135)
+script = ExtResource("3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="InformationPanelAnchor" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BossInformationPanel" parent="CanvasLayer/InformationPanelAnchor" instance=ExtResource("4")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_top = -78.0
+offset_bottom = -31.0
+
+[node name="RoundInformationPanel" parent="CanvasLayer/InformationPanelAnchor" instance=ExtResource("5")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+offset_top = -41.0
+offset_bottom = 41.0
+
+[node name="OverlayHUD" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="OverlayHUD" instance=ExtResource("6")]
+unique_name_in_owner = true
+visible = false
