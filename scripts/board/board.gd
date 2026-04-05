@@ -217,9 +217,13 @@ func check_and_clear_lines(should_execute_events: bool = true, should_trigger_ne
 
 		if GameManager.is_perk_active(GameData.Perks.STACK_MASTER) and lines_count >= 3:
 			GameManager.trigger_perk(GameData.Perks.STACK_MASTER)
-
+		if GameManager.is_perk_active(GameData.Perks.BUILDER):
+			for i in range(lines_count):
+				GameManager.trigger_perk(GameData.Perks.BUILDER);
 		if GameManager.is_perk_active(GameData.Perks.PAUPER) and lines_count == 1:
 			GameManager.trigger_cumulative_perk(GameData.Perks.PAUPER)
+		if GameManager.is_perk_active(GameData.Perks.COMBO_ENGINE) and lines_count >= 2:
+			GameManager.trigger_cumulative_perk(GameData.Perks.COMBO_ENGINE)
 
 		if GameManager.is_perk_active(GameData.Perks.PERFECTION) and lines_count == 4:
 			GameManager.trigger_cumulative_perk(GameData.Perks.PERFECTION)

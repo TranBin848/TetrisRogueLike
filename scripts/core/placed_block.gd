@@ -376,6 +376,8 @@ func destroy() -> void :
 	)
 
 	execute_destroy_effect()
+	if GameManager.is_perk_active(GameData.Perks.RETRIGGER_BLOCK):
+		execute_destroy_effect();
 
 
 func execute_destroy_effect() -> void :
@@ -396,7 +398,10 @@ func execute_destroy_effect() -> void :
 		if honey_dice_event_queue.size() > 0:
 			EventManager.execute_queue_events(honey_dice_event_queue)
 
-
+	
+	if GameManager.is_perk_active(GameData.Perks.MULT_REACTOR):
+		GameManager.trigger_perk(GameData.Perks.MULT_REACTOR);
+	
 	match type:
 		GameData.BLOCK_TYPES.NORMAL:
 			var points: int = 1
