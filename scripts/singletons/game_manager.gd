@@ -239,6 +239,10 @@ func _ready() -> void :
 
 		points = Big.new(0)
 		multiplier = Big.new(1)
+
+		if is_perk_active(GameData.Perks.SACRIFICE_ROW):
+			points = points.plus(200);
+
 		calculation_finished.emit()
 
 		awaiting_calculation_blocker = false
@@ -747,6 +751,8 @@ func trigger_perk(perk: GameData.Perks) -> void:
 			add_points(10)
 		GameData.Perks.BUILDER:
 			add_points(50);
+		GameData.Perks.SACRIFICE_ROW:
+			add_points(100);
 		
 		GameData.Perks.SPEED_RUN:
 			var level: int = get_perk_level(GameData.Perks.SPEED_RUN)

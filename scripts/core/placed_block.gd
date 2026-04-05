@@ -38,7 +38,7 @@ var type: String:
 		description = GameManager.replace_tags(tr("BLOCK_" + block_name + "_DESCRIPTION"))
 
 		add_to_group(GameData.get_block_name(value))
-
+		const ACCELERATOR_MULT = 0.5;
 		match type:
 			GameData.BLOCK_TYPES.CFOUR:
 				var tick_timer: Timer = Timer.new()
@@ -46,6 +46,8 @@ var type: String:
 
 				tick_timer.name = "CFOURTickTimer"
 				tick_timer.wait_time = 1.0 / GameManager.timescale
+				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					tick_timer.wait_time *= ACCELERATOR_MULT;
 				tick_timer.one_shot = false
 
 				tick_timer.timeout.connect( func() -> void :
@@ -76,6 +78,8 @@ var type: String:
 
 				morph_timer.name = "UraniumMorphTimer"
 				morph_timer.wait_time = 5.0 / GameManager.timescale
+				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					morph_timer.wait_time *= ACCELERATOR_MULT;
 				morph_timer.one_shot = false
 
 				morph_timer.timeout.connect( func() -> void :

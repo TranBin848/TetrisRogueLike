@@ -90,6 +90,8 @@ func initialize_board() -> void :
 			sprite_row.append(null)
 
 		placed_blocks_grid.append(sprite_row)
+	if GameManager.is_perk_active(GameData.Perks.SACRIFICE_ROW):
+		_spawn_warden_row();
 
 
 func is_position_occupied(pos: Vector2i) -> bool:
@@ -489,5 +491,5 @@ func _spawn_warden_row() -> void :
 	for col in range(BOARD_WIDTH):
 		positions.append(Vector2i(col, BOARD_HEIGHT - 1))
 	place_blocks_directly(positions, "indestructible")
-	await get_tree().process_frame
-	check_and_clear_lines()
+	#await get_tree().process_frame
+	#check_and_clear_lines()
