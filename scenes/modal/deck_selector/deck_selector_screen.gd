@@ -22,7 +22,7 @@ var available_decks: Array[GameData.DeckTypes] = []
 
 
 const DECK_FOLDER_NAMES: Dictionary = {
-	GameData.DeckTypes.NORMAL: "default", 
+	GameData.DeckTypes.NORMAL: "normal", 
 	GameData.DeckTypes.MOAI: "moai", 
 	GameData.DeckTypes.X: "the_x"
 }

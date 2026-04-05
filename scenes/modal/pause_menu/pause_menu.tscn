@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bulm880jjyu0w"]
 
-[ext_resource type="Script" uid="uid://dfusa6omlbknn" path="res://scenes/modal/pause_menu.gd" id="1_3fk83"]
+[ext_resource type="Script" uid="uid://dfusa6omlbknn" path="res://scenes/modal/pause_menu/pause_menu.gd" id="1_3fk83"]
 [ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="2_0b3a6"]
 
 [node name="PauseMenu" type="ColorRect"]

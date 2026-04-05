@@ -124,7 +124,6 @@ outline_color = Color(0.105882, 0.105882, 0.105882, 1)
 [node name="HudLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
 layer = 2
-visible = false
 
 [node name="DeckSelectorScreen" parent="HudLayer" node_paths=PackedStringArray("focus_on_destroy") instance=ExtResource("9_jk1qb")]
 focus_on_destroy = NodePath("../../CanvasLayer/MarginContainer/MainContainerVBoxContainer/NewGameButton")
