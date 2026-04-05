@@ -167,9 +167,9 @@ enum BlockGroups{
 enum BossTypes{
 	NONE, 
 	BLINDFOLDED, 
-	REVERSED, 
-	FALL_UP, 
-	DIZZY, 
+	REVERSED, # MIRROR
+	FALL_UP, # DEFIANT
+	DIZZY, # PUPEPT MASTER
 	THIEF, 
 	PERFECTIONIST, 
 	ECLIPSE
@@ -299,7 +299,9 @@ var blocks: Dictionary = {
 	BLOCK_TYPES.UNDEAD_PIRATE: BlockData.new([BlockGroups.PIRATES, BlockGroups.MONSTER], 2, 3), 
 
 	BLOCK_TYPES.TREASURE_CHEST: BlockData.new([BlockGroups.PIRATES, BlockGroups.CASINO], 2, 3), 
-	BLOCK_TYPES.CURSED_CHEST: BlockData.new([BlockGroups.PIRATES, BlockGroups.CASINO], 1, 2)
+	BLOCK_TYPES.CURSED_CHEST: BlockData.new([BlockGroups.PIRATES, BlockGroups.CASINO], 1, 2),
+	
+	"indestructible": BlockData.new([], 0, 0)
 }
 
 

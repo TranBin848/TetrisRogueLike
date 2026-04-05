@@ -99,8 +99,11 @@ func _ready() -> void :
 
 	area_entered.connect( func(block_collision_area: Area2D) -> void :
 		if destroy_animation_requested:
+			return;
+		var hit_block: PlacedBlock = block_collision_area.get_parent() as PlacedBlock
+		if !(hit_block && is_instance_valid(hit_block) and hit_block.type == "indestructible"):
 			return
-
+		
 		if associated_block_type == GameData.BLOCK_TYPES.FIRE_MAGE:
 			if lifetime <= 0.3:
 				return

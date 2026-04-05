@@ -170,6 +170,8 @@ func is_line_full(row: int) -> bool:
 
 		if block == null or not is_instance_valid(block):
 			return false
+		if block.type == "indestructible":
+			return false
 
 	return true
 
@@ -468,3 +470,24 @@ func _apply_gravity_to_column(col: int, destroyed_rows: Array[int]) -> void :
 
 		block.grid_position = Vector2i(col, final_row)
 		block.animate_y(final_row * PIECE_SIZE)
+
+
+func _spawn_warden_row() -> void :
+	for row in range(0, BOARD_HEIGHT - 1):
+		for col in range(BOARD_WIDTH):
+			var block: PlacedBlock = placed_blocks_grid[row + 1][col]
+			placed_blocks_grid[row + 1][col] = null
+			placed_blocks_grid[row][col] = block
+			if is_instance_valid(block):
+				block.grid_position = Vector2i(col, row)
+				block.animate_y(row * PIECE_SIZE)
+				if row <= DEATHLINE_TOP_ROWS:
+					GameManager.deathline = true
+	for col in range(BOARD_WIDTH):
+		placed_blocks_grid[BOARD_HEIGHT - 1][col] = null
+	var positions: Array[Vector2i] = []
+	for col in range(BOARD_WIDTH):
+		positions.append(Vector2i(col, BOARD_HEIGHT - 1))
+	place_blocks_directly(positions, "indestructible")
+	await get_tree().process_frame
+	check_and_clear_lines()

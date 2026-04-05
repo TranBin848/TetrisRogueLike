@@ -92,7 +92,7 @@ var type: String:
 
 
 					for block in adjacent_blocks:
-						if is_instance_valid(block) and not block.destroy_animation_requested and not GameData.is_block_on_group(block.type, GameData.BlockGroups.NUCLEAR):
+						if is_instance_valid(block) and not block.destroy_animation_requested and not GameData.is_block_on_group(block.type, GameData.BlockGroups.NUCLEAR) and block.type != "indestructible":
 							possible_blocks.append(block)
 
 
@@ -197,6 +197,7 @@ func get_center_position() -> Vector2:
 func morph(new_type: String) -> void :
 	if type == new_type:
 		return
+	if type == "indestructible": return;
 
 	var old_type: String = type
 	type = new_type
@@ -341,6 +342,9 @@ func _cleanup_timers() -> void :
 
 
 func destroy() -> void :
+	
+	if type == "indestructible":
+		return
 	calculation_blocker.activate()
 	destroy_animation_requested = true
 
@@ -483,7 +487,7 @@ func execute_destroy_effect() -> void :
 			var possible_blocks: Array[PlacedBlock] = []
 
 			for block in all_blocks_on_board:
-				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != GameData.BLOCK_TYPES.RADIOACTIVE:
+				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != GameData.BLOCK_TYPES.RADIOACTIVE and block.type != "indestructible":
 					possible_blocks.append(block)
 
 			if possible_blocks.size() > 0:
@@ -648,7 +652,7 @@ func execute_destroy_effect() -> void :
 
 
 			for block in all_blocks_on_board:
-				if is_instance_valid(block) and not block.destroy_animation_requested:
+				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != "indestructible":
 					possible_blocks.append(block)
 
 			var all_block_types: Array = GameData.BLOCK_TYPES.values()
