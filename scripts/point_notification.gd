@@ -26,7 +26,7 @@ static func create(pos: Vector2, type: int, value: Variant, pitch: float) -> Poi
 	var scene: PackedScene = preload("res://scenes/point_notification.tscn")
 	var instance: PointNotification = scene.instantiate()
 
-	GameManager.get_current_scene().get_node("%PointNotificationContainer").add_child(instance)
+	GameManager.get_current_scene().find_child("PointNotificationContainer", true, false).add_child(instance)
 
 	instance.global_position = pos
 	instance.animate(type, value, pitch)

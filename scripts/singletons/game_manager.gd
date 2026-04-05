@@ -429,7 +429,7 @@ func _migrate_original_pieces(raw_pieces: Dictionary) -> Dictionary:
 
 
 func get_current_scene() -> Node:
-	var viewport = get_tree().current_scene.get_node_or_null("%MainViewport")
+	var viewport = get_tree().current_scene.find_child("MainViewport", true, false)
 	if viewport and viewport.get_child_count() > 0:
 		return viewport.get_child(0)
 	return get_tree().current_scene
@@ -948,27 +948,27 @@ func reset_variables() -> void :
 	hold_piece_changed.emit()
 
 
-#func goto_board() -> void :
-	#Transition.goto(Transition.Scene.GAME, func():
-		#score = Big.new(0)
-		#target_score = Big.new(calculate_round_score(current_round))
-#
-		#CalculationBlocker.active_count = 0
-#
-		#hold_piece_data = {}
-		#hold_piece_changed.emit()
-#
+func goto_board() -> void :
+	Transition.goto(Transition.Scene.GAME, func():
+		score = Big.new(0)
+		target_score = Big.new(calculate_round_score(current_round))
+
+		CalculationBlocker.active_count = 0
+
+		hold_piece_data = {}
+		hold_piece_changed.emit()
+
 		#AudioManager.set_music_filter_enabled(false)
-	#)
+	)
 
 
-#func goto_level_selection() -> void :
+func goto_level_selection() -> void :
 	#SpeedrunTimerLayer.resume_timer()
-#
-	#Transition.goto(Transition.Scene.LEVEL_SELECTION, func():
-		#reset_pieces_to_original()
+
+	Transition.goto(Transition.Scene.LEVEL_SELECTION, func():
+		reset_pieces_to_original()
 		#AudioManager.set_music_filter_enabled(false)
-	#)
+	)
 
 
 func get_board() -> Board:

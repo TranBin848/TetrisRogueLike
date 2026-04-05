@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://gu0vbsm01hyv"]
+
+[ext_resource type="Texture2D" uid="uid://dybu4sr5jpxjy" path="res://images/level_selection/round_boss.png" id="1"]
+[ext_resource type="Script" uid="uid://y2hh3io2vd8" path="res://scripts/boss_information_panel.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cl1fv64nhhm43" path="res://images/perks/full_clear.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="5"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_efsdc"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("1")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="BossInformationPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(132, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -23.5
+offset_right = 66.0
+offset_bottom = 23.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_efsdc")
+script = ExtResource("2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TitleContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="BossIcon_1" type="TextureRect" parent="VBoxContainer/TitleContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3")
+
+[node name="BossTitleLabel" parent="VBoxContainer/TitleContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "The Thief"
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+horizontal_alignment = 1
+
+[node name="BossIcon_2" type="TextureRect" parent="VBoxContainer/TitleContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3")
+
+[node name="DescriptionLabel" parent="VBoxContainer" instance=ExtResource("5")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+horizontal_alignment = 1
+shadow_enabled = false
+shadow_color = Color(0.341176, 0.109804, 0.152941, 1)
+shadow_offset = 1
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)

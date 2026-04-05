@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cbs48jhogj406"]
+
+[ext_resource type="StyleBox" uid="uid://j8h1wbow0uj1" path="res://resources/gray_panel.tres" id="1"]
+[ext_resource type="Script" uid="uid://cbyixiqownck7" path="res://scenes/level_selection/round_information_panel.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://bc177ph43h6ef" path="res://scenes/ui/bouncy_button.tscn" id="4"]
+
+[node name="RoundInformationPanel" type="PanelContainer" unique_id=1646013388]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = 31.0
+offset_right = 66.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1")
+script = ExtResource("2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1944818700]
+layout_mode = 2
+
+[node name="RoundTitleLabel" parent="VBoxContainer" unique_id=746307509 instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ROUND"
+shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+horizontal_alignment = 1
+
+[node name="SeparatorColorRect" type="ColorRect" parent="VBoxContainer" unique_id=700255611]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(0.364706, 0.364706, 0.364706, 0.588235)
+
+[node name="EmptySpace2" type="Control" parent="VBoxContainer" unique_id=22838398]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="RoundRewardContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1381244990]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RoundRewardLabel" parent="VBoxContainer/RoundRewardContainer" unique_id=581179526 instance=ExtResource("3")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "ROUND_REWARD"
+shadow_enabled = false
+shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+
+[node name="RoundRewardValueLabel" parent="VBoxContainer/RoundRewardContainer" unique_id=1903533321 instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "REWARD_PERK"
+font_color = Color(1, 0.921569, 0.341176, 1)
+shadow_enabled = false
+shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+
+[node name="ScoreContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1045366021]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScoreLabel" parent="VBoxContainer/ScoreContainer" unique_id=1863465392 instance=ExtResource("3")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "TARGET_SCORE"
+shadow_enabled = false
+shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+
+[node name="ScoreValueLabel" parent="VBoxContainer/ScoreContainer" unique_id=841093167 instance=ExtResource("3")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "10,000"
+shadow_enabled = false
+shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+
+[node name="EmptySpace" type="Control" parent="VBoxContainer" unique_id=1405120234]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="PlayButton" parent="VBoxContainer" unique_id=1068711812 instance=ExtResource("4")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "ROUND_PLAY"

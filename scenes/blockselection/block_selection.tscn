@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://g4o1ld066mvq" path="res://sprite/button_inventory.png" id="9_t7s4v"]
 [ext_resource type="Texture2D" uid="uid://vwjqkrqwftf" path="res://sprite/button_roll.png" id="10_j61n3"]
 [ext_resource type="Texture2D" uid="uid://baikypk7t42mh" path="res://sprite/button_skip.png" id="11_t7s4v"]
-[ext_resource type="PackedScene" uid="uid://bulm880jjyu0w" path="res://scenes/modal/pause_menu.tscn" id="12_j61n3"]
+[ext_resource type="PackedScene" uid="uid://bulm880jjyu0w" path="res://scenes/modal/pause_menu/pause_menu.tscn" id="12_j61n3"]
 
 [node name="BlockSelection" type="Node2D"]
 script = ExtResource("1_v1gjm")
