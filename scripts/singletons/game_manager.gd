@@ -288,33 +288,18 @@ func _input(event: InputEvent) -> void :
 		if event is InputEventKey:
 			if event.pressed:
 				if event.keycode == KEY_1:
-					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.PIRATE_CANNONEER)
-
-				elif event.keycode == KEY_2:
-					_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.SKELETON)
-
-				elif event.keycode == KEY_3:
-					_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.PIRATE_CAPTAIN)
-
-				elif event.keycode == KEY_4:
-					_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.UNDEAD_PIRATE)
-
-				elif event.keycode == KEY_5:
-					_debug_create_piece(PieceRenderer.ShapeType.L, GameData.BLOCK_TYPES.CANNON)
-
-				elif event.keycode == KEY_6:
 					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.GOLD)
 					
-				elif event.keycode == KEY_7:
+				elif event.keycode == KEY_2:
 					_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.BLUE_C)
 					
-				elif event.keycode == KEY_8:
+				elif event.keycode == KEY_3:
 					_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.RED_C)
 					
-				elif event.keycode == KEY_9:
+				elif event.keycode == KEY_4:
 					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.SAND)
 					
-				elif event.keycode == KEY_0:
+				elif event.keycode == KEY_5:
 					_debug_create_piece(PieceRenderer.ShapeType.J, GameData.BLOCK_TYPES.RAINBOW)
 
 				#elif event.keycode == KEY_F5:
