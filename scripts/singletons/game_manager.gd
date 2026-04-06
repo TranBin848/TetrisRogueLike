@@ -653,14 +653,10 @@ func add_multiplier(value) -> void :
 		multiplier = multiplier.plus(Big.new(value))
 
 
-
-
-#func is_game_busy() -> bool:
-	#return (paused or 
-	#EventManager.has_pending_events() or 
-	#is_calculating or 
-	##GameOverScreen.is_active() or 
-	##VictoryScreen.is_active())
+func is_game_busy() -> bool:
+	return (paused or 
+		EventManager.has_pending_events() or 
+		is_calculating)
 
 
 func is_perk_active(perk: GameData.Perks) -> bool:
