@@ -218,12 +218,12 @@ func _ready() -> void :
 		if awaiting_calculation_blocker:
 			return
 
-		#if CalculationBlocker.active_count > 0:
-			#awaiting_calculation_blocker = true
-#
-			#print("[GameManager] Waiting for CalculationBlocker to finish...")
-			#await calculation_blocker_finished
-			#print("[GameManager] CalculationBlocker finished.")
+		if CalculationBlocker.active_count > 0:
+			awaiting_calculation_blocker = true
+
+			print("[GameManager] Waiting for CalculationBlocker to finish...")
+			await calculation_blocker_finished
+			print("[GameManager] CalculationBlocker finished.")
 
 		await get_tree().create_timer(1.0 / timescale).timeout
 
@@ -792,20 +792,18 @@ func trigger_perk(perk: GameData.Perks) -> void:
 			target_score = target_score.minus(sacrifice_percentage_value)
 
 		GameData.Perks.STACK_MASTER:
-			pass
-			#EventManager.add_event_last( func() -> float:
-				#GameManager.multiplier = GameManager.multiplier.multiply(2)
-				#return BlockChainReaction.DEFAULT_DELAY
-			#)
+			EventManager.add_event_last( func() -> float:
+				GameManager.multiplier = GameManager.multiplier.multiply(2)
+				return BlockChainReaction.DEFAULT_DELAY
+			)
 
 		GameData.Perks.FULL_CLEAR:
-			pass
-			#EventManager.add_event_last( func() -> float:
-				#if GameManager.get_board().is_fully_clear():
-					#GameManager.points = GameManager.points.multiply(3)
-					#GameManager.multiplier = GameManager.multiplier.multiply(3)
-				#return BlockChainReaction.DEFAULT_DELAY
-			#)
+			EventManager.add_event_last( func() -> float:
+				if GameManager.get_board().is_fully_clear():
+					GameManager.points = GameManager.points.multiply(3)
+					GameManager.multiplier = GameManager.multiplier.multiply(3)
+				return BlockChainReaction.DEFAULT_DELAY
+			)
 
 
 func add_placed_block(block_instance: PlacedBlock, block_type: String) -> void :

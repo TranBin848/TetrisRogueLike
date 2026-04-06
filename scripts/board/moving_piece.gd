@@ -372,25 +372,23 @@ func hold_piece() -> void :
 		queue_free()
 
 
-	#if not GameManager.is_perk_active(GameData.Perks.FORGIVEN):
-		##var target_score_panel: ScoreBackgroundPanel = GameManager.get_unique_node("ScoreBackgroundPanel")
-		##var hold_background_panel: HoldBackgroundPanel = GameManager.get_unique_node("HoldBackgroundPanel")
-#
-		#var target_score_increase: Big = GameManager.target_score.multiply(0.1)
-#
-		#GameManager.target_score = GameManager.target_score.plus(target_score_increase)
-		#target_score_panel.target_score_label_value = GameManager.target_score.to_float()
-#
-		#PointNotification.create_and_slide(hold_background_panel.global_position + hold_background_panel.size / 2 + Vector2(0, 6), PointNotification.GRAY, target_score_increase.to_scientific(true), 1.0, PointNotification.DOWN, 8.0)
-#
-	#GameManager.hold_piece_changed.emit()
-#
-	##AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.8, 1.2))
-#
-	#time_since_spawn = 0.0
-	#rotated = false
-#
-	#reset_placement_timer()
+	if not GameManager.is_perk_active(GameData.Perks.FORGIVEN):
+		var target_score_panel: ScoreBackgroundPanel = GameManager.get_unique_node("ScoreBackgroundPanel")
+		var target_score_increase: Big = GameManager.target_score.multiply(0.1)
+
+		GameManager.target_score = GameManager.target_score.plus(target_score_increase)
+
+		if is_instance_valid(target_score_panel):
+			target_score_panel.target_score_label_value = GameManager.target_score.to_float()
+
+	GameManager.hold_piece_changed.emit()
+
+	#AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.8, 1.2))
+
+	time_since_spawn = 0.0
+	rotated = false
+
+	reset_placement_timer()
 
 
 
