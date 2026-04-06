@@ -10,6 +10,7 @@ signal multiplier_changed(value: Big)
 signal calculation_finished()
 signal calculation_blocker_finished()
 signal rolls_changed(value: int)
+signal coins_changed(value: int)
 
 signal second_passed()
 
@@ -121,6 +122,10 @@ var rolls_left: int = 5:
 		rolls_left = value
 		rolls_changed.emit(rolls_left)
 
+var coins: int = 0:
+	set(value):
+		coins = value
+		coins_changed.emit(coins)
 
 const MAX_PERK_SLOTS: int = 6
 const MAX_PERK_LEVEL: int = 5
@@ -296,6 +301,21 @@ func _input(event: InputEvent) -> void :
 
 				elif event.keycode == KEY_5:
 					_debug_create_piece(PieceRenderer.ShapeType.L, GameData.BLOCK_TYPES.CANNON)
+
+				elif event.keycode == KEY_6:
+					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.GOLD)
+					
+				elif event.keycode == KEY_7:
+					_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.BLUE_C)
+					
+				elif event.keycode == KEY_8:
+					_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.RED_C)
+					
+				elif event.keycode == KEY_9:
+					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.SAND)
+					
+				elif event.keycode == KEY_0:
+					_debug_create_piece(PieceRenderer.ShapeType.J, GameData.BLOCK_TYPES.RAINBOW)
 
 				#elif event.keycode == KEY_F5:
 					#AchievementManager.reset_all_achievements()
@@ -638,6 +658,8 @@ func add_points(value) -> void :
 	else:
 		points = points.plus(Big.new(value))
 
+func add_coins(value: int) -> void :
+	coins += value
 
 func add_multiplier(value) -> void :
 	if value is Big:
