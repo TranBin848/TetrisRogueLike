@@ -33,6 +33,11 @@ const BLOCK_TYPES: Dictionary = {
 	"MOAI": "moai", 
 	"X": "x", 
 
+	"GOLD": "special/common/gold", 
+	"BLUE_C": "special/common/bluec", 
+	"RED_C": "special/common/redc", 
+	"SAND": "special/common/sand", 
+	"RAINBOW": "special/common/rainbow", 
 
 	"STONE": "stone", 
 	"GRANITE": "granite", 
@@ -155,7 +160,8 @@ enum BlockGroups{
 	ARCANE, 
 	HARMONY, 
 	MONSTER, 
-	PIRATES
+	PIRATES,
+	SPECIAL
 }
 
 enum BossTypes{
@@ -223,6 +229,11 @@ const GROUP_COLOR_MAP: Dictionary[GameData.BlockGroups, Dictionary] = {
 		"font_color": Color("bf6f4a"), 
 		"font_shadow_color": Color("8a4836"), 
 		"background_color": Color("bf6f4a")
+	},
+	BlockGroups.SPECIAL: {
+		"font_color": Color("f2cb05"), 
+		"font_shadow_color": Color("b87b14"), 
+		"background_color": Color("f2cb05")
 	}
 }
 
@@ -232,6 +243,11 @@ var blocks: Dictionary = {
 	BLOCK_TYPES.MOAI: BlockData.new([BlockGroups.DEFAULT], 3, 5), 
 	BLOCK_TYPES.X: BlockData.new([BlockGroups.DEFAULT], 3, 5), 
 
+	BLOCK_TYPES.GOLD: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
+	BLOCK_TYPES.BLUE_C: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
+	BLOCK_TYPES.RED_C: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
+	BLOCK_TYPES.SAND: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
+	BLOCK_TYPES.RAINBOW: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
 
 	BLOCK_TYPES.STONE: BlockData.new([BlockGroups.FORTRESS], 3, 5), 
 	BLOCK_TYPES.BRICK: BlockData.new([BlockGroups.FORTRESS], 2, 3), 

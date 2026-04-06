@@ -3,6 +3,7 @@ class_name PointNotification extends Control
 const RED_BACKGROUND_STYLE: StyleBoxTexture = preload("res://resources/point_notification_red.tres")
 const BLUE_BACKGROUND_STYLE: StyleBoxTexture = preload("res://resources/point_notification_blue.tres")
 const GRAY_BACKGROUND_STYLE: StyleBoxTexture = preload("res://resources/point_notification_gray.tres")
+const YELLOW_BACKGROUND_STYLE: StyleBoxTexture = preload("res://resources/point_notification_yellow.tres")
 
 const BACKGROUND_ANIMATION_DURATION: float = 0.2
 const LABEL_ANIMATION_DURATION: float = 0.5
@@ -14,7 +15,8 @@ const DOWN: float = PI / 2
 enum {
 	BLUE, 
 	RED, 
-	GRAY
+	GRAY,
+	YELLOW
 }
 
 
@@ -54,6 +56,11 @@ func animate(type: int, value: Variant, pitch: float) -> void :
 		label.add_theme_color_override("font_shadow_color", Color("3d3d3d"))
 		label.add_theme_color_override("font_outline_color", Color("3d3d3d"))
 		background.add_theme_stylebox_override("panel", GRAY_BACKGROUND_STYLE)
+
+	elif type == YELLOW:
+		label.add_theme_color_override("font_shadow_color", Color("b87b14"))
+		label.add_theme_color_override("font_outline_color", Color("b87b14"))
+		background.add_theme_stylebox_override("panel", YELLOW_BACKGROUND_STYLE)
 
 
 	if value is String:

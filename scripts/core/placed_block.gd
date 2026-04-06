@@ -428,6 +428,23 @@ func execute_destroy_effect() -> void :
 			GameManager.add_multiplier(multi)
 			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, multi)
 
+		GameData.BLOCK_TYPES.GOLD:
+			GameManager.add_coins(2)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.YELLOW, "+2")
+
+		GameData.BLOCK_TYPES.BLUE_C:
+			GameManager.add_points(50)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 50)
+
+		GameData.BLOCK_TYPES.RED_C:
+			GameManager.add_multiplier(4)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 4)
+
+		GameData.BLOCK_TYPES.RAINBOW:
+			if Random.randf() <= 0.20:
+				GameManager.add_multiplier(20)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 20)
+
 		GameData.BLOCK_TYPES.STONE:
 			GameManager.add_multiplier(10)
 			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 10, 1.8, PointNotification.UP, 6.0)

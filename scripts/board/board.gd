@@ -151,7 +151,8 @@ func place_piece(blocks: Array[Vector2i], sprite_path: String, block_type: Strin
 	_trigger_below_blocks_animation(blocks)
 	handle_block_placement_interactions(b, piece_was_rotated)
 
-
+	if block_type == GameData.BLOCK_TYPES.SAND:
+		_process_sand_blocks(b)
 
 	#AchievementManager.add_progress(AchievementManager.AchievementId.PLACE_50_PIECES)
 	#AchievementManager.add_progress(AchievementManager.AchievementId.PLACE_100_PIECES)
@@ -159,6 +160,44 @@ func place_piece(blocks: Array[Vector2i], sprite_path: String, block_type: Strin
 
 	return b
 
+func _process_sand_blocks(sand_blocks: Array[PlacedBlock]) -> void:
+	var is_fall_up: bool = GameManager.current_boss == GameData.BossTypes.FALL_UP
+
+	if is_fall_up:
+		sand_blocks.sort_custom(func(a, b): return a.grid_position.y < b.grid_position.y)
+	else:
+		sand_blocks.sort_custom(func(a, b): return a.grid_position.y > b.grid_position.y)
+
+	var any_moved = false
+
+	for block in sand_blocks:
+		if not is_instance_valid(block):
+			continue
+
+		var col = block.grid_position.x
+		var start_row = block.grid_position.y
+		var final_row = start_row
+
+		if is_fall_up:
+			var check_row = start_row - 1
+			while check_row >= 0 and not is_position_occupied(Vector2i(col, check_row)):
+				final_row = check_row
+				check_row -= 1
+		else:
+			var check_row = start_row + 1
+			while check_row < BOARD_HEIGHT and not is_position_occupied(Vector2i(col, check_row)):
+				final_row = check_row
+				check_row += 1
+
+		if final_row != start_row:
+			placed_blocks_grid[start_row][col] = null
+			placed_blocks_grid[final_row][col] = block
+			block.grid_position = Vector2i(col, final_row)
+			block.animate_y(final_row * PIECE_SIZE)
+			any_moved = true
+
+	if any_moved:
+		GameCamera.shake_direction(2, 270, 0.2)
 
 func is_line_full(row: int) -> bool:
 
