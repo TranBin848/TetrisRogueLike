@@ -13,7 +13,7 @@ script = ExtResource("1_fbg3b")
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_fbg3b")
-position = Vector2(4, 4)
+position = Vector2(10, 10)
 
 [node name="MainSprite" type="Sprite2D" parent="."]
 position = Vector2(6, 6)
