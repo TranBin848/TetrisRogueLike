@@ -6,6 +6,8 @@ const DEFAULT_DELAY: float = 0.09
 func common_destroy(block: PlacedBlock, cleared_lines_count: int = 1) -> float:
 	if block.destroy_animation_requested:
 		return 0.0
+	if block.type == "indestructible":
+		return 0.0
 
 	block.destroy_animation_requested = true
 	block.destroy()

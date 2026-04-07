@@ -38,7 +38,7 @@ var type: String:
 		description = GameManager.replace_tags(tr("BLOCK_" + block_name + "_DESCRIPTION"))
 
 		add_to_group(GameData.get_block_name(value))
-
+		const ACCELERATOR_MULT = 0.5;
 		match type:
 			GameData.BLOCK_TYPES.CFOUR:
 				var tick_timer: Timer = Timer.new()
@@ -46,6 +46,8 @@ var type: String:
 
 				tick_timer.name = "CFOURTickTimer"
 				tick_timer.wait_time = 1.0 / GameManager.timescale
+				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					tick_timer.wait_time *= ACCELERATOR_MULT;
 				tick_timer.one_shot = false
 
 				tick_timer.timeout.connect( func() -> void :
@@ -76,6 +78,8 @@ var type: String:
 
 				morph_timer.name = "UraniumMorphTimer"
 				morph_timer.wait_time = 5.0 / GameManager.timescale
+				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					morph_timer.wait_time *= ACCELERATOR_MULT;
 				morph_timer.one_shot = false
 
 				morph_timer.timeout.connect( func() -> void :
@@ -92,7 +96,7 @@ var type: String:
 
 
 					for block in adjacent_blocks:
-						if is_instance_valid(block) and not block.destroy_animation_requested and not GameData.is_block_on_group(block.type, GameData.BlockGroups.NUCLEAR):
+						if is_instance_valid(block) and not block.destroy_animation_requested and not GameData.is_block_on_group(block.type, GameData.BlockGroups.NUCLEAR) and block.type != "indestructible":
 							possible_blocks.append(block)
 
 
@@ -197,6 +201,7 @@ func get_center_position() -> Vector2:
 func morph(new_type: String) -> void :
 	if type == new_type:
 		return
+	if type == "indestructible": return;
 
 	var old_type: String = type
 	type = new_type
@@ -341,6 +346,9 @@ func _cleanup_timers() -> void :
 
 
 func destroy() -> void :
+	
+	if type == "indestructible":
+		return
 	calculation_blocker.activate()
 	destroy_animation_requested = true
 
@@ -376,6 +384,8 @@ func destroy() -> void :
 	)
 
 	execute_destroy_effect()
+	if GameManager.is_perk_active(GameData.Perks.RETRIGGER_BLOCK):
+		execute_destroy_effect();
 
 
 func execute_destroy_effect() -> void :
@@ -396,7 +406,10 @@ func execute_destroy_effect() -> void :
 		if honey_dice_event_queue.size() > 0:
 			EventManager.execute_queue_events(honey_dice_event_queue)
 
-
+	
+	if GameManager.is_perk_active(GameData.Perks.MULT_REACTOR):
+		GameManager.trigger_perk(GameData.Perks.MULT_REACTOR);
+	
 	match type:
 		GameData.BLOCK_TYPES.NORMAL:
 			var points: int = 1
@@ -495,7 +508,7 @@ func execute_destroy_effect() -> void :
 			var possible_blocks: Array[PlacedBlock] = []
 
 			for block in all_blocks_on_board:
-				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != GameData.BLOCK_TYPES.RADIOACTIVE:
+				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != GameData.BLOCK_TYPES.RADIOACTIVE and block.type != "indestructible":
 					possible_blocks.append(block)
 
 			if possible_blocks.size() > 0:
@@ -660,7 +673,7 @@ func execute_destroy_effect() -> void :
 
 
 			for block in all_blocks_on_board:
-				if is_instance_valid(block) and not block.destroy_animation_requested:
+				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != "indestructible":
 					possible_blocks.append(block)
 
 			var all_block_types: Array = GameData.BLOCK_TYPES.values()

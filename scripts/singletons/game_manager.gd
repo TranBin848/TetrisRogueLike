@@ -133,7 +133,7 @@ const LEVELED_PERKS: Array[GameData.Perks] = [
 	GameData.Perks.SPEED_RUN, 
 	GameData.Perks.ACCEPTANCE, 
 	GameData.Perks.LAST_BREATH, 
-	GameData.Perks.CHAIN_REACTION
+	GameData.Perks.CHAIN_REACTION,
 ]
 
 const SPEED_RUN_STACK_BY_LEVEL: Array[int] = [3, 10, 25, 35, 100]
@@ -244,6 +244,10 @@ func _ready() -> void :
 
 		points = Big.new(0)
 		multiplier = Big.new(1)
+
+		if is_perk_active(GameData.Perks.SACRIFICE_ROW):
+			points = points.plus(200);
+
 		calculation_finished.emit()
 
 		awaiting_calculation_blocker = false
@@ -711,7 +715,6 @@ func trigger_cumulative_perk(perk: GameData.Perks, amount: int = 1) -> void:
 			var stack_count: int = cumulative_perks[perk]
 			add_points(stack_count * 10)
 			#InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "+%d" % (stack_count * 10))
-
 		GameData.Perks.PERFECTION:
 			var stack_count: int = cumulative_perks[perk]
 			add_multiplier(stack_count * 5)
@@ -749,7 +752,11 @@ func trigger_perk(perk: GameData.Perks) -> void:
 
 		GameData.Perks.AUTOMAGIC:
 			add_points(10)
-
+		GameData.Perks.BUILDER:
+			add_points(50);
+		GameData.Perks.SACRIFICE_ROW:
+			add_points(100);
+		
 		GameData.Perks.SPEED_RUN:
 			var level: int = get_perk_level(GameData.Perks.SPEED_RUN)
 			if level == 0:
@@ -786,7 +793,12 @@ func trigger_perk(perk: GameData.Perks) -> void:
 		GameData.Perks.SACRIFICE:
 			var sacrifice_percentage_value: Big = target_score.multiply(0.05)
 			target_score = target_score.minus(sacrifice_percentage_value)
-
+		
+		GameData.Perks.MULT_REACTOR:
+			add_multiplier(1);
+		GameData.Perks.COMBO_ENGINE:
+			add_points(150);
+		
 		GameData.Perks.STACK_MASTER:
 			EventManager.add_event_last( func() -> float:
 				GameManager.multiplier = GameManager.multiplier.multiply(2)
