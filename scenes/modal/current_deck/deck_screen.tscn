@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b1665m2r87fp2"]
 
 [ext_resource type="Script" uid="uid://b6eud32ruoeev" path="res://scenes/modal/current_deck/deck_screen.gd" id="1_2io3a"]
-[ext_resource type="StyleBox" uid="uid://7oxeqbf6gpjm" path="res://themes/gray_panel_larger.tres" id="2_w1ni1"]
+[ext_resource type="StyleBox" path="res://themes/gray_panel_larger.tres" id="2_w1ni1"]
 [ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="3_6ilh8"]
 [ext_resource type="Theme" uid="uid://c88wvjauk67nf" path="res://themes/scroll_container_theme.tres" id="4_6ilh8"]
 [ext_resource type="Texture2D" uid="uid://xuv8qr4wlkf" path="res://sprite/perk_empty_slot.png" id="5_rsdo6"]

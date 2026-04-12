@@ -26,7 +26,6 @@ pivot_offset = Vector2(9, 9)
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_f55qh")
 script = ExtResource("1_1tams")
-theme_override_styles/panel = SubResource("StyleBoxTexture_f55qh")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2

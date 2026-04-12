@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnfk2dx0w4dur"]
+
+[ext_resource type="Script" uid="uid://cbd1l4yfm78j0" path="res://scenes/speedrun_timer_layer.gd" id="1_7ssir"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="2_qcuh1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ssir"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+
+[node name="SpeedrunTimerLayer" type="CanvasLayer"]
+layer = 4
+script = ExtResource("1_7ssir")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7ssir")
+
+[node name="TimerLabel" parent="MarginContainer/PanelContainer" instance=ExtResource("2_qcuh1")]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "00:00:00"
+shadow_enabled = false
+horizontal_alignment = 1

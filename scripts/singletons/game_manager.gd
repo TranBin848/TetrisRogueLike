@@ -10,7 +10,7 @@ signal multiplier_changed(value: Big)
 signal calculation_finished()
 signal calculation_blocker_finished()
 signal rolls_changed(value: int)
-signal coins_changed(value: int)
+#signal coins_changed(value: int)
 
 signal second_passed()
 
@@ -56,7 +56,6 @@ const MOUSE_IDLE_TIMEOUT: float = 2.0
 
 
 var is_demo_build: bool = _detect_demo_build()
-
 
 var paused: bool = false
 
@@ -122,10 +121,6 @@ var rolls_left: int = 5:
 		rolls_left = value
 		rolls_changed.emit(rolls_left)
 
-var coins: int = 0:
-	set(value):
-		coins = value
-		coins_changed.emit(coins)
 
 const MAX_PERK_SLOTS: int = 6
 const MAX_PERK_LEVEL: int = 5
@@ -133,7 +128,7 @@ const LEVELED_PERKS: Array[GameData.Perks] = [
 	GameData.Perks.SPEED_RUN, 
 	GameData.Perks.ACCEPTANCE, 
 	GameData.Perks.LAST_BREATH, 
-	GameData.Perks.CHAIN_REACTION,
+	GameData.Perks.CHAIN_REACTION
 ]
 
 const SPEED_RUN_STACK_BY_LEVEL: Array[int] = [3, 10, 25, 35, 100]
@@ -195,7 +190,7 @@ var is_gamepad_connected: bool = false
 func _ready() -> void :
 	load_and_apply_settings()
 	generate_piece_queue()
-	#load_game_save()
+	load_game_save()
 
 
 	if OS.is_debug_build():
@@ -332,87 +327,70 @@ func load_and_apply_settings() -> void :
 		#SpeedrunTimerLayer.activate()
 	#else:
 		#SpeedrunTimerLayer.deactivate()
+func save_game() -> void:
+	var save_resource: SaveResource = SaveResource.new()
+	save_resource.current_round = current_round
+	save_resource.perk_levels = perk_levels.duplicate()
+	save_resource.original_pieces = original_pieces.duplicate(true)
+	save_resource.rolls_left = rolls_left
+	save_resource.boss_usage_history = boss_usage_history.duplicate()
+	save_resource.deck_type = current_deck
+	save_resource.best_score = best_score.to_plain_scientific()
+	save_resource.blocks_rolled_count = blocks_rolled_count
+	save_resource.blocks_skipped_count = blocks_skipped_count
+	save_resource.speedrun_time = SpeedrunTimerLayer.timepassed
+	save_resource.seed_string = Random.get_current_seed_string()
+	save_resource.cumulative_perks = cumulative_perks.duplicate()
+	save_resource.write()
 
 
-#func save_game() -> void :
-	#var save_resource: SaveResource = SaveResource.new()
-	#save_resource.current_round = current_round
-	#save_resource.perk_levels = perk_levels.duplicate()
-	#save_resource.original_pieces = original_pieces.duplicate(true)
-	#save_resource.rolls_left = rolls_left
-	#save_resource.boss_usage_history = boss_usage_history.duplicate()
-	#save_resource.deck_type = current_deck
-	#save_resource.best_score = best_score.to_plain_scientific()
-	#save_resource.blocks_rolled_count = blocks_rolled_count
-	#save_resource.blocks_skipped_count = blocks_skipped_count
-	#save_resource.speedrun_time = SpeedrunTimerLayer.timepassed
-	#save_resource.seed_string = Random.get_current_seed_string()
-	#save_resource.cumulative_perks = cumulative_perks.duplicate()
-	#save_resource.write()
+func load_game_save() -> void:
+	var save_resource: SaveResource = SaveResource.load_from_disk()
 
-#func load_game_save() -> void :
-	#var save_resource: SaveResource = SaveResource.load_from_disk()
-#
-	#if save_resource != null:
-		#current_round = save_resource.current_round
-#
-#
-		#if save_resource.perk_levels != null and save_resource.perk_levels.size() > 0:
-			#perk_levels = save_resource.perk_levels.duplicate()
-		#elif save_resource.current_perks != null and save_resource.current_perks.size() > 0:
-#
-			#perk_levels.clear()
-			#for perk: GameData.Perks in save_resource.current_perks:
-				#perk_levels[perk] = 1
-			#print("🔄 Migrated old perk system: converted %d perks to level 1" % perk_levels.size())
-		#else:
-			#perk_levels.clear()
-#
-		#original_pieces.assign(_migrate_original_pieces(save_resource.original_pieces.duplicate(true)))
-		#target_score = Big.new(calculate_round_score(current_round))
-#
-		#if not save_resource.seed_string.is_empty():
-			#Random.set_custom_seed(save_resource.seed_string)
-#
-#
-		#rolls_left = save_resource.rolls_left if save_resource.rolls_left > 0 else 5
-#
-#
-		#if save_resource.boss_usage_history != null:
-			#boss_usage_history = save_resource.boss_usage_history.duplicate()
-			#print("🔄 Loaded boss usage history from save file")
-		#else:
-			#boss_usage_history.clear()
-			#print("🎲 Starting fresh boss usage history")
-#
-#
-		#current_deck = save_resource.deck_type as GameData.DeckTypes
-		#print("🎨 Loaded deck type: %d" % current_deck)
-#
-#
-		#best_score = Big.new(save_resource.best_score) if save_resource.best_score != "" else Big.new(0)
-		#blocks_rolled_count = save_resource.blocks_rolled_count
-		#blocks_skipped_count = save_resource.blocks_skipped_count
-		#print("📊 Loaded statistics - Best: %s, Rolled: %d, Skipped: %d" % [best_score.to_scientific(true), blocks_rolled_count, blocks_skipped_count])
-#
-#
-		#SpeedrunTimerLayer.timepassed = save_resource.speedrun_time
-		#print("⏱️ Loaded speedrun time: %.2f seconds" % save_resource.speedrun_time)
-#
-#
-		#if save_resource.cumulative_perks != null:
-			#cumulative_perks = save_resource.cumulative_perks.duplicate()
-			#print("📈 Loaded cumulative perks: %s" % str(cumulative_perks))
-		#else:
-			#cumulative_perks.clear()
-#
-		#pieces.clear()
-		#for shape_type: PieceRenderer.ShapeType in original_pieces:
-			#pieces[shape_type] = original_pieces[shape_type].duplicate()
-	#else:
-#
-		#boss_usage_history.clear()
-		#perk_levels.clear()
+	if save_resource != null:
+		current_round = save_resource.current_round
+
+		if save_resource.perk_levels != null and save_resource.perk_levels.size() > 0:
+			perk_levels = save_resource.perk_levels.duplicate()
+		elif save_resource.current_perks != null and save_resource.current_perks.size() > 0:
+			perk_levels.clear()
+			for perk: GameData.Perks in save_resource.current_perks:
+				perk_levels[perk] = 1
+		else:
+			perk_levels.clear()
+
+		original_pieces.assign(_migrate_original_pieces(save_resource.original_pieces.duplicate(true)))
+		target_score = Big.new(calculate_round_score(current_round))
+
+		if not save_resource.seed_string.is_empty():
+			Random.set_custom_seed(save_resource.seed_string)
+
+		rolls_left = save_resource.rolls_left if save_resource.rolls_left > 0 else 5
+
+		if save_resource.boss_usage_history != null:
+			boss_usage_history = save_resource.boss_usage_history.duplicate()
+		else:
+			boss_usage_history.clear()
+
+		current_deck = save_resource.deck_type as GameData.DeckTypes
+
+		best_score = Big.new(save_resource.best_score) if save_resource.best_score != "" else Big.new(0)
+		blocks_rolled_count = save_resource.blocks_rolled_count
+		blocks_skipped_count = save_resource.blocks_skipped_count
+
+		SpeedrunTimerLayer.timepassed = save_resource.speedrun_time
+
+		if save_resource.cumulative_perks != null:
+			cumulative_perks = save_resource.cumulative_perks.duplicate()
+		else:
+			cumulative_perks.clear()
+
+		pieces.clear()
+		for shape_type: PieceRenderer.ShapeType in original_pieces:
+			pieces[shape_type] = original_pieces[shape_type].duplicate()
+	else:
+		boss_usage_history.clear()
+		perk_levels.clear()
 
 
 func _migrate_original_pieces(raw_pieces: Dictionary) -> Dictionary:
@@ -429,12 +407,12 @@ func _migrate_original_pieces(raw_pieces: Dictionary) -> Dictionary:
 	return migrated
 
 
-#func has_save_file() -> bool:
-	#return SaveResource.save_exists()
-#
-#
-#func delete_save_file() -> void :
-	#SaveResource.delete_save()
+func has_save_file() -> bool:
+	return SaveResource.save_exists()
+
+
+func delete_save_file() -> void:
+	SaveResource.delete_save()
 
 
 func get_current_scene() -> Node:
@@ -541,16 +519,8 @@ func _calculate_next_piece_cache() -> void :
 		print("[GameManager] Used piece from hold: ", GameData.get_block_name(next_piece_cache.type))
 		return
 
-	# Fallback: if no pieces available, use default block
 	print("\n[GameManager] No pieces available in the queue!")
 	print("[GameManager] Remaining count: ", get_remaining_pieces_count())
-	print("[GameManager] Using fallback default block")
-	
-	var fallback_shape = PieceRenderer.ShapeType.I
-	var fallback_block = get_current_default_block()
-	next_piece_cache = {"type": fallback_block, "shape": fallback_shape, "queue_index": 0}
-	if piece_queue.is_empty():
-		piece_queue.append(fallback_shape)
 	
 	pieces_finished.emit()
 
@@ -647,8 +617,8 @@ func add_points(value) -> void :
 	else:
 		points = points.plus(Big.new(value))
 
-func add_coins(value: int) -> void :
-	coins += value
+#func add_coins(value: int) -> void :
+	#coins += value
 
 func add_multiplier(value) -> void :
 	if value is Big:
@@ -660,7 +630,9 @@ func add_multiplier(value) -> void :
 func is_game_busy() -> bool:
 	return (paused or 
 		EventManager.has_pending_events() or 
-		is_calculating)
+		is_calculating or
+		GameOverScreen.is_active() or
+		VictoryScreen.is_active())
 
 
 func is_perk_active(perk: GameData.Perks) -> bool:
@@ -912,11 +884,11 @@ func get_active_groups_in_deck() -> Array[GameData.BlockGroups]:
 	return active_groups
 
 
-#func restart() -> void :
-	#Transition.restart( func():
-		#reset_variables()
-		#SpeedrunTimerLayer.resume_timer()
-	#)
+func restart() -> void :
+	Transition.restart( func():
+		reset_variables()
+		SpeedrunTimerLayer.resume_timer()
+	)
 
 
 func reset_variables() -> void :
