@@ -80,9 +80,9 @@ func _update_deathline_position() -> void :
 
 func initialize_board() -> void :
 
+	GameManager.activate_perk(GameData.Perks.FULL_CLEAR);
 	GameManager.activate_perk(GameData.Perks.SPEED_RUN);
-	GameManager.activate_perk(GameData.Perks.SACRIFICE_ROW);
-	GameManager.activate_perk(GameData.Perks.COMBO_ENGINE);
+	GameManager.activate_perk(GameData.Perks.AUTOMAGIC);
 
 	placed_blocks_grid.clear()
 	GameManager.clear_placed_blocks_variables()
