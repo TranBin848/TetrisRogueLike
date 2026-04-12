@@ -246,7 +246,7 @@ func _ready() -> void :
 		multiplier = Big.new(1)
 
 		if is_perk_active(GameData.Perks.SACRIFICE_ROW):
-			points = points.plus(200);
+			trigger_perk(GameData.Perks.SACRIFICE_ROW);
 
 		calculation_finished.emit()
 
@@ -674,6 +674,8 @@ func get_perk_level(perk: GameData.Perks) -> int:
 func get_unique_perk_count() -> int:
 	return perk_levels.size()
 
+func activate_perk(perk : GameData.Perks) -> void:
+	perk_levels[perk] = 1;
 
 func can_upgrade_perk(perk: GameData.Perks) -> bool:
 	if perk not in LEVELED_PERKS:
@@ -714,11 +716,11 @@ func trigger_cumulative_perk(perk: GameData.Perks, amount: int = 1) -> void:
 		GameData.Perks.PAUPER:
 			var stack_count: int = cumulative_perks[perk]
 			add_points(stack_count * 10)
-			#InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "+%d" % (stack_count * 10))
+			InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "+%d" % (stack_count * 10))
 		GameData.Perks.PERFECTION:
 			var stack_count: int = cumulative_perks[perk]
 			add_multiplier(stack_count * 5)
-			#InGamePerksContainer.spawn_point_notification(perk, PointNotification.RED, "+%d" % (stack_count * 5))
+			InGamePerksContainer.spawn_point_notification(perk, PointNotification.RED, "+%d" % (stack_count * 5))
 
 		GameData.Perks.MOMENTUM:
 			var stack_count: int = cumulative_perks[perk]
@@ -726,7 +728,7 @@ func trigger_cumulative_perk(perk: GameData.Perks, amount: int = 1) -> void:
 
 			add_points(total)
 
-			#InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "+%d" % total)
+			InGamePerksContainer.spawn_point_notification(perk, PointNotification.BLUE, "+%d" % total)
 
 
 func reset_cumulative_perk(perk: GameData.Perks) -> void:
@@ -743,19 +745,23 @@ func trigger_perk(perk: GameData.Perks) -> void:
 	match perk:
 
 		GameData.Perks.POINT_RUSH:
-			pass
-			#InGamePerksContainer.pulse_perk_icon(GameData.Perks.POINT_RUSH)
+			InGamePerksContainer.pulse_perk_icon(GameData.Perks.POINT_RUSH)
 
-		GameData.Perks.SHORTCUT:
-			var shortcut_percentage_value: Big = target_score.multiply(0.25)
-			target_score = target_score.minus(shortcut_percentage_value)
-
-		GameData.Perks.AUTOMAGIC:
-			add_points(10)
 		GameData.Perks.BUILDER:
 			add_points(50);
 		GameData.Perks.SACRIFICE_ROW:
 			add_points(100);
+			InGamePerksContainer \
+				.spawn_point_notification(GameData.Perks.SACRIFICE_ROW, PointNotification.BLUE, 100);
+		
+		GameData.Perks.MULT_REACTOR:
+			add_multiplier(1);
+			InGamePerksContainer\
+				.spawn_point_notification(GameData.Perks.LAST_BREATH, PointNotification.RED, 1);
+		GameData.Perks.COMBO_ENGINE:
+			add_points(150);
+			InGamePerksContainer\
+				.spawn_point_notification(GameData.Perks.COMBO_ENGINE, PointNotification.BLUE, 150);
 		
 		GameData.Perks.SPEED_RUN:
 			var level: int = get_perk_level(GameData.Perks.SPEED_RUN)
@@ -764,6 +770,7 @@ func trigger_perk(perk: GameData.Perks) -> void:
 			level = clamp(level, 1, 5)
 			var points_value: int = SPEED_RUN_STACK_BY_LEVEL[level - 1]
 			add_points(points_value)
+			InGamePerksContainer.spawn_point_notification(GameData.Perks.SPEED_RUN, PointNotification.BLUE, points_value)
 
 		GameData.Perks.ACCEPTANCE:
 			var level: int = get_perk_level(GameData.Perks.ACCEPTANCE)
@@ -772,6 +779,7 @@ func trigger_perk(perk: GameData.Perks) -> void:
 			level = clamp(level, 1, 5)
 			var multiplier_value: int = ACCEPTANCE_FLOW_BY_LEVEL[level - 1]
 			add_multiplier(multiplier_value)
+			InGamePerksContainer.spawn_point_notification(GameData.Perks.ACCEPTANCE, PointNotification.RED, multiplier_value)
 
 		GameData.Perks.CHAIN_REACTION:
 			var level: int = get_perk_level(GameData.Perks.CHAIN_REACTION)
@@ -780,6 +788,8 @@ func trigger_perk(perk: GameData.Perks) -> void:
 			level = clamp(level, 1, 5)
 			var multiplier_value: int = CHAIN_REACTION_FLOW_BY_LEVEL[level - 1]
 			add_multiplier(multiplier_value)
+			InGamePerksContainer.spawn_point_notification(GameData.Perks.CHAIN_REACTION, PointNotification.RED, multiplier_value)
+
 
 		GameData.Perks.LAST_BREATH:
 			var level: int = get_perk_level(GameData.Perks.LAST_BREATH)
@@ -789,16 +799,19 @@ func trigger_perk(perk: GameData.Perks) -> void:
 			var percentage: float = LAST_BREATH_PERCENT_BY_LEVEL[level - 1]
 			var target_score_percentage: Big = target_score.multiply(percentage)
 			add_points(target_score_percentage)
+			InGamePerksContainer.spawn_point_notification(GameData.Perks.LAST_BREATH, PointNotification.BLUE, target_score_percentage.to_scientific(true))
 
 		GameData.Perks.SACRIFICE:
 			var sacrifice_percentage_value: Big = target_score.multiply(0.05)
 			target_score = target_score.minus(sacrifice_percentage_value)
 		
-		GameData.Perks.MULT_REACTOR:
-			add_multiplier(1);
-		GameData.Perks.COMBO_ENGINE:
-			add_points(150);
-		
+			InGamePerksContainer.spawn_point_notification(
+				GameData.Perks.SACRIFICE, 
+				PointNotification.GRAY, 
+				"-" + sacrifice_percentage_value.to_scientific(true)
+			)
+			InGamePerksContainer.pulse_perk_icon(GameData.Perks.SACRIFICE)
+			
 		GameData.Perks.STACK_MASTER:
 			EventManager.add_event_last( func() -> float:
 				GameManager.multiplier = GameManager.multiplier.multiply(2)
@@ -812,6 +825,25 @@ func trigger_perk(perk: GameData.Perks) -> void:
 					GameManager.multiplier = GameManager.multiplier.multiply(3)
 				return BlockChainReaction.DEFAULT_DELAY
 			)
+		
+		GameData.Perks.SHORTCUT:
+			var shortcut_percentage_value: Big = target_score.multiply(0.25)
+			var score_background_panel: ScoreBackgroundPanel = get_unique_node("ScoreBackgroundPanel")
+
+			target_score = target_score.minus(shortcut_percentage_value)
+			score_background_panel.target_score_label_value = target_score.to_float()
+
+			InGamePerksContainer.spawn_point_notification(
+				GameData.Perks.SHORTCUT, 
+				PointNotification.GRAY, 
+				"-" + shortcut_percentage_value.to_scientific(true)
+			)
+
+		GameData.Perks.AUTOMAGIC:
+			add_points(10)
+			InGamePerksContainer.spawn_point_notification(GameData.Perks.AUTOMAGIC, PointNotification.BLUE, 10)
+			InGamePerksContainer.pulse_perk_icon(GameData.Perks.AUTOMAGIC)
+
 
 
 func add_placed_block(block_instance: PlacedBlock, block_type: String) -> void :
@@ -986,7 +1018,6 @@ func goto_level_selection() -> void :
 
 func get_board() -> Board:
 	return get_unique_node("Board") as Board
-
 
 func spawn_moving_piece() -> MovingPiece:
 	var next_piece: Dictionary = consume_next_piece()

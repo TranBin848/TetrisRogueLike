@@ -80,6 +80,10 @@ func _update_deathline_position() -> void :
 
 func initialize_board() -> void :
 
+	GameManager.activate_perk(GameData.Perks.SPEED_RUN);
+	GameManager.activate_perk(GameData.Perks.SACRIFICE_ROW);
+	GameManager.activate_perk(GameData.Perks.COMBO_ENGINE);
+
 	placed_blocks_grid.clear()
 	GameManager.clear_placed_blocks_variables()
 
@@ -92,7 +96,10 @@ func initialize_board() -> void :
 		placed_blocks_grid.append(sprite_row)
 	if GameManager.is_perk_active(GameData.Perks.SACRIFICE_ROW):
 		_spawn_warden_row();
-
+		InGamePerksContainer._self.ready.connect(func() -> void:
+			await get_tree().create_timer(1.5 * GameManager.timescale).timeout;
+			GameManager.trigger_perk(GameData.Perks.SACRIFICE_ROW);
+		, CONNECT_ONE_SHOT);
 
 func is_position_occupied(pos: Vector2i) -> bool:
 

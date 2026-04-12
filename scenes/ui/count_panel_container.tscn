@@ -1,0 +1,27 @@
+[gd_scene load_steps=0 format=3 uid="uid://hyorwv4b77oe"]
+
+[ext_resource type="StyleBox" uid="uid://djocamgdajj1v" path="res://resources/count_panel_container_red.tres" id="1"]
+[ext_resource type="Script" uid="uid://bfcj3ebv2kkr" path="res://scripts/count_panel_container.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="3"]
+
+[node name="CountPanelContainer" type="PanelContainer" unique_id=2010114407]
+z_index = 1
+custom_minimum_size = Vector2(12, 12)
+offset_right = 12.0
+offset_bottom = 12.0
+theme_override_styles/panel = ExtResource("1")
+script = ExtResource("2")
+
+[node name="CountLabel" parent="." unique_id=912884843 instance=ExtResource("3")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "0"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+horizontal_alignment = 1
+vertical_alignment = 1
