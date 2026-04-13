@@ -666,6 +666,25 @@ func can_select_another_perk() -> bool:
 	return false
 
 
+func add_or_upgrade_perk(perk: GameData.Perks) -> bool:
+	if perk == GameData.Perks.NONE:
+		return false
+
+	var current_level: int = get_perk_level(perk)
+
+	if current_level <= 0:
+		if get_unique_perk_count() >= MAX_PERK_SLOTS:
+			return false
+		perk_levels[perk] = 1
+		return true
+
+	if not can_upgrade_perk(perk):
+		return false
+
+	perk_levels[perk] = min(current_level + 1, MAX_PERK_LEVEL)
+	return true
+
+
 func is_perk_used(perk: GameData.Perks) -> bool:
 	return is_perk_active(perk) and perks_used.has(perk)
 
@@ -973,21 +992,21 @@ func spawn_moving_piece() -> MovingPiece:
 	return moving_piece
 
 
-#func use_roll() -> void :
-	#if rolls_left > 0:
-		#rolls_left -= 1
-		#blocks_rolled_count += 1
-		#save_game()
-#
-#
-#func add_rolls(amount: int) -> void :
-	#rolls_left += amount
-	#save_game()
-#
-#
-#func increment_blocks_skipped() -> void :
-	#blocks_skipped_count += 1
-	#save_game()
+func use_roll() -> void :
+	if rolls_left > 0:
+		rolls_left -= 1
+		blocks_rolled_count += 1
+		save_game()
+
+
+func add_rolls(amount: int) -> void :
+	rolls_left += amount
+	save_game()
+
+
+func increment_blocks_skipped() -> void :
+	blocks_skipped_count += 1
+	save_game()
 
 
 func can_roll() -> bool:

@@ -45,16 +45,19 @@ var disabled: bool = false:
 
 @onready var button: BouncyButton = $Button
 @onready var margin_container: MarginContainer = $MarginContainer
-@onready var piece_container: Control = %PieceContainer
-@onready var piece_renderer: PieceRenderer = %PieceRenderer
-@onready var count_label: LabelShadowed = %CountLabel
-@onready var title_label: LabelShadowed = %TitleLabel
-@onready var description_label: RichTextLabelShadowed = %DescriptionLabel
+@onready var piece_container: Control = $MarginContainer/VBoxContainer/PieceContainer
+@onready var piece_renderer: PieceRenderer = $MarginContainer/VBoxContainer/PieceContainer/PieceRenderer
+@onready var count_label: LabelShadowed = $MarginContainer/VBoxContainer/PieceContainer/CountPanelContainer/Count
+@onready var title_label: LabelShadowed = $MarginContainer/VBoxContainer/VBoxContainer/TitleLabel
+@onready var description_label: RichTextLabelShadowed = $MarginContainer/VBoxContainer/VBoxContainer/DescriptionLabel
 @onready var piece_change_timer: Timer = $PieceChangeTimer
-@onready var types_hbox_container: HBoxContainer = %TypesHBoxContainer
+@onready var types_hbox_container: HBoxContainer = $MarginContainer/VBoxContainer/TypesHBoxContainer
 
 
 func center_piece(piece_type: PieceRenderer.ShapeType) -> void :
+	if not is_instance_valid(piece_container) or not is_instance_valid(piece_renderer):
+		return
+
 	var bounds: Rect2i = piece_renderer.get_piece_bounds(piece_type, 0)
 
 	if bounds.size == Vector2i.ZERO:
