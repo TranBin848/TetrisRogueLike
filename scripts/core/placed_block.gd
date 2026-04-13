@@ -442,7 +442,7 @@ func execute_destroy_effect() -> void :
 			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, multi)
 
 		GameData.BLOCK_TYPES.GOLD:
-			GameManager.add_coins(2)
+			#GameManager.add_coins(2)
 			PointNotification.create_and_slide(get_center_position(), PointNotification.YELLOW, "+2")
 
 		GameData.BLOCK_TYPES.BLUE_C:

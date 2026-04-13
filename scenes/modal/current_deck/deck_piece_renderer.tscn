@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfqo7tr6hlprs"]
+
+[ext_resource type="Script" uid="uid://ofd6m0fmf86l" path="res://scenes/modal/current_deck/deck_piece_renderer.gd" id="1_h0hmn"]
+[ext_resource type="Texture2D" uid="uid://bnjn8u4ifuu44" path="res://sprite/rounded_white_panel.png" id="2_qc0re"]
+[ext_resource type="PackedScene" uid="uid://c4ecjkyq0vrgm" path="res://scenes/piece_renderer.tscn" id="3_cs36w"]
+[ext_resource type="Texture2D" uid="uid://bpms14qhfnier" path="res://sprite/rounded_outline_white_panel.png" id="4_w70jn"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="5_cs36w"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qc0re"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+texture = ExtResource("2_qc0re")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+modulate_color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="DeckPieceRenderer" type="Control"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_h0hmn")
+
+[node name="BackgroundRect" type="NinePatchRect" parent="."]
+self_modulate = Color(0.266667, 0.266667, 0.266667, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qc0re")
+region_rect = Rect2(0, 0, 8, 8)
+patch_margin_left = 1
+patch_margin_top = 1
+patch_margin_right = 1
+patch_margin_bottom = 1
+
+[node name="PieceRenderer" parent="BackgroundRect" instance=ExtResource("3_cs36w")]
+
+[node name="FocusRect" type="NinePatchRect" parent="."]
+self_modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_w70jn")
+region_rect = Rect2(0, 0, 8, 8)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="CountPanelContainer" type="PanelContainer" parent="."]
+z_index = 2
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -12.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qc0re")
+
+[node name="CountLabel" parent="CountPanelContainer" instance=ExtResource("5_cs36w")]
+layout_mode = 2
+mouse_filter = 2
+text = "x15"
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+horizontal_alignment = 1

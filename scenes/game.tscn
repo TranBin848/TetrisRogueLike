@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://3ca6erjlgewg"]
+[gd_scene load_steps=9 format=3 uid="uid://3ca6erjlgewg"]
 
 [ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_iywne"]
 [ext_resource type="Script" uid="uid://dk3x83rgqwwnb" path="res://scripts/game.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://cdujk1vf4b7fc" path="res://scenes/score_panel.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://xuv8qr4wlkf" path="res://sprite/perk_empty_slot.png" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bmrln54m45dt6" path="res://scenes/next_piece_container.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://drt2ejk5tqos1" path="res://scenes/tooltip.tscn" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://cqe8qwtwascqq" path="res://scenes/modal/victory/victory_screen.tscn" id="7_gee14"]
+[ext_resource type="PackedScene" uid="uid://c3ebj7xy3tb6o" path="res://scenes/modal/game_over/game_over_screen.tscn" id="8_gee14"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_script")
@@ -92,3 +95,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="OverlayHUD" type="CanvasLayer" parent="."]
+
+[node name="Tooltip" parent="OverlayHUD" instance=ExtResource("6_u5sy4")]
+visible = false
+
+[node name="VictoryScreen" parent="OverlayHUD" instance=ExtResource("7_gee14")]
+visible = false
+
+[node name="GameOverScreen" parent="OverlayHUD" instance=ExtResource("8_gee14")]
+visible = false

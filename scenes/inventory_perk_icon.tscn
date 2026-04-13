@@ -1,0 +1,89 @@
+[gd_scene load_steps=9 format=3 uid="uid://c240n3v3bas8h"]
+
+[ext_resource type="Script" uid="uid://dsyuetea8y8ke" path="res://scenes/inventory_perk_icon.gd" id="1_1tams"]
+[ext_resource type="Texture2D" uid="uid://b6jk5ld8bony2" path="res://sprite/count_panel_container_gray.png" id="1_12x0s"]
+[ext_resource type="Texture2D" uid="uid://lxhljo7a8c0t" path="res://sprite/stack_master.png" id="2_sl6yp"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="3_12x0s"]
+[ext_resource type="Texture2D" uid="uid://bpms14qhfnier" path="res://sprite/rounded_outline_white_panel.png" id="5_f55qh"]
+[ext_resource type="PackedScene" uid="uid://duvq6dwhlynd4" path="res://scenes/count_panel_container.tscn" id="6_7oi68"]
+[ext_resource type="StyleBox" uid="uid://cy01vakhcxgb6" path="res://themes/count_panel_container_gray.tres" id="7_i1tex"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f55qh"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+texture = ExtResource("1_12x0s")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[node name="InventoryPerkIcon" type="PanelContainer"]
+offset_right = 22.0
+offset_bottom = 22.0
+pivot_offset = Vector2(9, 9)
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_f55qh")
+script = ExtResource("1_1tams")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_sl6yp")
+
+[node name="LevelLabel" parent="TextureRect" instance=ExtResource("3_12x0s")]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -9.5
+offset_top = -7.0
+offset_right = 11.5
+offset_bottom = 1.0
+grow_horizontal = 2
+font_family = 0
+text = "III"
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+horizontal_alignment = 1
+
+[node name="FocusAnchorPoint" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FocusRect" type="NinePatchRect" parent="FocusAnchorPoint"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_f55qh")
+region_rect = Rect2(0, 0, 8, 8)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="CountAnchorPoint" type="Control" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="CountPanelContainer" parent="CountAnchorPoint" instance=ExtResource("6_7oi68")]
+custom_minimum_size = Vector2(13, 13)
+layout_mode = 0
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 10.0
+offset_bottom = 10.0
+theme_override_styles/panel = ExtResource("7_i1tex")
+margin = 3
