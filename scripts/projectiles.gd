@@ -99,8 +99,11 @@ func _ready() -> void :
 
 	area_entered.connect( func(block_collision_area: Area2D) -> void :
 		if destroy_animation_requested:
+			return;
+		var hit_block: PlacedBlock = block_collision_area.get_parent() as PlacedBlock
+		if !(hit_block && is_instance_valid(hit_block) and hit_block.type == "indestructible"):
 			return
-
+		
 		if associated_block_type == GameData.BLOCK_TYPES.FIRE_MAGE:
 			if lifetime <= 0.3:
 				return
@@ -108,8 +111,10 @@ func _ready() -> void :
 			blocks_hit_count += 1
 
 			EventManager.add_projectile_event(BlockChainReaction.fire_mage.bind(block_collision_area.get_parent() as PlacedBlock))
-
-			if blocks_hit_count >= 3:
+			var countLeft := 3;
+			if GameManager.is_perk_active(GameData.Perks.PROJECTILE_HIT):
+				countLeft *= 2;
+			if blocks_hit_count >= countLeft:
 				play_destroy_animation()
 
 		elif associated_block_type == GameData.BLOCK_TYPES.SKELETON:
@@ -126,8 +131,10 @@ func _ready() -> void :
 			blocks_hit_count += 1
 
 			EventManager.add_projectile_event(BlockChainReaction.undead_pirate_bone.bind(block_collision_area.get_parent() as PlacedBlock))
-
-			if blocks_hit_count >= 5:
+			var countLeft := 5;
+			if GameManager.is_perk_active(GameData.Perks.PROJECTILE_HIT):
+				countLeft *= 2;
+			if blocks_hit_count >= countLeft:
 				play_destroy_animation()
 				return
 

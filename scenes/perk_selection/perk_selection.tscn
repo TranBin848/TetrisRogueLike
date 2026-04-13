@@ -1,0 +1,112 @@
+[gd_scene load_steps=14 format=3 uid="uid://cws6dbrkfrthu"]
+
+[ext_resource type="Script" uid="uid://dfed3cyu31dsh" path="res://scenes/perk_selection/perk_selection.gd" id="1_5vt00"]
+[ext_resource type="PackedScene" uid="uid://bdibwlsljo4pa" path="res://scenes/game_camera.tscn" id="1_ffett"]
+[ext_resource type="PackedScene" uid="uid://cb8n4d47n5xjb" path="res://scenes/background.tscn" id="2_uycsu"]
+[ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="3_6mawp"]
+[ext_resource type="FontVariation" uid="uid://bj5qt3kblfua8" path="res://fonts/awesome_9_trimmed.tres" id="4_f5ihd"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="5_jjrhw"]
+[ext_resource type="PackedScene" uid="uid://bf00xui3imyvw" path="res://scenes/perk_selection/perk_button.tscn" id="6_f5ihd"]
+[ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="7_jjrhw"]
+[ext_resource type="Texture2D" uid="uid://g4o1ld066mvq" path="res://sprite/button_inventory.png" id="8_cl1vq"]
+[ext_resource type="Texture2D" uid="uid://vwjqkrqwftf" path="res://sprite/button_roll.png" id="9_8qbpt"]
+[ext_resource type="Texture2D" uid="uid://baikypk7t42mh" path="res://sprite/button_skip.png" id="10_c6qo3"]
+[ext_resource type="PackedScene" uid="uid://drt2ejk5tqos1" path="res://scenes/tooltip.tscn" id="11_456xr"]
+[ext_resource type="PackedScene" uid="uid://bulm880jjyu0w" path="res://scenes/modal/pause_menu/pause_menu.tscn" id="12_5vt00"]
+
+[node name="PerkSelection" type="Node2D"]
+script = ExtResource("1_5vt00")
+
+[node name="GameCamera" parent="." instance=ExtResource("1_ffett")]
+
+[node name="Background" parent="." instance=ExtResource("2_uycsu")]
+quantity = 25
+movement_direction_degrees = -90.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="PickYourRewardLabel" parent="CanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("3_6mawp")]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.105882, 0.105882, 0.105882, 1)
+theme_override_colors/font_shadow_color = Color(0.105882, 0.105882, 0.105882, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/normal_font = ExtResource("4_f5ihd")
+text = "REWARD"
+horizontal_alignment = 1
+font_family = 1
+shadow_offset = 1
+outline_color = Color(0.105882, 0.105882, 0.105882, 1)
+
+[node name="ShadowedLabel" parent="CanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("5_jjrhw")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "REWARD_DESCRIPTION"
+font_color = Color(0.521569, 0.521569, 0.521569, 1)
+shadow_enabled = false
+outline_color = Color(0.105882, 0.105882, 0.105882, 1)
+horizontal_alignment = 1
+
+[node name="PerkContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PerkButton" parent="CanvasLayer/MarginContainer/PerkContainer" instance=ExtResource("6_f5ihd")]
+layout_mode = 2
+
+[node name="PerkButton2" parent="CanvasLayer/MarginContainer/PerkContainer" instance=ExtResource("6_f5ihd")]
+layout_mode = 2
+
+[node name="PerkButton3" parent="CanvasLayer/MarginContainer/PerkContainer" instance=ExtResource("6_f5ihd")]
+layout_mode = 2
+
+[node name="BottomContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="InventoryButton" parent="CanvasLayer/MarginContainer/BottomContainer" instance=ExtResource("7_jjrhw")]
+layout_mode = 2
+icon = ExtResource("8_cl1vq")
+
+[node name="RollButton" parent="CanvasLayer/MarginContainer/BottomContainer" instance=ExtResource("7_jjrhw")]
+layout_mode = 2
+text = "BUTTON_ROLL"
+icon = ExtResource("9_8qbpt")
+
+[node name="SkipButton" parent="CanvasLayer/MarginContainer/BottomContainer" instance=ExtResource("7_jjrhw")]
+layout_mode = 2
+text = "BUTTON_SKIP"
+icon = ExtResource("10_c6qo3")
+
+[node name="OverlayHUD" type="CanvasLayer" parent="."]
+
+[node name="Tooltip" parent="OverlayHUD" instance=ExtResource("11_456xr")]
+visible = false
+z_index = 5
+offset_left = 88.0
+offset_top = 89.0
+offset_right = 288.0
+offset_bottom = 132.0
+
+[node name="PauseMenu" parent="OverlayHUD" instance=ExtResource("12_5vt00")]
+visible = false

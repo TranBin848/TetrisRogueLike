@@ -1,0 +1,234 @@
+[gd_scene load_steps=7 format=3 uid="uid://cqe8qwtwascqq"]
+
+[ext_resource type="StyleBox" uid="uid://bwerxk3dkj8pe" path="res://themes/gray_panel.tres" id="1_4bd4f"]
+[ext_resource type="Script" uid="uid://mron4gnm0wp5" path="res://scenes/modal/victory/victory_screen.gd" id="1_x7sic"]
+[ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="2_ye68u"]
+[ext_resource type="FontVariation" uid="uid://bj5qt3kblfua8" path="res://fonts/awesome_9_trimmed.tres" id="3_6ialo"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="3_ldgpr"]
+[ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="5_6ialo"]
+
+[node name="VictoryScreen" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.8, 0.980392, 0.0784314)
+script = ExtResource("1_x7sic")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("1_4bd4f")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TitleContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/VBoxContainer/TitleContainer" instance=ExtResource("2_ye68u")]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0.803922, 0.976471, 1)
+theme_override_colors/font_outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_colors/font_shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/normal_font = ExtResource("3_6ialo")
+text = "[wave]STAGE_CLEAR"
+horizontal_alignment = 1
+font_family = 1
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+shadow_offset = 1
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="PhraseLabel" parent="CenterContainer/PanelContainer/VBoxContainer/TitleContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "Nice! You're becoming good at this."
+font_color = Color(0.643137, 0.643137, 0.643137, 1)
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="PiecesPlayedContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/PiecesPlayedContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "PIECES_PLAYED"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="ValueLabel" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/PiecesPlayedContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "0"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="TotalScoreContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/TotalScoreContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "TOTAL_SCORE"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="ValueLabel" parent="CenterContainer/PanelContainer/VBoxContainer/VBoxContainer/TotalScoreContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "0"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="SeparatorColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+color = Color(1, 1, 1, 0.0784314)
+
+[node name="LastLevelContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BestScoreContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/BestScoreContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "TOTAL_SCORE"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="ValueLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/BestScoreContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "0"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="BlocksScrollContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/BlocksScrollContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "BLOCKS_ROLLED"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="ValueLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/BlocksScrollContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "0"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="BlocksSkippedContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/BlocksSkippedContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "BLOCKS_SKIPPED"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="ValueLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/BlocksSkippedContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "0"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="SeedContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/SeedContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "SEED"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="ValueLabel" parent="CenterContainer/PanelContainer/VBoxContainer/LastLevelContainer/SeedContainer" instance=ExtResource("3_ldgpr")]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "0"
+shadow_enabled = false
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
+
+[node name="ButtonContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ContinueButton" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonContainer" instance=ExtResource("5_6ialo")]
+layout_mode = 2
+text = "CONTINUE"
+
+[node name="MenuButton" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonContainer" instance=ExtResource("5_6ialo")]
+layout_mode = 2
+text = "BUTTON_MENU"

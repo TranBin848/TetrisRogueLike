@@ -90,6 +90,8 @@ func initialize_board() -> void :
 			sprite_row.append(null)
 
 		placed_blocks_grid.append(sprite_row)
+	if GameManager.is_perk_active(GameData.Perks.SACRIFICE_ROW):
+		_spawn_warden_row();
 
 
 func is_position_occupied(pos: Vector2i) -> bool:
@@ -209,6 +211,8 @@ func is_line_full(row: int) -> bool:
 
 		if block == null or not is_instance_valid(block):
 			return false
+		if block.type == "indestructible":
+			return false
 
 	return true
 
@@ -256,9 +260,13 @@ func check_and_clear_lines(should_execute_events: bool = true, should_trigger_ne
 
 		if GameManager.is_perk_active(GameData.Perks.STACK_MASTER) and lines_count >= 3:
 			GameManager.trigger_perk(GameData.Perks.STACK_MASTER)
-
+		if GameManager.is_perk_active(GameData.Perks.BUILDER):
+			for i in range(lines_count):
+				GameManager.trigger_perk(GameData.Perks.BUILDER);
 		if GameManager.is_perk_active(GameData.Perks.PAUPER) and lines_count == 1:
 			GameManager.trigger_cumulative_perk(GameData.Perks.PAUPER)
+		if GameManager.is_perk_active(GameData.Perks.COMBO_ENGINE) and lines_count >= 2:
+			GameManager.trigger_cumulative_perk(GameData.Perks.COMBO_ENGINE)
 
 		if GameManager.is_perk_active(GameData.Perks.PERFECTION) and lines_count == 4:
 			GameManager.trigger_cumulative_perk(GameData.Perks.PERFECTION)
@@ -503,3 +511,24 @@ func _apply_gravity_to_column(col: int, destroyed_rows: Array[int]) -> void :
 
 		block.grid_position = Vector2i(col, final_row)
 		block.animate_y(final_row * PIECE_SIZE)
+
+
+func _spawn_warden_row() -> void :
+	for row in range(0, BOARD_HEIGHT - 1):
+		for col in range(BOARD_WIDTH):
+			var block: PlacedBlock = placed_blocks_grid[row + 1][col]
+			placed_blocks_grid[row + 1][col] = null
+			placed_blocks_grid[row][col] = block
+			if is_instance_valid(block):
+				block.grid_position = Vector2i(col, row)
+				block.animate_y(row * PIECE_SIZE)
+				if row <= DEATHLINE_TOP_ROWS:
+					GameManager.deathline = true
+	for col in range(BOARD_WIDTH):
+		placed_blocks_grid[BOARD_HEIGHT - 1][col] = null
+	var positions: Array[Vector2i] = []
+	for col in range(BOARD_WIDTH):
+		positions.append(Vector2i(col, BOARD_HEIGHT - 1))
+	place_blocks_directly(positions, "indestructible")
+	#await get_tree().process_frame
+	#check_and_clear_lines()
