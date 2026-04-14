@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c88wvjauk67nf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wppgy"]
+bg_color = Color(0.521569, 0.521569, 0.521569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lyohh"]
+bg_color = Color(0.705882, 0.705882, 0.705882, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tguum"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rtj05"]
+content_margin_left = 2.0
+content_margin_top = 0.0
+content_margin_right = 2.0
+content_margin_bottom = 0.0
+bg_color = Color(0.152941, 0.152941, 0.152941, 1)
+anti_aliasing = false
+
+[resource]
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_wppgy")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_lyohh")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_tguum")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_rtj05")

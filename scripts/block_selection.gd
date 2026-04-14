@@ -7,19 +7,19 @@ const DECK_SCREEN_SCENE: PackedScene = preload("res://scenes/modal/current_deck/
 var previously_shown_blocks: Array[String] = []
 
 
-@onready var block_button_container: HBoxContainer = %BlockButtonContainer
-@onready var reward_label: RichTextLabelShadowed = %PickYourRewardLabel
-@onready var reward_description_label: LabelShadowed = %PickYourRewardDescriptionLabel
-@onready var roll_button: BouncyButton = %RerollButton
-@onready var skip_button: BouncyButton = %SkipButton
-@onready var inventory_button: BouncyButton = %InventoryButton
+@onready var block_button_container: HBoxContainer = $CanvasLayer/MarginContainer/BlockButtonContainer
+@onready var reward_label: RichTextLabelShadowed = $CanvasLayer/MarginContainer/TopTitleContainer/PickYourRewardLabel
+@onready var reward_description_label: LabelShadowed = $CanvasLayer/MarginContainer/TopTitleContainer/PickYourRewardDescriptionLabel
+@onready var roll_button: BouncyButton = $CanvasLayer/MarginContainer/BottomContainer/RerollButton
+@onready var skip_button: BouncyButton = $CanvasLayer/MarginContainer/BottomContainer/SkipButton
+@onready var inventory_button: BouncyButton = $CanvasLayer/MarginContainer/BottomContainer/InventoryButton
 @onready var overlay_hud: CanvasLayer = $OverlayHUD
-@onready var bottom_container: HBoxContainer = %BottomContainer
+@onready var bottom_container: HBoxContainer = $CanvasLayer/MarginContainer/BottomContainer
 
 
-@onready var block_button_1: BlockButton = %BlockButton_1
-@onready var block_button_2: BlockButton = %BlockButton_2
-@onready var block_button_3: BlockButton = %BlockButton_3
+@onready var block_button_1: BlockButton = $CanvasLayer/MarginContainer/BlockButtonContainer/BlockButton_1
+@onready var block_button_2: BlockButton = $CanvasLayer/MarginContainer/BlockButtonContainer/BlockButton_2
+@onready var block_button_3: BlockButton = $CanvasLayer/MarginContainer/BlockButtonContainer/BlockButton_3
 
 
 func _ready() -> void :
@@ -218,8 +218,8 @@ func animate_block_buttons() -> void :
 
 		block_button.modulate.a = 1
 
-		AudioManager.play(AudioManager.SoundEffects.POP, pop_sound_pitch)
-		AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, pop_sound_pitch)
+		#AudioManager.play(AudioManager.SoundEffects.POP, pop_sound_pitch)
+		#AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, pop_sound_pitch)
 
 		pop_sound_pitch += 0.1
 
@@ -228,7 +228,7 @@ func animate_block_buttons() -> void :
 	var first_block_button: BlockButton = block_button_container.get_child(0) as BlockButton
 
 	first_block_button.button.grab_focus()
-	( %PauseMenu as PauseMenu).focus_on_destroy = first_block_button.button
+	($OverlayHUD/PauseMenu as PauseMenu).focus_on_destroy = first_block_button.button
 
 
 func _update_roll_button_text(rolls: int) -> void :

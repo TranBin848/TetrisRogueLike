@@ -19,8 +19,8 @@ enum Scene{
 var scenes: Dictionary = {
 	Scene.MAIN_MENU: preload("res://scenes/main_menu.tscn"), 
 	Scene.LEVEL_SELECTION: preload("res://scenes/level_selection/level_selection.tscn"), 
-	#Scene.BLOCK_SELECTION: preload("res://scenes/block_selection/block_selection.tscn"), 
-	#Scene.PERK_SELECTION: preload("res://scenes/perk_selection/perk_selection.tscn"), 
+	Scene.BLOCK_SELECTION: preload("res://scenes/blockselection/block_selection.tscn"), 
+	Scene.PERK_SELECTION: preload("res://scenes/perk_selection/perk_selection.tscn"), 
 	Scene.GAME: preload("res://scenes/game.tscn")
 }
 
