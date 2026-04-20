@@ -354,7 +354,42 @@ func apply_gravity_changes() -> float:
 
 		_apply_gravity_to_column(col, destroyed_rows)
 
+	_apply_full_board_gravity_sweep()
+
 	return GRAVITY_DELAY
+
+
+func _apply_full_board_gravity_sweep() -> void:
+	var is_fall_up: bool = GameManager.current_boss == GameData.BossTypes.FALL_UP
+
+	for col in BOARD_WIDTH:
+		# Collect all blocks in this column sorted from bottom to top (or top to bottom for fall_up)
+		var row_range: Array[int] = []
+		row_range.assign(range(BOARD_HEIGHT - 1, -1, -1) if not is_fall_up else range(BOARD_HEIGHT))
+
+		for row in row_range:
+			var block: PlacedBlock = placed_blocks_grid[row][col]
+			if not is_instance_valid(block):
+				continue
+
+			# Find the lowest empty slot below this block
+			var final_row: int = row
+			if is_fall_up:
+				var check = row - 1
+				while check >= 0 and not is_instance_valid(placed_blocks_grid[check][col]):
+					final_row = check
+					check -= 1
+			else:
+				var check = row + 1
+				while check < BOARD_HEIGHT and not is_instance_valid(placed_blocks_grid[check][col]):
+					final_row = check
+					check += 1
+
+			if final_row != row:
+				placed_blocks_grid[row][col] = null
+				placed_blocks_grid[final_row][col] = block
+				block.grid_position = Vector2i(col, final_row)
+				block.animate_y(final_row * PIECE_SIZE)
 
 
 

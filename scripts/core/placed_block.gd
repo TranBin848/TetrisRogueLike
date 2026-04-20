@@ -486,9 +486,14 @@ func execute_destroy_effect() -> void :
 			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, "+10")
 			
 			var danger_blocks = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.DANGER)
+			var has_chain: bool = false
 			for db in danger_blocks:
 				if is_instance_valid(db) and not db.destroy_animation_requested:
 					EventManager.add_event(BlockChainReaction.common_destroy.bind(db, 1))
+					has_chain = true
+			
+			if has_chain:
+				EventManager.should_check_lines_after_queue = true
 
 		GameData.BLOCK_TYPES.STONE:
 			GameManager.add_multiplier(10)
