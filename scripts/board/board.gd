@@ -254,7 +254,24 @@ func check_and_clear_lines(should_execute_events: bool = true, should_trigger_ne
 				var block: PlacedBlock = placed_blocks_grid[i][col]
 
 				if is_instance_valid(block):
+					if block.type == GameData.BLOCK_TYPES.OBSIDIAN:
+						continue
+					if block.type == GameData.BLOCK_TYPES.GLASS:
+						var is_fall_up: bool = GameManager.current_boss == GameData.BossTypes.FALL_UP
+						var top_row = i - 1 if not is_fall_up else i + 1
+						if rows_to_clear.has(top_row):
+							block.custom_variables["glass_double_trigger"] = true
 					EventManager.add_event(BlockChainReaction.common_destroy.bind(block, lines_count))
+		
+		var obsidians = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.OBSIDIAN)
+		if obsidians.size() > 0:
+			EventManager.add_event(func() -> float:
+				for obs in obsidians:
+					GameManager.multiplier = GameManager.multiplier.multiply(1.25)
+					PointNotification.create_and_slide(obs.get_center_position(), PointNotification.RED, "x1.25")
+					obs.pulse_animation()
+				return 0.1
+			)
 
 		GameCamera.shake_direction(2 * linebreak_sound_pitch, 0, 0.3)
 
@@ -388,6 +405,23 @@ func _animate_blocks_in_columns(columns: Array[int]) -> int:
 
 
 func handle_block_placement_interactions(newly_placed_blocks: Array[PlacedBlock], piece_was_rotated: bool = false) -> void :
+
+	var is_copy_piece: bool = false
+	var special_adjacents: Array[PlacedBlock] = []
+	
+	for b in newly_placed_blocks:
+		if b.type == GameData.BLOCK_TYPES.COPY:
+			is_copy_piece = true
+			var adjacent_blocks: Array[PlacedBlock] = b.get_adjacent_blocks()
+			for adj in adjacent_blocks:
+				if is_instance_valid(adj) and not newly_placed_blocks.has(adj) and not GameData.is_block_on_group(adj.type, GameData.BlockGroups.DEFAULT):
+					special_adjacents.append(adj)
+					
+	if is_copy_piece and special_adjacents.size() > 0:
+		var chosen_type = Random.pick_random(special_adjacents).type
+		for b in newly_placed_blocks:
+			b.morph(chosen_type)
+			PointNotification.create_and_slide(b.get_center_position(), PointNotification.BLUE, "COPIED!")
 
 	var colony_event_queue: Array[Callable] = []
 
