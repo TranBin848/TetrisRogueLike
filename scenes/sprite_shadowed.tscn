@@ -6,7 +6,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fbg3b"]
 shader = ExtResource("1_y510u")
-shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 0)
 
 [node name="SpriteShadowed" type="Node2D"]
 script = ExtResource("1_fbg3b")

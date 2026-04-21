@@ -50,10 +50,16 @@ const BLOCK_TYPES: Dictionary = {
 	"SAND": "special/common/sand", 
 	"RAINBOW": "special/common/rainbow", 
 
+	"GLASS": "special/uncommon/glass",
+	"LUCKY": "special/uncommon/lucky",
+	"COPY": "special/uncommon/copy",
+
 	"STONE": "stone", 
 	"GRANITE": "granite", 
 	"BRICK": "brick", 
-	"OBSIDIAN": "obsidian", 
+	"OBSIDIAN": "special/rare/obsidian", 
+	"DANGER": "special/rare/danger",
+
 
 
 	"RED_DICE": "red_dice", 
@@ -172,7 +178,9 @@ enum BlockGroups{
 	HARMONY, 
 	MONSTER, 
 	PIRATES,
-	SPECIAL
+	SPECIAL,
+	UNCOMMON,
+	RARE
 }
 
 enum BossTypes{
@@ -245,6 +253,16 @@ const GROUP_COLOR_MAP: Dictionary[GameData.BlockGroups, Dictionary] = {
 		"font_color": Color("f2cb05"), 
 		"font_shadow_color": Color("b87b14"), 
 		"background_color": Color("f2cb05")
+	},
+	BlockGroups.UNCOMMON: {
+		"font_color": Color("c8f4f9"), 
+		"font_shadow_color": Color("4eb6c4"), 
+		"background_color": Color("4eb6c4")
+	},
+	BlockGroups.RARE: {
+		"font_color": Color("f2c5e5"), 
+		"font_shadow_color": Color("822d64"), 
+		"background_color": Color("d557ad")
 	}
 }
 
@@ -260,10 +278,16 @@ var blocks: Dictionary = {
 	BLOCK_TYPES.SAND: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
 	BLOCK_TYPES.RAINBOW: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
 
+	BLOCK_TYPES.GLASS: BlockData.new([BlockGroups.UNCOMMON], 1, 2), 
+	BLOCK_TYPES.LUCKY: BlockData.new([BlockGroups.UNCOMMON], 1, 2), 
+	BLOCK_TYPES.COPY: BlockData.new([BlockGroups.UNCOMMON], 1, 2), 
+
 	BLOCK_TYPES.STONE: BlockData.new([BlockGroups.FORTRESS], 3, 5), 
 	BLOCK_TYPES.BRICK: BlockData.new([BlockGroups.FORTRESS], 2, 3), 
 	BLOCK_TYPES.GRANITE: BlockData.new([BlockGroups.FORTRESS], 1, 2), 
-	BLOCK_TYPES.OBSIDIAN: BlockData.new([BlockGroups.FORTRESS], 2, 3, [BLOCK_TYPES.BRICK, BLOCK_TYPES.STONE, BLOCK_TYPES.GRANITE]), 
+
+	BLOCK_TYPES.OBSIDIAN: BlockData.new([BlockGroups.RARE], 1, 2),
+	BLOCK_TYPES.DANGER: BlockData.new([BlockGroups.RARE], 1, 2),
 
 
 	BLOCK_TYPES.RED_DICE: BlockData.new([BlockGroups.CASINO], 3, 5), 

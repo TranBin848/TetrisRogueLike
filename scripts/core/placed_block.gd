@@ -458,6 +458,43 @@ func execute_destroy_effect() -> void :
 				GameManager.add_multiplier(20)
 				PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 20)
 
+		GameData.BLOCK_TYPES.LUCKY:
+			var possible_shapes: Array = [PieceRenderer.ShapeType.I, PieceRenderer.ShapeType.O, PieceRenderer.ShapeType.T, PieceRenderer.ShapeType.S, PieceRenderer.ShapeType.Z, PieceRenderer.ShapeType.J, PieceRenderer.ShapeType.L]
+			var random_shape = Random.pick_random(possible_shapes)
+			var all_types: Array = GameData.BLOCK_TYPES.values()
+			var random_type = Random.pick_random(all_types)
+
+			if not GameManager.pieces.has(random_shape):
+				GameManager.pieces[random_shape] = []
+			
+			GameManager.pieces[random_shape].append(random_type)
+			var insert_index = Random.randi_range(0, max(0, GameManager.piece_queue.size() - 1))
+			GameManager.piece_queue.insert(insert_index, random_shape)
+			
+			PointNotification.create_and_slide(get_center_position(), PointNotification.YELLOW, "+1 BLOCK")
+
+		GameData.BLOCK_TYPES.GLASS:
+			var multi: float = 1.5
+			if custom_variables.get("glass_double_trigger", false):
+				multi = 2.25
+			GameManager.multiplier = GameManager.multiplier.multiply(multi)
+			var notif_str = "x1.5" if multi == 1.5 else "x2.25!"
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, notif_str)
+
+		GameData.BLOCK_TYPES.DANGER:
+			GameManager.add_points(10)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, "+10")
+			
+			var danger_blocks = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.DANGER)
+			var has_chain: bool = false
+			for db in danger_blocks:
+				if is_instance_valid(db) and not db.destroy_animation_requested:
+					EventManager.add_event(BlockChainReaction.common_destroy.bind(db, 1))
+					has_chain = true
+			
+			if has_chain:
+				EventManager.should_check_lines_after_queue = true
+
 		GameData.BLOCK_TYPES.STONE:
 			GameManager.add_multiplier(10)
 			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 10, 1.8, PointNotification.UP, 6.0)
