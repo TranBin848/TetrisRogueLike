@@ -454,7 +454,7 @@ func execute_destroy_effect() -> void :
 			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 4)
 
 		GameData.BLOCK_TYPES.RAINBOW:
-			if Random.randf() <= 0.20:
+			if GameManager.chance(0.20):
 				GameManager.add_multiplier(20)
 				PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 20)
 
@@ -879,12 +879,24 @@ func execute_destroy_effect() -> void :
 
 			fireball_1.velocity = Vector2(BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_1._get_up_multiplier())
 			fireball_2.velocity = Vector2( - BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_2._get_up_multiplier())
+			if GameManager.is_perk_active(GameData.Perks.PROJECTILE_MULT):
+				get_tree().root.create_timer(0.1).timeout.connect(func():
+					var fireball_3: BlockProjectile = BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+					var fireball_4: BlockProjectile = BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+
+					fireball_3.velocity = Vector2(BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_3._get_up_multiplier())
+					fireball_4.velocity = Vector2( - BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_4._get_up_multiplier())
+				);
 
 		GameData.BLOCK_TYPES.UNDEAD_PIRATE:
 			GameCamera.shake_direction(2, 90, 0.2)
 			#AudioManager.play(AudioManager.SoundEffects.QUICK_BLOOD, randf_range(0.8, 1.2))
-
+			
 			BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+			if (GameManager.is_perk_active(GameData.Perks.PROJECTILE_MULT)):
+				get_tree().root.create_timer(0.1).timeout.connect(func():
+					BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+				);
 
 		GameData.BLOCK_TYPES.PIRATE_CAPTAIN:
 			GameManager.add_points(3)
@@ -913,13 +925,13 @@ func execute_destroy_effect() -> void :
 
 		GameData.BLOCK_TYPES.TREASURE_CHEST:
 
-			if Random.randf() < 0.5:
+			if GameManager.chance(0.5):
 				GameManager.add_points(100)
 				PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 100, 1.8, PointNotification.UP, 6.0)
 
 		GameData.BLOCK_TYPES.CURSED_CHEST:
 
-			if Random.randf() < 0.15:
+			if GameManager.chance(0.15):
 				GameManager.add_points(1000)
 				PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 1000, 1.8, PointNotification.UP, 6.0)
 			else:
