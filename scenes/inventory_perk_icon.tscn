@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://lxhljo7a8c0t" path="res://sprite/stack_master.png" id="2_sl6yp"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="3_12x0s"]
 [ext_resource type="Texture2D" uid="uid://bpms14qhfnier" path="res://sprite/rounded_outline_white_panel.png" id="5_f55qh"]
-[ext_resource type="PackedScene" path="res://scenes/count_panel_container.tscn" id="6_7oi68"]
-[ext_resource type="StyleBox" path="res://themes/count_panel_container_gray.tres" id="7_i1tex"]
+[ext_resource type="PackedScene" uid="uid://duvq6dwhlynd4" path="res://scenes/count_panel_container.tscn" id="6_7oi68"]
+[ext_resource type="StyleBox" uid="uid://cy01vakhcxgb6" path="res://themes/count_panel_container_gray.tres" id="7_i1tex"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f55qh"]
 content_margin_left = 4.0

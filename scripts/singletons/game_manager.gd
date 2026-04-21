@@ -186,6 +186,10 @@ var current_moving_piece: MovingPiece
 var _mouse_idle_timer: float = 0.0
 var is_gamepad_connected: bool = false
 
+func chance(c : float) -> bool:
+	if (is_perk_active(GameData.Perks.DREAM)):
+		return Random.randf() < c * 1.5;
+	return Random.randf() < c;
 
 func _ready() -> void :
 	load_and_apply_settings()
