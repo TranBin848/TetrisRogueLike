@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp0ukko83k7x3"]
+
+[ext_resource type="Script" uid="uid://ddae3pejmnhli" path="res://scripts/bouncy_texture_button.gd" id="1"]
+
+[node name="BouncyTextureButton" type="TextureButton"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1")

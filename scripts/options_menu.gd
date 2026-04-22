@@ -4,9 +4,9 @@ class_name OptionsMenu extends ModalRect
 @onready var center_container: CenterContainer = $CenterContainer
 @onready var general_tab_button: Button = $CenterContainer / VBoxContainer / TabsHBoxContainer / GeneralTabButton
 @onready var keyboard_tab_button: Button = $CenterContainer / VBoxContainer / TabsHBoxContainer / KeyboardTabButton
-#@onready var general_container: SettingsGeneralVBoxContainer = $CenterContainer / VBoxContainer / PanelContainer / VBoxContainer / GeneralVBoxContainer
+@onready var general_container: VBoxContainer = $CenterContainer / VBoxContainer / PanelContainer / VBoxContainer / GeneralVBoxContainer
 @onready var controls_scroll_container: ScrollContainer = $CenterContainer / VBoxContainer / PanelContainer / VBoxContainer / ControlsScrollContainer
-#@onready var controls_container: SettingsControlsVBoxContainer = $CenterContainer / VBoxContainer / PanelContainer / VBoxContainer / ControlsScrollContainer / MarginContainer / ControlsVBoxContainer
+@onready var controls_container: SettingsControlsVBoxContainer = $CenterContainer / VBoxContainer / PanelContainer / VBoxContainer / ControlsScrollContainer / MarginContainer / ControlsVBoxContainer
 @onready var reset_controls_button: BouncyButton = %ResetControlsButton
 @onready var save_button: BouncyButton = %SaveButton
 #@onready var reset_keybindings_confirmation: ResetKeybindingsConfirmation = $ResetKeybindingsConfirmation
@@ -54,12 +54,12 @@ func _ready() -> void :
 
 func load_settings() -> void :
 	settings = SettingsResource.load_from_disk()
-	#general_container.load_settings(settings)
-	#controls_container.load_settings(settings)
+	general_container.load_settings(settings)
+	controls_container.load_settings(settings)
 
 
 func show_general_tab() -> void :
-	#general_container.visible = true
+	general_container.visible = true
 	controls_scroll_container.visible = false
 	general_tab_button.grab_focus()
 
@@ -72,7 +72,7 @@ func show_general_tab() -> void :
 
 
 func show_controls_tab() -> void :
-	#general_container.visible = false
+	general_container.visible = false
 	controls_scroll_container.visible = true
 	keyboard_tab_button.grab_focus()
 

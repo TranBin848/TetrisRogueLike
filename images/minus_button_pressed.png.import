@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ltecljd0h7i1"
-path="res://.godot/imported/key.png-0b0c63dcc4bece2ac30d21ec52036741.ctex"
+uid="uid://d4c3c8dymnc61"
+path="res://.godot/imported/minus_button_pressed.png-cd95520c5207d511f3a8479ca4d3c615.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/key.png"
-dest_files=["res://.godot/imported/key.png-0b0c63dcc4bece2ac30d21ec52036741.ctex"]
+source_file="res://images/minus_button_pressed.png"
+dest_files=["res://.godot/imported/minus_button_pressed.png-cd95520c5207d511f3a8479ca4d3c615.ctex"]
 
 [params]
 
