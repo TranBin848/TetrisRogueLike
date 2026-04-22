@@ -1,0 +1,15 @@
+[gd_resource type="StyleBoxTexture" load_steps=0 format=3 uid="uid://c51st0cuostdp"]
+
+[ext_resource type="Texture2D" uid="uid://d0te0j1c0oamw" path="res://images/rounded_white_panel.png" id="1"]
+
+[resource]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("1")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+modulate_color = Color(0.25098, 0.25098, 0.25098, 1)
