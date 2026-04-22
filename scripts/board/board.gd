@@ -458,62 +458,10 @@ func handle_block_placement_interactions(newly_placed_blocks: Array[PlacedBlock]
 			b.morph(chosen_type)
 			PointNotification.create_and_slide(b.get_center_position(), PointNotification.BLUE, "COPIED!")
 
-	var colony_event_queue: Array[Callable] = []
-
-	var worker_bee_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.WORKER_BEE)
-	var queen_bee_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.QUEEN_BEE)
-
-
-	for b in newly_placed_blocks:
-		worker_bee_blocks.erase(b)
-		queen_bee_blocks.erase(b)
-
-	for worker_bee_block in worker_bee_blocks:
-		var adjacent_blocks: Array[PlacedBlock] = worker_bee_block.get_adjacent_blocks()
-		var adjacent_colony_block_count: int = 0
-
-		for block in adjacent_blocks:
-			if is_instance_valid(block) and GameData.is_block_on_group(block.type, GameData.BlockGroups.COLONY):
-				adjacent_colony_block_count += 1
-
-		if adjacent_colony_block_count > 0:
-			colony_event_queue.append(BlockChainReaction.worker_bee.bind(worker_bee_block, adjacent_colony_block_count))
-
-	for queen_bee_block in queen_bee_blocks:
-		var adjacent_blocks: Array[PlacedBlock] = queen_bee_block.get_adjacent_blocks()
-		var adjacent_colony_block_count: int = 0
-
-		for block in adjacent_blocks:
-			if is_instance_valid(block) and GameData.is_block_on_group(block.type, GameData.BlockGroups.COLONY):
-				adjacent_colony_block_count += 1
-
-		if adjacent_colony_block_count > 0:
-			colony_event_queue.append(BlockChainReaction.queen_bee.bind(queen_bee_block, adjacent_colony_block_count))
-
-	if colony_event_queue.size() > 0:
-		EventManager.execute_queue_events(colony_event_queue)
-
-
 	if not piece_was_rotated:
 
 		if GameManager.is_perk_active(GameData.Perks.ACCEPTANCE):
 			GameManager.trigger_perk(GameData.Perks.ACCEPTANCE)
-
-		var bricks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.BRICK)
-
-
-		for b in newly_placed_blocks:
-			bricks.erase(b)
-
-		if bricks.size() > 0:
-			var bricks_event_queue: Array[Callable] = []
-
-			for brick in bricks:
-				bricks_event_queue.append(BlockChainReaction.brick.bind(brick))
-
-			EventManager.execute_queue_events(bricks_event_queue)
-
-
 
 
 func _apply_gravity_to_column(col: int, destroyed_rows: Array[int]) -> void :

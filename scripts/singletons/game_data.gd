@@ -40,8 +40,6 @@ enum DeckTypes{
 const BLOCK_TYPES: Dictionary = {
 
 	"NORMAL": "normal", 
-	"MOAI": "moai", 
-	"X": "x", 
 
 	"GOLD": "special/common/gold", 
 	"BLUE_C": "special/common/bluec", 
@@ -52,69 +50,67 @@ const BLOCK_TYPES: Dictionary = {
 	"GLASS": "special/uncommon/glass",
 	"LUCKY": "special/uncommon/lucky",
 	"COPY": "special/uncommon/copy",
-
-	"STONE": "stone", 
-	"GRANITE": "granite", 
-	"BRICK": "brick", 
 	"OBSIDIAN": "special/rare/obsidian", 
 	"DANGER": "special/rare/danger",
-
-
-
-	"RED_DICE": "red_dice", 
-	"BLUE_DICE": "blue_dice", 
-	"MIXED_DICE": "mixed_dice", 
-	"JACKPOT": "jackpot", 
-
-
-	"BRONZE": "bronze", 
-	"IRON": "iron", 
-	"DIAMOND": "diamond", 
-
-
-	"RADIOACTIVE": "radioactive", 
-	"URANIUM": "uranium", 
-	"NUKE": "nuke", 
-	"REACTOR": "reactor", 
-
-
-	"TNT": "tnt", 
-	"BOMB": "bomb", 
-	"CFOUR": "cfour", 
-	"DETONATOR": "detonator", 
-
-
-	"WORKER_BEE": "worker_bee", 
-	"QUEEN_BEE": "queen_bee", 
-	"HONEY": "honey", 
-	"HIVE": "hive", 
-
-	"HONEY_BOMB": "honey_bomb", 
-	"HONEY_DICE": "honey_dice", 
-
-
-	"MIMIC": "mimic", 
-	"FIRE_MAGE": "fire_mage", 
-	"BOOKSHELF": "bookshelf", 
-	"ARCANIST": "arcanist", 
-
-
-	"PIANO": "piano", 
-	"ACOUSTIC_GUITAR": "acoustic_guitar", 
-	"ELECTRIC_GUITAR": "electric_guitar", 
-	"SPEAKERS": "speakers", 
-
-
-	"SLIME": "slime", 
-	"SKELETON": "skeleton", 
-
-	"PIRATE_CAPTAIN": "pirate_captain", 
-	"PIRATE_CANNONEER": "pirate_cannoneer", 
-	"CANNON": "cannon", 
-
-	"UNDEAD_PIRATE": "undead_pirate", 
-	"TREASURE_CHEST": "treasure_chest", 
-	"CURSED_CHEST": "cursed_chest"
+	
+	#"STONE": "stone", 
+	#"GRANITE": "granite", 
+	#"BRICK": "brick", #
+#
+	#"RED_DICE": "red_dice", 
+	#"BLUE_DICE": "blue_dice", 
+	#"MIXED_DICE": "mixed_dice", 
+	#"JACKPOT": "jackpot", 
+#
+#
+	#"BRONZE": "bronze", 
+	#"IRON": "iron", 
+	#"DIAMOND": "diamond", 
+#
+#
+	#"RADIOACTIVE": "radioactive", 
+	#"URANIUM": "uranium", 
+	#"NUKE": "nuke", 
+	#"REACTOR": "reactor", 
+#
+#
+	#"TNT": "tnt", 
+	#"BOMB": "bomb", 
+	#"CFOUR": "cfour", 
+	#"DETONATOR": "detonator", 
+#
+#
+	#"WORKER_BEE": "worker_bee", 
+	#"QUEEN_BEE": "queen_bee", 
+	#"HONEY": "honey", 
+	#"HIVE": "hive", 
+#
+	#"HONEY_BOMB": "honey_bomb", 
+	#"HONEY_DICE": "honey_dice", 
+#
+#
+	#"MIMIC": "mimic", 
+	#"FIRE_MAGE": "fire_mage", 
+	#"BOOKSHELF": "bookshelf", 
+	#"ARCANIST": "arcanist", 
+#
+#
+	#"PIANO": "piano", 
+	#"ACOUSTIC_GUITAR": "acoustic_guitar", 
+	#"ELECTRIC_GUITAR": "electric_guitar", 
+	#"SPEAKERS": "speakers", 
+#
+#
+	#"SLIME": "slime", 
+	#"SKELETON": "skeleton", 
+#
+	#"PIRATE_CAPTAIN": "pirate_captain", 
+	#"PIRATE_CANNONEER": "pirate_cannoneer", 
+	#"CANNON": "cannon", 
+#
+	#"UNDEAD_PIRATE": "undead_pirate", 
+	#"TREASURE_CHEST": "treasure_chest", 
+	#"CURSED_CHEST": "cursed_chest"
 }
 
 
@@ -268,8 +264,6 @@ const GROUP_COLOR_MAP: Dictionary[GameData.BlockGroups, Dictionary] = {
 
 var blocks: Dictionary = {
 	BLOCK_TYPES.NORMAL: BlockData.new([BlockGroups.DEFAULT], 3, 5), 
-	BLOCK_TYPES.MOAI: BlockData.new([BlockGroups.DEFAULT], 3, 5), 
-	BLOCK_TYPES.X: BlockData.new([BlockGroups.DEFAULT], 3, 5), 
 
 	BLOCK_TYPES.GOLD: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
 	BLOCK_TYPES.BLUE_C: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
@@ -280,70 +274,73 @@ var blocks: Dictionary = {
 	BLOCK_TYPES.GLASS: BlockData.new([BlockGroups.UNCOMMON], 1, 2), 
 	BLOCK_TYPES.LUCKY: BlockData.new([BlockGroups.UNCOMMON], 1, 2), 
 	BLOCK_TYPES.COPY: BlockData.new([BlockGroups.UNCOMMON], 1, 2), 
-
-	BLOCK_TYPES.STONE: BlockData.new([BlockGroups.FORTRESS], 3, 5), 
-	BLOCK_TYPES.BRICK: BlockData.new([BlockGroups.FORTRESS], 2, 3), 
-	BLOCK_TYPES.GRANITE: BlockData.new([BlockGroups.FORTRESS], 1, 2), 
-
+	
 	BLOCK_TYPES.OBSIDIAN: BlockData.new([BlockGroups.RARE], 1, 2),
 	BLOCK_TYPES.DANGER: BlockData.new([BlockGroups.RARE], 1, 2),
+	
+	
+	#BLOCK_TYPES.STONE: BlockData.new([BlockGroups.FORTRESS], 3, 5), 
+	#BLOCK_TYPES.BRICK: BlockData.new([BlockGroups.FORTRESS], 2, 3), 
+	#BLOCK_TYPES.GRANITE: BlockData.new([BlockGroups.FORTRESS], 1, 2), 
+
+	
 
 
-	BLOCK_TYPES.RED_DICE: BlockData.new([BlockGroups.CASINO], 3, 5), 
-	BLOCK_TYPES.BLUE_DICE: BlockData.new([BlockGroups.CASINO], 3, 5), 
-	BLOCK_TYPES.MIXED_DICE: BlockData.new([BlockGroups.CASINO], 3, 5), 
-	BLOCK_TYPES.JACKPOT: BlockData.new([BlockGroups.CASINO], 1, 2, [BLOCK_TYPES.RED_DICE, BLOCK_TYPES.BLUE_DICE, BLOCK_TYPES.MIXED_DICE]), 
-
-
-	BLOCK_TYPES.BRONZE: BlockData.new([BlockGroups.MINERALS], 2, 3), 
-	BLOCK_TYPES.IRON: BlockData.new([BlockGroups.MINERALS], 3, 5), 
-	BLOCK_TYPES.DIAMOND: BlockData.new([BlockGroups.MINERALS], 2, 3, [BLOCK_TYPES.IRON, BLOCK_TYPES.BRONZE]), 
-
-
-	BLOCK_TYPES.TNT: BlockData.new([BlockGroups.EXPLOSIVES], 3, 5), 
-	BLOCK_TYPES.BOMB: BlockData.new([BlockGroups.EXPLOSIVES], 2, 3), 
-	BLOCK_TYPES.CFOUR: BlockData.new([BlockGroups.EXPLOSIVES], 2, 3), 
-	BLOCK_TYPES.DETONATOR: BlockData.new([BlockGroups.EXPLOSIVES], 1, 1, [BLOCK_TYPES.TNT, BLOCK_TYPES.BOMB, BLOCK_TYPES.CFOUR]), 
-
-
-	BLOCK_TYPES.RADIOACTIVE: BlockData.new([BlockGroups.NUCLEAR], 3, 5), 
-	BLOCK_TYPES.URANIUM: BlockData.new([BlockGroups.NUCLEAR], 3, 5), 
-	BLOCK_TYPES.NUKE: BlockData.new([BlockGroups.NUCLEAR, BlockGroups.EXPLOSIVES], 3, 5), 
-	BLOCK_TYPES.REACTOR: BlockData.new([BlockGroups.NUCLEAR], 1, 2, [BLOCK_TYPES.URANIUM, BLOCK_TYPES.RADIOACTIVE]), 
-
-
-	BLOCK_TYPES.QUEEN_BEE: BlockData.new([BlockGroups.COLONY], 2, 3), 
-	BLOCK_TYPES.WORKER_BEE: BlockData.new([BlockGroups.COLONY], 2, 3), 
-	BLOCK_TYPES.HONEY: BlockData.new([BlockGroups.COLONY], 2, 3, [BLOCK_TYPES.QUEEN_BEE, BLOCK_TYPES.WORKER_BEE]), 
-	BLOCK_TYPES.HIVE: BlockData.new([BlockGroups.COLONY], 1, 2, [BLOCK_TYPES.QUEEN_BEE, BLOCK_TYPES.WORKER_BEE]), 
-
-	BLOCK_TYPES.HONEY_BOMB: BlockData.new([BlockGroups.COLONY, BlockGroups.EXPLOSIVES], 2, 3), 
-	BLOCK_TYPES.HONEY_DICE: BlockData.new([BlockGroups.COLONY, BlockGroups.CASINO], 2, 3), 
-
-
-	BLOCK_TYPES.MIMIC: BlockData.new([BlockGroups.ARCANE, BlockGroups.MONSTER], 2, 3), 
-	BLOCK_TYPES.FIRE_MAGE: BlockData.new([BlockGroups.ARCANE], 2, 3), 
-	BLOCK_TYPES.BOOKSHELF: BlockData.new([BlockGroups.ARCANE], 2, 3), 
-	BLOCK_TYPES.ARCANIST: BlockData.new([BlockGroups.ARCANE], 1, 2, [BLOCK_TYPES.MIMIC, BLOCK_TYPES.SLIME, BLOCK_TYPES.BOOKSHELF]), 
-
-
-	BLOCK_TYPES.PIANO: BlockData.new([BlockGroups.HARMONY], 3, 5), 
-	BLOCK_TYPES.ACOUSTIC_GUITAR: BlockData.new([BlockGroups.HARMONY], 3, 5), 
-	BLOCK_TYPES.ELECTRIC_GUITAR: BlockData.new([BlockGroups.HARMONY], 3, 5), 
-	BLOCK_TYPES.SPEAKERS: BlockData.new([BlockGroups.HARMONY], 1, 2, [BLOCK_TYPES.PIANO, BLOCK_TYPES.ACOUSTIC_GUITAR, BLOCK_TYPES.ELECTRIC_GUITAR]), 
-
-
-	BLOCK_TYPES.SLIME: BlockData.new([BlockGroups.MONSTER], 2, 3), 
-	BLOCK_TYPES.SKELETON: BlockData.new([BlockGroups.MONSTER], 3, 5), 
-
-
-	BLOCK_TYPES.PIRATE_CAPTAIN: BlockData.new([BlockGroups.PIRATES], 2, 3), 
-	BLOCK_TYPES.PIRATE_CANNONEER: BlockData.new([BlockGroups.PIRATES], 2, 3, [BLOCK_TYPES.PIRATE_CAPTAIN]), 
-	BLOCK_TYPES.CANNON: BlockData.new([BlockGroups.PIRATES], 1, 2, [BLOCK_TYPES.PIRATE_CAPTAIN]), 
-	BLOCK_TYPES.UNDEAD_PIRATE: BlockData.new([BlockGroups.PIRATES, BlockGroups.MONSTER], 2, 3), 
-
-	BLOCK_TYPES.TREASURE_CHEST: BlockData.new([BlockGroups.PIRATES, BlockGroups.CASINO], 2, 3), 
-	BLOCK_TYPES.CURSED_CHEST: BlockData.new([BlockGroups.PIRATES, BlockGroups.CASINO], 1, 2),
+	#BLOCK_TYPES.RED_DICE: BlockData.new([BlockGroups.CASINO], 3, 5), 
+	#BLOCK_TYPES.BLUE_DICE: BlockData.new([BlockGroups.CASINO], 3, 5), 
+	#BLOCK_TYPES.MIXED_DICE: BlockData.new([BlockGroups.CASINO], 3, 5), 
+	#BLOCK_TYPES.JACKPOT: BlockData.new([BlockGroups.CASINO], 1, 2, [BLOCK_TYPES.RED_DICE, BLOCK_TYPES.BLUE_DICE, BLOCK_TYPES.MIXED_DICE]), 
+#
+#
+	#BLOCK_TYPES.BRONZE: BlockData.new([BlockGroups.MINERALS], 2, 3), 
+	#BLOCK_TYPES.IRON: BlockData.new([BlockGroups.MINERALS], 3, 5), 
+	#BLOCK_TYPES.DIAMOND: BlockData.new([BlockGroups.MINERALS], 2, 3, [BLOCK_TYPES.IRON, BLOCK_TYPES.BRONZE]), 
+#
+#
+	#BLOCK_TYPES.TNT: BlockData.new([BlockGroups.EXPLOSIVES], 3, 5), 
+	#BLOCK_TYPES.BOMB: BlockData.new([BlockGroups.EXPLOSIVES], 2, 3), 
+	#BLOCK_TYPES.CFOUR: BlockData.new([BlockGroups.EXPLOSIVES], 2, 3), 
+	#BLOCK_TYPES.DETONATOR: BlockData.new([BlockGroups.EXPLOSIVES], 1, 1, [BLOCK_TYPES.TNT, BLOCK_TYPES.BOMB, BLOCK_TYPES.CFOUR]), 
+#
+#
+	#BLOCK_TYPES.RADIOACTIVE: BlockData.new([BlockGroups.NUCLEAR], 3, 5), 
+	#BLOCK_TYPES.URANIUM: BlockData.new([BlockGroups.NUCLEAR], 3, 5), 
+	#BLOCK_TYPES.NUKE: BlockData.new([BlockGroups.NUCLEAR, BlockGroups.EXPLOSIVES], 3, 5), 
+	#BLOCK_TYPES.REACTOR: BlockData.new([BlockGroups.NUCLEAR], 1, 2, [BLOCK_TYPES.URANIUM, BLOCK_TYPES.RADIOACTIVE]), 
+#
+#
+	#BLOCK_TYPES.QUEEN_BEE: BlockData.new([BlockGroups.COLONY], 2, 3), 
+	#BLOCK_TYPES.WORKER_BEE: BlockData.new([BlockGroups.COLONY], 2, 3), 
+	#BLOCK_TYPES.HONEY: BlockData.new([BlockGroups.COLONY], 2, 3, [BLOCK_TYPES.QUEEN_BEE, BLOCK_TYPES.WORKER_BEE]), 
+	#BLOCK_TYPES.HIVE: BlockData.new([BlockGroups.COLONY], 1, 2, [BLOCK_TYPES.QUEEN_BEE, BLOCK_TYPES.WORKER_BEE]), 
+#
+	#BLOCK_TYPES.HONEY_BOMB: BlockData.new([BlockGroups.COLONY, BlockGroups.EXPLOSIVES], 2, 3), 
+	#BLOCK_TYPES.HONEY_DICE: BlockData.new([BlockGroups.COLONY, BlockGroups.CASINO], 2, 3), 
+#
+#
+	#BLOCK_TYPES.MIMIC: BlockData.new([BlockGroups.ARCANE, BlockGroups.MONSTER], 2, 3), 
+	#BLOCK_TYPES.FIRE_MAGE: BlockData.new([BlockGroups.ARCANE], 2, 3), 
+	#BLOCK_TYPES.BOOKSHELF: BlockData.new([BlockGroups.ARCANE], 2, 3), 
+	#BLOCK_TYPES.ARCANIST: BlockData.new([BlockGroups.ARCANE], 1, 2, [BLOCK_TYPES.MIMIC, BLOCK_TYPES.SLIME, BLOCK_TYPES.BOOKSHELF]), 
+#
+#
+	#BLOCK_TYPES.PIANO: BlockData.new([BlockGroups.HARMONY], 3, 5), 
+	#BLOCK_TYPES.ACOUSTIC_GUITAR: BlockData.new([BlockGroups.HARMONY], 3, 5), 
+	#BLOCK_TYPES.ELECTRIC_GUITAR: BlockData.new([BlockGroups.HARMONY], 3, 5), 
+	#BLOCK_TYPES.SPEAKERS: BlockData.new([BlockGroups.HARMONY], 1, 2, [BLOCK_TYPES.PIANO, BLOCK_TYPES.ACOUSTIC_GUITAR, BLOCK_TYPES.ELECTRIC_GUITAR]), 
+#
+#
+	#BLOCK_TYPES.SLIME: BlockData.new([BlockGroups.MONSTER], 2, 3), 
+	#BLOCK_TYPES.SKELETON: BlockData.new([BlockGroups.MONSTER], 3, 5), 
+#
+#
+	#BLOCK_TYPES.PIRATE_CAPTAIN: BlockData.new([BlockGroups.PIRATES], 2, 3), 
+	#BLOCK_TYPES.PIRATE_CANNONEER: BlockData.new([BlockGroups.PIRATES], 2, 3, [BLOCK_TYPES.PIRATE_CAPTAIN]), 
+	#BLOCK_TYPES.CANNON: BlockData.new([BlockGroups.PIRATES], 1, 2, [BLOCK_TYPES.PIRATE_CAPTAIN]), 
+	#BLOCK_TYPES.UNDEAD_PIRATE: BlockData.new([BlockGroups.PIRATES, BlockGroups.MONSTER], 2, 3), 
+#
+	#BLOCK_TYPES.TREASURE_CHEST: BlockData.new([BlockGroups.PIRATES, BlockGroups.CASINO], 2, 3), 
+	#BLOCK_TYPES.CURSED_CHEST: BlockData.new([BlockGroups.PIRATES, BlockGroups.CASINO], 1, 2),
 	
 	"indestructible": BlockData.new([], 0, 0)
 }
