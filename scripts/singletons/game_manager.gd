@@ -26,7 +26,7 @@ const DISCORD_URL: String = "https://discord.com/invite/UbAUwg2Fvc"
 
 
 const ROUND_SCORES_BASE: Array[int] = [
-	5000, 
+	50, 
 	100, 
 	300, 
 	600, 

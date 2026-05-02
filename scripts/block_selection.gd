@@ -105,7 +105,7 @@ func randomize_blocks() -> void :
 
 	for block_type: String in sorted_block_types:
 
-		if block_type in [GameData.BLOCK_TYPES.NORMAL, GameData.BLOCK_TYPES.MOAI, GameData.BLOCK_TYPES.X]:
+		if block_type in [GameData.BLOCK_TYPES.NORMAL]:
 			continue
 
 
