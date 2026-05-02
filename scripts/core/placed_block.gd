@@ -39,6 +39,84 @@ var type: String:
 
 		add_to_group(GameData.get_block_name(value))
 		const ACCELERATOR_MULT = 0.5;
+		match type:
+			GameData.BLOCK_TYPES.CFOUR:
+				var tick_timer: Timer = Timer.new()
+				add_child(tick_timer)
+
+				tick_timer.name = "CFOURTickTimer"
+				tick_timer.wait_time = 1.0 / GameManager.timescale
+				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					tick_timer.wait_time *= ACCELERATOR_MULT;
+				tick_timer.one_shot = false
+
+				tick_timer.timeout.connect( func() -> void :
+					if destroy_animation_requested:
+						tick_timer.stop()
+						tick_timer.queue_free()
+						return
+
+					if GameManager.is_game_busy():
+						return
+
+					custom_variables[CFOUR_VARIABLE] = (custom_variables.get(CFOUR_VARIABLE, 0)) + 1
+					pulse_animation()
+
+
+					#AudioManager.play(AudioManager.SoundEffects.SINGLE_CLICK_3, 1.6 + (custom_variables[CFOUR_VARIABLE] * 0.05))
+
+					if custom_variables[CFOUR_VARIABLE] >= CFOUR_ACTIVATION_THRESHOLD:
+						destroy()
+				)
+
+				tick_timer.start()
+
+			GameData.BLOCK_TYPES.URANIUM:
+				var morph_timer: Timer = Timer.new()
+
+				add_child(morph_timer)
+
+				morph_timer.name = "UraniumMorphTimer"
+				morph_timer.wait_time = 5.0 / GameManager.timescale
+				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					morph_timer.wait_time *= ACCELERATOR_MULT;
+				morph_timer.one_shot = false
+
+				morph_timer.timeout.connect( func() -> void :
+					if destroy_animation_requested:
+						morph_timer.stop()
+						morph_timer.queue_free()
+						return
+
+					if GameManager.is_game_busy():
+						return
+
+					var adjacent_blocks: Array[PlacedBlock] = get_adjacent_blocks()
+					var possible_blocks: Array[PlacedBlock] = []
+
+
+					for block in adjacent_blocks:
+						if is_instance_valid(block) and not block.destroy_animation_requested and not GameData.is_block_on_group(block.type, GameData.BlockGroups.NUCLEAR) and block.type != "indestructible":
+							possible_blocks.append(block)
+
+
+					if possible_blocks.size() > 0:
+						var target_block: PlacedBlock = Random.pick_random(possible_blocks)
+						target_block.morph(GameData.BLOCK_TYPES.URANIUM)
+
+						GameCamera.shake_randomly(1, 0.1)
+						#AudioManager.play(AudioManager.SoundEffects.RADIOACTIVE, randf_range(0.4, 0.6))
+
+						var reactor_queue: Array[Callable] = []
+
+						for reactor_block in GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.REACTOR):
+							reactor_queue.append(BlockChainReaction.reactor.bind(reactor_block))
+
+						EventManager.execute_queue_events(reactor_queue)
+				)
+
+				morph_timer.start()
+
 
 var grid_position: Vector2i = Vector2i.ZERO
 
@@ -343,6 +421,26 @@ func execute_destroy_effect() -> void :
 			GameManager.add_points(points)
 			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, points)
 
+		GameData.BLOCK_TYPES.MOAI:
+			var points: int = 10
+
+			if GameManager.is_perk_active(GameData.Perks.POINT_RUSH):
+				GameManager.trigger_perk(GameData.Perks.POINT_RUSH)
+				points *= 2
+
+			GameManager.add_points(points)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, points)
+
+		GameData.BLOCK_TYPES.X:
+			var multi: int = 1
+
+			if GameManager.is_perk_active(GameData.Perks.POINT_RUSH):
+				GameManager.trigger_perk(GameData.Perks.POINT_RUSH)
+				multi *= 2
+
+			GameManager.add_multiplier(multi)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, multi)
+
 		GameData.BLOCK_TYPES.GOLD:
 			#GameManager.add_coins(2)
 			PointNotification.create_and_slide(get_center_position(), PointNotification.YELLOW, "+2")
@@ -356,7 +454,7 @@ func execute_destroy_effect() -> void :
 			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 4)
 
 		GameData.BLOCK_TYPES.RAINBOW:
-			if Random.randf() <= 0.20:
+			if GameManager.chance(0.20):
 				GameManager.add_multiplier(20)
 				PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 20)
 
@@ -396,3 +494,450 @@ func execute_destroy_effect() -> void :
 			
 			if has_chain:
 				EventManager.should_check_lines_after_queue = true
+
+		GameData.BLOCK_TYPES.STONE:
+			GameManager.add_multiplier(10)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 10, 1.8, PointNotification.UP, 6.0)
+
+		GameData.BLOCK_TYPES.OBSIDIAN:
+			var points: int = custom_variables.get(OBSIDIAN_FORTRESS_VARIABLE, 0)
+
+			GameManager.add_multiplier(points)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, points)
+
+			#AudioManager.play(AudioManager.SoundEffects.DICE, randf_range(0.4, 0.6))
+
+		GameData.BLOCK_TYPES.RED_DICE:
+			var random_value: int = Random.randi_range(1, 4) * GameManager.current_round
+
+			GameManager.add_multiplier(random_value)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, random_value, 1.8, PointNotification.UP, max(2, random_value * 0.5))
+
+			#AudioManager.play(AudioManager.SoundEffects.DICE, randf_range(0.8, 1.2))
+
+		GameData.BLOCK_TYPES.BLUE_DICE:
+			var random_value: int = Random.randi_range(1, 4) * GameManager.current_round
+
+			GameManager.add_points(random_value)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, random_value, 1.8, PointNotification.UP, max(2, random_value * 0.5))
+
+			#AudioManager.play(AudioManager.SoundEffects.DICE, randf_range(0.8, 1.2))
+
+		GameData.BLOCK_TYPES.MIXED_DICE:
+			var random_value: int = Random.randi_range(1, 3) * GameManager.current_round
+
+			if Random.randf() < 0.5:
+				GameManager.add_points(random_value)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, random_value, 1.8, PointNotification.UP, max(2, random_value * 0.5))
+			else:
+				GameManager.add_multiplier(random_value)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.RED, random_value, 1.8, PointNotification.UP, max(2, random_value * 0.5))
+
+			#AudioManager.play(AudioManager.SoundEffects.DICE, randf_range(0.8, 1.2))
+
+		GameData.BLOCK_TYPES.RADIOACTIVE:
+			GameManager.add_multiplier(1)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 1, 1.8, PointNotification.UP, 6.0)
+			#AudioManager.play(AudioManager.SoundEffects.RADIOACTIVE, randf_range(0.8, 1.2))
+
+			Random.shuffle(all_blocks_on_board)
+
+			var possible_blocks: Array[PlacedBlock] = []
+
+			for block in all_blocks_on_board:
+				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != GameData.BLOCK_TYPES.RADIOACTIVE and block.type != "indestructible":
+					possible_blocks.append(block)
+
+			if possible_blocks.size() > 0:
+				var target_block: PlacedBlock = Random.pick_random(possible_blocks)
+
+				target_block.morph(GameData.BLOCK_TYPES.RADIOACTIVE)
+				GameCamera.shake_randomly(1, 0.2)
+
+				var reactor_queue: Array[Callable] = []
+
+				for reactor_block in GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.REACTOR):
+					reactor_queue.append(BlockChainReaction.reactor.bind(reactor_block))
+
+				EventManager.execute_queue_events(reactor_queue)
+
+		GameData.BLOCK_TYPES.TNT:
+			GameCamera.shake_randomly(1, 0.2)
+			#AudioManager.play(AudioManager.SoundEffects.DYNAMITE, randf_range(0.8, 1.2))
+
+			for block in get_adjacent_blocks():
+				EventManager.add_event(BlockChainReaction.tnt.bind(block))
+
+		GameData.BLOCK_TYPES.BOMB:
+			GameCamera.shake_randomly(3, 0.3)
+			#AudioManager.play(AudioManager.SoundEffects.DYNAMITE, randf_range(0.6, 0.8))
+
+			var blocks_in_range: Array[PlacedBlock] = get_blocks_in_range(3)
+
+			blocks_in_range.sort_custom( func(a: PlacedBlock, b: PlacedBlock) -> bool:
+
+				var dist_a: int = abs(a.grid_position.x - grid_position.x) + abs(a.grid_position.y - grid_position.y)
+				var dist_b: int = abs(b.grid_position.x - grid_position.x) + abs(b.grid_position.y - grid_position.y)
+				return dist_a < dist_b
+			)
+
+			for block in blocks_in_range:
+				EventManager.add_event(BlockChainReaction.bomb.bind(block))
+
+		GameData.BLOCK_TYPES.CFOUR:
+			if custom_variables.get(CFOUR_VARIABLE, 0) < CFOUR_ACTIVATION_THRESHOLD:
+				return
+
+			GameCamera.shake_randomly(3, 0.3)
+			#AudioManager.play(AudioManager.SoundEffects.DYNAMITE, randf_range(0.6, 0.8))
+
+			var blocks_in_range: Array[PlacedBlock] = get_blocks_in_range(3)
+
+			blocks_in_range.sort_custom( func(a: PlacedBlock, b: PlacedBlock) -> bool:
+
+				var dist_a: int = abs(a.grid_position.x - grid_position.x) + abs(a.grid_position.y - grid_position.y)
+				var dist_b: int = abs(b.grid_position.x - grid_position.x) + abs(b.grid_position.y - grid_position.y)
+				return dist_a < dist_b
+			)
+
+			for block in blocks_in_range:
+				EventManager.add_event(BlockChainReaction.cfour.bind(block))
+
+			EventManager.execute_events()
+
+		GameData.BLOCK_TYPES.DETONATOR:
+			var explosive_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_group(GameData.BlockGroups.EXPLOSIVES)
+
+			#AudioManager.play(AudioManager.SoundEffects.DOUBLE_CLICK, randf_range(1.2, 1.4))
+
+			for block in explosive_blocks:
+				if block == self:
+					continue
+
+				if block.type != GameData.BLOCK_TYPES.DETONATOR:
+					EventManager.add_event(BlockChainReaction.detonator.bind(block))
+
+		GameData.BLOCK_TYPES.NUKE:
+			var target_blocks: Array[PlacedBlock] = []
+
+			target_blocks.append_array(_get_column_blocks(grid_position.x))
+
+			GameCamera.shake_randomly(3, 0.3)
+			#AudioManager.play(AudioManager.SoundEffects.DYNAMITE, randf_range(0.6, 0.8))
+
+			for block in target_blocks:
+				if block != self:
+					EventManager.add_event(BlockChainReaction.nuke.bind(block))
+
+		GameData.BLOCK_TYPES.BRONZE:
+			var block_count: int = all_blocks_on_board.size()
+			var point_value: int = floor(block_count * 0.3)
+
+			for block in get_adjacent_blocks():
+				if block.type == GameData.BLOCK_TYPES.DIAMOND:
+					block.pulse_animation()
+					point_value *= 3
+
+			if point_value > 0:
+				GameManager.add_points(point_value)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, point_value, 1.8, PointNotification.UP, 6.0)
+
+		GameData.BLOCK_TYPES.IRON:
+			var block_count: int = all_blocks_on_board.size()
+			var point_value: int = floor(block_count * 0.1)
+
+			for block in get_adjacent_blocks():
+				if block.type == GameData.BLOCK_TYPES.DIAMOND:
+					block.pulse_animation()
+					point_value *= 3
+
+			if point_value > 0:
+				GameManager.add_multiplier(point_value)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.RED, point_value, 1.8, PointNotification.UP, 6.0)
+
+		GameData.BLOCK_TYPES.GRANITE:
+			GameManager.points = GameManager.points.multiply(2)
+			GameManager.multiplier = GameManager.multiplier.multiply(0.75)
+
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, "x2", 1.6, PointNotification.UP, 6.0)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, "x0.75", 1.6, PointNotification.DOWN, 6.0)
+
+		GameData.BLOCK_TYPES.DIAMOND:
+			GameManager.add_points(3)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 3, 1.8, PointNotification.UP, 6.0)
+
+		GameData.BLOCK_TYPES.URANIUM:
+			GameManager.add_points(10)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 10, 1.8, PointNotification.UP, 6.0)
+
+		GameData.BLOCK_TYPES.JACKPOT:
+			var casino_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_group(GameData.BlockGroups.CASINO)
+
+			for block in casino_blocks:
+				if block == self:
+					continue
+
+				if block.type != GameData.BLOCK_TYPES.JACKPOT:
+					EventManager.add_event(BlockChainReaction.jackpot.bind(block))
+
+		GameData.BLOCK_TYPES.HIVE:
+			var queen_bee_count: int = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.QUEEN_BEE).size()
+			var worker_bee_count: int = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.WORKER_BEE).size()
+
+			if queen_bee_count > 0 and worker_bee_count > 0:
+				var points: int = queen_bee_count * worker_bee_count
+
+				var honey_blocks_count: int = get_adjacent_blocks_of_type(GameData.BLOCK_TYPES.HONEY).size()
+
+				if honey_blocks_count > 0:
+					points *= honey_blocks_count * 2
+
+				GameManager.add_multiplier(points)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.RED, points)
+
+				#AudioManager.play(AudioManager.SoundEffects.COLONY, randf_range(0.8, 1.2))
+
+		GameData.BLOCK_TYPES.HONEY_BOMB:
+			#AudioManager.play(AudioManager.SoundEffects.DYNAMITE, randf_range(1.1, 1.3))
+
+			for adjacent_block in get_adjacent_blocks():
+				if adjacent_block.type != GameData.BLOCK_TYPES.HIVE:
+					EventManager.add_event(BlockChainReaction.honey_bomb.bind(adjacent_block))
+
+		GameData.BLOCK_TYPES.MIMIC:
+
+			var possible_blocks: Array[PlacedBlock] = []
+
+
+			for block in all_blocks_on_board:
+				if is_instance_valid(block) and not block.destroy_animation_requested and block.type != "indestructible":
+					possible_blocks.append(block)
+
+			var all_block_types: Array = GameData.BLOCK_TYPES.values()
+
+
+			all_block_types.erase(GameData.BLOCK_TYPES.NORMAL)
+			all_block_types.erase(GameData.BLOCK_TYPES.MOAI)
+			all_block_types.erase(GameData.BLOCK_TYPES.X)
+			all_block_types.erase(GameData.BLOCK_TYPES.MIMIC)
+
+			if possible_blocks.size() > 0:
+				var target_block: PlacedBlock = Random.pick_random(possible_blocks)
+				target_block.morph(Random.pick_random(all_block_types))
+
+			GameManager.add_multiplier(3)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 3)
+			#AudioManager.play(AudioManager.SoundEffects.EATING, randf_range(0.8, 1.2))
+
+		GameData.BLOCK_TYPES.BOOKSHELF:
+
+
+
+			GameManager.add_points(25)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 25)
+
+			var blocks_in_range: Array[PlacedBlock] = get_blocks_in_range(2)
+			var block_types: Array = GameData.BLOCK_TYPES.values()
+
+
+			block_types.erase(GameData.BLOCK_TYPES.NORMAL)
+			block_types.erase(GameData.BLOCK_TYPES.MOAI)
+			block_types.erase(GameData.BLOCK_TYPES.X)
+			block_types.erase(GameData.BLOCK_TYPES.BOOKSHELF)
+
+			for block in blocks_in_range:
+				var random_block_type: String = Random.pick_random(block_types)
+				EventManager.add_event(BlockChainReaction.bookshelf.bind(block, random_block_type))
+
+		GameData.BLOCK_TYPES.ARCANIST:
+			var arcane_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_group(GameData.BlockGroups.ARCANE)
+
+			#AudioManager.play(AudioManager.SoundEffects.MAGIC_SPELL, randf_range(0.6, 0.8))
+
+			for block in arcane_blocks:
+				if block == self:
+					continue
+
+				if block.type != GameData.BLOCK_TYPES.ARCANIST:
+					EventManager.add_event(BlockChainReaction.arcanist.bind(block))
+
+		GameData.BLOCK_TYPES.SLIME:
+
+			var board: Board = GameManager.get_board()
+
+			if is_instance_valid(board):
+				var valid_positions: Array[Vector2i] = []
+
+
+				var current_row: int = grid_position.y
+				var start_row: int = current_row + 1
+
+
+				if GameManager.current_boss == GameData.BossTypes.FALL_UP:
+
+					start_row = current_row - 1
+					for row in range(start_row, -1, -1):
+						for col in range(Board.BOARD_WIDTH):
+							if not board.is_position_occupied(Vector2i(col, row)):
+								valid_positions.append(Vector2i(col, row))
+				else:
+
+					for row in range(start_row, Board.BOARD_HEIGHT):
+						for col in range(Board.BOARD_WIDTH):
+							if not board.is_position_occupied(Vector2i(col, row)):
+								valid_positions.append(Vector2i(col, row))
+
+				if valid_positions.size() > 0:
+					var target_position: Vector2i = Random.pick_random(valid_positions)
+
+
+					EventManager.add_event( func() -> float:
+						board.place_blocks_directly([target_position], GameData.BLOCK_TYPES.SLIME)
+
+						#AudioManager.play(AudioManager.SoundEffects.OWO_LOW, randf_range(0.8, 1.2))
+						EventManager.request_line_check_after_queue()
+
+						return BlockChainReaction.DEFAULT_DELAY
+					)
+
+		GameData.BLOCK_TYPES.PIANO:
+
+			var piano_blocks_in_row: Array[PlacedBlock] = []
+			var row_blocks: Array[PlacedBlock] = _get_row_blocks(grid_position.y)
+
+			for block in row_blocks:
+				if block.type == GameData.BLOCK_TYPES.PIANO:
+					piano_blocks_in_row.append(block)
+
+			var point_value: int = 4
+
+			if piano_blocks_in_row.size() > 0:
+				point_value *= piano_blocks_in_row.size()
+
+			GameManager.add_points(point_value)
+			#AudioManager.play(AudioManager.SoundEffects.PIANO, randf_range(0.8, 1.2))
+
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, point_value)
+
+		GameData.BLOCK_TYPES.ACOUSTIC_GUITAR:
+
+			var acoustic_guitar_blocks_in_column: Array[PlacedBlock] = []
+			var column_blocks: Array[PlacedBlock] = _get_column_blocks(grid_position.x)
+
+			for block in column_blocks:
+				if block.type == GameData.BLOCK_TYPES.ACOUSTIC_GUITAR:
+					acoustic_guitar_blocks_in_column.append(block)
+
+			var multiplier_value: int = 2
+
+			if acoustic_guitar_blocks_in_column.size() > 0:
+				multiplier_value *= acoustic_guitar_blocks_in_column.size()
+
+			GameManager.add_multiplier(multiplier_value)
+			#AudioManager.play(AudioManager.SoundEffects.ACOUSTIC_GUITAR, randf_range(0.8, 1.2))
+
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, multiplier_value)
+
+		GameData.BLOCK_TYPES.ELECTRIC_GUITAR:
+
+			var electric_guitar_blocks_in_column: Array[PlacedBlock] = []
+			var column_blocks: Array[PlacedBlock] = _get_column_blocks(grid_position.x)
+
+			for block in column_blocks:
+				if block.type == GameData.BLOCK_TYPES.ELECTRIC_GUITAR:
+					electric_guitar_blocks_in_column.append(block)
+
+			var point_value: int = 4
+
+			if electric_guitar_blocks_in_column.size() > 0:
+				point_value *= electric_guitar_blocks_in_column.size()
+
+			GameManager.add_points(point_value)
+			#AudioManager.play(AudioManager.SoundEffects.ELECTRIC_GUITAR, randf_range(0.8, 1.2))
+
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, point_value)
+
+		GameData.BLOCK_TYPES.SPEAKERS:
+
+			var harmony_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_group(GameData.BlockGroups.HARMONY)
+
+			for harmony_block in harmony_blocks:
+				if harmony_block == self or harmony_block.type == GameData.BLOCK_TYPES.SPEAKERS or harmony_block.destroy_animation_requested:
+					continue
+
+				EventManager.add_event(BlockChainReaction.speakers.bind(harmony_block))
+
+		GameData.BLOCK_TYPES.SKELETON:
+			BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+
+		GameData.BLOCK_TYPES.FIRE_MAGE:
+			GameCamera.shake_direction(2, 90, 0.2)
+			#AudioManager.play(AudioManager.SoundEffects.FIRE_BALL, randf_range(0.8, 1.2))
+
+			var fireball_1: BlockProjectile = BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+			var fireball_2: BlockProjectile = BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+
+			fireball_1.velocity = Vector2(BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_1._get_up_multiplier())
+			fireball_2.velocity = Vector2( - BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_2._get_up_multiplier())
+			if GameManager.is_perk_active(GameData.Perks.PROJECTILE_MULT):
+				get_tree().root.create_timer(0.1).timeout.connect(func():
+					var fireball_3: BlockProjectile = BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+					var fireball_4: BlockProjectile = BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+
+					fireball_3.velocity = Vector2(BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_3._get_up_multiplier())
+					fireball_4.velocity = Vector2( - BlockProjectile.HORIZONTAL_SPEED, -150.0 * fireball_4._get_up_multiplier())
+				);
+
+		GameData.BLOCK_TYPES.UNDEAD_PIRATE:
+			GameCamera.shake_direction(2, 90, 0.2)
+			#AudioManager.play(AudioManager.SoundEffects.QUICK_BLOOD, randf_range(0.8, 1.2))
+			
+			BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+			if (GameManager.is_perk_active(GameData.Perks.PROJECTILE_MULT)):
+				get_tree().root.create_timer(0.1).timeout.connect(func():
+					BlockProjectile.create(get_parent(), type, get_center_position() - Vector2(0, PieceRenderer.PIECE_SIZE / 2))
+				);
+
+		GameData.BLOCK_TYPES.PIRATE_CAPTAIN:
+			GameManager.add_points(3)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 3, 1.8, PointNotification.UP, 6.0)
+
+			var pirate_cannoneer_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.PIRATE_CANNONEER)
+
+			for block in pirate_cannoneer_blocks:
+				if block.destroy_animation_requested:
+					continue
+
+				EventManager.add_event(BlockChainReaction.pirate_captain.bind(block))
+
+		GameData.BLOCK_TYPES.PIRATE_CANNONEER:
+			GameManager.add_multiplier(1)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.RED, 1, 1.8, PointNotification.UP, 6.0)
+
+			var cannon_blocks: Array[PlacedBlock] = GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.CANNON)
+
+
+			for cannon in cannon_blocks:
+				if cannon.destroy_animation_requested:
+					continue
+
+				EventManager.add_event(BlockChainReaction.pirate_cannoneer.bind(cannon))
+
+		GameData.BLOCK_TYPES.TREASURE_CHEST:
+
+			if GameManager.chance(0.5):
+				GameManager.add_points(100)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 100, 1.8, PointNotification.UP, 6.0)
+
+		GameData.BLOCK_TYPES.CURSED_CHEST:
+
+			if GameManager.chance(0.15):
+				GameManager.add_points(1000)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 1000, 1.8, PointNotification.UP, 6.0)
+			else:
+				GameManager.add_points(-100)
+				PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, "-100", 1.8, PointNotification.UP, 6.0)
+
+		GameData.BLOCK_TYPES.CANNON:
+			GameManager.add_points(3)
+			PointNotification.create_and_slide(get_center_position(), PointNotification.BLUE, 3, 1.8, PointNotification.UP, 6.0)

@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=0 format=3 uid="uid://by4hco41tdp2s"]
+
+[ext_resource type="Texture2D" uid="uid://uyvurq6snik3" path="res://images/count_panel_container_gray.png" id="1"]
+
+[resource]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+texture = ExtResource("1")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
