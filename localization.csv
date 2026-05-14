@@ -48,6 +48,15 @@ DEMO_VERSION,Demo Version
 TUTORIAL_5,Reach your [yellow]Target Score[white] to win and unlock new [yellow]Blocks[white]. [red]Red levels[white] gives a [perk]!
 POINT_RUSH,Point Rush
 TUTORIAL_6,You lose if [yellow]Pieces[white] run out or [yellow]Blocks[white] reach the screen top.
+DREAM_DESCRIPTION,Gives 25% luck.
+ACCELERATOR_DESCRIPTION,Increase the speed of reactions.
+PROJECTILE_MULT_DESCRIPTION,Increases the amount of projectiles.
+PROJECTILE_HIT_DESCRIPTION,Increases the amount of hit of projectiles.
+SACRIFICE_ROW_DESCRIPTION,"Add 1 permanent indestructible line, permanently gives [points:+50]."
+COMBO_ENGINE_DESCRIPTION,"When two or more lines is cleared, gives [points:+150]."
+BUILDER_DESCRIPTION,"When line cleared, gives [points:+50]."
+MULT_REACTOR_DESCRIPTION,"When a block's effect triggered, gives [multiplier:+1]."
+RETRIGGER_BLOCK_DESCRIPTION,Retrigger current block's effect.
 SPEED_RUN_DESCRIPTION_1,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+3]."
 SPEED_RUN_DESCRIPTION_2,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+10]."
 TUTORIAL_0,Welcome to [yellow]Stackflow[white]! This strategic block-stacking game is all about smart placement and management.
@@ -277,6 +286,15 @@ ACHIEVEMENT_DISCOVER_COLONY_DESCRIPTION,Discover all [group:colony] blocks.
 BLOCK_STONE_DESCRIPTION,[red]Can't be rotated[white]. Gives [multiplier:+10] when destroyed.
 FORGIVEN_DESCRIPTION,Using [yellow]Hold[white] won't increase your [yellow]Target Score[white] anymore.
 <!MissingKey:243:Hold Piece>,Hold Piece
+DREAM,Dream
+ACCELERATOR,Accelerator
+PROJECTILE_MULT,Projectile Mult
+PROJECTILE_HIT,Projectile Hit
+SACRIFICE_ROW,Row Sacrifice
+COMBO_ENGINE,Combo Engine
+BUILDER,Builder
+MULT_REACTOR,Mult Reactor
+RETRIGGER_BLOCK,Retrigger block
 SPEED_RUN,Speedrunner
 CHAIN_REACTION_DESCRIPTION_4,"When another [perk] activates, gain [multiplier:+13]."
 OPTION_GAME_SPEED,Game Speed
