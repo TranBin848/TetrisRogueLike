@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bkk7wno815vn6"]
+[gd_scene load_steps=14 format=3 uid="uid://bkk7wno815vn6"]
 
 [ext_resource type="Script" uid="uid://bklekfjbahjoi" path="res://scripts/block_selection.gd" id="1_v1gjm"]
 [ext_resource type="PackedScene" uid="uid://cb8n4d47n5xjb" path="res://scenes/background.tscn" id="2_imli6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://vwjqkrqwftf" path="res://sprite/button_roll.png" id="10_j61n3"]
 [ext_resource type="Texture2D" uid="uid://baikypk7t42mh" path="res://sprite/button_skip.png" id="11_t7s4v"]
 [ext_resource type="PackedScene" uid="uid://bulm880jjyu0w" path="res://scenes/modal/pause_menu/pause_menu.tscn" id="12_j61n3"]
+[ext_resource type="PackedScene" uid="uid://drt2ejk5tqos1" path="res://scenes/tooltip.tscn" id="13_15dhi"]
 
 [node name="BlockSelection" type="Node2D"]
 script = ExtResource("1_v1gjm")
@@ -101,6 +102,9 @@ text = "BUTTON_SKIP"
 icon = ExtResource("11_t7s4v")
 
 [node name="OverlayHUD" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PauseMenu" parent="OverlayHUD" instance=ExtResource("12_j61n3")]
+visible = false
+
+[node name="Tooltip" parent="OverlayHUD" instance=ExtResource("13_15dhi")]
+visible = false
