@@ -767,7 +767,7 @@ func trigger_perk(perk: GameData.Perks) -> void:
 		GameData.Perks.MULT_REACTOR:
 			add_multiplier(1);
 			InGamePerksContainer\
-				.spawn_point_notification(GameData.Perks.LAST_BREATH, PointNotification.RED, 1);
+				.spawn_point_notification(GameData.Perks.MULT_REACTOR, PointNotification.RED, 1);
 		GameData.Perks.COMBO_ENGINE:
 			add_points(150);
 			InGamePerksContainer\

@@ -80,9 +80,9 @@ func _update_deathline_position() -> void :
 
 func initialize_board() -> void :
 
-	GameManager.activate_perk(GameData.Perks.PROJECTILE_HIT);
-	GameManager.activate_perk(GameData.Perks.PROJECTILE_MULT);
-	GameManager.activate_perk(GameData.Perks.DREAM);
+	GameManager.activate_perk(GameData.Perks.SACRIFICE_ROW);
+	GameManager.activate_perk(GameData.Perks.MULT_REACTOR);
+	GameManager.activate_perk(GameData.Perks.CHAIN_REACTION);
 
 	placed_blocks_grid.clear()
 	GameManager.clear_placed_blocks_variables()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c240n3v3bas8h"]
+[gd_scene load_steps=10 format=3 uid="uid://c240n3v3bas8h"]
 
 [ext_resource type="Script" uid="uid://dsyuetea8y8ke" path="res://scenes/inventory_perk_icon.gd" id="1_1tams"]
 [ext_resource type="Texture2D" uid="uid://b6jk5ld8bony2" path="res://sprite/count_panel_container_gray.png" id="1_12x0s"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpms14qhfnier" path="res://sprite/rounded_outline_white_panel.png" id="5_f55qh"]
 [ext_resource type="PackedScene" uid="uid://duvq6dwhlynd4" path="res://scenes/count_panel_container.tscn" id="6_7oi68"]
 [ext_resource type="StyleBox" uid="uid://cy01vakhcxgb6" path="res://themes/count_panel_container_gray.tres" id="7_i1tex"]
+[ext_resource type="Script" path="res://scripts/count_panel_container.gd" id="8_l17ek"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f55qh"]
 content_margin_left = 4.0
@@ -86,4 +87,5 @@ offset_top = -3.0
 offset_right = 10.0
 offset_bottom = 10.0
 theme_override_styles/panel = ExtResource("7_i1tex")
+script = ExtResource("8_l17ek")
 margin = 3
