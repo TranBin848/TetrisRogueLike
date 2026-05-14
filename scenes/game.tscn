@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3ca6erjlgewg"]
+[gd_scene load_steps=10 format=3 uid="uid://3ca6erjlgewg"]
 
 [ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_iywne"]
 [ext_resource type="Script" uid="uid://dk3x83rgqwwnb" path="res://scripts/game.gd" id="1_script"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://drt2ejk5tqos1" path="res://scenes/tooltip.tscn" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://cqe8qwtwascqq" path="res://scenes/modal/victory/victory_screen.tscn" id="7_gee14"]
 [ext_resource type="PackedScene" uid="uid://c3ebj7xy3tb6o" path="res://scenes/modal/game_over/game_over_screen.tscn" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://bulm880jjyu0w" path="res://scenes/modal/pause_menu/pause_menu.tscn" id="9_pause"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_script")
@@ -100,6 +101,13 @@ mouse_filter = 2
 
 [node name="Tooltip" parent="OverlayHUD" instance=ExtResource("6_u5sy4")]
 visible = false
+
+[node name="PauseMenu" parent="OverlayHUD" instance=ExtResource("9_pause")]
+visible = false
+offset_left = 83.0
+offset_top = 120.0
+offset_right = -87.0
+offset_bottom = -150.0
 
 [node name="VictoryScreen" parent="OverlayHUD" instance=ExtResource("7_gee14")]
 visible = false

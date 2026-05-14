@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://u0aj1u0ed204"]
+
+[ext_resource type="Script" uid="uid://bldqpayuo5a31" path="res://scripts/control_container.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="2"]
+[ext_resource type="FontVariation" uid="uid://bj5qt3kblfua8" path="res://fonts/awesome_9_trimmed.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://b3wsb2f76pjt" path="res://resources/settings/keyboard_button_normal.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://c8av5usnfk6lv" path="res://resources/settings/keyboard_button_pressed.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://dsi7pbtw3ptdc" path="res://resources/settings/keyboard_button_hover.tres" id="6"]
+[ext_resource type="StyleBox" uid="uid://djo27cvdtb2h2" path="res://resources/settings/keyboard_button_disabled.tres" id="7"]
+[ext_resource type="StyleBox" uid="uid://dglfm5mjx7uwx" path="res://resources/gray_button_focus.tres" id="8"]
+[ext_resource type="Script" uid="uid://bsc4nrepqfqyt" path="res://scripts/bouncy_button.gd" id="9"]
+
+[node name="ControlContainer" type="HBoxContainer" unique_id=1799333803]
+script = ExtResource("1")
+
+[node name="Title" parent="." unique_id=235644890 instance=ExtResource("2")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+font_family = 0
+text = "INPUT_TITLE_KEY"
+shadow_enabled = false
+shadow_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+outline_color = Color(0.15294118, 0.15294118, 0.15294118, 1)
+
+[node name="InputButton" type="Button" parent="." unique_id=1823830622]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_disabled_color = Color(0.313726, 0.313726, 0.313726, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("4")
+theme_override_styles/pressed = ExtResource("5")
+theme_override_styles/hover = ExtResource("6")
+theme_override_styles/disabled = ExtResource("7")
+theme_override_styles/focus = ExtResource("8")
+text = "Shift"
+icon_alignment = 1
+script = ExtResource("9")
