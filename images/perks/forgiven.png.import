@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckgenjhqnpu2m"
-path="res://.godot/imported/full_clear.png-3ed62d133b1ec4fe7be2ebedea22df47.ctex"
+uid="uid://cikdr0cry1e0"
+path="res://.godot/imported/forgiven.png-8e9339169d2d0a454411ee2b8cbecdfa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/perks/full_clear.png"
-dest_files=["res://.godot/imported/full_clear.png-3ed62d133b1ec4fe7be2ebedea22df47.ctex"]
+source_file="res://images/perks/forgiven.png"
+dest_files=["res://.godot/imported/forgiven.png-8e9339169d2d0a454411ee2b8cbecdfa.ctex"]
 
 [params]
 

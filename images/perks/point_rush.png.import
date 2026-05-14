@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckgenjhqnpu2m"
-path="res://.godot/imported/full_clear.png-3ed62d133b1ec4fe7be2ebedea22df47.ctex"
+uid="uid://d06coifn3qfke"
+path="res://.godot/imported/point_rush.png-01987b3f1baf67a4a72342223b074c60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/perks/full_clear.png"
-dest_files=["res://.godot/imported/full_clear.png-3ed62d133b1ec4fe7be2ebedea22df47.ctex"]
+source_file="res://images/perks/point_rush.png"
+dest_files=["res://.godot/imported/point_rush.png-01987b3f1baf67a4a72342223b074c60.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://c240n3v3bas8h"]
 
-[ext_resource type="Script" path="res://scenes/inventory_perk_icon.gd" id="1_1tams"]
+[ext_resource type="Script" uid="uid://dsyuetea8y8ke" path="res://scenes/inventory_perk_icon.gd" id="1_1tams"]
 [ext_resource type="Texture2D" uid="uid://b6jk5ld8bony2" path="res://sprite/count_panel_container_gray.png" id="1_12x0s"]
 [ext_resource type="Texture2D" uid="uid://lxhljo7a8c0t" path="res://sprite/stack_master.png" id="2_sl6yp"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="3_12x0s"]

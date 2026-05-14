@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://duvq6dwhlynd4"]
 
 [ext_resource type="StyleBox" uid="uid://bi6w6wu0mqrl5" path="res://themes/count_panel_container.tres" id="1_0b4k2"]
-[ext_resource type="Script" uid="uid://dana7wxst262l" path="res://scenes/count_panel_container.gd" id="1_6qg3n"]
+[ext_resource type="Script" uid="uid://cp203gjbsmtgy" path="res://scripts/count_panel_container.gd" id="2_0b4k2"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="2_4brat"]
 
 [node name="CountPanelContainer" type="PanelContainer"]
 z_index = 1
 custom_minimum_size = Vector2(12, 12)
 theme_override_styles/panel = ExtResource("1_0b4k2")
-script = ExtResource("1_6qg3n")
+script = ExtResource("2_0b4k2")
 
 [node name="CountLabel" parent="." instance=ExtResource("2_4brat")]
 layout_mode = 2
