@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://u0aj1u0ed204"]
+[gd_scene load_steps=0 format=3 uid="uid://u0aj1u0ed204"]
 
 [ext_resource type="Script" uid="uid://bldqpayuo5a31" path="res://scripts/control_container.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="2"]

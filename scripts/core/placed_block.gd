@@ -38,84 +38,84 @@ var type: String:
 		description = GameManager.replace_tags(tr("BLOCK_" + block_name + "_DESCRIPTION"))
 
 		add_to_group(GameData.get_block_name(value))
-		const ACCELERATOR_MULT = 0.5;
-		match type:
-			GameData.BLOCK_TYPES.CFOUR:
-				var tick_timer: Timer = Timer.new()
-				add_child(tick_timer)
-
-				tick_timer.name = "CFOURTickTimer"
-				tick_timer.wait_time = 1.0 / GameManager.timescale
-				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
-					tick_timer.wait_time *= ACCELERATOR_MULT;
-				tick_timer.one_shot = false
-
-				tick_timer.timeout.connect( func() -> void :
-					if destroy_animation_requested:
-						tick_timer.stop()
-						tick_timer.queue_free()
-						return
-
-					if GameManager.is_game_busy():
-						return
-
-					custom_variables[CFOUR_VARIABLE] = (custom_variables.get(CFOUR_VARIABLE, 0)) + 1
-					pulse_animation()
-
-
-					#AudioManager.play(AudioManager.SoundEffects.SINGLE_CLICK_3, 1.6 + (custom_variables[CFOUR_VARIABLE] * 0.05))
-
-					if custom_variables[CFOUR_VARIABLE] >= CFOUR_ACTIVATION_THRESHOLD:
-						destroy()
-				)
-
-				tick_timer.start()
-
-			GameData.BLOCK_TYPES.URANIUM:
-				var morph_timer: Timer = Timer.new()
-
-				add_child(morph_timer)
-
-				morph_timer.name = "UraniumMorphTimer"
-				morph_timer.wait_time = 5.0 / GameManager.timescale
-				if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
-					morph_timer.wait_time *= ACCELERATOR_MULT;
-				morph_timer.one_shot = false
-
-				morph_timer.timeout.connect( func() -> void :
-					if destroy_animation_requested:
-						morph_timer.stop()
-						morph_timer.queue_free()
-						return
-
-					if GameManager.is_game_busy():
-						return
-
-					var adjacent_blocks: Array[PlacedBlock] = get_adjacent_blocks()
-					var possible_blocks: Array[PlacedBlock] = []
-
-
-					for block in adjacent_blocks:
-						if is_instance_valid(block) and not block.destroy_animation_requested and not GameData.is_block_on_group(block.type, GameData.BlockGroups.NUCLEAR) and block.type != "indestructible":
-							possible_blocks.append(block)
-
-
-					if possible_blocks.size() > 0:
-						var target_block: PlacedBlock = Random.pick_random(possible_blocks)
-						target_block.morph(GameData.BLOCK_TYPES.URANIUM)
-
-						GameCamera.shake_randomly(1, 0.1)
-						#AudioManager.play(AudioManager.SoundEffects.RADIOACTIVE, randf_range(0.4, 0.6))
-
-						var reactor_queue: Array[Callable] = []
-
-						for reactor_block in GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.REACTOR):
-							reactor_queue.append(BlockChainReaction.reactor.bind(reactor_block))
-
-						EventManager.execute_queue_events(reactor_queue)
-				)
-
-				morph_timer.start()
+		#const ACCELERATOR_MULT = 0.5;
+		#match type:
+			#GameData.BLOCK_TYPES.CFOUR:
+				#var tick_timer: Timer = Timer.new()
+				#add_child(tick_timer)
+#
+				#tick_timer.name = "CFOURTickTimer"
+				#tick_timer.wait_time = 1.0 / GameManager.timescale
+				#if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					#tick_timer.wait_time *= ACCELERATOR_MULT;
+				#tick_timer.one_shot = false
+#
+				#tick_timer.timeout.connect( func() -> void :
+					#if destroy_animation_requested:
+						#tick_timer.stop()
+						#tick_timer.queue_free()
+						#return
+#
+					#if GameManager.is_game_busy():
+						#return
+#
+					#custom_variables[CFOUR_VARIABLE] = (custom_variables.get(CFOUR_VARIABLE, 0)) + 1
+					#pulse_animation()
+#
+#
+					##AudioManager.play(AudioManager.SoundEffects.SINGLE_CLICK_3, 1.6 + (custom_variables[CFOUR_VARIABLE] * 0.05))
+#
+					#if custom_variables[CFOUR_VARIABLE] >= CFOUR_ACTIVATION_THRESHOLD:
+						#destroy()
+				#)
+#
+				#tick_timer.start()
+#
+			#GameData.BLOCK_TYPES.URANIUM:
+				#var morph_timer: Timer = Timer.new()
+#
+				#add_child(morph_timer)
+#
+				#morph_timer.name = "UraniumMorphTimer"
+				#morph_timer.wait_time = 5.0 / GameManager.timescale
+				#if GameManager.is_perk_active(GameData.Perks.ACCELERATOR):
+					#morph_timer.wait_time *= ACCELERATOR_MULT;
+				#morph_timer.one_shot = false
+#
+				#morph_timer.timeout.connect( func() -> void :
+					#if destroy_animation_requested:
+						#morph_timer.stop()
+						#morph_timer.queue_free()
+						#return
+#
+					#if GameManager.is_game_busy():
+						#return
+#
+					#var adjacent_blocks: Array[PlacedBlock] = get_adjacent_blocks()
+					#var possible_blocks: Array[PlacedBlock] = []
+#
+#
+					#for block in adjacent_blocks:
+						#if is_instance_valid(block) and not block.destroy_animation_requested and not GameData.is_block_on_group(block.type, GameData.BlockGroups.NUCLEAR) and block.type != "indestructible":
+							#possible_blocks.append(block)
+#
+#
+					#if possible_blocks.size() > 0:
+						#var target_block: PlacedBlock = Random.pick_random(possible_blocks)
+						#target_block.morph(GameData.BLOCK_TYPES.URANIUM)
+#
+						#GameCamera.shake_randomly(1, 0.1)
+						##AudioManager.play(AudioManager.SoundEffects.RADIOACTIVE, randf_range(0.4, 0.6))
+#
+						#var reactor_queue: Array[Callable] = []
+#
+						#for reactor_block in GameManager.get_blocks_of_type(GameData.BLOCK_TYPES.REACTOR):
+							#reactor_queue.append(BlockChainReaction.reactor.bind(reactor_block))
+#
+						#EventManager.execute_queue_events(reactor_queue)
+				#)
+#
+				#morph_timer.start()
 
 
 var grid_position: Vector2i = Vector2i.ZERO
