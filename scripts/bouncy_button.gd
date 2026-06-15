@@ -3,6 +3,7 @@ class_name BouncyButton extends Button
 @export var hover_scale: float = 1.1
 @export var pressed_scale_addition: float = 0.05
 @export var animation_duration: float = 0.2
+@export var custom_font_size: int = 0
 
 var scale_tween: Tween
 
@@ -24,7 +25,11 @@ func _get_font_size() -> int:
 
 func _update_font() -> void :
 	add_theme_font_override("font", _get_font_variation())
-	add_theme_font_size_override("font_size", _get_font_size())
+
+	if custom_font_size > 0:
+		add_theme_font_size_override("font_size", custom_font_size)
+	elif not has_theme_font_size_override("font_size"):
+		add_theme_font_size_override("font_size", _get_font_size())
 
 func _ready() -> void :
 	_update_font()
