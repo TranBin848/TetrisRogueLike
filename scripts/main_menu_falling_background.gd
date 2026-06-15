@@ -39,7 +39,7 @@ const SPECIAL_TEXTURE_PATHS: Array[String] = [
 	"res://images/blocks/special/rare/danger.png"
 ]
 
-@export var quantity: int = 18
+@export var quantity: int = 30
 @export var piece_scale_min: float = 0.6
 @export var piece_scale_max: float = 0.7
 @export var special_piece_chance: float = 0.35
