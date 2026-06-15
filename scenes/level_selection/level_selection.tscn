@@ -43,9 +43,6 @@ offset_bottom = -31.0
 [node name="RoundInformationPanel" parent="CanvasLayer/InformationPanelAnchor" instance=ExtResource("5")]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 8
-offset_top = -41.0
-offset_bottom = 41.0
 
 [node name="OverlayHUD" type="CanvasLayer" parent="."]
 

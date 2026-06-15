@@ -68,12 +68,12 @@ func _ready() -> void :
 
 	music_slider.value_changed.connect( func(value: float):
 		settings.music_volume = value
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value))
+		#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear_to_db(value))
 	)
 
 	effect_slider.value_changed.connect( func(value: float):
 		settings.effect_volume = value
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), linear_to_db(value))
+		#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), linear_to_db(value))
 	)
 
 	# effect_slider.gui_input.connect( func(event: InputEvent):

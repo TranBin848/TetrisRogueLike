@@ -26,7 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://bn5wlm0iyjvva" path="res://images/plus_button_normal.png" id="24"]
 [ext_resource type="Texture2D" uid="uid://pljlp13d1erq" path="res://images/plus_button_pressed.png" id="25"]
 [ext_resource type="Texture2D" uid="uid://cx6al5hv7vbi6" path="res://images/plus_button_hover.png" id="26"]
-[ext_resource type="PackedScene" path="res://scenes/ui/pixel_slider.tscn" id="27"]
+[ext_resource type="PackedScene" uid="uid://dorw11b1e8a8e" path="res://scenes/ui/pixel_slider.tscn" id="27"]
 [ext_resource type="Theme" uid="uid://c88wvjauk67nf" path="res://themes/scroll_container_theme.tres" id="28"]
 [ext_resource type="Script" uid="uid://b0or8dipvkyow" path="res://scripts/settings_controls_v_box_container.gd" id="29"]
 [ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="30"]
