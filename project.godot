@@ -96,6 +96,10 @@ user_show_deck={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://localization.en.translation")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

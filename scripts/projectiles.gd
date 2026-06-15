@@ -13,10 +13,10 @@ const PROJECTILE_TEXTURE_MAP: Dictionary = {
 }
 
 const PROJECTILE_PARTICLE_COLOR_MAP: Dictionary = {
-	GameData.BLOCK_TYPES.FIRE_MAGE: Color("ffc825"), 
-	GameData.BLOCK_TYPES.CANNON: Color("5d5d5d"), 
-	GameData.BLOCK_TYPES.SKELETON: Color("ffffff64"), 
-	GameData.BLOCK_TYPES.PIRATE_CANNONEER: Color("ffffff64"), 
+	#GameData.BLOCK_TYPES.FIRE_MAGE: Color("ffc825"), 
+	#GameData.BLOCK_TYPES.CANNON: Color("5d5d5d"), 
+	#GameData.BLOCK_TYPES.SKELETON: Color("ffffff64"), 
+	#GameData.BLOCK_TYPES.PIRATE_CANNONEER: Color("ffffff64"), 
 }
 
 const MAXIMUM_LIFETIME: float = 5.0

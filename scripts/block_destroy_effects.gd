@@ -190,6 +190,11 @@ func pirate_captain(block: PlacedBlock) -> float:
 	#AudioManager.play(AudioManager.SoundEffects.STRING, randf_range(0.8, 1.2))
 	GameCamera.shake_direction(0.5, 0, 0.2)
 	BlockProjectile.create(block.get_parent(), block.type, block.get_center_position())
+	
+	if (GameManager.is_perk_active(GameData.Perks.PROJECTILE_MULT)):
+		get_tree().root.create_timer(0.1).timeout.connect(func():
+			BlockProjectile.create(block.get_parent(), block.type, block.get_center_position())
+		);
 
 	return DEFAULT_DELAY
 
@@ -211,6 +216,10 @@ func pirate_cannoneer(block: PlacedBlock) -> float:
 	GameCamera.shake_direction(0.5, 90, 0.2)
 	#AudioManager.play(AudioManager.SoundEffects.CANNON, randf_range(0.8, 1.2))
 	BlockProjectile.create(block.get_parent(), block.type, block.get_center_position())
+	if (GameManager.is_perk_active(GameData.Perks.PROJECTILE_MULT)):
+		get_tree().root.create_timer(0.1).timeout.connect(func():
+			BlockProjectile.create(block.get_parent(), block.type, block.get_center_position())
+		);
 
 	return DEFAULT_DELAY
 

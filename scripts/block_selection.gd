@@ -101,11 +101,13 @@ func randomize_blocks() -> void :
 
 
 	var sorted_block_types: Array = GameData.blocks.keys()
+	sorted_block_types.remove_at(sorted_block_types.size() - 1); # Indestructibles block
 	sorted_block_types.sort()
+	print(sorted_block_types.size());
 
 	for block_type: String in sorted_block_types:
 
-		if block_type in [GameData.BLOCK_TYPES.NORMAL, GameData.BLOCK_TYPES.MOAI, GameData.BLOCK_TYPES.X]:
+		if block_type in [GameData.BLOCK_TYPES.NORMAL]:
 			continue
 
 

@@ -285,7 +285,7 @@ func land_piece() -> void :
 	var current_blocks: Array[Vector2i] = get_current_blocks()
 	var sprite_path: String
 
-	if current_piece_data.type in [GameData.BLOCK_TYPES.MOAI, GameData.BLOCK_TYPES.NORMAL, GameData.BLOCK_TYPES.X]:
+	if current_piece_data.type in [ GameData.BLOCK_TYPES.NORMAL]:
 		sprite_path = PieceRenderer.DECK_SPRITES[GameManager.current_deck][current_piece_data.shape]
 	else:
 		sprite_path = GameData.get_block_texture_path(current_piece_data.type)
@@ -395,10 +395,6 @@ func hold_piece() -> void :
 
 
 func rotate_piece(addition: int) -> void :
-
-	if current_piece_data.type == GameData.BLOCK_TYPES.STONE or current_piece_data.type == GameData.BLOCK_TYPES.MOAI:
-		return
-
 
 	if current_piece_data.shape == PieceRenderer.ShapeType.O:
 		return

@@ -1,0 +1,362 @@
+﻿key,en
+ROUND,Level
+ACHIEVEMENT_POINTS_500_000_COMBO_DESCRIPTION,"Score a 500,000 combo."
+BLOCK_GROUP_SPECIAL,Special
+BLOCK_GROUP_UNCOMMON,Uncommon
+BLOCK_GROUP_COMMON,Common
+BLOCK_GROUP_RARE,Rare
+BLOCK_GROUP_ARCANE,Magical
+BOSS_REVERSED,The Mirror
+TOTAL_SCORE,Total Score
+BLOCK_BRICK_DESCRIPTION,"When placing a non-rotated [yellow]Piece[white], gain [multiplier:+1]."
+BLOCK_CANNON_DESCRIPTION,"When destroyed, gives [points:+3].
+
+Can be fired by [block:pirate_cannoneer] blocks, launching a [yellow]Cannonball[white] that destroys the entire [yellow]Column[white]."
+INPUT_USER_DOWN,Move Down
+BUTTON_RESTART,Restart
+LAST_BREATH_DESCRIPTION_2,"After placing your last [yellow]Piece[white], gain 15% of your [yellow]Target Score[white] as [points]"
+DECK_NORMAL,Default
+LAST_BREATH_DESCRIPTION_3,"After placing your last [yellow]Piece[white], gain 20% of your [yellow]Target Score[white] as [points]"
+BLOCK_FIRE_MAGE_DESCRIPTION,"When destroyed, releases two [yellow]Fireballs[white] that burns up to 3 [yellow]Blocks[white], granting [multiplier:+5] per [yellow]Block[white].
+
+[yellow]Fireball[white] bounces off the wall."
+LAST_BREATH_DESCRIPTION_1,"After placing your last [yellow]Piece[white], gain 10% of your [yellow]Target Score[white] as [points]"
+LAST_BREATH_DESCRIPTION_4,"After placing your last [yellow]Piece[white], gain 25% of your [yellow]Target Score[white] as [points]"
+LAST_BREATH_DESCRIPTION_5,"After placing your last [yellow]Piece[white], gain 40% of your [yellow]Target Score[white] as [points]"
+BLOCK_ARCANIST_DESCRIPTION,"When destroyed, activates the effect of every [group:arcane] block without destroying them."
+NEXT_PIECE,Next Piece
+OPTION_EFFECT_VOLUME,Effect Volume
+POINT_RUSH_DESCRIPTION,[points] given by [yellow]Blocks[white] of your initial deck are multiplied [yellow]x2[white].
+BUTTON_PLAY,Play
+BLOCK_GROUP_MONSTER,Monster
+FINAL_ROUND,Final Round
+BLOCK_SLIME,Slime
+INPUT_USER_LEFT,Move Left
+INPUT_USER_PLACE,Instant Place
+STACK_MASTER_DESCRIPTION,"If you clear [yellow]3 or more lines[white] in a single combo, gain [multiplier:x2]."
+ACHIEVEMENT_PLACE_100_PIECES_DESCRIPTION,Place 100 Pieces in total.
+BLOCK_UNKNOWN,Unknown Block
+BLOCK_JACKPOT_DESCRIPTION,"When destroyed, triggers all [group:casino] effects without destroying the blocks."
+PERFECTION,Perfection
+BLOCK_MOAI_DESCRIPTION,"[red]Can't be rotated![white] When destroyed, gives [points:+10]."
+BLOCK_MIXED_DICE_DESCRIPTION,"When destroyed, awards [points:1-3] or [multiplier:1-3] multiplied by the current [yellow]Level[white]."
+BLOCK_CURSED_CHEST,Cursed Chest
+BOSS_PERFECTIONIST_DESCRIPTION,Clearing LESS than four [yellow]Rows[white] multiplies your [points] by [yellow]0.5x[white].
+TUTORIAL_4,"Use the hold button to save pieces, but your [yellow]Target Score[white] increases 10% each time."
+INPUT_USER_SHOW_DECK,Show Deck
+DEMO_VERSION,Demo Version
+TUTORIAL_5,Reach your [yellow]Target Score[white] to win and unlock new [yellow]Blocks[white]. [red]Red levels[white] gives a [perk]!
+POINT_RUSH,Point Rush
+TUTORIAL_6,You lose if [yellow]Pieces[white] run out or [yellow]Blocks[white] reach the screen top.
+DREAM_DESCRIPTION,Gives 25% luck.
+ACCELERATOR_DESCRIPTION,Increase the speed of reactions.
+PROJECTILE_MULT_DESCRIPTION,Increases the amount of projectiles.
+PROJECTILE_HIT_DESCRIPTION,Increases the amount of hit of projectiles.
+SACRIFICE_ROW_DESCRIPTION,"Add 1 permanent indestructible line, permanently gives [points:+50]."
+COMBO_ENGINE_DESCRIPTION,"When two or more lines is cleared, gives [points:+150]."
+BUILDER_DESCRIPTION,"When line cleared, gives [points:+50]."
+MULT_REACTOR_DESCRIPTION,"When a block's effect triggered, gives [multiplier:+1]."
+RETRIGGER_BLOCK_DESCRIPTION,Retrigger current block's effect.
+SPEED_RUN_DESCRIPTION_1,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+3]."
+SPEED_RUN_DESCRIPTION_2,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+10]."
+TUTORIAL_0,Welcome to [yellow]Stackflow[white]! This strategic block-stacking game is all about smart placement and management.
+BOSS_FALL_UP,The Defiant
+SPEED_RUN_DESCRIPTION_3,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+25]."
+BLOCK_BLUE_DICE_DESCRIPTION,"When destroyed, randomly awards [points:1-4] multiplied by the current [yellow]Level[white]."
+TUTORIAL_1,"Watch your Score, [points], and [multiplier] at the top. These drive your progress!"
+BOSS_DIZZY,The Puppet Master
+TARGET_SCORE,Target Score
+SPEED_RUN_DESCRIPTION_4,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+35]."
+TUTORIAL_2,Place [yellow]Blocks[white] to complete lines. Each line gives [blue]+10 Points[white] plus [multiplier] bonuses.
+INPUT_USER_ROTATE_COUNTERCLOCKWISE,Rotate Counterclockwise
+SPEED_RUN_DESCRIPTION_5,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+100]."
+TUTORIAL_3,Check upcoming [yellow]Pieces[white] and track what's remaining in your deck. Plan ahead wisely!
+ACHIEVEMENT_PLACE_500_PIECES,Block Legend
+BOSS_PERFECTIONIST,The Perfectionist
+BLOCK_CURSED_CHEST_DESCRIPTION,"When destroyed, has [yellow]15%[white] chance to give [points:+1000] but an 85% chance to lose [points:-100]!"
+VICTORY,Victory!
+PERFECTION_DESCRIPTION,Gain [multiplier:+5] for clearing four [yellow]Rows[white]. Clearing four [yellow]Rows[white] accumulates [red]+5[white] to this bonus. Persists through [yellow]Levels[white].
+BLOCK_TREASURE_CHEST,Treasure Chest
+BLOCK_RED_DICE,Red Dice
+DEMO_THANKS,[wave]Thanks for Playing!
+BLOCK_HIVE_DESCRIPTION,"When destroyed, gives [multiplier:+1] for each [block:worker_bee] block multiplied by the number of [block:queen_bee] blocks."
+BLOCK_HONEY_BOMB,Honey Bomb
+ACHIEVEMENT_DISCOVER_FORTRESS_DESCRIPTION,Discover all [group:fortress] blocks.
+BLOCK_BRONZE_DESCRIPTION,"When destroyed, gives [blue]+0.3 Point[white] for each [yellow]Block[white] on the board."
+BLOCK_MIMIC,Mimic
+BLOCK_RED_DICE_DESCRIPTION,"When destroyed, randomly awards [multiplier:1-4] multiplied by the current [yellow]Level[white]."
+BLOCK_DETONATOR,Red Button
+ACHIEVEMENT_PLACE_500_PIECES_DESCRIPTION,Place 500 Pieces in total.
+AUTOMAGIC_DESCRIPTION,[yellow]Pieces[white] will automatically be placed [yellow]3 seconds[white] after it spawns. You gain [points:+10] every time a [yellow]Piece[white] is placed.
+INPUT_USER_RIGHT,Move Right
+SACRIFICE_DESCRIPTION,You can't use [yellow]Hold[white]. Instead it'll sacrifice your current [yellow]Piece[white] to reduce the [yellow]Target Score[white] by [yellow]5%[white].
+BLOCK_CFOUR,C4
+BLOCK_IRON_DESCRIPTION,"When destroyed, gives [multiplier:+0.1] for each [yellow]Block[white] on the board."
+BLOCK_BOOKSHELF,Bookshelf
+BLOCK_URANIUM,Uranium
+BUTTON_QUIT,Quit
+BLOCK_PIRATE_CANNONEER_DESCRIPTION,"When destroyed, gives [multiplier:+1] and shoots all [block:cannon] blocks on the board."
+BLOCK_SLIME_DESCRIPTION,"When destroyed, creates a new [block:slime] in a random gap in a lower [yellow]Row[white]."
+BLOCK_PIRATE_CAPTAIN,Pirate Captain
+ACHIEVEMENT_PLACE_50_PIECES,Block Placer
+QUIT,Quit
+ACHIEVEMENT_DISCOVER_HARMONY_DESCRIPTION,Discover all [group:harmony] blocks.
+OPTION_VISUAL_EFFECTS,Visual Effects
+BUTTON_MENU,Back to Menu
+BLOCKS_ROLLED,Blocks Rolled
+ACHIEVEMENT_THE_X,The X
+LAST_BREATH,Last Breath
+CHAIN_REACTION,Chain Reaction
+OPTION_GENERAL,General
+BOSS_BLINDFOLDED_DESCRIPTION,You lose the preview of where the [yellow]Piece[white] is going to land.
+ACHIEVEMENT_THE_MOAI,The Moai
+BLOCK_MOAI,The Moai
+BUTTON_RESUME,Resume
+BOSS_REVERSED_DESCRIPTION,The horizontal controls are reversed.
+ITEMS_COLLECTED,Items Collected
+ACHIEVEMENT_DISCOVER_COLONY,Beengo!
+BLOCK_PIRATE_CANNONEER,Pirate Cannoneer
+PHRASE_VICTORY_2,Perfect run! Ready for more?
+PHRASE_VICTORY_3,Masterful! The chaos fears your precision.
+PHRASE_VICTORY_1,Victory! The blocks bow to you.
+BLOCK_CFOUR_DESCRIPTION,"After [yellow]5s[white], explodes a [yellow]3x3[white] area around it, giving [points:+3] for each [yellow]Block[white]."
+BOSS_ECLIPSE,The Eclipse
+ROUND_REWARD,Reward
+SHORTCUT,Shortcut
+PHRASE_VICTORY_4,Brilliant! The RNG smiles upon you.
+BUTTON_ACHIEVEMENTS,Achievements
+STACK_MASTER,Stack Master
+BLOCK_NUKE,Nuke
+OPTION_CONTROLS,Controls
+BLOCK_BLUE_DICE,Blue Dice
+ACHIEVEMENT_BEAT_LEVEL_10,Getting the Hang of It
+BLOCK_GRANITE_DESCRIPTION,"When destroyed, multiplies [points] by [blue]x2[white], but multiplies your [multiplier] by [red]x0.75[white]."
+OPTION_MUSIC_VOLUME,Music Volume
+BLOCK_WORKER_BEE_DESCRIPTION,"When a [yellow]Block[white] is placed, gives [points:+0.5] for each adjacent [group:colony] block."
+CUSTOM_SEED,Custom Seed
+BLOCK_HONEY_DICE_DESCRIPTION,"When a [group:casino] block is destroyed, gives [points:+0.5] for each [group:colony] block on the board."
+ACHIEVEMENT_DISCOVER_EXPLOSIVES,Certified TNT Enjoyer
+BLOCK_JACKPOT,Jackpot
+ACHIEVEMENT_DISCOVER_CASINO,Becoming Addicted...
+BUTTON_CONTINUE,Continue
+BLOCK_SKELETON_DESCRIPTION,"When destroyed, releases a flying [yellow]Bone[white] that shatters the first [yellow]Block[white] it hits, giving [points:+5] per [yellow]Block[white]."
+BOSS_THIEF,The Thief
+FORGIVEN,Forgiven
+BLOCK_BRONZE,Bronze
+BLOCK_GROUP_COLONY,Colony
+MOMENTUM_DESCRIPTION,Clearing a [yellow]Combo[white] starts a 15s timer. Each successive [yellow]Combo[white] grants an additional [points:+10] that accumulates and refreshes the timer.
+BLOCK_X,The X
+BLOCK_MIXED_DICE,Mixed Dice
+ROUND_PLAY,Play Round
+BLOCK_FIRE_MAGE,Fire Mage
+BLOCK_REACTOR,Reactor
+BLOCK_GOLD,Gold
+BLOCK_BLUE_C,Blue
+BLOCK_RED_C,Red
+BLOCK_RAINBOW,Rainbow
+BLOCK_GLASS,Glass
+BLOCK_LUCKY,Lucky Block
+BLOCK_DANGER,Danger
+BLOCK_COPY,Copy
+BLOCK_SAND,Sand 
+BLOCK_OBSIDIAN,Obsidian
+ACHIEVEMENT_DISCOVER_HARMONY,Lofi Enjoyer
+BLOCKIPEDIA_BOSS,Bosses
+ACHIEVEMENT_WIN_FIRST_RUN_DESCRIPTION,Complete your first full run.
+ACHIEVEMENT_DISCOVER_MINERALS,I'm Rich!
+BLOCK_HIVE,Hive
+BLOCK_HONEY,Honey
+BUTTON_OPTIONS,Options
+POINTS,Stack
+REWARD_PERK,Perk
+BLOCK_DETONATOR_DESCRIPTION,"When destroyed, activates the effect of every [group:explosives] blocks."
+OPTION_LANGUAGE,Language
+MOMENTUM,Momentum
+BLOCK_SPEAKERS_DESCRIPTION,"When destroyed, activates the effect of every [group:harmony] block without destroying them."
+BLOCKIPEDIA_PERKS_DESCRIPTION,Discover the various [yellow]Perks[white] that can aid you in your run.
+BLOCK_TNT_DESCRIPTION,"When destroyed, explodes adjacent [yellow]Blocks[white], giving [points:+3] each."
+SACRIFICE,Sacrifice
+BLOCK_URANIUM_DESCRIPTION,"When destroyed, gives [points:+10].
+
+Every 5.0s, a random adjacent [yellow]Block[white] becomes [block:uranium] if it is not [group:nuclear]."
+BLOCK_HONEY_BOMB_DESCRIPTION,"When destroyed, transforms all adjacent [yellow]Blocks[white] into [block:hive]."
+REWARD_DESCRIPTION,Select a perk to upgrade permanently your run.
+ACHIEVEMENT_DISCOVER_CASINO_DESCRIPTION,Discover all [group:casino] blocks.
+BUTTON_NEW_GAME,New Game
+BLOCK_GROUP_NUCLEAR,Nuclear
+SEED,Seed
+BLOCK_IRON,Iron
+BOSS_THIEF_DESCRIPTION,Prevents you from using the [yellow]Hold[white] function.
+DECK_THE_X_DESCRIPTION,"When a [yellow]Row[white] is cleared, you gain [multiplier:+10] and [points:+1]."
+ACHIEVEMENT_PLACE_100_PIECES,Professional Stacker
+ACHIEVEMENT_DISCOVER_ARCANE_DESCRIPTION,Discover all [group:arcane] blocks.
+LANGUAGE_NAME,English
+ACCEPTANCE_DESCRIPTION_1,"If you place a [yellow]Piece[white] without rotating it, gain [multiplier:+5]."
+ACCEPTANCE_DESCRIPTION_2,"If you place a [yellow]Piece[white] without rotating it, gain [multiplier:+8]."
+BLOCK_UNDEAD_PIRATE,Undead Pirate
+ACHIEVEMENT_DISCOVER_MONSTER,Gotta Catch 'em All!
+ACCEPTANCE_DESCRIPTION_3,"If you place a [yellow]Piece[white] without rotating it, gain [multiplier:+12]."
+ACCEPTANCE_DESCRIPTION_4,"If you place a [yellow]Piece[white] without rotating it, gain [multiplier:+15]."
+ACHIEVEMENT_POINTS_100_000_COMBO,Combo Maestro
+ACCEPTANCE_DESCRIPTION_5,"If you place a [yellow]Piece[white] without rotating it, gain [multiplier:+30]."
+DEMO_CONTENT,"You've reached the end of the available content. We hope you enjoyed this preview of what's to come.
+
+If you'd like to follow the game's development, add Stackflow to your Steam wishlist to get notified when the Early Access begins!"
+RESET_CONTROLS_CONFIRMATION,Procceding will reset your control bindings to default. Are you sure?
+BLOCK_BRICK,Brick
+BLOCK_GROUP_FORTRESS,Fortress
+ACHIEVEMENT_THE_X_DESCRIPTION,Get [multiplier:100] or more on a single combo.
+OPTION_INPUT_REPEAT_DELAY,Input Repeat Delay (DAS)
+BLOCK_HONEY_DICE,Honey Dice
+BLOCKIPEDIA_PERKS,Perks
+BLOCK_GROUP_PIRATES,Pirates
+EMPTY,Empty
+BLOCK_X_DESCRIPTION,Gives [multiplier:+1] when destroyed.
+ACHIEVEMENT_DISCOVER_MINERALS_DESCRIPTION,Discover all [group:minerals] blocks.
+PIECES_PLAYED,Pieces Played
+BUTTON_BLOCKIPEDIA,Blockipedia
+BLOCK_WORKER_BEE,Worker Bee
+BOSS_DIZZY_DESCRIPTION,[yellow]Pieces[white] rotate automatically every [yellow]3 seconds[white].
+SHORTCUT_DESCRIPTION,Reduces the [yellow]Target Score[white] by [yellow]25%[white].
+OPTION_INPUT_SOFT_DROP_RATE,Soft Drop Rate
+BLOCK_SPEAKERS,Speakers
+BLOCK_DIAMOND,Diamond
+BLOCK_CANNON,Cannon
+BLOCK_BLUE_C_DESCRIPTION,"When destroyed,  gives [points:+50]."
+BLOCK_RED_C_DESCRIPTION,"When destroyed,  gives [multiplier:+4]."
+BLOCK_SAND_DESCRIPTION,Settles into any empty holes upon landing.
+BLOCK_COPY_DESCRIPTION,Copy the closest block's effect.
+BLOCK_LUCKY_DESCRIPTION,"When explode, add one random block to the deck."
+BLOCK_GLASS_DESCRIPTION,Multiply multipliers by 1.5 when destroyed last.
+BLOCK_RAINBOW_DESCRIPTION,"When destroyed, has [yellow]20%[white] chance to explode and gives [multiplier:+20] but an 80% chance to give nothing!"
+BLOCK_GOLD_DESCRIPTION,"When destroyed, gives [yellow]+2 coins[white]."
+BLOCK_DANGER_DESCRIPTION,"When destroyed, clears all blocks of the same color/type currently on the board and converts them all into Chips (each cleared space = 10 chips)."
+BLOCK_OBSIDIAN_DESCRIPTION,Can't be destroyed. Gives permanent [multiplier: +4].
+BLOCK_ELECTRIC_GUITAR,Electric Guitar
+ACHIEVEMENT_BEAT_LEVEL_20_DESCRIPTION,Survive to level 20.
+ACHIEVEMENT_DISCOVER_MONSTER_DESCRIPTION,Discover all [group:monster] blocks.
+FULL_CLEAR_DESCRIPTION,"If you clear the [yellow]Board[white] completely, multiplies [points] by [blue]x3[white] and [multiplier] by [red]x3[white]."
+BOSS_FALL_UP_DESCRIPTION,[yellow]Pieces[white] fall upwards instead of downwards.
+BLOCK_REWARD,Choose a Block
+BLOCK_BOOKSHELF_DESCRIPTION,"When destroyed, gives [points:+25].
+
+Transforms all [yellow]Blocks[white] in a 2x2 area around it into a different [yellow]Block[white]."
+WISHLIST_BUTTON,Wishlist on Steam
+BOSS_BLINDFOLDED,The Oracle
+ACHIEVEMENT_DISCOVER_ARCANE,World of Blocraft
+DECK_NORMAL_DESCRIPTION,"When a [yellow]Row[white] is cleared, you gain [points:+10] and [multiplier:+1]."
+BLOCK_GROUP_MINERALS,Minerals
+BLOCK_GROUP_EXPLOSIVES,Explosives
+BLOCK_RADIOACTIVE_DESCRIPTION,"When destroyed, gives [multiplier:+1] and converts a random [yellow]Block[white] on the board into [yellow]Radioactive[white]."
+BLOCK_GRANITE,Granite
+YES,Yes
+INPUT_USER_ROTATE_CLOCKWISE,Rotate Clockwise
+DECK_MOAI,The Moai
+BLOCK_UNKNOWN_DESCRIPTION,Keep playing to discover this [yellow]Block[white]!
+BLOCK_PIANO_DESCRIPTION,"When destroyed, gives [points:+4] multiplied by the number of [block:piano] blocks on the same [yellow]Row[white]."
+BLOCK_GROUP_CASINO,Casino
+PIECES,Pieces
+BLOCK_STONE,Stone
+BLOCK_NUKE_DESCRIPTION,"When destroyed, explodes its [yellow]Column[white], giving [points:+1] per [yellow]Block[white].
+
+[group:nuclear] blocks give [points:+5] instead."
+CONTINUE,Continue
+BLOCKIPEDIA_BOSS_DESCRIPTION,Get to know the [red]Bosses[white] that challenge you every third [yellow]Level[white].
+DEMO_LOCKED_DESCRIPTION,Only available on the full version of the game.
+ACHIEVEMENT_BEAT_LEVEL_20,Veteran
+PAUPER,Pauper
+PAUPER_DESCRIPTION,Gain [points:+10] for clearing a single [yellow]Row[white]. Clearing single [yellow]Rows[white] accumulates [blue]+10[white] to this bonus. Persists through [yellow]Levels[white].
+BLOCKIPEDIA_BLOCKS,Blocks
+FULL_CLEAR,Full Clear
+GAME_OVER,Game Over
+BLOCK_REWARD_DESCRIPTION,Select a new type of block to appear on your board.
+BLOCK_QUEEN_BEE,Queen Bee
+BLOCK_ELECTRIC_GUITAR_DESCRIPTION,"When destroyed, gives [points:+4] multiplied by the number of [block:electric_guitar] blocks in the same [yellow]Column[white]."
+ACHIEVEMENT_BEAT_LEVEL_10_DESCRIPTION,Survive to level 10.
+BLOCK_TREASURE_CHEST_DESCRIPTION,"When destroyed, has [yellow]50%[white] chance to give [points:+100] but a 50% chance to give nothing!"
+ACCEPTANCE,Acceptance
+DECK_THE_X,The X
+BLOCK_HONEY_DESCRIPTION,Adjacent [group:colony] block bonuses are multiplied by [yellow]x2[white].
+BLOCK_NORMAL,Block
+DECK_MOAI_DESCRIPTION,"[red]Can't be rotated![white] When destroyed, gives [points:+10]."
+BLOCK_ARCANIST,Arcanist
+INSERT,Insert
+RESTART,Restart
+ACHIEVEMENT_DISCOVER_COLONY_DESCRIPTION,Discover all [group:colony] blocks.
+BLOCK_STONE_DESCRIPTION,[red]Can't be rotated[white]. Gives [multiplier:+10] when destroyed.
+FORGIVEN_DESCRIPTION,Using [yellow]Hold[white] won't increase your [yellow]Target Score[white] anymore.
+<!MissingKey:243:Hold Piece>,Hold Piece
+DREAM,Dream
+ACCELERATOR,Accelerator
+PROJECTILE_MULT,Projectile Mult
+PROJECTILE_HIT,Projectile Hit
+SACRIFICE_ROW,Row Sacrifice
+COMBO_ENGINE,Combo Engine
+BUILDER,Builder
+MULT_REACTOR,Mult Reactor
+RETRIGGER_BLOCK,Retrigger block
+SPEED_RUN,Speedrunner
+CHAIN_REACTION_DESCRIPTION_4,"When another [perk] activates, gain [multiplier:+13]."
+OPTION_GAME_SPEED,Game Speed
+CHAIN_REACTION_DESCRIPTION_5,"When another [perk] activates, gain [multiplier:+20]."
+CHAIN_REACTION_DESCRIPTION_2,"When another [perk] activates, gain [multiplier:+5]."
+BLOCK_DIAMOND_DESCRIPTION,"When destroyed, gives [points:+3].
+
+Adjacent [yellow]Iron[white] and [yellow]Bronze[white] bonuses are multiplied by [yellow]x3[white]."
+CHAIN_REACTION_DESCRIPTION_3,"When another [perk] activates, gain [multiplier:+10]."
+BUTTON_ROLL,Roll
+<!MissingKey:252:Rotate 180 Degrees>,Rotate 180 Degrees
+CHAIN_REACTION_DESCRIPTION_1,"When another [perk] activates, gain [multiplier:+1]."
+ACHIEVEMENT_DISCOVER_NUCLEAR_DESCRIPTION,Discover all [group:nuclear] blocks.
+BLOCK_NORMAL_DESCRIPTION,Gives [points:+1] when destroyed.
+BLOCKS_SKIPPED,Blocks Skipped
+OPTION_SPEEDRUN_TIMER,Speedrun Timer
+ACHIEVEMENT_THE_MOAI_DESCRIPTION,Win a round [red]without[white] rotating any [yellow]Piece[white].
+BLOCK_TNT,TNT
+BLOCK_BOMB_DESCRIPTION,"When destroyed, explodes a [yellow]3x3[white] area around it, giving [multiplier:+1] for each [yellow]Block[white]."
+BEST_SCORE,Best Score
+ACHIEVEMENT_WIN_FIRST_RUN,Beginner's Luck (Or Skill?)
+OPTION_INPUT_REPEAT_RATE,Input Repeat Rate (ARR)
+BLOCK_QUEEN_BEE_DESCRIPTION,"When a [yellow]Block[white] is placed, gives [multiplier:+0.5] for each adjacent [group:colony] block."
+BUTTON_SKIP,Skip
+ACHIEVEMENT_DISCOVER_FORTRESS,Are You Building a Castle?!
+SETTINGS,Settings
+OPTION_SAVE,Save
+MULTIPLIER,Flow
+NEW_GAME_CONFIRMATION,Procceding will reset your progress. Are you sure?
+ACHIEVEMENT_PLACE_50_PIECES_DESCRIPTION,Place 50 Pieces in total.
+BLOCK_GROUP_HARMONY,Harmony
+ACHIEVEMENT_POINTS_100_000_COMBO_DESCRIPTION,"Score a 100,000 combo."
+NO,No
+OPTION_FULLSCREEN,Fullscreen
+BLOCK_PIANO,Piano
+AUTOMAGIC,Automagic
+ACHIEVEMENT_DISCOVER_PIRATES_DESCRIPTION,Discover all [group:pirates] blocks.
+BLOCK_UNDEAD_PIRATE_DESCRIPTION,"When destroyed, releases an [yellow]Undead Arm[white].
+
+[yellow]Undead Arm[white] gives [points:+5] for each [yellow]Block[white] it hits. Can hit a maximum of 5 [yellow]Blocks[white]."
+BLOCK_ACOUSTIC_GUITAR_DESCRIPTION,"When destroyed, gives [multiplier:+2] multiplied by the number of [block:acoustic_guitar] blocks in the same [yellow]Column[white]."
+DEMO_LOCKED_TITLE,Not Available on Demo
+BOSS_ECLIPSE_DESCRIPTION,"Hides the [yellow]Pieces Left[white], [yellow]Next Piece[white], and [yellow]Hold[white] displays."
+BLOCK_BOMB,Bomb
+BLOCK_REACTOR_DESCRIPTION,"Each time a [group:nuclear] block spreads, gain [multiplier:+1]."
+ACHIEVEMENT_DISCOVER_PIRATES,Yo Ho!
+REWARD_BLOCK,Block
+STAGE_CLEAR,Stage Clear
+BLOCK_MIMIC_DESCRIPTION,"When destroyed, gives [multiplier:+3].
+
+Transforms a random [yellow]Block[white] on the board into a different [yellow]Block[white]."
+PERKS,Perks
+REWARD,Pick Your Reward
+BLOCK_RADIOACTIVE,Radioactive
+BLOCKIPEDIA_BLOCKS_DESCRIPTION,Learn about the [yellow]Blocks[white] you may find during the game.
+ACHIEVEMENT_DISCOVER_EXPLOSIVES_DESCRIPTION,Discover all [group:explosives] blocks.
+BLOCK_ACOUSTIC_GUITAR,Acoustic Guitar
+ACHIEVEMENT_DISCOVER_NUCLEAR,Dr. Oppenblocker
+SCORE,Score
+BLOCK_PIRATE_CAPTAIN_DESCRIPTION,"When destroyed, gives [points:+3] and command all [block:pirate_cannoneer] blocks to shoot [yellow]Knives[white].
+
+Each [yellow]Knife[white] destroys the first [yellow]Block[white] it hits."
+LOCKED,Locked
+BLOCK_SKELETON,Skeleton
+ACHIEVEMENT_POINTS_500_000_COMBO,Combo Legend

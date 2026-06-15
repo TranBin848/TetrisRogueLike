@@ -4,8 +4,8 @@ class_name GameScreen extends Node2D
 static var _instance: GameScreen
 
 @onready var current_score_panel: ScoreBackgroundPanel = $HUD/MainMarginContainer/MainHBoxContainer/LeftContainer/ScoreBackgroundPanel
-@onready var game_over_screen: GameOverScreen = $OverlayHUD/GameOverScreen
-@onready var victory_screen: VictoryScreen = $OverlayHUD/VictoryScreen
+@onready var game_over_screen: GameOverScreen = $HUD/GameOverScreen
+@onready var victory_screen: VictoryScreen = $HUD/VictoryScreen
 #@onready var demo_warning: DemoWarning = %DemoWarning
 
 
