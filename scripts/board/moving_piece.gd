@@ -312,6 +312,10 @@ func land_piece() -> void :
 		if time_since_spawn <= time_threshold:
 			GameManager.trigger_perk(GameData.Perks.SPEED_RUN)
 
+	if time_since_spawn <= GameManager.FAST_PLACEMENT_THRESHOLD:
+		GameManager.add_multiplier(GameManager.FAST_PLACEMENT_BONUS)
+		PointNotification.create_and_slide(global_position, PointNotification.RED, "SPEED BONUS! x%s" % str(GameManager.FAST_PLACEMENT_BONUS))
+
 	#AudioManager.play(AudioManager.SoundEffects.DIRT_3, randf_range(1.6, 2.0))
 
 	queue_free()

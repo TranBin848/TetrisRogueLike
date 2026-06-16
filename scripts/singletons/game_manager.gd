@@ -49,6 +49,13 @@ const ROUND_SCORES_BASE: Array[int] = [
 	25000000
 ]
 
+const ROUND_TIMER_BASE: Array[int] = [
+	60, 65, 70, 75, 80, 85, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230
+]
+
+const FAST_PLACEMENT_THRESHOLD: float = 1.5
+const FAST_PLACEMENT_BONUS: float = 0.2
+
 const DEMO_LAST_ROUND: int = 12
 const BOSS_COOLDOWN_ROUNDS: int = 2
 const MOUSE_IDLE_TIMEOUT: float = 2.0
@@ -74,6 +81,9 @@ var show_tutorial: bool = true
 var settings: SettingsResource
 
 var deathline: bool = false
+var time_out: bool = false
+var round_time_left: float = 0.0
+var is_timer_active: bool = false
 
 var current_round: int = 1
 var current_boss: GameData.BossTypes = GameData.BossTypes.NONE
@@ -275,6 +285,14 @@ func _process(delta: float) -> void :
 
 	_mouse_idle_timer += delta
 
+	if is_timer_active and not paused and not is_game_busy():
+		round_time_left -= delta * timescale
+		if round_time_left <= 0:
+			round_time_left = 0
+			is_timer_active = false
+			time_out = true
+			if is_instance_valid(GameScreen._instance):
+				GameScreen.next_action()
 
 	if is_gamepad_connected and _mouse_idle_timer >= MOUSE_IDLE_TIMEOUT:
 		if Input.mouse_mode != Input.MOUSE_MODE_HIDDEN:
@@ -973,6 +991,9 @@ func reset_variables() -> void :
 	cumulative_perks.clear()
 
 	deathline = false
+	time_out = false
+	is_timer_active = false
+	round_time_left = 0.0
 
 	points = Big.new(0)
 	multiplier = Big.new(1)
@@ -1007,6 +1028,10 @@ func goto_board() -> void :
 	Transition.goto(Transition.Scene.GAME, func():
 		score = Big.new(0)
 		target_score = Big.new(calculate_round_score(current_round))
+		
+		round_time_left = get_round_time_limit(current_round)
+		is_timer_active = true
+		time_out = false
 
 		CalculationBlocker.active_count = 0
 
@@ -1065,22 +1090,20 @@ func can_roll() -> bool:
 
 
 
+func get_round_time_limit(round_num: int) -> float:
+	if round_num <= ROUND_TIMER_BASE.size():
+		return float(ROUND_TIMER_BASE[round_num - 1])
+	return float(ROUND_TIMER_BASE[ROUND_TIMER_BASE.size() - 1])
+
 func calculate_round_score(round_num: int) -> Big:
 	if round_num <= 0:
 		return Big.new(0)
 
-
 	if round_num <= ROUND_SCORES_BASE.size():
 		return Big.new(ROUND_SCORES_BASE[round_num - 1])
 
-
-
-
-
-
 	var last_known_score: Big = Big.new(ROUND_SCORES_BASE[ROUND_SCORES_BASE.size() - 1])
 	var rounds_beyond: int = round_num - ROUND_SCORES_BASE.size()
-
 
 	var base_score: Big = last_known_score.duplicate()
 

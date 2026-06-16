@@ -148,7 +148,7 @@ func _update_multiplier() -> void :
 	var normalized_value: float = (clamped_value - WAVE_ANIMATION_MINIMUM_VALUE) / (WAVE_ANIMATION_MAXIMUM_VALUE - WAVE_ANIMATION_MINIMUM_VALUE)
 	wave_amplitude = normalized_value * WAVE_ANIMATION_AMPLITUDE_MAXIMUM
 
-	multiplier_label.text = (wave_tag % wave_amplitude) + _format_big_number(GameManager.multiplier)
+	multiplier_label.text = (wave_tag % wave_amplitude) + GameManager.multiplier.to_scientific(false)
 
 
 func trigger_finish_animation() -> void :
