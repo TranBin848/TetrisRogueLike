@@ -32,7 +32,7 @@ static func next_action() -> void :
 
 	GameManager.next_action_frame = current_frame
 
-	if GameManager.deathline:
+	if GameManager.deathline or GameManager.time_out:
 		if is_instance_valid(_instance.game_over_screen):
 			_instance.game_over_screen.appear_animation()
 		return
