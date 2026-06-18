@@ -1,13 +1,13 @@
 [gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b3e1767opghrn"]
 
-[ext_resource type="Texture2D" uid="uid://bp5astyt0hf10" path="res://images/main_button.png" id="1_x0gya"]
+[ext_resource type="Texture2D" uid="uid://0i5ydlkit6kc" path="res://images/background/main_button_grey.png" id="1_6wq74"]
 
 [resource]
 content_margin_left = 6.0
 content_margin_top = 4.0
 content_margin_right = 6.0
 content_margin_bottom = 4.0
-texture = ExtResource("1_x0gya")
+texture = ExtResource("1_6wq74")
 texture_margin_left = 2.0
 texture_margin_top = 2.0
 texture_margin_right = 2.0

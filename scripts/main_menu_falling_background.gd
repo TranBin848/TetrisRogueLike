@@ -6,6 +6,11 @@ const SHADOW_OFFSET: Vector2 = Vector2(2, 2)
 const PIECE_SHADOW_COLOR: Color = Color("2f2f2f")
 const OUTLINE_COLOR: Color = Color("2f2f2f")
 const PIECE_SHADOW_SPRITE: Texture2D = preload("res://images/white_block.png")
+const MONOCHROME_PIECE_COLOR: Color = Color("1b2027")
+const MONOCHROME_OUTLINE_COLOR: Color = Color("303842")
+const MONOCHROME_SHADOW_COLOR: Color = Color("090c10")
+const GRID_COLOR: Color = Color("29313a")
+const DARK_BACKGROUND_COLOR: Color = Color("0d1116")
 
 const SHAPES: Array = [
 	[Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1)],
@@ -45,6 +50,10 @@ const SPECIAL_TEXTURE_PATHS: Array[String] = [
 @export var special_piece_chance: float = 0.35
 @export var fall_speed_min: float = 40.0
 @export var fall_speed_max: float = 70.0
+@export var monochrome: bool = false
+@export var white_outline: bool = false
+@export var grid_enabled: bool = false
+@export var grid_size: int = 16
 
 var pieces: Array[Dictionary] = []
 var normal_textures: Array[Texture2D] = []
@@ -70,7 +79,19 @@ func _process(delta: float) -> void:
 
 
 func _draw() -> void:
-	draw_rect(Rect2(Vector2.ZERO, SCREEN_SIZE), Color.BLACK)
+	draw_rect(
+		Rect2(Vector2.ZERO, SCREEN_SIZE),
+		DARK_BACKGROUND_COLOR if monochrome else Color.BLACK
+	)
+
+	if not grid_enabled:
+		return
+
+	for x in range(0, int(SCREEN_SIZE.x) + 1, grid_size):
+		draw_line(Vector2(x, 0), Vector2(x, SCREEN_SIZE.y), GRID_COLOR, 1.0)
+
+	for y in range(0, int(SCREEN_SIZE.y) + 1, grid_size):
+		draw_line(Vector2(0, y), Vector2(SCREEN_SIZE.x, y), GRID_COLOR, 1.0)
 
 
 func _load_textures() -> void:
@@ -115,7 +136,14 @@ func _rebuild_piece_sprites(piece: Dictionary) -> void:
 		child.free()
 
 	var shape: Array = SHAPES[randi() % SHAPES.size()]
-	var texture: Texture2D = _pick_block_texture()
+	var texture: Texture2D = PIECE_SHADOW_SPRITE if monochrome else _pick_block_texture()
+	var piece_color: Color = MONOCHROME_PIECE_COLOR if monochrome else Color.WHITE
+	var outline_color: Color = (
+		Color.WHITE
+		if monochrome and white_outline
+		else MONOCHROME_OUTLINE_COLOR if monochrome else OUTLINE_COLOR
+	)
+	var shadow_color: Color = MONOCHROME_SHADOW_COLOR if monochrome else PIECE_SHADOW_COLOR
 	var center_offset: Vector2 = _get_shape_center_offset(shape)
 	var outline_offsets: Array[Vector2] = [
 		Vector2(-1, -1), Vector2(0, -1), Vector2(1, -1),
@@ -127,14 +155,14 @@ func _rebuild_piece_sprites(piece: Dictionary) -> void:
 		var local_pos: Vector2 = Vector2(block_pos) * PIECE_SIZE - center_offset
 
 		for offset in outline_offsets:
-			_add_block_sprite(piece_node, PIECE_SHADOW_SPRITE, local_pos + SHADOW_OFFSET + offset, PIECE_SHADOW_COLOR, -2)
+			_add_block_sprite(piece_node, PIECE_SHADOW_SPRITE, local_pos + SHADOW_OFFSET + offset, shadow_color, -2)
 
-		_add_block_sprite(piece_node, PIECE_SHADOW_SPRITE, local_pos + SHADOW_OFFSET, PIECE_SHADOW_COLOR, -2)
+		_add_block_sprite(piece_node, PIECE_SHADOW_SPRITE, local_pos + SHADOW_OFFSET, shadow_color, -2)
 
 		for offset in outline_offsets:
-			_add_block_sprite(piece_node, PIECE_SHADOW_SPRITE, local_pos + offset, OUTLINE_COLOR, -1)
+			_add_block_sprite(piece_node, PIECE_SHADOW_SPRITE, local_pos + offset, outline_color, -1)
 
-		_add_block_sprite(piece_node, texture, local_pos, Color.WHITE, 0)
+		_add_block_sprite(piece_node, texture, local_pos, piece_color, 0)
 
 
 func _pick_block_texture() -> Texture2D:

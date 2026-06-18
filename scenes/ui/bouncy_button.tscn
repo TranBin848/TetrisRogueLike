@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://dmrc4yisjb4o7" path="res://themes/gray_button_disabled.tres" id="3_3j3vd"]
 [ext_resource type="StyleBox" uid="uid://dq7e37ljbot8a" path="res://themes/gray_button_hover.tres" id="4_jh3k1"]
 [ext_resource type="StyleBox" uid="uid://c3eyb2dnuxuab" path="res://themes/gray_button_pressed.tres" id="5_8qjmy"]
-[ext_resource type="StyleBox" uid="uid://b3e1767opghrn" path="res://themes/gray_button_normal.tres" id="6_0o12s"]
+[ext_resource type="StyleBox" uid="uid://dv7vpykst6lmc" path="res://images/gray_button_normal.tres" id="6_0o12s"]
 
 [node name="BouncyButton" type="Button"]
 theme_override_colors/font_disabled_color = Color(0.313726, 0.313726, 0.313726, 1)
