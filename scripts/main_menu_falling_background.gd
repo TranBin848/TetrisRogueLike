@@ -51,6 +51,7 @@ const SPECIAL_TEXTURE_PATHS: Array[String] = [
 @export var fall_speed_min: float = 40.0
 @export var fall_speed_max: float = 70.0
 @export var monochrome: bool = false
+@export var white_outline: bool = false
 @export var grid_enabled: bool = false
 @export var grid_size: int = 16
 
@@ -137,7 +138,11 @@ func _rebuild_piece_sprites(piece: Dictionary) -> void:
 	var shape: Array = SHAPES[randi() % SHAPES.size()]
 	var texture: Texture2D = PIECE_SHADOW_SPRITE if monochrome else _pick_block_texture()
 	var piece_color: Color = MONOCHROME_PIECE_COLOR if monochrome else Color.WHITE
-	var outline_color: Color = MONOCHROME_OUTLINE_COLOR if monochrome else OUTLINE_COLOR
+	var outline_color: Color = (
+		Color.WHITE
+		if monochrome and white_outline
+		else MONOCHROME_OUTLINE_COLOR if monochrome else OUTLINE_COLOR
+	)
 	var shadow_color: Color = MONOCHROME_SHADOW_COLOR if monochrome else PIECE_SHADOW_COLOR
 	var center_offset: Vector2 = _get_shape_center_offset(shape)
 	var outline_offsets: Array[Vector2] = [
