@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://3ca6erjlgewg"]
+[gd_scene load_steps=10 format=3 uid="uid://3ca6erjlgewg"]
 
 [ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_iywne"]
 [ext_resource type="Script" uid="uid://dk3x83rgqwwnb" path="res://scripts/game.gd" id="1_script"]
@@ -9,10 +9,23 @@
 [ext_resource type="PackedScene" uid="uid://cqe8qwtwascqq" path="res://scenes/modal/victory/victory_screen.tscn" id="7_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://c3ebj7xy3tb6o" path="res://scenes/modal/game_over/game_over_screen.tscn" id="8_gee14"]
 [ext_resource type="PackedScene" uid="uid://drjqwertyuiop" path="res://scenes/round_timer_panel.tscn" id="9_timer"]
+[ext_resource type="PackedScene" uid="uid://vjtnu6vy4e0o" path="res://scenes/main_menu_falling_background.tscn" id="10_background"]
 
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_script")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Background" parent="BackgroundLayer" instance=ExtResource("10_background")]
+quantity = 30
+piece_scale_min = 0.55
+piece_scale_max = 0.75
+special_piece_chance = 0.0
+fall_speed_min = 40.0
+fall_speed_max = 70.0
+monochrome = true
 
 [node name="Board" parent="." instance=ExtResource("1_iywne")]
 unique_name_in_owner = true
