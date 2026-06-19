@@ -135,4 +135,5 @@ unique_name_in_owner = true
 layer = 2
 
 [node name="DeckSelectorScreen" parent="HudLayer" node_paths=PackedStringArray("focus_on_destroy") instance=ExtResource("9_jk1qb")]
+visible = false
 focus_on_destroy = NodePath("../../CanvasLayer/MarginContainer/MainContainerVBoxContainer/ButtonCenterContainer/VBoxContainer/NewGameButton")

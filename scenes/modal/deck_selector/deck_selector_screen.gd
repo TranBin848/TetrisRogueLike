@@ -23,22 +23,17 @@ var available_decks: Array[GameData.DeckTypes] = []
 
 const DECK_FOLDER_NAMES: Dictionary = {
 	GameData.DeckTypes.NORMAL: "normal", 
-	GameData.DeckTypes.MOAI: "moai", 
-	GameData.DeckTypes.X: "the_x"
+
 }
 
 
 const DECK_LOCALIZATION_KEYS: Dictionary = {
 	GameData.DeckTypes.NORMAL: "NORMAL", 
-	GameData.DeckTypes.MOAI: "MOAI", 
-	GameData.DeckTypes.X: "THE_X"
 }
 
 
 const DECK_ACHIEVEMENT_MAP: Dictionary = {
 	GameData.DeckTypes.NORMAL: - 1, 
-	#GameData.DeckTypes.MOAI: AchievementManager.AchievementId.THE_MOAI, 
-	#GameData.DeckTypes.X: AchievementManager.AchievementId.THE_X
 }
 
 
@@ -86,8 +81,6 @@ func _populate_available_decks() -> void :
 
 
 func _setup_buttons() -> void :
-	previous_button.pressed.connect(_on_previous_pressed)
-	next_button.pressed.connect(_on_next_pressed)
 	play_button.pressed.connect(_on_play_pressed)
 
 
@@ -111,24 +104,6 @@ func _update_display() -> void :
 		var localization_key: String = DECK_LOCALIZATION_KEYS[current_deck]
 		var title_key: String = "DECK_%s" % localization_key
 		title_label.text = tr(title_key)
-
-
-	#if not is_unlocked:
-		#var achievement_id: int = DECK_ACHIEVEMENT_MAP[current_deck]
-		##var achievement_localization_key: String = _get_achievement_localization_key(achievement_id)
-		#var condition_key: String = "ACHIEVEMENT_%s_DESCRIPTION" % achievement_localization_key
-		#var raw_condition: String = tr(condition_key)
-		#var parsed_condition: String = GameManager.replace_tags(raw_condition)
-#
-		#description_label.text = parsed_condition
-	#else:
-		#var localization_key: String = DECK_LOCALIZATION_KEYS[current_deck]
-		#var description_key: String = "DECK_%s_DESCRIPTION" % localization_key
-		#var raw_description: String = tr(description_key)
-		#var parsed_description: String = GameManager.replace_tags(raw_description)
-#
-		#description_label.text = parsed_description
-
 
 	play_button.text = tr("BUTTON_PLAY")
 	play_button.disabled = not is_unlocked
@@ -154,20 +129,6 @@ func _is_deck_unlocked(deck_type: GameData.DeckTypes) -> bool:
 		return true
 	
 	return false
-	
-	#return AchievementManager.is_unlocked(achievement_id)
-
-
-
-#func _get_achievement_localization_key(achievement_id: int) -> String:
-	#if achievement_id == AchievementManager.AchievementId.THE_MOAI:
-		#return "THE_MOAI"
-	#elif achievement_id == AchievementManager.AchievementId.THE_X:
-		#return "THE_X"
-#
-	#return ""
-
-
 
 func _on_previous_pressed() -> void :
 	current_deck_index -= 1
