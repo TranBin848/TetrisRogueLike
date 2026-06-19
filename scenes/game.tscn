@@ -138,12 +138,3 @@ visible = false
 
 [node name="GameOverScreen" parent="HUD" instance=ExtResource("8_gee14")]
 visible = false
-
-[node name="HUD_MainMarginContainer_MainHBoxContainer_LeftContainer_InGamePerk#EmptySlot_4" type="TextureRect" parent="."]
-texture = ExtResource("2_yqjtg")
-
-[node name="HUD_MainMarginContainer_MainHBoxContainer_LeftContainer_InGamePerk#EmptySlot_5" type="TextureRect" parent="."]
-texture = ExtResource("2_yqjtg")
-
-[node name="HUD_MainMarginContainer_MainHBoxContainer_LeftContainer_InGamePerk#EmptySlot_6" type="TextureRect" parent="."]
-texture = ExtResource("2_yqjtg")
