@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bkciwrv7lehmy"]
 
-[ext_resource type="PackedScene" uid="uid://cb8n4d47n5xjb" path="res://scenes/background.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://vjtnu6vy4e0o" path="res://scenes/main_menu_falling_background.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://bdibwlsljo4pa" path="res://scenes/game_camera.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dcao5fmilp7do" path="res://scripts/square_renderer.gd" id="3"]
 [ext_resource type="PackedScene" uid="uid://gu0vbsm01hyv" path="res://scenes/boss_information_panel.tscn" id="4"]
@@ -9,9 +9,14 @@
 
 [node name="LevelSelection" type="Node2D"]
 
-[node name="Background_1" parent="." instance=ExtResource("1")]
-z_index = -2
-quantity = 25
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Background" parent="BackgroundLayer" instance=ExtResource("1")]
+piece_scale_min = 0.55
+piece_scale_max = 0.75
+special_piece_chance = 0.0
+monochrome = true
 
 [node name="GameCamera" parent="." instance=ExtResource("2")]
 unique_name_in_owner = true

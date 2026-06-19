@@ -22,6 +22,7 @@ var current_square: LevelSelectionSquare = null:
 
 
 func _ready() -> void :
+	camera.enabled = true
 	boss_information_panel.visible = false
 	round_information_panel.visible = false
 

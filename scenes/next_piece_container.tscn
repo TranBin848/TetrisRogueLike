@@ -35,7 +35,7 @@ shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
 outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 
 [node name="NextContainer" type="Control" parent="VBoxContainer"]
-custom_minimum_size = Vector2(48, 48)
+custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1

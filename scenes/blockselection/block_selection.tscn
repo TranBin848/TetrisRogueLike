@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bkk7wno815vn6"]
 
 [ext_resource type="Script" uid="uid://bklekfjbahjoi" path="res://scripts/block_selection.gd" id="1_v1gjm"]
-[ext_resource type="PackedScene" uid="uid://cb8n4d47n5xjb" path="res://scenes/background.tscn" id="2_imli6"]
+[ext_resource type="PackedScene" uid="uid://vjtnu6vy4e0o" path="res://scenes/main_menu_falling_background.tscn" id="2_imli6"]
 [ext_resource type="PackedScene" uid="uid://bdibwlsljo4pa" path="res://scenes/game_camera.tscn" id="3_wsnju"]
 [ext_resource type="PackedScene" uid="uid://ceg74cmxc6il5" path="res://scenes/ui/rich_text_label_shadowed.tscn" id="4_cpfc2"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="5_wnmrr"]
@@ -17,7 +17,18 @@
 [node name="BlockSelection" type="Node2D"]
 script = ExtResource("1_v1gjm")
 
-[node name="Background" parent="." instance=ExtResource("2_imli6")]
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Background" parent="BackgroundLayer" instance=ExtResource("2_imli6")]
+quantity = 30
+piece_scale_min = 0.55
+piece_scale_max = 0.75
+special_piece_chance = 0.0
+fall_speed_min = 40.0
+fall_speed_max = 70.0
+monochrome = true
+white_outline = true
 
 [node name="GameCamera" parent="." instance=ExtResource("3_wsnju")]
 
@@ -42,6 +53,7 @@ theme_override_constants/separation = 2
 [node name="PickYourRewardLabel" parent="CanvasLayer/MarginContainer/TopTitleContainer" instance=ExtResource("4_cpfc2")]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0.105882, 0.105882, 0.105882, 1)
+theme_override_colors/font_shadow_color = Color(0.105882, 0.105882, 0.105882, 1)
 theme_override_constants/shadow_offset_y = 1
 theme_override_constants/shadow_offset_x = 1
 theme_override_fonts/normal_font = ExtResource("5_wsnju")

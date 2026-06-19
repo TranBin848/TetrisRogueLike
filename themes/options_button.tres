@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://dou3i810n7r88"]
+
+[ext_resource type="Texture2D" uid="uid://61ej8k50xojy" path="res://images/background/Options_button.png" id="1_mkxnx"]
+
+[resource]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+texture = ExtResource("1_mkxnx")
+texture_margin_left = 42.0
+texture_margin_top = 16.0
+texture_margin_right = 42.0
+texture_margin_bottom = 18.0

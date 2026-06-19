@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://btsqkn3qiuok" path="res://images/slider_grabber.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://doi420shgrroo" path="res://images/slider_grabber_highlight.png" id="2"]
-[ext_resource type="StyleBox" path="res://resources/slider_background.tres" id="3"]
-[ext_resource type="StyleBox" path="res://resources/slider_grabber_area.tres" id="4"]
-[ext_resource type="StyleBox" path="res://resources/slider_grabber_area_highlight.tres" id="5"]
+[ext_resource type="StyleBox" uid="uid://c5o8h0yyjjttv" path="res://resources/slider_background.tres" id="3"]
+[ext_resource type="StyleBox" uid="uid://cum0wc475we8u" path="res://resources/slider_grabber_area.tres" id="4"]
+[ext_resource type="StyleBox" uid="uid://dbhw6lorx1hni" path="res://resources/slider_grabber_area_highlight.tres" id="5"]
 
 [node name="PixelSlider" type="HSlider"]
 custom_minimum_size = Vector2(80, 0)

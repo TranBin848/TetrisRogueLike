@@ -1,0 +1,14 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://cwjm3m6dfp7ar"]
+
+[ext_resource type="Texture2D" uid="uid://bn2mhsc2wjhnu" path="res://images/background/newGame_button.png" id="1_nq1ym"]
+
+[resource]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+texture = ExtResource("1_nq1ym")
+texture_margin_left = 42.0
+texture_margin_top = 16.0
+texture_margin_right = 42.0
+texture_margin_bottom = 18.0

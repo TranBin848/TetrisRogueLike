@@ -2,7 +2,7 @@ class_name NextPieceContainer extends PanelContainer
 
 const DECK_SCREEN_PACKED_SCENE: PackedScene = preload("res://scenes/modal/current_deck/deck_screen.tscn")
 const HOVER_MODULATE: Color = Color(1.2, 1.2, 1.2, 1)
-const NEXT_CONTAINER_SIZE: int = 48
+const NEXT_CONTAINER_SIZE: int = 56
 
 
 var scale_tween: Tween
@@ -82,7 +82,7 @@ func center_piece(piece_type: PieceRenderer.ShapeType) -> void :
 	var offset_x = center_x - (bounds.position.x * PieceRenderer.PIECE_SIZE)
 	var offset_y = center_y - (bounds.position.y * PieceRenderer.PIECE_SIZE)
 
-	piece_renderer.position = Vector2(offset_x, offset_y)
+	piece_renderer.position = Vector2(roundf(offset_x), roundf(offset_y))
 
 
 func update_next_display() -> void :
