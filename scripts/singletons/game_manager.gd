@@ -305,41 +305,38 @@ func _input(event: InputEvent) -> void :
 		if Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	if OS.is_debug_build():
-		if event is InputEventKey:
-			if event.pressed:
-				if event.keycode == KEY_1:
-					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.GOLD)
-					
-				elif event.keycode == KEY_2:
-					_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.BLUE_C)
-					
-				elif event.keycode == KEY_3:
-					_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.RED_C)
-					
-				elif event.keycode == KEY_4:
-					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.SAND)
-					
-				elif event.keycode == KEY_0:
-					_debug_create_piece(PieceRenderer.ShapeType.J, GameData.BLOCK_TYPES.RAINBOW)
-					
-				elif event.keycode == KEY_Q:
-					_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.GLASS)
-					
-				elif event.keycode == KEY_W:
-					_debug_create_piece(PieceRenderer.ShapeType.S, GameData.BLOCK_TYPES.LUCKY)
-
-				elif event.keycode == KEY_E:
-					_debug_create_piece(PieceRenderer.ShapeType.Z, GameData.BLOCK_TYPES.COPY)
-
-				elif event.keycode == KEY_R:
-					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.OBSIDIAN)
-
-				elif event.keycode == KEY_T:
-					_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.DANGER)
-
-				#elif event.keycode == KEY_F5:
-					#AchievementManager.reset_all_achievements()
+	#if OS.is_debug_build():
+		#if event is InputEventKey:
+			#if event.pressed:
+				#if event.keycode == KEY_1:
+					#_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.GOLD)
+					#
+				#elif event.keycode == KEY_2:
+					#_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.BLUE_C)
+					#
+				#elif event.keycode == KEY_3:
+					#_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.RED_C)
+					#
+				#elif event.keycode == KEY_4:
+					#_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.SAND)
+					#
+				#elif event.keycode == KEY_0:
+					#_debug_create_piece(PieceRenderer.ShapeType.J, GameData.BLOCK_TYPES.RAINBOW)
+					#
+				#elif event.keycode == KEY_Q:
+					#_debug_create_piece(PieceRenderer.ShapeType.T, GameData.BLOCK_TYPES.GLASS)
+					#
+				#elif event.keycode == KEY_W:
+					#_debug_create_piece(PieceRenderer.ShapeType.S, GameData.BLOCK_TYPES.LUCKY)
+#
+				#elif event.keycode == KEY_E:
+					#_debug_create_piece(PieceRenderer.ShapeType.Z, GameData.BLOCK_TYPES.COPY)
+#
+				#elif event.keycode == KEY_R:
+					#_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.OBSIDIAN)
+#
+				#elif event.keycode == KEY_T:
+					#_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.DANGER)
 
 
 func load_and_apply_settings() -> void :

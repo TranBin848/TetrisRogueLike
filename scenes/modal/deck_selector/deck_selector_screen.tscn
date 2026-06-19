@@ -51,17 +51,6 @@ text = "X"
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="PreviousButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3")]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_left = NodePath(".")
-focus_neighbor_top = NodePath("../../CloseButton")
-focus_neighbor_right = NodePath("../NextButton")
-focus_neighbor_bottom = NodePath("../../BottomContainer/HBoxContainer/PlayButton")
-focus_next = NodePath("../NextButton")
-focus_previous = NodePath("../NextButton")
-text = "<"
-
 [node name="DeckPreviewTexture" type="TextureRect" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 80)
@@ -69,17 +58,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("4")
 stretch_mode = 3
-
-[node name="NextButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3")]
-unique_name_in_owner = true
-layout_mode = 2
-focus_neighbor_left = NodePath("../PreviousButton")
-focus_neighbor_top = NodePath("../../CloseButton")
-focus_neighbor_right = NodePath(".")
-focus_neighbor_bottom = NodePath("../../BottomContainer/HBoxContainer/PlayButton")
-focus_next = NodePath("../PreviousButton")
-focus_previous = NodePath("../PreviousButton")
-text = ">"
 
 [node name="TextContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
@@ -120,21 +98,16 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
-focus_neighbor_left = NodePath("../../../HBoxContainer/PreviousButton")
 focus_neighbor_right = NodePath("../SeedButton")
-focus_next = NodePath("../../../HBoxContainer/NextButton")
-focus_previous = NodePath("../../../HBoxContainer/PreviousButton")
 text = "BUTTON_PLAY"
 
 [node name="SeedButton" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/HBoxContainer" instance=ExtResource("3")]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_left = NodePath("../PlayButton")
-focus_neighbor_top = NodePath("../../../HBoxContainer/NextButton")
 focus_neighbor_right = NodePath("../PlayButton")
 focus_neighbor_bottom = NodePath("../../SeedLineEdit")
 focus_next = NodePath("../../SeedLineEdit")
-focus_previous = NodePath("../../../HBoxContainer/NextButton")
 icon = ExtResource("7")
 
 [node name="TooltipAnchorControl" type="CenterContainer" parent="CenterContainer/PanelContainer/HBoxContainer/VBoxContainer/BottomContainer/HBoxContainer/SeedButton"]
