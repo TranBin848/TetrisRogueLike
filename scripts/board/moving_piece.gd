@@ -74,7 +74,7 @@ static func create(parent: Node, next_piece_data: Dictionary) -> MovingPiece:
 func _ready() -> void :
 	fall_time = max(FALL_TIME_MINIMUM, FALL_TIME_DEFAULT - (GameManager.current_round * FALL_TIME_ROUND_DECREASE))
 
-	ghost_renderer.modulate.a = 0.2
+	ghost_renderer.modulate.a = 0.45
 
 	if GameManager.current_boss == GameData.BossTypes.BLINDFOLDED:
 		ghost_renderer.visible = false
