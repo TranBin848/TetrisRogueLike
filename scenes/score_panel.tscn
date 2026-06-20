@@ -50,7 +50,7 @@ horizontal_alignment = 1
 [node name="Control" type="ColorRect" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 1)
 layout_mode = 2
-color = Color(0.317647, 0.317647, 0.317647, 1)
+color = Color(0.317647, 0.317647, 0.317647, 0.588235)
 
 [node name="Score" type="PanelContainer" parent="VBoxContainer"]
 layout_mode = 2
