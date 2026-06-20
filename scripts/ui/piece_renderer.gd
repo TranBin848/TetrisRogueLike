@@ -51,7 +51,7 @@ const DECK_SPRITES: Dictionary = {
 const PIECE_SHADOW_SPRITE: CompressedTexture2D = preload("res://images/white_block.png")
 const PIECE_SHADOW_COLOR: Color = Color("2f2f2f")
 const OUTLINE_COLOR: Color = Color("2f2f2f")
-const SHADOW_OFFSET: Vector2 = Vector2(2, 2)
+const SHADOW_OFFSET: Vector2 = Vector2(1, 1)
 
 const PIECE_SHAPES: Dictionary[ShapeType, Array] = {
 	ShapeType.I: [
