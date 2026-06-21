@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://climcg5wulglf"]
+[gd_scene load_steps=6 format=3 uid="uid://climcg5wulglf"]
 
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="1_6l86g"]
 [ext_resource type="Texture2D" uid="uid://ltecljd0h7i1" path="res://images/key.png" id="1_i4wpw"]
+[ext_resource type="Script" uid="uid://bjto5f5snhd5c" path="res://scripts/button_hint.gd" id="1_r43cm"]
 [ext_resource type="Texture2D" uid="uid://qrd6280insra" path="res://sprite/key_arrow_up.png" id="2_a621b"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a621b"]
@@ -20,6 +21,7 @@ region_rect = Rect2(0, 0, 16, 16)
 custom_minimum_size = Vector2(16, 17)
 layout_mode = 3
 anchors_preset = 0
+script = ExtResource("1_r43cm")
 
 [node name="KeyboardHintPanelContainer" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(16, 17)
@@ -49,3 +51,14 @@ shadow_enabled = false
 shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
 outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+stretch_mode = 5
