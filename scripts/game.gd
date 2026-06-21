@@ -19,7 +19,7 @@ func _ready() -> void :
 		await get_tree().create_timer(1.5).timeout
 		GameManager.trigger_perk(GameData.Perks.SHORTCUT)
 
-	if GameManager.settings != null and GameManager.settings.show_tutorial:
+	if GameManager.settings != null:
 		var tutorial_scene = load("res://scenes/tutorial.tscn")
 		var tutorial_instance = tutorial_scene.instantiate()
 		$HUD.add_child(tutorial_instance)

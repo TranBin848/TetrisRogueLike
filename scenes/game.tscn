@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://3ca6erjlgewg"]
+[gd_scene load_steps=15 format=3 uid="uid://3ca6erjlgewg"]
 
 [ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_iywne"]
 [ext_resource type="Script" uid="uid://dk3x83rgqwwnb" path="res://scripts/game.gd" id="1_script"]
@@ -14,7 +14,6 @@
 [ext_resource type="StyleBox" uid="uid://bwerxk3dkj8pe" path="res://themes/gray_panel.tres" id="11_panel"]
 [ext_resource type="StyleBox" uid="uid://c8m1jufawoe8" path="res://themes/light_gray_panel.tres" id="12_light_panel"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="13_label"]
-[ext_resource type="PackedScene" uid="uid://g3swhspqn465" path="res://scenes/tutorial.tscn" id="15_ir15t"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_script")
@@ -139,9 +138,3 @@ visible = false
 
 [node name="GameOverScreen" parent="HUD" instance=ExtResource("8_gee14")]
 visible = false
-
-[node name="Tutorial" parent="." instance=ExtResource("15_ir15t")]
-offset_left = 100.0
-offset_top = 104.0
-offset_right = 100.0
-offset_bottom = 104.0

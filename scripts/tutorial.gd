@@ -1,7 +1,7 @@
 class_name Tutorial extends ColorRect
 
 
-const LAST_INDEX: int = 7
+const LAST_INDEX: int = 8
 const PAUSE_MENU_SCENE: PackedScene = preload("res://scenes/modal/pause_menu/pause_menu.tscn")
 
 
@@ -10,11 +10,12 @@ var data: Array[Dictionary] = []
 var positions: Array[Vector2] = [
 	Vector2(240, 135), 
 	Vector2(126, 150), 
-	Vector2(100, 104), 
+	Vector2(240, 135), 
 	Vector2(350, 140), 
 	Vector2(320, 187), 
-	Vector2(126, 150),
+	Vector2(126, 150), 
 	Vector2(240, 135), 
+	Vector2(112, 191),
 	Vector2(240, 135)
 ]
 
@@ -28,11 +29,12 @@ var current_highlighted_previous_z_index: int = 0
 var highlighted_node_list: Array[String] = [
 	"", 
 	"../MainMarginContainer/MainHBoxContainer/LeftContainer/ScoreBackgroundPanel", 
-	"../MainMarginContainer/MainHBoxContainer/LeftContainer/RoundTimerPanel", 
-	"../MainMarginContainer/MainHBoxContainer/RightContainer/HoldBackgroundPanel", 
+	"", 
 	"../MainMarginContainer/MainHBoxContainer/RightContainer/NextPieceContainer", 
+	"../MainMarginContainer/MainHBoxContainer/RightContainer/HoldBackgroundPanel", 
 	"../MainMarginContainer/MainHBoxContainer/LeftContainer/PerkPanel", 
 	"", 
+	"../MainMarginContainer/MainHBoxContainer/LeftContainer/RoundTimerPanel",
 	""
 ]
 
@@ -44,10 +46,6 @@ var highlighted_node_list: Array[String] = [
 
 
 func _ready() -> void :
-	if not GameManager.settings.show_tutorial:
-		_destroy()
-		return
-
 	get_viewport().size_changed.connect(_resync_to_viewport)
 	_resync_to_viewport()
 
@@ -66,9 +64,6 @@ func _ready() -> void :
 
 	continue_button.pressed.connect( func() -> void :
 		if current_step == LAST_INDEX:
-			GameManager.settings.show_tutorial = false
-			GameManager.settings.write()
-
 			_destroy()
 			return
 
