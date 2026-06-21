@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bmkxyww52per3" path="res://scripts/hold_background_panel.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://2vlmo5cuclu5" path="res://images/hold_empty.png" id="3"]
 [ext_resource type="PackedScene" uid="uid://c4ecjkyq0vrgm" path="res://scenes/piece_renderer.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/eclipse_container.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://6qi1q6a0o2tq" path="res://scenes/eclipse_container.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://climcg5wulglf" path="res://scenes/ui/button_hint.tscn" id="6"]
 
 [node name="HoldBackgroundPanel" type="PanelContainer"]
