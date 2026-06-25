@@ -51,7 +51,7 @@ static func appear_animation(from: Node, target_position: Vector2, title: String
 	_instance._tween.set_trans(Tween.TRANS_BACK)
 	_instance._tween.tween_property(_instance, "_animation_y_addition", 0, 0.3).from(4)
 
-	#AudioManager.play(AudioManager.SoundEffects.BLOOP, randf_range(0.9, 1.1))
+	AudioManager.play(AudioManager.SoundEffects.BLOOP, randf_range(0.9, 1.1))
 
 
 static func disappear_animation(from: Node) -> void :

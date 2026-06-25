@@ -21,7 +21,7 @@ func _ready() -> void :
 
 
 func _pressed() -> void :
-	#AudioManager.play(AudioManager.SoundEffects.DOUBLE_CLICK, randf_range(0.8, 1.2))
+	AudioManager.play(AudioManager.SoundEffects.DOUBLE_CLICK, randf_range(0.8, 1.2))
 
 	pivot_offset = size / 2
 

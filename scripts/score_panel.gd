@@ -31,7 +31,7 @@ var score_label_value: float = 0.0:
 	set(value):
 		if score_label_value != value:
 			if score_sound_time_interval <= 0.0:
-				#AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, score_sound_pitch)
+				AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, score_sound_pitch)
 				score_sound_pitch = clamp(score_sound_pitch + score_sound_pitch_increment, 0.8, 1.4)
 				score_sound_time_interval = 0.05
 
@@ -56,7 +56,7 @@ var target_score_label_value: float = 0.0:
 	set(value):
 		if target_score_label_value != value:
 			if score_sound_time_interval <= 0.0:
-				#AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, score_sound_pitch)
+				AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, score_sound_pitch)
 				score_sound_pitch = clamp(score_sound_pitch + score_sound_pitch_increment, 0.8, 1.4)
 				score_sound_time_interval = 0.05
 

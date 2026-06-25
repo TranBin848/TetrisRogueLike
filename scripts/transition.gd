@@ -57,7 +57,7 @@ func _transition_to_scene(scene: Scene, on_black_callback: Callable = Callable()
 
 	target = scene
 
-	#AudioManager.play(AudioManager.SoundEffects.TRANSITION, 0.9)
+	AudioManager.play(AudioManager.SoundEffects.TRANSITION, 0.9)
 
 	if GameManager.current_round % 3 == 0 and scene == Scene.GAME:
 		color_rect.color = TRANSITION_COLOR_BOSS
@@ -74,7 +74,7 @@ func _transition_to_scene(scene: Scene, on_black_callback: Callable = Callable()
 	tween.tween_callback(
 		func() -> void :
 			return
-			#AudioManager.play(AudioManager.SoundEffects.TRANSITION, 1.1)
+			AudioManager.play(AudioManager.SoundEffects.TRANSITION, 1.1)
 	)
 	tween.tween_property(color_rect, "material:shader_parameter/circle_size", 1.05, TRANSITION_DURATION_OUT / speed)
 

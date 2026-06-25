@@ -177,7 +177,7 @@ func appear_animation() -> void :
 
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-	#AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, 1.4)
+	AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, 1.4)
 
 	tween.parallel().tween_property(panel_container, "scale", Vector2.ONE, 0.3).from(Vector2(1.1, 0.9))
 

@@ -20,7 +20,7 @@ func _ready() -> void :
 
 	resume_button.pressed.connect( func():
 		GameManager.paused = false
-		#AudioManager.set_music_filter_enabled(GameManager.paused)
+		AudioManager.set_music_filter_enabled(GameManager.paused)
 		visible = false
 	)
 
@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void :
 		GameManager.paused = not GameManager.paused
 		visible = GameManager.paused
 
-		#AudioManager.set_music_filter_enabled(GameManager.paused)
+		AudioManager.set_music_filter_enabled(GameManager.paused)
 
 	if event is InputEventKey and Engine.has_singleton("Steam"):
 		if event.pressed and event.keycode == KEY_TAB:
@@ -66,10 +66,10 @@ func _unhandled_input(event: InputEvent) -> void :
 				visible = true
 
 				GameManager.paused = true
-				#AudioManager.set_music_filter_enabled(GameManager.paused)
+				AudioManager.set_music_filter_enabled(GameManager.paused)
 
 
 func _force_pause() -> void :
 	GameManager.paused = true
-	#AudioManager.set_music_filter_enabled(GameManager.paused)
+	AudioManager.set_music_filter_enabled(GameManager.paused)
 	visible = true

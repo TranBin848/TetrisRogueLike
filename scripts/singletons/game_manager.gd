@@ -1010,7 +1010,7 @@ func reset_variables() -> void :
 
 	CalculationBlocker.active_count = 0
 
-	#AudioManager.set_music_filter_enabled(false)
+	AudioManager.set_music_filter_enabled(false)
 #
 #
 	#SpeedrunTimerLayer.reset_timer()
@@ -1035,7 +1035,7 @@ func goto_board() -> void :
 		hold_piece_data = {}
 		hold_piece_changed.emit()
 
-		#AudioManager.set_music_filter_enabled(false)
+		AudioManager.set_music_filter_enabled(false)
 	)
 
 
@@ -1044,7 +1044,7 @@ func goto_level_selection() -> void :
 
 	Transition.goto(Transition.Scene.LEVEL_SELECTION, func():
 		reset_pieces_to_original()
-		#AudioManager.set_music_filter_enabled(false)
+		AudioManager.set_music_filter_enabled(false)
 	)
 
 

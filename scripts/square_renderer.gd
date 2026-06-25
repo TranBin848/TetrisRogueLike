@@ -87,8 +87,8 @@ func _ready() -> void :
 		var camera_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 		camera_tween.tween_property(camera, "global_position", current_square.global_position, 0.75 / speed)
 		camera_tween.tween_callback( func():
-			#AudioManager.play(AudioManager.SoundEffects.PERK, 0.65 + (current_square.round_index * 0.05))
-			#AudioManager.play(AudioManager.SoundEffects.BLOOP, 1.0)
+			AudioManager.play(AudioManager.SoundEffects.PERK, 0.65 + (current_square.round_index * 0.05))
+			AudioManager.play(AudioManager.SoundEffects.BLOOP, 1.0)
 			current_square.current_round_indicator.visible = true
 
 			round_information_panel.appear_animation()
@@ -103,8 +103,8 @@ func _ready() -> void :
 
 		await get_tree().create_timer(1.0 / GameManager.timescale).timeout
 
-		#AudioManager.play(AudioManager.SoundEffects.PERK, 0.65 + (current_square.round_index * 0.05))
-		#AudioManager.play(AudioManager.SoundEffects.BLOOP, 1.0)
+		AudioManager.play(AudioManager.SoundEffects.PERK, 0.65 + (current_square.round_index * 0.05))
+		AudioManager.play(AudioManager.SoundEffects.BLOOP, 1.0)
 		current_square.current_round_indicator.visible = true
 
 		round_information_panel.appear_animation()
