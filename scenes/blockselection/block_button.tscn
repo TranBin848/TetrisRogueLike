@@ -124,8 +124,15 @@ shadow_enabled = false
 shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
 outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="TypesHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.42
+[node name="TypesHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -102.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
 alignment = 1

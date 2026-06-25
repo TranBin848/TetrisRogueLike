@@ -1,4 +1,4 @@
-class_name BlockTypePanel extends PanelContainer
+class_name BlockTypePanel extends MarginContainer
 
 
 var block_group: GameData.BlockGroups = GameData.BlockGroups.DEFAULT:
@@ -19,8 +19,9 @@ func _apply_block_group_visuals() -> void:
 
 	var group_color: Dictionary = GameData.GROUP_COLOR_MAP[block_group]
 
-	self_modulate = group_color["background_color"]
+	# self_modulate = group_color["background_color"]
 	label.outline_color = group_color["font_shadow_color"]
+	label.add_theme_color_override("font_color", group_color["font_color"])
 
 
 @onready var label: LabelShadowed = $ShadowedLabel
