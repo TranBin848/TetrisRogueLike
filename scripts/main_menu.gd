@@ -3,6 +3,7 @@ class_name MainMenuScreen extends Node2D
 const GAME_SCENE: String = "res://scenes/game.tscn"
 const OPTIONS_MENU_SCENE: PackedScene = preload("res://scenes/options_menu.tscn")
 
+@onready var continue_button: BouncyButton = get_node_or_null("%ContinueButton")
 @onready var new_game_button: BouncyButton = get_node_or_null("%NewGameButton")
 @onready var options_button: BouncyButton = get_node_or_null("%OptionsButton")
 @onready var quit_button: BouncyButton = get_node_or_null("%QuitButton")
@@ -15,9 +16,22 @@ func _ready() -> void:
 	# Disable GameCamera autoload for main menu
 	GameCamera.disable()
 	
+	# Check for save file
+	if SaveResource.save_exists():
+		if continue_button:
+			continue_button.visible = true
+			continue_button.pressed.connect(_on_continue_pressed)
+			continue_button.grab_focus()
+	else:
+		if continue_button:
+			continue_button.visible = false
+		if new_game_button:
+			new_game_button.grab_focus()
+	
 	# Connect new game button
 	if new_game_button:
-		new_game_button.grab_focus()
+		if not SaveResource.save_exists():
+			new_game_button.grab_focus()
 		new_game_button.pressed.connect(_on_new_game_pressed)
 	
 	# Connect quit button
@@ -28,6 +42,9 @@ func _ready() -> void:
 	if options_button:
 		options_button.pressed.connect(_on_options_pressed)
 
+
+func _on_continue_pressed() -> void:
+	GameManager.goto_level_selection()
 
 func _on_new_game_pressed() -> void:
 	Random.set_random_seed()

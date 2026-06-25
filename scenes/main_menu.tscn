@@ -71,11 +71,25 @@ size_flags_horizontal = 4
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = -15
+theme_override_constants/separation = -5
+
+[node name="ContinueButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer/ButtonCenterContainer/VBoxContainer" instance=ExtResource("4")]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(140, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 3
+theme_override_styles/focus = ExtResource("6_oa1go")
+theme_override_styles/disabled = ExtResource("6_oa1go")
+theme_override_styles/hover = ExtResource("6_oa1go")
+theme_override_styles/pressed = ExtResource("6_oa1go")
+theme_override_styles/normal = ExtResource("6_oa1go")
+text = "BUTTON_CONTINUE"
 
 [node name="NewGameButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer/ButtonCenterContainer/VBoxContainer" instance=ExtResource("4")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 60)
+custom_minimum_size = Vector2(140, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 3
@@ -88,7 +102,7 @@ text = "New Game"
 
 [node name="OptionsButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer/ButtonCenterContainer/VBoxContainer" instance=ExtResource("4")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 60)
+custom_minimum_size = Vector2(140, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 3
@@ -101,7 +115,7 @@ text = "Options"
 
 [node name="QuitButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer/ButtonCenterContainer/VBoxContainer" instance=ExtResource("4")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(140, 60)
+custom_minimum_size = Vector2(140, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 3
@@ -112,11 +126,6 @@ theme_override_styles/pressed = ExtResource("8_5dd4i")
 theme_override_styles/normal = ExtResource("8_5dd4i")
 text = "Quit"
 
-[node name="ContinueButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "BUTTON_CONTINUE"
 
 [node name="AchievementsButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
 unique_name_in_owner = true

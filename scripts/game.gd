@@ -43,6 +43,11 @@ static func next_action() -> void :
 		return
 
 	if GameManager.score.is_greater_than_or_equal_to(GameManager.target_score):
+		if not GameManager.is_timer_active:
+			return # Already processing victory
+			
+		GameManager.is_timer_active = false
+		
 		var target_f = GameManager.target_score.to_float()
 		var overflow_f = max(0.0, GameManager.score.minus(GameManager.target_score).to_float())
 		var overflow_bonus = 0

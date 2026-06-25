@@ -15,6 +15,8 @@ const SAVE_PATH := "user://save.tres"
 @export var best_score: String = "0"
 @export var blocks_rolled_count: int = 0
 @export var blocks_skipped_count: int = 0
+@export var coins: int = 0
+@export var current_roll_cost: int = 5
 
 static func load_from_disk() -> SaveResource:
 	if FileAccess.file_exists(SAVE_PATH):
