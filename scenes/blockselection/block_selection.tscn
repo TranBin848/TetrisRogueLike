@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkk7wno815vn6"]
+[gd_scene load_steps=15 format=3 uid="uid://bkk7wno815vn6"]
 
 [ext_resource type="Script" uid="uid://bklekfjbahjoi" path="res://scripts/block_selection.gd" id="1_v1gjm"]
 [ext_resource type="PackedScene" uid="uid://vjtnu6vy4e0o" path="res://scenes/main_menu_falling_background.tscn" id="2_imli6"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://baikypk7t42mh" path="res://sprite/button_skip.png" id="11_t7s4v"]
 [ext_resource type="PackedScene" uid="uid://bulm880jjyu0w" path="res://scenes/modal/pause_menu/pause_menu.tscn" id="12_j61n3"]
 [ext_resource type="PackedScene" uid="uid://drt2ejk5tqos1" path="res://scenes/tooltip.tscn" id="13_15dhi"]
+[ext_resource type="PackedScene" uid="uid://bc3fvg3b6tp73" path="res://scenes/ui/coin_panel.tscn" id="20_coin"]
 
 [node name="BlockSelection" type="Node2D"]
 script = ExtResource("1_v1gjm")
@@ -41,6 +42,11 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
+
+[node name="CoinPanel" parent="CanvasLayer/MarginContainer" instance=ExtResource("20_coin")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
 
 [node name="TopTitleContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
 layout_mode = 2

@@ -10,8 +10,15 @@ signal multiplier_changed(value: Big)
 signal calculation_finished()
 signal calculation_blocker_finished()
 signal rolls_changed(value: int)
-#signal coins_changed(value: int)
+signal coins_changed(value: int)
 
+var coins: int = 0:
+	set(value):
+		coins = value
+		coins_changed.emit(coins)
+
+var current_roll_cost: int = 5
+const SKIP_COST: int = 20
 signal second_passed()
 
 signal input_remapped()
@@ -305,11 +312,11 @@ func _input(event: InputEvent) -> void :
 		if Input.mouse_mode != Input.MOUSE_MODE_VISIBLE:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-	#if OS.is_debug_build():
-		#if event is InputEventKey:
-			#if event.pressed:
-				#if event.keycode == KEY_1:
-					#_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.GOLD)
+	if OS.is_debug_build():
+		if event is InputEventKey:
+			if event.pressed:
+				if event.keycode == KEY_1:
+					_debug_create_piece(PieceRenderer.ShapeType.O, GameData.BLOCK_TYPES.GOLD)
 					#
 				#elif event.keycode == KEY_2:
 					#_debug_create_piece(PieceRenderer.ShapeType.I, GameData.BLOCK_TYPES.BLUE_C)
@@ -651,8 +658,8 @@ func add_points(value) -> void :
 	else:
 		points = points.plus(Big.new(value))
 
-#func add_coins(value: int) -> void :
-	#coins += value
+func add_coins(value: int) -> void :
+	coins += value
 
 func add_multiplier(value) -> void :
 	if value is Big:
@@ -1043,6 +1050,7 @@ func goto_level_selection() -> void :
 	#SpeedrunTimerLayer.resume_timer()
 
 	Transition.goto(Transition.Scene.LEVEL_SELECTION, func():
+		current_roll_cost = 5
 		reset_pieces_to_original()
 		AudioManager.set_music_filter_enabled(false)
 	)
@@ -1065,8 +1073,9 @@ func spawn_moving_piece() -> MovingPiece:
 
 
 func use_roll() -> void :
-	if rolls_left > 0:
-		rolls_left -= 1
+	if coins >= current_roll_cost:
+		coins -= current_roll_cost
+		current_roll_cost += 5
 		blocks_rolled_count += 1
 		save_game()
 
@@ -1082,7 +1091,15 @@ func increment_blocks_skipped() -> void :
 
 
 func can_roll() -> bool:
-	return rolls_left > 0
+	return coins >= current_roll_cost
+
+func can_skip() -> bool:
+	return coins >= SKIP_COST
+
+func use_skip() -> void :
+	if coins >= SKIP_COST:
+		coins -= SKIP_COST
+		save_game()
 
 
 

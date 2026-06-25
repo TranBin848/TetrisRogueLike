@@ -26,11 +26,8 @@ func _ready() -> void :
 	reward_label.text = "[wave]" + tr("BLOCK_REWARD")
 
 
-	GameManager.rolls_changed.connect(_update_roll_button_text)
-	_update_roll_button_text(GameManager.rolls_left)
-
-
-	skip_button.text = tr("BUTTON_SKIP") + "(+2)"
+	GameManager.coins_changed.connect(_update_buttons)
+	_update_buttons(GameManager.coins)
 
 	for i in block_button_container.get_child_count():
 		var block_button: BlockButton = block_button_container.get_child(i) as BlockButton
@@ -70,9 +67,10 @@ func _ready() -> void :
 	)
 
 	skip_button.pressed.connect( func() -> void :
+		if not GameManager.can_skip():
+			return
+		GameManager.use_skip()
 		skip_button.disabled = true
-
-		GameManager.add_rolls(2)
 		GameManager.increment_blocks_skipped()
 		GameManager.goto_level_selection()
 	)
@@ -233,9 +231,12 @@ func animate_block_buttons() -> void :
 	($OverlayHUD/PauseMenu as PauseMenu).focus_on_destroy = first_block_button.button
 
 
-func _update_roll_button_text(rolls: int) -> void :
-	roll_button.text = tr("BUTTON_ROLL") + "(%d)" % rolls
+func _update_buttons(_coins: int) -> void :
+	roll_button.text = tr("BUTTON_ROLL") + " (-%d COINS)" % GameManager.current_roll_cost
 	roll_button.disabled = not GameManager.can_roll()
+	
+	skip_button.text = tr("BUTTON_SKIP") + " (-%d COINS)" % GameManager.SKIP_COST
+	skip_button.disabled = not GameManager.can_skip()
 
 
 func _setup_focus_navigation() -> void :
@@ -259,5 +260,4 @@ func _notification(what: int) -> void :
 
 	if what == NOTIFICATION_TRANSLATION_CHANGED:
 		reward_label.text = "[wave]" + tr("BLOCK_REWARD")
-		_update_roll_button_text(GameManager.rolls_left)
-		skip_button.text = tr("BUTTON_SKIP") + "(+2)"
+		_update_buttons(GameManager.coins)
