@@ -103,7 +103,7 @@ outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="TitleLabel" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_bwyhj")]
@@ -126,4 +126,6 @@ outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 
 [node name="TypesHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.42
 alignment = 1
