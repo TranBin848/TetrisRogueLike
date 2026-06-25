@@ -75,7 +75,15 @@ func animate(type: int, value: Variant, pitch: float) -> void :
 
 	AudioManager.play(AudioManager.SoundEffects.POP, pitch)
 
-	label.pivot_offset = label.size / 2
+	label.reset_size()
+	var label_min_size: Vector2 = label.get_minimum_size()
+	label.size = label_min_size
+	label.position = -label_min_size / 2
+	label.pivot_offset = label_min_size / 2
+
+	background.size = label_min_size + Vector2(16, 4)
+	background.position = -background.size / 2
+	background.pivot_offset = background.size / 2
 
 	var background_tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	background_tween.parallel().tween_property(background, "scale", Vector2.ONE, 0.3 / GameManager.timescale).from(Vector2(1.6, 0.0))
