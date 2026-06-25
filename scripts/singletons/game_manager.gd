@@ -379,6 +379,8 @@ func save_game() -> void:
 	save_resource.best_score = best_score.to_plain_scientific()
 	save_resource.blocks_rolled_count = blocks_rolled_count
 	save_resource.blocks_skipped_count = blocks_skipped_count
+	save_resource.coins = coins
+	save_resource.current_roll_cost = current_roll_cost
 	save_resource.speedrun_time = SpeedrunTimerLayer.timepassed
 	save_resource.seed_string = Random.get_current_seed_string()
 	save_resource.cumulative_perks = cumulative_perks.duplicate()
@@ -418,6 +420,8 @@ func load_game_save() -> void:
 		best_score = Big.new(save_resource.best_score) if save_resource.best_score != "" else Big.new(0)
 		blocks_rolled_count = save_resource.blocks_rolled_count
 		blocks_skipped_count = save_resource.blocks_skipped_count
+		coins = save_resource.coins
+		current_roll_cost = save_resource.current_roll_cost
 
 		SpeedrunTimerLayer.timepassed = save_resource.speedrun_time
 
