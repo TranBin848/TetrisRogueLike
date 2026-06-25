@@ -103,7 +103,7 @@ outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_constants/separation = 6
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="TitleLabel" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("6_bwyhj")]
@@ -124,6 +124,15 @@ shadow_enabled = false
 shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
 outline_color = Color(0.152941, 0.152941, 0.152941, 1)
 
-[node name="TypesHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
+[node name="TypesHBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -102.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
 alignment = 1

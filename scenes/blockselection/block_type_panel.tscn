@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://denedrkghul76" path="res://scripts/block_type_panel.gd" id="1_45kh5"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="2_66fqx"]
 
-[node name="BlockTypePanel" type="PanelContainer"]
+[node name="BlockTypePanel" type="MarginContainer"]
 script = ExtResource("1_45kh5")
 
 [node name="ShadowedLabel" parent="." instance=ExtResource("2_66fqx")]

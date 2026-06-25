@@ -21,12 +21,9 @@ script = ExtResource("1_v1gjm")
 layer = -10
 
 [node name="Background" parent="BackgroundLayer" instance=ExtResource("2_imli6")]
-quantity = 30
 piece_scale_min = 0.55
 piece_scale_max = 0.75
 special_piece_chance = 0.0
-fall_speed_min = 40.0
-fall_speed_max = 70.0
 monochrome = true
 white_outline = true
 

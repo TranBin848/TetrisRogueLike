@@ -378,6 +378,10 @@ func _apply_full_board_gravity_sweep() -> void:
 			if not is_instance_valid(block):
 				continue
 
+			# Chỉ áp dụng hiệu ứng trượt lấp hố (Sticky Gravity) cho Sand Block
+			if block.type != GameData.BLOCK_TYPES.SAND:
+				continue
+
 			# Find the lowest empty slot below this block
 			var final_row: int = row
 			if is_fall_up:

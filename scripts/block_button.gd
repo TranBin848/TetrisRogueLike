@@ -51,7 +51,7 @@ var disabled: bool = false:
 @onready var title_label: LabelShadowed = $MarginContainer/VBoxContainer/VBoxContainer/TitleLabel
 @onready var description_label: RichTextLabelShadowed = $MarginContainer/VBoxContainer/VBoxContainer/DescriptionLabel
 @onready var piece_change_timer: Timer = $PieceChangeTimer
-@onready var types_hbox_container: HBoxContainer = $MarginContainer/VBoxContainer/TypesHBoxContainer
+@onready var types_hbox_container: HBoxContainer = $TypesHBoxContainer
 
 
 func center_piece(piece_type: PieceRenderer.ShapeType) -> void :
