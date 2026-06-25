@@ -62,14 +62,14 @@ func appear_animation() -> void :
 
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-	#tween.tween_callback( func():
-		#AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, 1.6)
-	#)
+	tween.tween_callback( func():
+		AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, 1.6)
+	)
 
 	tween.tween_property(panel_container, "modulate:a", 1.0, 0.2)
 	tween.parallel().tween_property(panel_container, "scale", Vector2.ONE, 0.3).from(Vector2(1.1, 0.9))
 
-	#AudioManager.set_music_filter_enabled(true)
+	AudioManager.set_music_filter_enabled(true)
 
 	round_label.text = str(GameManager.current_round)
 	pieces_placed_label.text = str(GameManager.pieces_played)

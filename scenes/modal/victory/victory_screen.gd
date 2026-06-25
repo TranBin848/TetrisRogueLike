@@ -66,7 +66,7 @@ func _ready() -> void :
 
 			GameManager.perks_used.clear()
 
-			#AudioManager.set_music_filter_enabled(true)
+			AudioManager.set_music_filter_enabled(true)
 			GameManager.reset_pieces_to_original()
 		)
 	)
@@ -129,10 +129,10 @@ func appear_animation() -> void :
 
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
-	#tween.tween_callback( func():
-		#AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, 1.6)
-		#AudioManager.play(AudioManager.SoundEffects.POSITIVE_NOTIFICATION, 1.0)
-	#)
+	tween.tween_callback( func():
+		AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, 1.6)
+		AudioManager.play(AudioManager.SoundEffects.POSITIVE_NOTIFICATION, 1.0)
+	)
 
 	tween.tween_property(panel_container, "modulate:a", 1.0, 0.2)
 	tween.parallel().tween_property(panel_container, "scale", Vector2.ONE, 0.3).from(Vector2(1.1, 0.9))

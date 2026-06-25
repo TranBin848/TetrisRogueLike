@@ -48,7 +48,7 @@ DEMO_VERSION,Demo Version
 TUTORIAL_5,Reach your [yellow]Target Score[white] to win and unlock new [yellow]Blocks[white]. [red]Red levels[white] gives a [perk]!
 POINT_RUSH,Point Rush
 TUTORIAL_6,You lose if [yellow]Pieces[white] run out or [yellow]Blocks[white] reach the screen top.
-TUTORIAL_7,"Besides running out of pieces, you also lose if the round timer reaches 0!"
+TUTORIAL_7,"Besides running out of [yellow]Pieces[white] , you also lose if the round [red]Timer[white] reaches 0!"
 ACCELERATOR_DESCRIPTION,Increase the speed of reactions.
 PROJECTILE_MULT_DESCRIPTION,Increases the amount of projectiles.
 PROJECTILE_HIT_DESCRIPTION,Increases the amount of hit of projectiles.

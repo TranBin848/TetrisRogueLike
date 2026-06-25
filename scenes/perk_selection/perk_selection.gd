@@ -73,7 +73,7 @@ func _ready() -> void :
 			roll_button.disabled = true
 			inventory_button.disabled = true
 
-			#AudioManager.play(AudioManager.SoundEffects.PERK, randf_range(0.9, 1.1))
+			AudioManager.play(AudioManager.SoundEffects.PERK, randf_range(0.9, 1.1))
 
 
 			if not GameManager.add_or_upgrade_perk(perk_button.perk):
@@ -215,8 +215,8 @@ func animate_perk_buttons() -> void :
 
 		perk_button.modulate.a = 1
 
-		#AudioManager.play(AudioManager.SoundEffects.POP, pop_sound_pitch)
-		#AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, pop_sound_pitch)
+		AudioManager.play(AudioManager.SoundEffects.POP, pop_sound_pitch)
+		AudioManager.play(AudioManager.SoundEffects.BLOOP_HIGH, pop_sound_pitch)
 
 		pop_sound_pitch += 0.1
 

@@ -284,7 +284,7 @@ func destroy() -> void :
 	other_blocks.assign(get_tree().get_nodes_in_group(PlacedBlock.GROUP_NAME))
 	other_blocks.erase(self)
 
-	#AudioManager.play(AudioManager.SoundEffects.BLOCK_DESTROY, PlacedBlock.destroy_base_pitch)
+	AudioManager.play(AudioManager.SoundEffects.BLOCK_DESTROY, PlacedBlock.destroy_base_pitch)
 	PlacedBlock.destroy_base_pitch = min(PlacedBlock.destroy_base_pitch + 0.05, 1.8)
 
 	GameManager.block_destroyed.emit(self)

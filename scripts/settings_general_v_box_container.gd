@@ -73,13 +73,13 @@ func _ready() -> void :
 
 	effect_slider.value_changed.connect( func(value: float):
 		settings.effect_volume = value
-		#AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), linear_to_db(value))
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), linear_to_db(value))
 	)
 
-	# effect_slider.gui_input.connect( func(event: InputEvent):
-	#     if event is InputEventMouseButton and event.is_released():
-	#         AudioManager.play(AudioManager.SoundEffects.SINGLE_CLICK_1, 1.0)
-	# )
+	#effect_slider.gui_input.connect( func(event: InputEvent):
+		#if event is InputEventMouseButton and event.is_released():
+			#AudioManager.play(AudioManager.SoundEffects.SINGLE_CLICK_1, 1.0)
+	 #)
 
 	previous_language_button.pressed.connect( func():
 		current_locale_index = (current_locale_index - 1) % available_locales.size()

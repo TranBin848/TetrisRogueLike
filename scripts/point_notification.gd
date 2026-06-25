@@ -73,7 +73,7 @@ func animate(type: int, value: Variant, pitch: float) -> void :
 
 		label.text = Utils.add_commas_to_number(value)
 
-	#AudioManager.play(AudioManager.SoundEffects.POP, pitch)
+	AudioManager.play(AudioManager.SoundEffects.POP, pitch)
 
 	label.pivot_offset = label.size / 2
 

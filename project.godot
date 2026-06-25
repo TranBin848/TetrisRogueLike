@@ -29,6 +29,7 @@ BlockChainReaction="*res://scripts/block_destroy_effects.gd"
 Random="*res://scripts/singletons/rng.gd"
 Transition="*res://scenes/transition.tscn"
 SpeedrunTimerLayer="*res://scenes/speedrun_timer_layer.tscn"
+AudioManager="*res://scripts/singletons/audio_manager.gd"
 
 [display]
 

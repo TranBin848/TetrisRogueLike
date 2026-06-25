@@ -91,7 +91,7 @@ func _on_dizzy_second_passed() -> void :
 
 	if GameManager.time_passed_in_seconds % GameData.DIZZY_ROTATION_INTERVAL == 0:
 		rotate_piece(ROTATION_CLOCKWISE)
-		#AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.4, 0.6))
+		AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.4, 0.6))
 
 
 func _unhandled_input(event: InputEvent) -> void :
@@ -316,7 +316,7 @@ func land_piece() -> void :
 		GameManager.add_multiplier(GameManager.FAST_PLACEMENT_BONUS)
 		PointNotification.create_and_slide(global_position, PointNotification.RED, "SPEED BONUS! x%s" % str(GameManager.FAST_PLACEMENT_BONUS))
 
-	#AudioManager.play(AudioManager.SoundEffects.DIRT_3, randf_range(1.6, 2.0))
+	AudioManager.play(AudioManager.SoundEffects.DIRT_3, randf_range(1.6, 2.0))
 
 	queue_free()
 
@@ -349,7 +349,7 @@ func hold_piece() -> void :
 
 		queue_free()
 
-		#AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.5, 0.7))
+		AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.5, 0.7))
 		return
 
 	if not GameManager.hold_piece_data.is_empty() and GameManager.hold_piece_data.has("shape"):
@@ -387,7 +387,7 @@ func hold_piece() -> void :
 
 	GameManager.hold_piece_changed.emit()
 
-	#AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.8, 1.2))
+	AudioManager.play(AudioManager.SoundEffects.POP, randf_range(0.8, 1.2))
 
 	time_since_spawn = 0.0
 	rotated = false
@@ -405,7 +405,7 @@ func rotate_piece(addition: int) -> void :
 
 	var new_rotation: int = (current_rotation + addition + 4) % 4
 
-	#AudioManager.play(AudioManager.SoundEffects.BLOOP)
+	AudioManager.play(AudioManager.SoundEffects.BLOOP)
 
 	rotated = true
 	GameManager.rotated_piece_on_current_round = true
