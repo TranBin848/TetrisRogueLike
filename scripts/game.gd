@@ -43,6 +43,18 @@ static func next_action() -> void :
 		return
 
 	if GameManager.score.is_greater_than_or_equal_to(GameManager.target_score):
+		var target_f = GameManager.target_score.to_float()
+		var overflow_f = max(0.0, GameManager.score.minus(GameManager.target_score).to_float())
+		var overflow_bonus = 0
+		if target_f > 0:
+			overflow_bonus = min(20, int((overflow_f / target_f) * 20.0))
+		
+		var coins_awarded = 5 + (GameManager.current_round * 2) + overflow_bonus
+		GameManager.add_coins(coins_awarded)
+		
+		if is_instance_valid(_instance.current_score_panel):
+			PointNotification.create_and_slide(_instance.current_score_panel.global_position + _instance.current_score_panel.size / 2, PointNotification.YELLOW, "+" + str(coins_awarded) + " COINS")
+
 		await _instance.get_tree().create_timer(1.0 / GameManager.timescale).timeout
 
 		if not is_instance_valid(_instance) or not is_instance_valid(_instance.current_score_panel):

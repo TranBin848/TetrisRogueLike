@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://3ca6erjlgewg"]
+[gd_scene load_steps=16 format=3 uid="uid://3ca6erjlgewg"]
 
 [ext_resource type="PackedScene" uid="uid://bqov56fuh2dpx" path="res://scenes/board.tscn" id="1_iywne"]
 [ext_resource type="Script" uid="uid://dk3x83rgqwwnb" path="res://scripts/game.gd" id="1_script"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bg7jqrkdt12dw" path="res://scenes/hold_background_panel.tscn" id="8_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://drjqwertyuiop" path="res://scenes/round_timer_panel.tscn" id="9_timer"]
 [ext_resource type="PackedScene" uid="uid://vjtnu6vy4e0o" path="res://scenes/main_menu_falling_background.tscn" id="10_background"]
+[ext_resource type="PackedScene" uid="uid://bc3fvg3b6tp73" path="res://scenes/ui/coin_panel.tscn" id="10_coin"]
 [ext_resource type="StyleBox" uid="uid://bwerxk3dkj8pe" path="res://themes/gray_panel.tres" id="11_panel"]
 [ext_resource type="StyleBox" uid="uid://c8m1jufawoe8" path="res://themes/light_gray_panel.tres" id="12_light_panel"]
 [ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="13_label"]
@@ -117,6 +118,9 @@ layout_mode = 2
 [node name="RightContainer" type="VBoxContainer" parent="HUD/MainMarginContainer/MainHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
+
+[node name="CoinPanel" parent="HUD/MainMarginContainer/MainHBoxContainer/RightContainer" instance=ExtResource("10_coin")]
+layout_mode = 2
 
 [node name="NextPieceContainer" parent="HUD/MainMarginContainer/MainHBoxContainer/RightContainer" instance=ExtResource("3_lnu2h")]
 layout_mode = 2

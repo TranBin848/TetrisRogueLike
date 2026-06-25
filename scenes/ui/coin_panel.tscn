@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://coinpanel12345"]
+
+[ext_resource type="Script" uid="uid://coinpanelscript" path="res://scripts/ui/coin_panel.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://c6f2e8b0a1d" path="res://sprite/coin.png" id="2_icon"]
+[ext_resource type="PackedScene" uid="uid://de4ndxdyt87p" path="res://scenes/ui/shadowed_label.tscn" id="3_label"]
+
+[node name="CoinPanel" type="HBoxContainer"]
+offset_right = 100.0
+offset_bottom = 32.0
+theme_override_constants/separation = 8
+script = ExtResource("1_script")
+
+[node name="Icon" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinValue" parent="." instance=ExtResource("3_label")]
+layout_mode = 2
+size_flags_vertical = 4
+text = "0"
+font_color = Color(1, 0.843137, 0, 1)
+shadow_color = Color(0.152941, 0.152941, 0.152941, 1)
+outline_color = Color(0.152941, 0.152941, 0.152941, 1)
