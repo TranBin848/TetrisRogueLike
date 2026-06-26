@@ -1002,6 +1002,10 @@ func reset_variables() -> void :
 	points = Big.new(0)
 	multiplier = Big.new(1)
 	rolls_left = 5
+	coins = 0
+	current_roll_cost = 5
+	blocks_rolled_count = 0
+	blocks_skipped_count = 0
 	is_calculating = false
 
 	hold_piece_data = {}
