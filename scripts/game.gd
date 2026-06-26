@@ -54,11 +54,18 @@ static func next_action() -> void :
 		if target_f > 0:
 			overflow_bonus = min(20, int((overflow_f / target_f) * 20.0))
 		
-		var coins_awarded = 5 + (GameManager.current_round * 2) + overflow_bonus
+		var time_bonus_coins = int(GameManager.round_time_left / 5.0)
+		var coins_awarded = 5 + (GameManager.current_round * 2) + overflow_bonus + time_bonus_coins
 		GameManager.add_coins(coins_awarded)
 		
 		if is_instance_valid(_instance.current_score_panel):
 			PointNotification.create_and_slide(_instance.current_score_panel.global_position + _instance.current_score_panel.size / 2, PointNotification.YELLOW, "+" + str(coins_awarded) + " COINS")
+			
+		if time_bonus_coins > 0:
+			var timer_panels = _instance.find_children("*", "RoundTimerPanel", true, false)
+			if timer_panels.size() > 0:
+				var timer_panel = timer_panels[0]
+				PointNotification.create_and_slide(timer_panel.global_position + timer_panel.size / 2, PointNotification.YELLOW, "+" + str(time_bonus_coins) + " TIME BONUS")
 
 		await _instance.get_tree().create_timer(1.0 / GameManager.timescale).timeout
 

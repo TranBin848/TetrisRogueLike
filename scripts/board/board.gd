@@ -459,7 +459,7 @@ func handle_block_placement_interactions(newly_placed_blocks: Array[PlacedBlock]
 			is_copy_piece = true
 			var adjacent_blocks: Array[PlacedBlock] = b.get_adjacent_blocks()
 			for adj in adjacent_blocks:
-				if is_instance_valid(adj) and not newly_placed_blocks.has(adj) and not GameData.is_block_on_group(adj.type, GameData.BlockGroups.DEFAULT):
+				if is_instance_valid(adj) and not newly_placed_blocks.has(adj) and not GameData.is_block_on_group(adj.type, GameData.BlockGroups.NORMAL):
 					special_adjacents.append(adj)
 					
 	if is_copy_piece and special_adjacents.size() > 0:

@@ -7,6 +7,7 @@ const DEFAULT_MINIMUM_SIZE: Vector2 = Vector2(130, 170)
 
 var awarded_piece_types: Array[PieceRenderer.ShapeType] = []
 var current_piece_index: int = 0
+var block_cost: int = 0
 
 var type: String = GameData.BLOCK_TYPES.NORMAL:
 	set(value):
@@ -23,6 +24,9 @@ var type: String = GameData.BLOCK_TYPES.NORMAL:
 		awarded_piece_types = get_balanced_shape_selection(shapes_count)
 
 		count_label.text = "x" + str(shapes_count)
+		
+		block_cost = GameData.get_block_cost(type)
+		cost_label.text = str(block_cost)
 
 		for child in types_hbox_container.get_children():
 			child.queue_free()
@@ -52,6 +56,7 @@ var disabled: bool = false:
 @onready var description_label: RichTextLabelShadowed = $MarginContainer/VBoxContainer/VBoxContainer/DescriptionLabel
 @onready var piece_change_timer: Timer = $PieceChangeTimer
 @onready var types_hbox_container: HBoxContainer = $TypesHBoxContainer
+@onready var cost_label: LabelShadowed = $MarginContainer/VBoxContainer/CostContainer/CostLabel
 
 
 func center_piece(piece_type: PieceRenderer.ShapeType) -> void :
@@ -96,6 +101,8 @@ func _ready() -> void :
 
 	button.pressed.connect( func() -> void :
 		pressed.emit()
+		
+		GameManager.add_coins(-block_cost)
 
 		for shape_type in awarded_piece_types:
 			GameManager.add_piece_to_original_deck(type, shape_type)

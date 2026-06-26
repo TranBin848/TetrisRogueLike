@@ -163,7 +163,7 @@ const LEGACY_BLOCK_TYPE_MAP: Dictionary = {
 }
 
 enum BlockGroups{
-	DEFAULT, 
+	NORMAL, 
 	FORTRESS, 
 	CASINO, 
 	MINERALS, 
@@ -264,7 +264,7 @@ const GROUP_COLOR_MAP: Dictionary[GameData.BlockGroups, Dictionary] = {
 
 
 var blocks: Dictionary = {
-	BLOCK_TYPES.NORMAL: BlockData.new([BlockGroups.DEFAULT], 3, 5), 
+	BLOCK_TYPES.NORMAL: BlockData.new([BlockGroups.NORMAL], 1, 1), 
 
 	BLOCK_TYPES.GOLD: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
 	BLOCK_TYPES.BLUE_C: BlockData.new([BlockGroups.SPECIAL], 1, 2), 
@@ -363,6 +363,19 @@ func get_block_type_display_name(block_type: String) -> String:
 		if BLOCK_TYPES[key] == block_type:
 			return key
 	return block_type
+
+
+func get_block_cost(block_type: String) -> int:
+	if not blocks.has(block_type): return 0
+	
+	var group_list = blocks[block_type].groups
+	if BlockGroups.RARE in group_list:
+		return 20
+	elif BlockGroups.UNCOMMON in group_list:
+		return 10
+	elif BlockGroups.SPECIAL in group_list:
+		return 5
+	return 0
 
 
 func is_valid_block_type(block_type: String) -> bool:

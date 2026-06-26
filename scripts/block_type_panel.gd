@@ -1,7 +1,7 @@
 class_name BlockTypePanel extends MarginContainer
 
 
-var block_group: GameData.BlockGroups = GameData.BlockGroups.DEFAULT:
+var block_group: GameData.BlockGroups = GameData.BlockGroups.NORMAL:
 	set(value):
 		block_group = value
 		_apply_block_group_visuals()
