@@ -100,6 +100,10 @@ func _ready() -> void :
 	)
 
 	button.pressed.connect( func() -> void :
+		if disabled:
+			return
+		
+		disabled = true
 		pressed.emit()
 		
 		GameManager.add_coins(-block_cost)
