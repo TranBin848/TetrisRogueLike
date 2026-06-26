@@ -1,4 +1,4 @@
-extends PanelContainer
+class_name RoundTimerPanel extends PanelContainer
 
 @onready var time_value: LabelShadowed = $VBoxContainer/TimeContainer/VBoxContainer/TimeValue
 
