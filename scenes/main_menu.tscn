@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://csemd0ev6juk8"]
+[gd_scene load_steps=11 format=3 uid="uid://csemd0ev6juk8"]
 
 [ext_resource type="Script" uid="uid://than0vol5832" path="res://scripts/main_menu.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://vjtnu6vy4e0o" path="res://scenes/main_menu_falling_background.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bdibwlsljo4pa" path="res://scenes/game_camera.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://diptqe1ltcpci" path="res://scenes/ui/bouncy_button.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://df5s3mxlvtgy0" path="res://images/logo (1) (1).png" id="5_oa1go"]
+[ext_resource type="StyleBox" uid="uid://c6wwfeqaqrvdj" path="res://themes/continue_game_button.tres" id="6_5dd4i"]
 [ext_resource type="StyleBox" uid="uid://cwjm3m6dfp7ar" path="res://themes/new_game_button.tres" id="6_oa1go"]
 [ext_resource type="StyleBox" uid="uid://dou3i810n7r88" path="res://themes/options_button.tres" id="7_jk1qb"]
 [ext_resource type="StyleBox" uid="uid://cmjyi2ivpubso" path="res://themes/quit_button.tres" id="8_5dd4i"]
@@ -80,12 +81,12 @@ custom_minimum_size = Vector2(140, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/outline_size = 3
-theme_override_styles/focus = ExtResource("6_oa1go")
-theme_override_styles/disabled = ExtResource("6_oa1go")
-theme_override_styles/hover = ExtResource("6_oa1go")
-theme_override_styles/pressed = ExtResource("6_oa1go")
-theme_override_styles/normal = ExtResource("6_oa1go")
-text = "BUTTON_CONTINUE"
+theme_override_styles/focus = ExtResource("6_5dd4i")
+theme_override_styles/disabled = ExtResource("6_5dd4i")
+theme_override_styles/hover = ExtResource("6_5dd4i")
+theme_override_styles/pressed = ExtResource("6_5dd4i")
+theme_override_styles/normal = ExtResource("6_5dd4i")
+text = "CONTINUE"
 
 [node name="NewGameButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer/ButtonCenterContainer/VBoxContainer" instance=ExtResource("4")]
 unique_name_in_owner = true
@@ -125,7 +126,6 @@ theme_override_styles/hover = ExtResource("8_5dd4i")
 theme_override_styles/pressed = ExtResource("8_5dd4i")
 theme_override_styles/normal = ExtResource("8_5dd4i")
 text = "Quit"
-
 
 [node name="AchievementsButton" parent="CanvasLayer/MarginContainer/MainContainerVBoxContainer" instance=ExtResource("4")]
 unique_name_in_owner = true
