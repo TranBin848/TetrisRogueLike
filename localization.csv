@@ -59,7 +59,7 @@ MULT_REACTOR_DESCRIPTION,"When a block's effect triggered, gives [multiplier:+1]
 RETRIGGER_BLOCK_DESCRIPTION,Retrigger current block's effect.
 SPEED_RUN_DESCRIPTION_1,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+3]."
 SPEED_RUN_DESCRIPTION_2,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+10]."
-TUTORIAL_0,Welcome to [yellow]Stackflow[white]! This strategic block-stacking game is all about smart placement and management.
+TUTORIAL_0,Welcome to [yellow]NeoTris[white]! This strategic block-stacking game is all about smart placement and management.
 BOSS_FALL_UP,The Defiant
 SPEED_RUN_DESCRIPTION_3,"If you place a [yellow]Piece[white] within [yellow]2 seconds[white] after it spawns, you gain [points:+25]."
 BLOCK_BLUE_DICE_DESCRIPTION,"When destroyed, randomly awards [points:1-4] multiplied by the current [yellow]Level[white]."
