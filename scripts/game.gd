@@ -54,7 +54,8 @@ static func next_action() -> void :
 		if target_f > 0:
 			overflow_bonus = min(20, int((overflow_f / target_f) * 20.0))
 		
-		var coins_awarded = 5 + (GameManager.current_round * 2) + overflow_bonus
+		var time_bonus_coins = int(GameManager.round_time_left / 5.0)
+		var coins_awarded = 5 + (GameManager.current_round * 2) + overflow_bonus + time_bonus_coins
 		GameManager.add_coins(coins_awarded)
 		
 		if is_instance_valid(_instance.current_score_panel):

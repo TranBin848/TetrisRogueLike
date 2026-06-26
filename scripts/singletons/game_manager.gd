@@ -28,10 +28,6 @@ signal piece_landed(blocks: Array[PlacedBlock], rotated: bool)
 signal block_destroyed(block: PlacedBlock)
 
 
-const STEAM_URL: String = "https://store.steampowered.com/app/3908810/Stackflow"
-const DISCORD_URL: String = "https://discord.com/invite/UbAUwg2Fvc"
-
-
 const ROUND_SCORES_BASE: Array[int] = [
 	50, 
 	100, 
@@ -974,7 +970,7 @@ func get_active_groups_in_deck() -> Array[GameData.BlockGroups]:
 			if GameData.blocks.has(block_type):
 				var block_data: BlockData = GameData.blocks[block_type]
 				for group in block_data.groups:
-					if group not in active_groups and group != GameData.BlockGroups.DEFAULT:
+					if group not in active_groups and group != GameData.BlockGroups.NORMAL:
 						active_groups.append(group)
 
 	return active_groups
@@ -1193,7 +1189,7 @@ func replace_tags(description: String) -> String:
 		var group_key: String = "BLOCK_GROUP_" + group_name
 
 
-		var block_group: GameData.BlockGroups = GameData.BlockGroups.DEFAULT
+		var block_group: GameData.BlockGroups = GameData.BlockGroups.NORMAL
 		for group_enum_value: GameData.BlockGroups in GameData.BlockGroups.values():
 			if GameData.get_block_group_name(group_enum_value) == group_name:
 				block_group = group_enum_value

@@ -173,9 +173,23 @@ func randomize_blocks() -> void :
 			block_button.type = selected_block_type
 			previously_shown_blocks.append(selected_block_type)
 
-		block_button.disabled = false
+		block_button.disabled = GameManager.coins < block_button.block_cost
 		block_button.modulate.a = 0
 		block_button.scale = Vector2(1.1, 0.8)
+		
+	# Softlock prevention: If player cannot afford ANY block, replace a random one with NORMAL (0 cost)
+	var can_afford_any: bool = false
+	for i in block_button_container.get_child_count():
+		var btn: BlockButton = block_button_container.get_child(i) as BlockButton
+		if GameManager.coins >= btn.block_cost:
+			can_afford_any = true
+			break
+			
+	if not can_afford_any:
+		var random_index = Random.randi_range(0, block_button_container.get_child_count() - 1)
+		var btn: BlockButton = block_button_container.get_child(random_index) as BlockButton
+		btn.type = GameData.BLOCK_TYPES.NORMAL
+		btn.disabled = false
 
 	animate_block_buttons()
 
@@ -237,6 +251,12 @@ func _update_buttons(_coins: int) -> void :
 	
 	skip_button.text = tr("BUTTON_SKIP") + " (-%d COINS)" % GameManager.SKIP_COST
 	skip_button.disabled = not GameManager.can_skip()
+	
+	if is_instance_valid(block_button_container):
+		for i in block_button_container.get_child_count():
+			var block_button: BlockButton = block_button_container.get_child(i) as BlockButton
+			if is_instance_valid(block_button):
+				block_button.disabled = GameManager.coins < block_button.block_cost
 
 
 func _setup_focus_navigation() -> void :
