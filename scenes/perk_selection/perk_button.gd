@@ -83,6 +83,10 @@ var shortcut: String = "1"
 
 func _ready() -> void :
 	button.pressed.connect( func() -> void :
+		if disabled:
+			return
+		
+		disabled = true
 		pressed.emit()
 	)
 
